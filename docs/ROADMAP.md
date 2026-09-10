@@ -125,7 +125,7 @@ that keeps the network congested but moving.
 ambulance trip are `ESTIMATED_DATA`; the results are `SIMULATED_DATA`. Neither is
 a measurement of Bengaluru traffic.
 
-### Phase 4 — Baseline calibration and uncertainty ✅ *(current)*
+### Phase 4 — Baseline calibration and uncertainty ✅
 
 Multi-seed baseline, determinism verification, sensitivity experiments and
 parameter audits. Reports:
@@ -175,7 +175,36 @@ runs, and the ambulance's travel time is read from SUMO output.
 
 ---
 
-### Phase 5 — Signal policies and counterfactual replay
+### Phase 5 — EMS signal priority and counterfactual replay 🔄 *(current)*
+
+Four policies (NORMAL, EMS_NEXT, EMS_ROLLING, EMS_FULL_PREEMPTION), paired
+scenario verification, and per-intersection attribution. Reports:
+[`EMS_SIGNAL_POLICIES.md`](EMS_SIGNAL_POLICIES.md),
+[`COUNTERFACTUAL_REPLAY.md`](COUNTERFACTUAL_REPLAY.md),
+[`EMS_DELAY_ATTRIBUTION.md`](EMS_DELAY_ATTRIBUTION.md).
+
+```bash
+python scripts/run_counterfactual.py --seed 42
+```
+
+**Seed 42 only. Seeds 43-46 have not been run**, pending review.
+
+**Result: all four policies gave the same simulated ambulance travel time,
+205.5 s — 0.00 s saved — at a traffic cost of 17,270 to 33,575 vehicle-seconds.**
+The ambulance is never stopped by a signal on its route: it arrives on green at
+the one actionable traffic light and spends 3.5 s on its approach. A priority
+policy can only recover time a signal was taking, and here it was taking none.
+
+That is the counterfactual method doing its job — distinguishing "the
+intervention helped" from "the intervention ran". The policies demonstrably ran
+(12/22/47 state transitions, 3/5/12 signal changes, 0 conflicts).
+
+**Found on the way:** the Phase 3 ambulance route passes **zero** traffic lights,
+which is why its waiting time was 0.0 s in every Phase 4 seed. Phase 5 selected a
+destination whose route passes signals; the Phase 3 trip is unchanged so Phase 4's
+numbers still stand.
+
+### Phase 5b — deferred
 
 Fixed-time baseline; EMS preemption with realistic detection range and clearance
 time. Paired runs with `config_hash` and seed verification.

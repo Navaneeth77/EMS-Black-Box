@@ -75,3 +75,35 @@ DEFAULT_AMBULANCE_TRIP = AmbulanceTripConfig(
     depart_time_s=600.0,
     trip_label="baseline",
 )
+
+# Phase 5 discovered that the trip above, despite being chosen to "cross the
+# junction under study", produces a route through **zero** traffic lights: the
+# router sends it down a residential rat-run south-east of Silk Board, which is
+# also why its waiting time was 0.0 s in all five Phase 4 seeds.
+#
+# Signal priority cannot save time on a route with no signals, so a
+# counterfactual run on it would show all four policies producing identical
+# results — not because they are identical, but because none of them has
+# anything to act on.
+#
+# This trip keeps the same Hosur Road origin and ends at the northern Sarjapura
+# Road boundary instead. Its route passes three traffic lights, two of which have
+# real red exposure for the ambulance's own movement. It is a configuration
+# choice by this project, exactly as the Phase 3 trip was, and it is not a real
+# EMS dispatch.
+#
+# The Phase 3 trip is left untouched: Phase 4's published numbers describe it,
+# and changing it would invalidate them.
+SIGNALISED_AMBULANCE_TRIP = AmbulanceTripConfig(
+    origin_edge="312063814#2",
+    destination_edge="1411121774#1",
+    depart_time_s=600.0,
+    trip_label="signalised",
+    basis=(
+        "ESTIMATED_DATA. Origin, destination and departure time are configuration "
+        "choices by this project, not a real EMS dispatch. Selected in Phase 5 by "
+        "searching boundary origin-destination pairs for a route that passes "
+        "traffic lights with red exposure for the ambulance movement, because the "
+        "Phase 3 trip's route passes none and no signal policy can act on it."
+    ),
+)

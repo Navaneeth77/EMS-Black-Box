@@ -132,6 +132,10 @@ data/processed/**
 !data/processed/*/calibration/**
 !data/processed/*/baseline_runs/
 !data/processed/*/baseline_runs/**
+!data/processed/*/ems/
+!data/processed/*/ems/**
+!data/processed/*/counterfactual/
+!data/processed/*/counterfactual/**
 
 # Simulation run outputs
 runs/

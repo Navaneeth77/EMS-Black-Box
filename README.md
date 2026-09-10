@@ -44,6 +44,13 @@ rank the estimated assumptions by how much they move the result. See
 [`docs/BASELINE_CALIBRATION.md`](docs/BASELINE_CALIBRATION.md) and
 [`docs/BASELINE_UNCERTAINTY.md`](docs/BASELINE_UNCERTAINTY.md).
 
+**Phase 5: counterfactual replay, seed 42.** Four signal policies over one
+identical scenario. All four gave the same simulated ambulance travel time
+(205.5 s, 0.00 s saved) at a traffic cost of 17,270-33,575 vehicle-seconds,
+because the ambulance is never stopped by a signal on its route. See
+[`docs/COUNTERFACTUAL_REPLAY.md`](docs/COUNTERFACTUAL_REPLAY.md). Seeds 43-46 are
+not yet run.
+
 **The demand is assumed, not measured.** No traffic count for Silk Board was
 available, and nothing in this project has been validated against observed
 Bengaluru traffic. Absolute travel times describe this modelled traffic and exist
@@ -258,6 +265,13 @@ docker compose --profile database up -d
 - [`docs/SUMO_CONVERSION.md`](docs/SUMO_CONVERSION.md) — the Phase 2 result: the
   netconvert configuration, why grade separation is topological rather than
   vertical, every warning investigated, and what still needs a human in netedit.
+- [`docs/EMS_SIGNAL_POLICIES.md`](docs/EMS_SIGNAL_POLICIES.md) — the four
+  policies, how priority is granted without ever creating a conflicting green,
+  and which traffic lights are actionable.
+- [`docs/COUNTERFACTUAL_REPLAY.md`](docs/COUNTERFACTUAL_REPLAY.md) — the seed-42
+  paired results and what they do and do not show.
+- [`docs/EMS_DELAY_ATTRIBUTION.md`](docs/EMS_DELAY_ATTRIBUTION.md) — where the
+  ambulance's time actually goes.
 - [`docs/BASELINE_CALIBRATION.md`](docs/BASELINE_CALIBRATION.md) — what the
   baseline rests on, how sensitive it is to each assumption, and why nothing was
   tuned.
