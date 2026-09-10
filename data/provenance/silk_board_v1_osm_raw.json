@@ -1,0 +1,63 @@
+{
+  "dataset_id": "silk_board_v1_osm_raw",
+  "data_class": "PUBLICLY_SOURCED_DATA",
+  "description": "Untouched OpenStreetMap extract covering Central Silk Board Junction, Bengaluru, as served by overpass.kumi.systems.",
+  "source_name": "OpenStreetMap",
+  "source_url": "https://overpass.kumi.systems/api/interpreter",
+  "source_licence": "ODbL 1.0",
+  "source_attribution": "© OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)",
+  "retrieved_at": "2026-09-09T16:12:40Z",
+  "sha256": "7531944338ea8dc55311095f42b456270b1e804b1ebf93e55a2bd2a507169804",
+  "size_bytes": 4800643,
+  "file_path": "data/raw/silk_board_v1/silk_board_v1.osm.xml",
+  "estimation_basis": null,
+  "produced_by": null,
+  "random_seed": null,
+  "derived_from": [],
+  "processing_steps": [
+    "None. Written byte-for-byte as received."
+  ],
+  "tool_versions": {
+    "python": "3.11.14",
+    "geopandas": "1.1.4",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "osmnx": "2.1.1"
+  },
+  "study_area": {
+    "area_id": "silk_board_v1",
+    "display_name": "Central Silk Board Junction, Bengaluru",
+    "anchor": {
+      "lat": 12.917236,
+      "lon": 77.623262
+    },
+    "anchor_derivation": "Length-weighted centroid, in UTM 43N (EPSG:32643), of the five OpenStreetMap highway ways whose name tag is exactly 'Silk Board Flyover' or 'Silk Board Interchange' (way/40696221, way/40696222, way/1208112302, way/1208112303, way/1254771465), as present in an OSM extract retrieved 2026-09-09. Chosen over a geocoder result because Nominatim returns bus stops and a landuse polygon for this name, none of which sit on the carriageway; and over the Hosur Road x Outer Ring Road crossing because those two corridors share no node and do not cross in plan view within the extract - the interchange is grade-separated and connected only through link ways.",
+    "anchor_source_ways": [
+      "way/40696221",
+      "way/40696222",
+      "way/1208112302",
+      "way/1208112303",
+      "way/1254771465"
+    ],
+    "half_extent_m": 800.0,
+    "bbox": {
+      "min_lon": 77.615889,
+      "min_lat": 12.910001,
+      "max_lon": 77.630635,
+      "max_lat": 12.924471
+    },
+    "bbox_api_order": "77.615889,12.910001,77.630635,12.924471",
+    "extent_m": {
+      "width": 1600.0,
+      "height": 1600.0
+    },
+    "area_km2": 2.56,
+    "notes": "Covers the Silk Board interchange core plus its immediate approaches on Hosur Road (NH-44), Outer Ring Road and Sarjapura Road.\n\nSIZING. The brief was 'approximately 5-10 intersections'. That target is not reachable under a topological definition: even a 400 m box contains 12 nodes where three or more through-roads meet, because the interchange decomposes into many ramp splits and merges and the ORR/Hosur corridors carry frequent slip-road connections. Measured three ways, this box contains 122 junction nodes on any drivable way, 22 distinct major-road intersections after clustering, and 5 intersections with a mapped traffic signal. The last is the count that matches the brief, and it is also the one that matters for this project: signal-controlled intersections are the only places an EMS priority policy can act. Smaller boxes were rejected because they shorten the approaches without reducing the intersection count much, and Silk Board's queues are the phenomenon under study. Larger boxes were rejected because at ~1.1 km half-extent the OSM API refuses the request (50,000-node cap).\n\nSCOPE LIMIT. This box does NOT cover the full length of the Silkboard Double Decker Flyover, whose OSM ways run about 2.8 km west toward Ragigudda. Traffic entering along that viaduct will appear at the study-area boundary rather than being simulated from its true origin.\n\nAPPROACH LENGTH. 800 m of approach on each corridor may prove short relative to observed Silk Board queues. If Phase 3 shows queues reaching the boundary, the box must be widened - as a new area_id, with runs repeated - rather than the results reported as-is."
+  },
+  "limitations": [
+    "OpenStreetMap is community-maintained. Geometry, lane counts and restrictions are contributed, not surveyed, and have not been independently verified by this project. Classified as PUBLICLY_SOURCED_DATA, not VERIFIED_REAL_DATA.",
+    "OSM road centrelines are cartographic, not engineering survey data. They must not be treated as accurate to design tolerances.",
+    "The extract reflects OSM's state at the retrieval timestamp only."
+  ],
+  "notes": "Attempt log: overpass-api.de: failed (URLError: <urlopen error [Errno 54] Connection reset by peer>) in 1.2s; overpass.kumi.systems: ok (4,800,643 bytes) in 184.3s"
+}

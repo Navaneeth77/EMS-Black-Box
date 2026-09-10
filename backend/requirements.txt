@@ -1,0 +1,14 @@
+# EMS Black Box - backend (FastAPI service layer)
+# Target: Python 3.11  (see docs/ENVIRONMENT.md)
+
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30      # includes websockets + watchfiles for --reload
+pydantic>=2.8,<3.0
+pydantic-settings>=2.4
+
+# Database access is deliberately NOT installed yet. Nothing depends on
+# Postgres until the ingestion pipeline exists; adding an ORM now would be an
+# unused dependency. When needed:
+#   sqlalchemy>=2.0
+#   psycopg[binary]>=3.2
+#   geoalchemy2>=0.15

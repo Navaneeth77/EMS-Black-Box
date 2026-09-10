@@ -1,0 +1,960 @@
+{
+  "reproducibility": {
+    "generated_at": "2026-09-10T04:47:58Z",
+    "sumo_version": "1.27.1",
+    "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
+    "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "period": "evening_peak",
+    "demand_scale": 0.5,
+    "step_length_s": 0.5,
+    "begin_s": 0.0,
+    "end_s": 3900.0,
+    "warmup_s": 300.0,
+    "scenario_variant": {
+      "variant_id": "include_unresolved",
+      "include_unresolved_infrastructure": true,
+      "unresolved_edge_ids": [
+        "1351994264"
+      ],
+      "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
+      "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
+    },
+    "ambulance": {
+      "origin_edge": "312063814#2",
+      "destination_edge": "491889864#5",
+      "depart_time_s": 600.0,
+      "vehicle_type": "ambulance",
+      "trip_label": "baseline",
+      "basis": "ESTIMATED_DATA. Origin, destination and departure time are configuration choices by this project, not a real EMS dispatch. No ambulance call record for Silk Board was available.",
+      "vehicle_id": "ambulance_baseline",
+      "data_class": "ESTIMATED_DATA",
+      "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+    },
+    "wall_clock_total_s": 798.9
+  },
+  "bottlenecks": {
+    "label": "simulation bottlenecks",
+    "definition": "Locations where this simulation accumulated the most time loss or waiting time. 'seeds_present' counts how many seeded runs ranked the location in their top set: a location present in every run is a property of the scenario, one present in a single run may be an artefact of that draw.",
+    "not_a_claim_about_reality": "These are bottlenecks in a simulation built on estimated demand, estimated vehicle behaviour and netconvert-generated signal programs. Nothing here establishes that they correspond to congestion at the real junction.",
+    "run_count": 5,
+    "most_delayed_edges": [
+      {
+        "edge_id": "744561216#0",
+        "seeds_present": 5,
+        "mean_time_loss_s": 84030.35,
+        "min_time_loss_s": 67636.68,
+        "max_time_loss_s": 98562.05,
+        "per_seed_time_loss_s": [
+          82268.39,
+          98562.05,
+          67636.68,
+          87376.12,
+          84308.51
+        ]
+      },
+      {
+        "edge_id": "370328588#2",
+        "seeds_present": 5,
+        "mean_time_loss_s": 66259.13,
+        "min_time_loss_s": 60436.82,
+        "max_time_loss_s": 72229.39,
+        "per_seed_time_loss_s": [
+          68229.48,
+          66026.73,
+          60436.82,
+          72229.39,
+          64373.23
+        ]
+      },
+      {
+        "edge_id": "544999264#1",
+        "seeds_present": 5,
+        "mean_time_loss_s": 46221.39,
+        "min_time_loss_s": 25017.42,
+        "max_time_loss_s": 59004.77,
+        "per_seed_time_loss_s": [
+          53570.64,
+          41405.29,
+          25017.42,
+          52108.85,
+          59004.77
+        ]
+      },
+      {
+        "edge_id": "744561216#3",
+        "seeds_present": 5,
+        "mean_time_loss_s": 44500.91,
+        "min_time_loss_s": 41609.2,
+        "max_time_loss_s": 48115.24,
+        "per_seed_time_loss_s": [
+          43610.42,
+          44550.79,
+          41609.2,
+          48115.24,
+          44618.89
+        ]
+      },
+      {
+        "edge_id": "128220197#1",
+        "seeds_present": 5,
+        "mean_time_loss_s": 10097.07,
+        "min_time_loss_s": 7650.7,
+        "max_time_loss_s": 11851.39,
+        "per_seed_time_loss_s": [
+          11762.81,
+          8763.83,
+          7650.7,
+          10456.63,
+          11851.39
+        ]
+      },
+      {
+        "edge_id": "631197944#1",
+        "seeds_present": 5,
+        "mean_time_loss_s": 9391.57,
+        "min_time_loss_s": 9331.06,
+        "max_time_loss_s": 9435.24,
+        "per_seed_time_loss_s": [
+          9333.87,
+          9435.24,
+          9431.17,
+          9331.06,
+          9426.5
+        ]
+      },
+      {
+        "edge_id": "230402870",
+        "seeds_present": 5,
+        "mean_time_loss_s": 6669.04,
+        "min_time_loss_s": 1896.56,
+        "max_time_loss_s": 8944.92,
+        "per_seed_time_loss_s": [
+          5970.29,
+          8590.66,
+          1896.56,
+          7942.75,
+          8944.92
+        ]
+      },
+      {
+        "edge_id": "1379614784#0",
+        "seeds_present": 5,
+        "mean_time_loss_s": 5118.39,
+        "min_time_loss_s": 4105.19,
+        "max_time_loss_s": 6122.91,
+        "per_seed_time_loss_s": [
+          5536.74,
+          4423.55,
+          4105.19,
+          6122.91,
+          5403.56
+        ]
+      },
+      {
+        "edge_id": "1393474724#1",
+        "seeds_present": 5,
+        "mean_time_loss_s": 4964.49,
+        "min_time_loss_s": 4887.45,
+        "max_time_loss_s": 5043.74,
+        "per_seed_time_loss_s": [
+          4887.45,
+          4976.26,
+          5043.74,
+          4984.06,
+          4930.96
+        ]
+      },
+      {
+        "edge_id": "92196679#0",
+        "seeds_present": 5,
+        "mean_time_loss_s": 4497.62,
+        "min_time_loss_s": 4448.28,
+        "max_time_loss_s": 4550.87,
+        "per_seed_time_loss_s": [
+          4470.2,
+          4448.28,
+          4489.74,
+          4529.0,
+          4550.87
+        ]
+      },
+      {
+        "edge_id": "464465165#3",
+        "seeds_present": 5,
+        "mean_time_loss_s": 4203.59,
+        "min_time_loss_s": 4113.83,
+        "max_time_loss_s": 4323.7,
+        "per_seed_time_loss_s": [
+          4113.83,
+          4175.97,
+          4323.7,
+          4242.17,
+          4162.28
+        ]
+      },
+      {
+        "edge_id": "172853382#6",
+        "seeds_present": 5,
+        "mean_time_loss_s": 2959.18,
+        "min_time_loss_s": 2902.98,
+        "max_time_loss_s": 3061.88,
+        "per_seed_time_loss_s": [
+          2902.98,
+          2928.93,
+          3061.88,
+          2950.97,
+          2951.13
+        ]
+      },
+      {
+        "edge_id": "886153772",
+        "seeds_present": 5,
+        "mean_time_loss_s": 2941.07,
+        "min_time_loss_s": 2902.47,
+        "max_time_loss_s": 2996.17,
+        "per_seed_time_loss_s": [
+          2902.47,
+          2910.16,
+          2996.17,
+          2955.87,
+          2940.7
+        ]
+      },
+      {
+        "edge_id": "1299917512",
+        "seeds_present": 5,
+        "mean_time_loss_s": 1643.66,
+        "min_time_loss_s": 1569.54,
+        "max_time_loss_s": 1758.89,
+        "per_seed_time_loss_s": [
+          1593.5,
+          1569.54,
+          1660.52,
+          1758.89,
+          1635.85
+        ]
+      },
+      {
+        "edge_id": "380709621",
+        "seeds_present": 5,
+        "mean_time_loss_s": 1496.29,
+        "min_time_loss_s": 1452.13,
+        "max_time_loss_s": 1599.45,
+        "per_seed_time_loss_s": [
+          1452.13,
+          1465.59,
+          1484.56,
+          1599.45,
+          1479.71
+        ]
+      },
+      {
+        "edge_id": "245809758#0",
+        "seeds_present": 5,
+        "mean_time_loss_s": 1341.71,
+        "min_time_loss_s": 1152.49,
+        "max_time_loss_s": 1682.98,
+        "per_seed_time_loss_s": [
+          1384.57,
+          1282.61,
+          1152.49,
+          1682.98,
+          1205.91
+        ]
+      },
+      {
+        "edge_id": "377124830",
+        "seeds_present": 4,
+        "mean_time_loss_s": 4676.67,
+        "min_time_loss_s": 1986.37,
+        "max_time_loss_s": 8810.59,
+        "per_seed_time_loss_s": [
+          1986.37,
+          5515.15,
+          2394.57,
+          8810.59
+        ]
+      },
+      {
+        "edge_id": "27934854#9",
+        "seeds_present": 4,
+        "mean_time_loss_s": 4231.6,
+        "min_time_loss_s": 3134.89,
+        "max_time_loss_s": 5106.99,
+        "per_seed_time_loss_s": [
+          3134.89,
+          4911.08,
+          3773.45,
+          5106.99
+        ]
+      },
+      {
+        "edge_id": "27934854#8",
+        "seeds_present": 4,
+        "mean_time_loss_s": 2437.66,
+        "min_time_loss_s": 1295.97,
+        "max_time_loss_s": 3480.25,
+        "per_seed_time_loss_s": [
+          1295.97,
+          3480.25,
+          2817.69,
+          2156.74
+        ]
+      },
+      {
+        "edge_id": "1109948513",
+        "seeds_present": 4,
+        "mean_time_loss_s": 1366.62,
+        "min_time_loss_s": 1296.16,
+        "max_time_loss_s": 1400.44,
+        "per_seed_time_loss_s": [
+          1400.44,
+          1397.38,
+          1372.48,
+          1296.16
+        ]
+      }
+    ],
+    "highest_waiting_edges": [
+      {
+        "edge_id": "744561216#0",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 71003.47,
+        "min_waiting_time_s": 56964.76,
+        "max_waiting_time_s": 84878.5,
+        "per_seed_waiting_time_s": [
+          68356.4,
+          84878.5,
+          56964.76,
+          75878.5,
+          68939.18
+        ]
+      },
+      {
+        "edge_id": "370328588#2",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 48880.55,
+        "min_waiting_time_s": 43772.04,
+        "max_waiting_time_s": 55339.73,
+        "per_seed_waiting_time_s": [
+          48912.03,
+          51265.43,
+          45113.52,
+          55339.73,
+          43772.04
+        ]
+      },
+      {
+        "edge_id": "544999264#1",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 34131.0,
+        "min_waiting_time_s": 18796.0,
+        "max_waiting_time_s": 41187.0,
+        "per_seed_waiting_time_s": [
+          38896.0,
+          33186.5,
+          18796.0,
+          38589.5,
+          41187.0
+        ]
+      },
+      {
+        "edge_id": "744561216#3",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 33609.43,
+        "min_waiting_time_s": 30977.42,
+        "max_waiting_time_s": 37392.39,
+        "per_seed_waiting_time_s": [
+          32844.73,
+          33449.65,
+          30977.42,
+          37392.39,
+          33382.94
+        ]
+      },
+      {
+        "edge_id": "128220197#1",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 7838.03,
+        "min_waiting_time_s": 5866.5,
+        "max_waiting_time_s": 9122.73,
+        "per_seed_waiting_time_s": [
+          9050.92,
+          6913.5,
+          5866.5,
+          8236.5,
+          9122.73
+        ]
+      },
+      {
+        "edge_id": "631197944#1",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 7044.7,
+        "min_waiting_time_s": 7002.5,
+        "max_waiting_time_s": 7072.0,
+        "per_seed_waiting_time_s": [
+          7011.5,
+          7071.0,
+          7072.0,
+          7002.5,
+          7066.5
+        ]
+      },
+      {
+        "edge_id": "230402870",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 5416.23,
+        "min_waiting_time_s": 1173.0,
+        "max_waiting_time_s": 7378.5,
+        "per_seed_waiting_time_s": [
+          4695.5,
+          7277.0,
+          1173.0,
+          6557.15,
+          7378.5
+        ]
+      },
+      {
+        "edge_id": "1379614784#0",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 4382.04,
+        "min_waiting_time_s": 3524.5,
+        "max_waiting_time_s": 5391.5,
+        "per_seed_waiting_time_s": [
+          4678.18,
+          3726.5,
+          3524.5,
+          5391.5,
+          4589.5
+        ]
+      },
+      {
+        "edge_id": "1393474724#1",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 4202.89,
+        "min_waiting_time_s": 4124.79,
+        "max_waiting_time_s": 4276.81,
+        "per_seed_waiting_time_s": [
+          4124.79,
+          4218.0,
+          4276.81,
+          4221.87,
+          4173.0
+        ]
+      },
+      {
+        "edge_id": "464465165#3",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 3635.2,
+        "min_waiting_time_s": 3563.0,
+        "max_waiting_time_s": 3751.5,
+        "per_seed_waiting_time_s": [
+          3563.0,
+          3611.0,
+          3751.5,
+          3659.5,
+          3591.0
+        ]
+      },
+      {
+        "edge_id": "172853382#6",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 2519.4,
+        "min_waiting_time_s": 2474.5,
+        "max_waiting_time_s": 2612.5,
+        "per_seed_waiting_time_s": [
+          2474.5,
+          2502.0,
+          2612.5,
+          2507.5,
+          2500.5
+        ]
+      },
+      {
+        "edge_id": "92196679#0",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 1967.2,
+        "min_waiting_time_s": 1927.5,
+        "max_waiting_time_s": 2026.0,
+        "per_seed_waiting_time_s": [
+          1932.0,
+          1927.5,
+          1976.5,
+          1974.0,
+          2026.0
+        ]
+      },
+      {
+        "edge_id": "245809758#2",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 995.7,
+        "min_waiting_time_s": 900.0,
+        "max_waiting_time_s": 1107.0,
+        "per_seed_waiting_time_s": [
+          1008.5,
+          974.0,
+          900.0,
+          1107.0,
+          989.0
+        ]
+      },
+      {
+        "edge_id": "1042112410",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 958.9,
+        "min_waiting_time_s": 778.5,
+        "max_waiting_time_s": 1160.5,
+        "per_seed_waiting_time_s": [
+          921.5,
+          962.0,
+          778.5,
+          1160.5,
+          972.0
+        ]
+      },
+      {
+        "edge_id": "1109948513",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 920.9,
+        "min_waiting_time_s": 845.0,
+        "max_waiting_time_s": 954.5,
+        "per_seed_waiting_time_s": [
+          947.5,
+          954.5,
+          924.0,
+          933.5,
+          845.0
+        ]
+      },
+      {
+        "edge_id": "380709621",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 887.4,
+        "min_waiting_time_s": 841.5,
+        "max_waiting_time_s": 983.5,
+        "per_seed_waiting_time_s": [
+          841.5,
+          877.5,
+          890.0,
+          983.5,
+          844.5
+        ]
+      },
+      {
+        "edge_id": "1506497135",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 883.6,
+        "min_waiting_time_s": 562.0,
+        "max_waiting_time_s": 1203.5,
+        "per_seed_waiting_time_s": [
+          1053.5,
+          718.5,
+          562.0,
+          1203.5,
+          880.5
+        ]
+      },
+      {
+        "edge_id": "464465163#1",
+        "seeds_present": 5,
+        "mean_waiting_time_s": 690.43,
+        "min_waiting_time_s": 516.0,
+        "max_waiting_time_s": 1050.13,
+        "per_seed_waiting_time_s": [
+          549.5,
+          750.5,
+          586.0,
+          1050.13,
+          516.0
+        ]
+      },
+      {
+        "edge_id": "377124830",
+        "seeds_present": 4,
+        "mean_waiting_time_s": 3507.12,
+        "min_waiting_time_s": 1217.5,
+        "max_waiting_time_s": 7229.0,
+        "per_seed_waiting_time_s": [
+          1217.5,
+          4090.5,
+          1491.5,
+          7229.0
+        ]
+      },
+      {
+        "edge_id": "27934854#9",
+        "seeds_present": 4,
+        "mean_waiting_time_s": 3207.13,
+        "min_waiting_time_s": 2227.0,
+        "max_waiting_time_s": 3927.52,
+        "per_seed_waiting_time_s": [
+          2227.0,
+          3863.5,
+          2810.5,
+          3927.52
+        ]
+      }
+    ],
+    "intersection_approaches": [
+      {
+        "junction_id": "1417443722",
+        "is_traffic_light": false,
+        "road_names": [],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 89148.74,
+        "min_total_time_loss_s": 71741.9,
+        "max_total_time_loss_s": 102985.6,
+        "per_seed_total_time_loss_s": [
+          87805.1,
+          102985.6,
+          71741.9,
+          93499.0,
+          89712.1
+        ]
+      },
+      {
+        "junction_id": "494271078",
+        "is_traffic_light": false,
+        "road_names": [],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 66259.12,
+        "min_total_time_loss_s": 60436.8,
+        "max_total_time_loss_s": 72229.4,
+        "per_seed_total_time_loss_s": [
+          68229.5,
+          66026.7,
+          60436.8,
+          72229.4,
+          64373.2
+        ]
+      },
+      {
+        "junction_id": "1417443736",
+        "is_traffic_light": false,
+        "road_names": [
+          "2nd Cross Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 46221.38,
+        "min_total_time_loss_s": 25017.4,
+        "max_total_time_loss_s": 59004.8,
+        "per_seed_total_time_loss_s": [
+          53570.6,
+          41405.3,
+          25017.4,
+          52108.8,
+          59004.8
+        ]
+      },
+      {
+        "junction_id": "6196977039",
+        "is_traffic_light": false,
+        "road_names": [],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 44519.48,
+        "min_total_time_loss_s": 41627.1,
+        "max_total_time_loss_s": 48134.4,
+        "per_seed_total_time_loss_s": [
+          43628.9,
+          44569.9,
+          41627.1,
+          48134.4,
+          44637.1
+        ]
+      },
+      {
+        "junction_id": "cluster_10282769895_10775075568_11964440742_11964440743",
+        "is_traffic_light": true,
+        "road_names": [
+          "Hosur Road",
+          "Madiwala Sarjapura Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 12127.28,
+        "min_total_time_loss_s": 11904.3,
+        "max_total_time_loss_s": 12429.3,
+        "per_seed_total_time_loss_s": [
+          11904.3,
+          12081.2,
+          12429.3,
+          12177.2,
+          12044.4
+        ]
+      },
+      {
+        "junction_id": "12196455086",
+        "is_traffic_light": false,
+        "road_names": [
+          "2nd Cross Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 10097.06,
+        "min_total_time_loss_s": 7650.7,
+        "max_total_time_loss_s": 11851.4,
+        "per_seed_total_time_loss_s": [
+          11762.8,
+          8763.8,
+          7650.7,
+          10456.6,
+          11851.4
+        ]
+      },
+      {
+        "junction_id": "cluster_12074449288_12074449292",
+        "is_traffic_light": true,
+        "road_names": [
+          "Sarjapura Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 9391.58,
+        "min_total_time_loss_s": 9331.1,
+        "max_total_time_loss_s": 9435.2,
+        "per_seed_total_time_loss_s": [
+          9333.9,
+          9435.2,
+          9431.2,
+          9331.1,
+          9426.5
+        ]
+      },
+      {
+        "junction_id": "cluster_1417443740_1417443741",
+        "is_traffic_light": false,
+        "road_names": [],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 6669.04,
+        "min_total_time_loss_s": 1896.6,
+        "max_total_time_loss_s": 8944.9,
+        "per_seed_total_time_loss_s": [
+          5970.3,
+          8590.7,
+          1896.6,
+          7942.7,
+          8944.9
+        ]
+      },
+      {
+        "junction_id": "494271106",
+        "is_traffic_light": false,
+        "road_names": [
+          "Madiwala Sarjapura Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 4497.62,
+        "min_total_time_loss_s": 4448.3,
+        "max_total_time_loss_s": 4550.9,
+        "per_seed_total_time_loss_s": [
+          4470.2,
+          4448.3,
+          4489.7,
+          4529.0,
+          4550.9
+        ]
+      },
+      {
+        "junction_id": "12040966323",
+        "is_traffic_light": false,
+        "road_names": [
+          "Ragigudda-Silk Board Integrated Flyover"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 2941.1,
+        "min_total_time_loss_s": 2902.5,
+        "max_total_time_loss_s": 2996.2,
+        "per_seed_total_time_loss_s": [
+          2902.5,
+          2910.2,
+          2996.2,
+          2955.9,
+          2940.7
+        ]
+      },
+      {
+        "junction_id": "cluster_306611966_7478115610",
+        "is_traffic_light": false,
+        "road_names": [
+          "15th Cross Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 2730.12,
+        "min_total_time_loss_s": 1253.7,
+        "max_total_time_loss_s": 7058.8,
+        "per_seed_total_time_loss_s": [
+          1393.6,
+          7058.8,
+          1277.3,
+          2667.2,
+          1253.7
+        ]
+      },
+      {
+        "junction_id": "4105324822",
+        "is_traffic_light": false,
+        "road_names": [
+          "Outer Ring Road",
+          "Srinagar - Kanyakumari Highway"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 2179.76,
+        "min_total_time_loss_s": 2109.2,
+        "max_total_time_loss_s": 2255.1,
+        "per_seed_total_time_loss_s": [
+          2255.1,
+          2129.1,
+          2179.6,
+          2225.8,
+          2109.2
+        ]
+      },
+      {
+        "junction_id": "11664293096",
+        "is_traffic_light": false,
+        "road_names": [
+          "Hosur Road",
+          "Silkboard Double Decker Flyover"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 1772.54,
+        "min_total_time_loss_s": 1694.3,
+        "max_total_time_loss_s": 1888.7,
+        "per_seed_total_time_loss_s": [
+          1726.6,
+          1694.3,
+          1792.8,
+          1888.7,
+          1760.3
+        ]
+      },
+      {
+        "junction_id": "9593357279",
+        "is_traffic_light": false,
+        "road_names": [
+          "Hosur Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 1654.86,
+        "min_total_time_loss_s": 1454.7,
+        "max_total_time_loss_s": 1879.0,
+        "per_seed_total_time_loss_s": [
+          1602.2,
+          1648.0,
+          1454.7,
+          1879.0,
+          1690.4
+        ]
+      },
+      {
+        "junction_id": "3805003790",
+        "is_traffic_light": false,
+        "road_names": [
+          "Outer Ring Road",
+          "Srinagar - Kanyakumari Highway"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 1522.88,
+        "min_total_time_loss_s": 1476.0,
+        "max_total_time_loss_s": 1623.4,
+        "per_seed_total_time_loss_s": [
+          1476.0,
+          1493.5,
+          1511.6,
+          1623.4,
+          1509.9
+        ]
+      },
+      {
+        "junction_id": "1123386062",
+        "is_traffic_light": false,
+        "road_names": [
+          "Outer Ring Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 1487.22,
+        "min_total_time_loss_s": 1380.6,
+        "max_total_time_loss_s": 1619.9,
+        "per_seed_total_time_loss_s": [
+          1492.5,
+          1479.1,
+          1380.6,
+          1619.9,
+          1464.0
+        ]
+      },
+      {
+        "junction_id": "cluster_10282796509_10282796511_10855370147_1723795924",
+        "is_traffic_light": false,
+        "road_names": [
+          "Outer Ring Road"
+        ],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 1484.46,
+        "min_total_time_loss_s": 1259.4,
+        "max_total_time_loss_s": 2043.2,
+        "per_seed_total_time_loss_s": [
+          1302.7,
+          1499.0,
+          1318.0,
+          2043.2,
+          1259.4
+        ]
+      },
+      {
+        "junction_id": "1123386065",
+        "is_traffic_light": false,
+        "road_names": [],
+        "seeds_present": 5,
+        "mean_total_time_loss_s": 1341.72,
+        "min_total_time_loss_s": 1152.5,
+        "max_total_time_loss_s": 1683.0,
+        "per_seed_total_time_loss_s": [
+          1384.6,
+          1282.6,
+          1152.5,
+          1683.0,
+          1205.9
+        ]
+      },
+      {
+        "junction_id": "10118500634",
+        "is_traffic_light": false,
+        "road_names": [
+          "Srinagar - Kanyakumari Highway"
+        ],
+        "seeds_present": 4,
+        "mean_total_time_loss_s": 4676.68,
+        "min_total_time_loss_s": 1986.4,
+        "max_total_time_loss_s": 8810.6,
+        "per_seed_total_time_loss_s": [
+          1986.4,
+          5515.1,
+          2394.6,
+          8810.6
+        ]
+      },
+      {
+        "junction_id": "306611415",
+        "is_traffic_light": false,
+        "road_names": [
+          "15th Cross Road"
+        ],
+        "seeds_present": 4,
+        "mean_total_time_loss_s": 4231.62,
+        "min_total_time_loss_s": 3134.9,
+        "max_total_time_loss_s": 5107.0,
+        "per_seed_total_time_loss_s": [
+          3134.9,
+          4911.1,
+          3773.5,
+          5107.0
+        ]
+      }
+    ]
+  }
+}

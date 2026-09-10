@@ -1,0 +1,73 @@
+{
+  "dataset_id": "sumo_network_review",
+  "data_class": "ESTIMATED_DATA",
+  "description": "Phase 2.5 structural and operational review of the SUMO network for Central Silk Board Junction, Bengaluru: operational status of construction-flagged ways, cause of disconnected fragments, OSM signal to traffic-light mapping, flyover ramp connectivity, junction-merge safety, and the inventory of netconvert-supplied lane counts and speeds.",
+  "source_name": "EMS Black Box Phase 2.5 review",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T03:40:45Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/network_review.json",
+  "estimation_basis": "Every classification is derived from data already in the repository — OSM way tags from the raw extract, the converted network's own topology and geometry, and the Phase 1 layer table — combined with thresholds recorded in ems_sim.network.sumo_review: a traffic light controlling one link is implausible, two lights within 100 m are probably one intersection, an intersection more than 8 m from both edges' endpoints is a crossing rather than a meeting, and a default speed at or above 80 km/h is unsupported for this study area. No external source was consulted and no real-world fact was asserted. Where OSM contradicts itself the review returns UNRESOLVED rather than choosing.",
+  "produced_by": null,
+  "random_seed": null,
+  "derived_from": [
+    "silk_board_v1_osm_raw",
+    "silk_board_v1_network_processed",
+    "silk_board_v1_sumo_network"
+  ],
+  "processing_steps": [
+    "Classified every OSM way carrying a construction, proposed or '(u/c)' marker, recording the evidence on both sides rather than a bare verdict.",
+    "Traced each such way to its SUMO edges and measured what would be disconnected if it were removed.",
+    "Determined for each investigated disconnected way whether the cause is study-area clipping or a genuine gap in OSM, by rebuilding the connectivity graph from the raw extract.",
+    "Mapped OSM traffic_signals nodes to built traffic lights within 75 m and assessed each light's plausibility from the number of links it controls.",
+    "Grouped traffic lights within 100 m to find physical intersections modelled as several independent lights.",
+    "Classified every connection of every major elevated deck edge as a ramp, an elevated continuation, a touchdown, or a crossing — by geometry.",
+    "Examined all joined junction clusters for merged grade separations, distinguishing a bridge meeting its approaches from two roads crossing.",
+    "Enumerated every edge whose lane count or speed netconvert supplied, and flagged default speeds unsupported for this study area."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": {
+    "area_id": "silk_board_v1",
+    "display_name": "Central Silk Board Junction, Bengaluru",
+    "anchor": {
+      "lat": 12.917236,
+      "lon": 77.623262
+    },
+    "anchor_derivation": "Length-weighted centroid, in UTM 43N (EPSG:32643), of the five OpenStreetMap highway ways whose name tag is exactly 'Silk Board Flyover' or 'Silk Board Interchange' (way/40696221, way/40696222, way/1208112302, way/1208112303, way/1254771465), as present in an OSM extract retrieved 2026-09-09. Chosen over a geocoder result because Nominatim returns bus stops and a landuse polygon for this name, none of which sit on the carriageway; and over the Hosur Road x Outer Ring Road crossing because those two corridors share no node and do not cross in plan view within the extract - the interchange is grade-separated and connected only through link ways.",
+    "anchor_source_ways": [
+      "way/40696221",
+      "way/40696222",
+      "way/1208112302",
+      "way/1208112303",
+      "way/1254771465"
+    ],
+    "half_extent_m": 800.0,
+    "bbox": {
+      "min_lon": 77.615889,
+      "min_lat": 12.910001,
+      "max_lon": 77.630635,
+      "max_lat": 12.924471
+    },
+    "bbox_api_order": "77.615889,12.910001,77.630635,12.924471",
+    "extent_m": {
+      "width": 1600.0,
+      "height": 1600.0
+    },
+    "area_km2": 2.56,
+    "notes": "Covers the Silk Board interchange core plus its immediate approaches on Hosur Road (NH-44), Outer Ring Road and Sarjapura Road.\n\nSIZING. The brief was 'approximately 5-10 intersections'. That target is not reachable under a topological definition: even a 400 m box contains 12 nodes where three or more through-roads meet, because the interchange decomposes into many ramp splits and merges and the ORR/Hosur corridors carry frequent slip-road connections. Measured three ways, this box contains 122 junction nodes on any drivable way, 22 distinct major-road intersections after clustering, and 5 intersections with a mapped traffic signal. The last is the count that matches the brief, and it is also the one that matters for this project: signal-controlled intersections are the only places an EMS priority policy can act. Smaller boxes were rejected because they shorten the approaches without reducing the intersection count much, and Silk Board's queues are the phenomenon under study. Larger boxes were rejected because at ~1.1 km half-extent the OSM API refuses the request (50,000-node cap).\n\nSCOPE LIMIT. This box does NOT cover the full length of the Silkboard Double Decker Flyover, whose OSM ways run about 2.8 km west toward Ragigudda. Traffic entering along that viaduct will appear at the study-area boundary rather than being simulated from its true origin.\n\nAPPROACH LENGTH. 800 m of approach on each corridor may prove short relative to observed Silk Board queues. If Phase 3 shows queues reaching the boundary, the box must be widened - as a new area_id, with runs repeated - rather than the results reported as-is."
+  },
+  "limitations": [
+    "OPERATIONAL STATUS OF way/1351994264 IS UNRESOLVED. OSM tags the 'Ragigudda-Silk Board Integrated Flyover (u/c)' as highway=primary_link — a drivable class — while naming it under construction. The review does not choose between these readings. It is currently in the drivable network and is the sole connection to a 1.9 km carriageway, so excluding it would isolate that edge.",
+    "Unresolved operational status: 1351994264.",
+    "Signal-to-light association is spatial proximity, not an OSM relation. OSM does not record which junction a signal node governs.",
+    "1 physical intersection(s) remain modelled as several independent traffic lights after raising tls.join-dist to 60 m. Merging the remainder needs junction-level joining and was left to human judgement.",
+    "All netconvert-supplied lane counts and speeds are ESTIMATED_DATA and were NOT replaced. No source in this project supports better values, and substituting a guess would be worse than a labelled default.",
+    "This review establishes no real-world fact. It cannot confirm what is open to traffic, how any signal is timed, or that the geometry matches the ground."
+  ],
+  "notes": "Validation after the review: 0 error(s), 6 warning(s). Narrative: docs/SUMO_NETWORK_REVIEW.md."
+}

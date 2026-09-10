@@ -1,0 +1,36 @@
+{
+  "dataset_id": "phase4_sensitivity",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 4 sensitivity experiments: vehicle-mix and two-wheeler behaviour variants run under identical conditions to quantify how far the baseline result moves with each estimated assumption.",
+  "source_name": "EMS Black Box Phase 4 sensitivity",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T05:05:07Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/calibration/sensitivity.json",
+  "estimation_basis": null,
+  "produced_by": "seed:42 duration:1800.0",
+  "random_seed": 42,
+  "derived_from": [
+    "phase3_baseline",
+    "silk_board_v1_sumo_network"
+  ],
+  "processing_steps": [
+    "Ran the baseline scenario with each vehicle-mix hypothesis, changing only the mix.",
+    "Ran it with each two-wheeler behavioural override, changing only that vType's parameters for the run.",
+    "Reported absolute and relative differences from the baseline variant."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "NO PARAMETER WAS TUNED. No observation of Silk Board exists in this project to tune towards, and fitting to expectation would make the model agree with its author rather than with the world.",
+    "Every variant is ESTIMATED_DATA. None is a measured modal split or a calibrated behavioural parameter.",
+    "Single seed per variant. A variant effect smaller than the seed-to-seed spread from the multi-seed baseline is not a finding.",
+    "Shorter runs than the full baseline, so absolute values are not comparable with it — only the differences between variants are."
+  ],
+  "notes": "both experiments, 683s wall clock."
+}

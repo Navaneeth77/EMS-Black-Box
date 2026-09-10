@@ -1,0 +1,7 @@
+# EMS Black Box - analysis
+# Target: Python 3.11
+
+numpy>=1.26
+pandas>=2.2
+lxml>=5.0              # SUMO tripinfo / edgedata XML parsing
+pyarrow>=17.0          # columnar storage for per-run measurement tables

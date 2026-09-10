@@ -1,0 +1,170 @@
+# ---------------------------------------------------------------------------
+# EMS Black Box - root ignore rules
+# Covers: Python, Node, SUMO artefacts, macOS, editors, local data
+# ---------------------------------------------------------------------------
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.python-version
+
+# Testing / typing / linting caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# --- Node / frontend ------------------------------------------------------
+node_modules/
+.pnp
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+.eslintcache
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+*.local
+
+# --- SUMO -----------------------------------------------------------------
+# Generated networks, routes and outputs are reproducible from configs + seeds,
+# so they are rebuilt rather than committed. Hand-authored scenario *inputs*
+# (.sumocfg, additional files, policy definitions) ARE committed.
+*.net.xml
+*.net.xml.gz
+*.rou.xml
+*.rou.alt.xml
+*.trips.xml
+*.poly.xml
+# NOTE: .netccfg is NOT ignored. The netconvert configuration is a committed
+# INPUT - the recipe that makes the conversion reproducible - not an output.
+# Only the artefacts it generates are regenerable.
+*.netecfg
+sumo-gui.log
+sumo.log
+
+# netconvert artefacts are regenerated with the network. Only the .netccfg —
+# the recipe — is committed; everything netconvert produces from it is output,
+# and several of these embed absolute paths from the machine that ran them.
+*.netconvert.log
+*.netconvert.err
+simulation/sumo/**/*.validation.json
+simulation/sumo/**/*.warnings.json
+simulation/sumo/**/*.joined-junctions.xml
+
+# Phase 3 generated demand, routes, scenario configs and run outputs. All are
+# regenerable from the committed demand configuration plus the recorded seed;
+# what gets committed is the recipe, not the output.
+simulation/demand/*.flows.xml
+simulation/routes/*.rou.xml
+simulation/routes/*.rou.alt.xml
+simulation/config/*.sumocfg
+simulation/results/**
+!simulation/results/.gitkeep
+!simulation/results/README.md
+
+# SUMO simulation outputs (regenerate from saved config + seed)
+*.tripinfo.xml
+*.fcd.xml
+*.summary.xml
+*.emissions.xml
+*.queue.xml
+*.edgedata.xml
+*.lanedata.xml
+*.vehroutes.xml
+*.stopinfo.xml
+*.statistics.xml
+
+# --- Data -----------------------------------------------------------------
+# Large / derived data stays out of git. Provenance records DO get committed:
+# they are the audit trail describing what the ignored files contain.
+data/raw/**
+!data/raw/.gitkeep
+!data/raw/README.md
+data/processed/**
+!data/processed/.gitkeep
+!data/processed/README.md
+!data/provenance/**
+
+# Phase 4 calibration outputs. Committed: they are small (~0.7 MB), they carry
+# the provenance and configuration hashes for every run, and they are the
+# evidence behind the uncertainty and sensitivity claims in the docs.
+#
+# Git cannot re-include a path through an excluded parent, so the intermediate
+# directories have to be un-excluded first.
+!data/processed/*/
+!data/processed/*/calibration/
+!data/processed/*/calibration/**
+!data/processed/*/baseline_runs/
+!data/processed/*/baseline_runs/**
+
+# Simulation run outputs
+runs/
+outputs/
+*.sqlite
+*.duckdb
+
+# --- Docker / database ----------------------------------------------------
+docker/volumes/
+pgdata/
+
+# --- macOS ----------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.DocumentRevisions-V100
+Icon?
+
+# --- Editors / IDE --------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Secrets / local config ----------------------------------------------
+.env
+.env.*
+!.env.example

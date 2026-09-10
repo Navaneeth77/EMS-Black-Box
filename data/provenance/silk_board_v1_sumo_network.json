@@ -1,0 +1,83 @@
+{
+  "dataset_id": "silk_board_v1_sumo_network",
+  "data_class": "PUBLICLY_SOURCED_DATA",
+  "description": "SUMO road network for Central Silk Board Junction, Bengaluru, converted from the OpenStreetMap extract by netconvert. Geometry and attributes derive from OSM; lane counts and speeds absent from OSM were supplied by netconvert defaults and are annotated as such on the affected edges.",
+  "source_name": "OpenStreetMap (converted)",
+  "source_url": null,
+  "source_licence": "ODbL 1.0",
+  "source_attribution": "© OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)",
+  "retrieved_at": "2026-09-10T03:40:46Z",
+  "sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+  "size_bytes": 4586233,
+  "file_path": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
+  "estimation_basis": null,
+  "produced_by": null,
+  "random_seed": null,
+  "derived_from": [
+    "silk_board_v1_osm_raw",
+    "silk_board_v1_network_processed"
+  ],
+  "processing_steps": [
+    "netconvert 1.27.1 run from the committed configuration simulation/sumo/silk_board_v1/silk_board_v1.netccfg.",
+    "Projected to UTM zone 43N; projection recorded in the net.xml <location>.",
+    "Clipped to the study-area bounding box with --keep-edges.in-geo-boundary; ways partly inside are kept whole, so boundary corridors extend beyond.",
+    "Restricted to the motor-vehicle network with --keep-edges.by-vclass passenger.",
+    "Junction clusters joined (--junctions.join, 15 m); 30 clusters joined.",
+    "Traffic lights inferred from OSM signal nodes on approach ways (--tls.guess-signals, 30 m) and clustered (--tls.join).",
+    "Turning arrows imported from OSM (--osm.turn-lanes).",
+    "OSM way IDs preserved per lane (--output.original-names) and street names kept (--output.street-names), so every edge is traceable to its source way.",
+    "netconvert-supplied defaults annotated on affected edges (--osm.annotate-defaults).",
+    "Largest weakly connected component kept; 6 residential fragments (182 edges) removed.",
+    "--osm.layer-elevation NOT applied and --flatten never applied; see limitations.",
+    "Structural validation run against the Phase 1 tables as an independent reference; report written alongside the network."
+  ],
+  "tool_versions": {
+    "netconvert": "1.27.1",
+    "sumo": "1.27.1"
+  },
+  "study_area": {
+    "area_id": "silk_board_v1",
+    "display_name": "Central Silk Board Junction, Bengaluru",
+    "anchor": {
+      "lat": 12.917236,
+      "lon": 77.623262
+    },
+    "anchor_derivation": "Length-weighted centroid, in UTM 43N (EPSG:32643), of the five OpenStreetMap highway ways whose name tag is exactly 'Silk Board Flyover' or 'Silk Board Interchange' (way/40696221, way/40696222, way/1208112302, way/1208112303, way/1254771465), as present in an OSM extract retrieved 2026-09-09. Chosen over a geocoder result because Nominatim returns bus stops and a landuse polygon for this name, none of which sit on the carriageway; and over the Hosur Road x Outer Ring Road crossing because those two corridors share no node and do not cross in plan view within the extract - the interchange is grade-separated and connected only through link ways.",
+    "anchor_source_ways": [
+      "way/40696221",
+      "way/40696222",
+      "way/1208112302",
+      "way/1208112303",
+      "way/1254771465"
+    ],
+    "half_extent_m": 800.0,
+    "bbox": {
+      "min_lon": 77.615889,
+      "min_lat": 12.910001,
+      "max_lon": 77.630635,
+      "max_lat": 12.924471
+    },
+    "bbox_api_order": "77.615889,12.910001,77.630635,12.924471",
+    "extent_m": {
+      "width": 1600.0,
+      "height": 1600.0
+    },
+    "area_km2": 2.56,
+    "notes": "Covers the Silk Board interchange core plus its immediate approaches on Hosur Road (NH-44), Outer Ring Road and Sarjapura Road.\n\nSIZING. The brief was 'approximately 5-10 intersections'. That target is not reachable under a topological definition: even a 400 m box contains 12 nodes where three or more through-roads meet, because the interchange decomposes into many ramp splits and merges and the ORR/Hosur corridors carry frequent slip-road connections. Measured three ways, this box contains 122 junction nodes on any drivable way, 22 distinct major-road intersections after clustering, and 5 intersections with a mapped traffic signal. The last is the count that matches the brief, and it is also the one that matters for this project: signal-controlled intersections are the only places an EMS priority policy can act. Smaller boxes were rejected because they shorten the approaches without reducing the intersection count much, and Silk Board's queues are the phenomenon under study. Larger boxes were rejected because at ~1.1 km half-extent the OSM API refuses the request (50,000-node cap).\n\nSCOPE LIMIT. This box does NOT cover the full length of the Silkboard Double Decker Flyover, whose OSM ways run about 2.8 km west toward Ragigudda. Traffic entering along that viaduct will appear at the study-area boundary rather than being simulated from its true origin.\n\nAPPROACH LENGTH. 800 m of approach on each corridor may prove short relative to observed Silk Board queues. If Phase 3 shows queues reaching the boundary, the box must be widened - as a new area_id, with runs repeated - rather than the results reported as-is."
+  },
+  "limitations": [
+    "major_ways_survive_conversion: 136/150 major OSM ways traceable in the network. 13 absent ways are under 50 m (expected: absorbed into joined junctions). 1 substantial major way(s) absent: Sarjapura Road (457214835, 580 m, tertiary)",
+    "operational_status_resolved: 1 way(s) have an UNRESOLVED operational status, 1 of them in the drivable network: ['1351994264']. OSM contradicts itself on these — a drivable classification with an under-construction name. Not resolved by inference: a guess would propagate into every travel time crossing them.",
+    "traffic_lights_plausible: 3 traffic light(s) control a single link and are not real signalised intersections: ['12611782078', '2971089260', '11348815671']. They come from OSM signal nodes whose junction was clipped or filtered away.",
+    "traffic_lights_not_fragmented: 1 physical intersection(s) are modelled as multiple independent traffic lights ([4] lights each, max separation [76.6] m). A signal-priority policy would have to coordinate lights the real junction controls as one.",
+    "ramps_connected_at_both_ends: 2 ramp(s) have no incoming or no outgoing edge: ['172853384#3', '684917326#0']. At a clipped boundary that is a legitimate source or sink; elsewhere it is a ramp to nowhere.",
+    "default_speeds_plausible: 166 edge(s) carry a DEFAULT speed at or above 80.0 km/h, unsupported by any source used here. Free-flow speed is the reference delay is measured against, so an over-estimate inflates every delay figure. Not replaced: no source supports a better value, and a guess would be worse than a labelled default.",
+    "TRAFFIC LIGHT PROGRAMS ARE ESTIMATED_DATA. Signal locations come from OSM; the phase durations and cycle structure were generated by netconvert from defaults. No real Bengaluru signal timings exist in any source used here. They must not be described as observed, and Phase 4 replaces them.",
+    "1389 of 1515 edges carry a lane count or speed supplied by netconvert because OSM had none. SUMO cannot simulate an edge without them. Affected edges are annotated with an 'osmDefaults' parameter naming which attributes were substituted.",
+    "Elevation is not modelled. --osm.layer-elevation was disabled after measurement: it introduced 32 edges with gradients above 15% (worst 1047%) on short layer-transition connectors, which would corrupt SUMO's grade resistance and therefore travel times. Grade separation is unaffected because it is topological - crossing edges share no junction - which the validation suite verifies directly.",
+    "Turn restrictions: netconvert could not determine the direction of 4 restriction relations and ignored them. Those turns remain legal in the network although they are not on the ground.",
+    "Network geometry beyond the study-area boundary is retained where a way is only partly inside. These are documented boundary connections, not modelled area.",
+    "OSM road centrelines are cartographic, not engineering survey data. The converted network inherits that: it is not accurate to design tolerances."
+  ],
+  "notes": "netconvert reported 68 warnings, 0 errors. Categorised in simulation/sumo/silk_board_v1/silk_board_v1.warnings.json and investigated in docs/SUMO_CONVERSION.md."
+}

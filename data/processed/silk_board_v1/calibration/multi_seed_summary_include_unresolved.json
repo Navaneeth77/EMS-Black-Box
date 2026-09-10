@@ -1,0 +1,5161 @@
+{
+  "reproducibility": {
+    "generated_at": "2026-09-10T04:47:58Z",
+    "sumo_version": "1.27.1",
+    "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
+    "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "period": "evening_peak",
+    "demand_scale": 0.5,
+    "step_length_s": 0.5,
+    "begin_s": 0.0,
+    "end_s": 3900.0,
+    "warmup_s": 300.0,
+    "scenario_variant": {
+      "variant_id": "include_unresolved",
+      "include_unresolved_infrastructure": true,
+      "unresolved_edge_ids": [
+        "1351994264"
+      ],
+      "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
+      "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
+    },
+    "ambulance": {
+      "origin_edge": "312063814#2",
+      "destination_edge": "491889864#5",
+      "depart_time_s": 600.0,
+      "vehicle_type": "ambulance",
+      "trip_label": "baseline",
+      "basis": "ESTIMATED_DATA. Origin, destination and departure time are configuration choices by this project, not a real EMS dispatch. No ambulance call record for Silk Board was available.",
+      "vehicle_id": "ambulance_baseline",
+      "data_class": "ESTIMATED_DATA",
+      "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+    },
+    "wall_clock_total_s": 798.9
+  },
+  "summary": {
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "run_count": 5,
+    "demand_config_hashes": [
+      "436a9db95aa7f710",
+      "7637f7d2807931d0",
+      "a74938316d727028",
+      "f1f340fae5d7447a",
+      "ff2579a9689c576d"
+    ],
+    "variant_ids": [
+      "include_unresolved"
+    ],
+    "distributions": {
+      "vehicles_departed": {
+        "name": "vehicles departed",
+        "unit": "count",
+        "sample_count": 5,
+        "mean": 3226.0,
+        "median": 3226.0,
+        "min": 3226.0,
+        "max": 3226.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "coefficient_of_variation": 0.0,
+        "per_seed": {
+          "42": 3226.0,
+          "43": 3226.0,
+          "44": 3226.0,
+          "45": 3226.0,
+          "46": 3226.0
+        },
+        "percentiles": {
+          "p25": 3226.0,
+          "p50": 3226.0,
+          "p75": 3226.0,
+          "p90": 3226.0
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "vehicles_arrived": {
+        "name": "vehicles arrived",
+        "unit": "count",
+        "sample_count": 5,
+        "mean": 2914.4,
+        "median": 2917.0,
+        "min": 2884.0,
+        "max": 2938.0,
+        "range": 54.0,
+        "stdev": 21.2673,
+        "coefficient_of_variation": 0.0073,
+        "per_seed": {
+          "42": 2917.0,
+          "43": 2904.0,
+          "44": 2929.0,
+          "45": 2884.0,
+          "46": 2938.0
+        },
+        "percentiles": {
+          "p25": 2904.0,
+          "p50": 2917.0,
+          "p75": 2929.0,
+          "p90": 2934.4
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "vehicles_remaining": {
+        "name": "vehicles still running at end",
+        "unit": "count",
+        "sample_count": 5,
+        "mean": 311.2,
+        "median": 309.0,
+        "min": 288.0,
+        "max": 341.0,
+        "range": 53.0,
+        "stdev": 21.0879,
+        "coefficient_of_variation": 0.0678,
+        "per_seed": {
+          "42": 309.0,
+          "43": 322.0,
+          "44": 296.0,
+          "45": 341.0,
+          "46": 288.0
+        },
+        "percentiles": {
+          "p25": 296.0,
+          "p50": 309.0,
+          "p75": 322.0,
+          "p90": 333.4
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "insertion_backlog": {
+        "name": "insertion backlog",
+        "unit": "count",
+        "sample_count": 5,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "coefficient_of_variation": null,
+        "per_seed": {
+          "42": 0.0,
+          "43": 0.0,
+          "44": 0.0,
+          "45": 0.0,
+          "46": 0.0
+        },
+        "percentiles": {
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "teleports": {
+        "name": "teleports",
+        "unit": "count",
+        "sample_count": 5,
+        "mean": 1.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 4.0,
+        "range": 4.0,
+        "stdev": 1.7321,
+        "coefficient_of_variation": 1.7321,
+        "per_seed": {
+          "42": 0.0,
+          "43": 1.0,
+          "44": 0.0,
+          "45": 4.0,
+          "46": 0.0
+        },
+        "percentiles": {
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 1.0,
+          "p90": 2.8
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "mean_travel_time": {
+        "name": "mean travel time (all vehicles)",
+        "unit": "s",
+        "sample_count": 5,
+        "mean": 264.136,
+        "median": 266.113,
+        "min": 245.228,
+        "max": 278.211,
+        "range": 32.983,
+        "stdev": 11.9161,
+        "coefficient_of_variation": 0.0451,
+        "per_seed": {
+          "42": 267.042,
+          "43": 266.113,
+          "44": 245.228,
+          "45": 264.086,
+          "46": 278.211
+        },
+        "percentiles": {
+          "p25": 264.086,
+          "p50": 266.113,
+          "p75": 267.042,
+          "p90": 273.7434
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "mean_waiting_time": {
+        "name": "mean waiting time (all vehicles)",
+        "unit": "s",
+        "sample_count": 5,
+        "mean": 58.1044,
+        "median": 59.479,
+        "min": 43.767,
+        "max": 67.688,
+        "range": 23.921,
+        "stdev": 8.8338,
+        "coefficient_of_variation": 0.152,
+        "per_seed": {
+          "42": 59.479,
+          "43": 61.683,
+          "44": 43.767,
+          "45": 57.905,
+          "46": 67.688
+        },
+        "percentiles": {
+          "p25": 57.905,
+          "p50": 59.479,
+          "p75": 61.683,
+          "p90": 65.286
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "mean_time_loss": {
+        "name": "mean time loss (all vehicles)",
+        "unit": "s",
+        "sample_count": 5,
+        "mean": 87.775,
+        "median": 89.951,
+        "min": 69.126,
+        "max": 102.365,
+        "range": 33.239,
+        "stdev": 12.0079,
+        "coefficient_of_variation": 0.1368,
+        "per_seed": {
+          "42": 90.907,
+          "43": 89.951,
+          "44": 69.126,
+          "45": 86.526,
+          "46": 102.365
+        },
+        "percentiles": {
+          "p25": 86.526,
+          "p50": 89.951,
+          "p75": 90.907,
+          "p90": 97.7818
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "ambulance_travel_time": {
+        "name": "ambulance travel time",
+        "unit": "s",
+        "sample_count": 5,
+        "mean": 145.9,
+        "median": 146.0,
+        "min": 144.0,
+        "max": 147.0,
+        "range": 3.0,
+        "stdev": 1.1402,
+        "coefficient_of_variation": 0.0078,
+        "per_seed": {
+          "42": 146.0,
+          "43": 144.0,
+          "44": 146.0,
+          "45": 146.5,
+          "46": 147.0
+        },
+        "percentiles": {
+          "p25": 146.0,
+          "p50": 146.0,
+          "p75": 146.5,
+          "p90": 146.8
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "ambulance_waiting_time": {
+        "name": "ambulance waiting time",
+        "unit": "s",
+        "sample_count": 5,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "coefficient_of_variation": null,
+        "per_seed": {
+          "42": 0.0,
+          "43": 0.0,
+          "44": 0.0,
+          "45": 0.0,
+          "46": 0.0
+        },
+        "percentiles": {
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p90": 0.0
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      },
+      "ambulance_time_loss": {
+        "name": "ambulance time loss",
+        "unit": "s",
+        "sample_count": 5,
+        "mean": 17.176,
+        "median": 17.39,
+        "min": 15.27,
+        "max": 18.36,
+        "range": 3.09,
+        "stdev": 1.1444,
+        "coefficient_of_variation": 0.0666,
+        "per_seed": {
+          "42": 17.39,
+          "43": 15.27,
+          "44": 17.31,
+          "45": 17.55,
+          "46": 18.36
+        },
+        "percentiles": {
+          "p25": 17.31,
+          "p50": 17.39,
+          "p75": 17.55,
+          "p90": 18.036
+        },
+        "percentile_note": "Estimated from 5 samples by linear interpolation. With this few runs a percentile is indicative, not precise."
+      }
+    },
+    "ambulance_route_consistency": {
+      "consistent_across_seeds": true,
+      "distinct_routes": 1,
+      "edge_count": 29,
+      "note": "Every seed produced the same ambulance route, so the travel times are samples of one journey under different traffic draws."
+    },
+    "completed_runs": 5,
+    "per_seed": [
+      {
+        "seed": 42,
+        "demand_id": "silk_board_v1_evening_peak_seed42",
+        "demand_config_hash": "f1f340fae5d7447a",
+        "variant_id": "include_unresolved",
+        "departed": 3226,
+        "arrived": 2917,
+        "remaining": 309,
+        "loaded": 3226,
+        "backlog": 0,
+        "teleports": 0,
+        "sumo_teleports": 0,
+        "collisions": 0,
+        "mean_travel_time_s": 267.042,
+        "mean_waiting_time_s": 59.479,
+        "mean_time_loss_s": 90.907,
+        "mean_speed_ms": null,
+        "mean_route_length_m": 2456.641,
+        "completed_trips": 2917,
+        "ambulance_completed": true,
+        "ambulance_travel_time_s": 146.0,
+        "ambulance_waiting_time_s": 0.0,
+        "ambulance_time_loss_s": 17.39,
+        "ambulance_route_edges": [
+          "312063814#2",
+          "312063814#3",
+          "1155963376#0",
+          "-229976708#19",
+          "-229976708#18",
+          "-229976708#17",
+          "-229976708#16",
+          "-229976708#15",
+          "-229976708#14",
+          "-229976708#13",
+          "-229976708#12",
+          "-229976708#10",
+          "-229976708#9",
+          "-229976708#7",
+          "-229976708#6",
+          "-229976708#5",
+          "-229976708#4",
+          "-726834057#5",
+          "-726834057#4",
+          "-726834057#3",
+          "-726834057#2",
+          "-726834057#1",
+          "-1118275525",
+          "-1109599647",
+          "-1109599644",
+          "-1109599642",
+          "243553545#4",
+          "491889864#4",
+          "491889864#5"
+        ],
+        "ambulance_route_length_m": 2134.23,
+        "ambulance_used_unresolved": false,
+        "vehicles_using_unresolved": 192,
+        "wall_clock_s": 160.14,
+        "output_dir": "simulation/results/silk_board_v1_evening_peak_seed42",
+        "top_delay_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 168.91499511718752,
+            "occupancy": 36.925166015625,
+            "waiting_time_s": 68356.40000000001,
+            "time_loss_s": 82268.39,
+            "speed_ms": 0.2943017578125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 246,
+            "left": 220
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 167.54827880859375,
+            "occupancy": 32.65557861328125,
+            "waiting_time_s": 48912.03,
+            "time_loss_s": 68229.48,
+            "speed_ms": 0.34060302734375003,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 282,
+            "left": 246
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 189.37801757812503,
+            "occupancy": 65.13871826171875,
+            "waiting_time_s": 38896.0,
+            "time_loss_s": 53570.64,
+            "speed_ms": 0.37078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 271
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 302.22102294921876,
+            "occupancy": 48.878388671875,
+            "waiting_time_s": 32844.73,
+            "time_loss_s": 43610.42,
+            "speed_ms": 0.40987792968750003,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 487,
+            "left": 467
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 184.13479736328125,
+            "occupancy": 62.37638427734375,
+            "waiting_time_s": 9050.92,
+            "time_loss_s": 11762.809999999998,
+            "speed_ms": 0.39505859374999996,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 271,
+            "left": 269
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.9294580078125,
+            "occupancy": 1.1401293945312498,
+            "waiting_time_s": 7011.5,
+            "time_loss_s": 9333.870000000003,
+            "speed_ms": 7.9301708984375,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 160.0214501953125,
+            "occupancy": 55.8023388671875,
+            "waiting_time_s": 4695.5,
+            "time_loss_s": 5970.29,
+            "speed_ms": 1.13777587890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 306,
+            "left": 301
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 203.6579931640625,
+            "occupancy": 61.800588378906255,
+            "waiting_time_s": 4678.18,
+            "time_loss_s": 5536.74,
+            "speed_ms": 0.424267578125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 269,
+            "left": 267
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.626513671875,
+            "occupancy": 14.410329589843752,
+            "waiting_time_s": 4124.79,
+            "time_loss_s": 4887.449999999999,
+            "speed_ms": 0.9752954101562499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.4052490234375,
+            "occupancy": 0.92165771484375,
+            "waiting_time_s": 1932.0,
+            "time_loss_s": 4470.2,
+            "speed_ms": 13.54629150390625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 97.79203125000001,
+            "occupancy": 11.3740087890625,
+            "waiting_time_s": 3563.0,
+            "time_loss_s": 4113.83,
+            "speed_ms": 0.9405322265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 137.1570654296875,
+            "occupancy": 22.84267333984375,
+            "waiting_time_s": 2227.0,
+            "time_loss_s": 3134.8900000000003,
+            "speed_ms": 2.5891552734375005,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 314,
+            "left": 308
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 52.59341552734375,
+            "occupancy": 7.579663085937501,
+            "waiting_time_s": 2474.5,
+            "time_loss_s": 2902.9800000000005,
+            "speed_ms": 1.94946044921875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "886153772",
+            "sampled_seconds": 3900.0,
+            "density": 10.0983056640625,
+            "occupancy": 1.7524658203125,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 2902.4700000000003,
+            "speed_ms": 10.4442333984375,
+            "departed": 412,
+            "arrived": 0,
+            "entered": 0,
+            "left": 392
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 68.780107421875,
+            "occupancy": 11.91162841796875,
+            "waiting_time_s": 1217.5,
+            "time_loss_s": 1986.37,
+            "speed_ms": 4.07650390625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 290,
+            "left": 282
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 11.00857177734375,
+            "occupancy": 2.0199267578124998,
+            "waiting_time_s": 475.5,
+            "time_loss_s": 1593.5,
+            "speed_ms": 9.676694335937501,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 389,
+            "left": 380
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 106.33906982421875,
+            "occupancy": 11.88797119140625,
+            "waiting_time_s": 841.5,
+            "time_loss_s": 1452.13,
+            "speed_ms": 1.90828857421875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 39.2404736328125,
+            "occupancy": 23.106369628906247,
+            "waiting_time_s": 1053.5,
+            "time_loss_s": 1412.93,
+            "speed_ms": 1.3885498046875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 269,
+            "left": 269
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 26.05493896484375,
+            "waiting_time_s": 947.5,
+            "time_loss_s": 1400.4399999999998,
+            "speed_ms": 0.6837231445312499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 14.81968505859375,
+            "occupancy": 2.747705078125,
+            "waiting_time_s": 568.5,
+            "time_loss_s": 1384.5700000000002,
+            "speed_ms": 6.1484033203125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 370
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 135.36793212890626,
+            "occupancy": 14.68170166015625,
+            "waiting_time_s": 1008.5,
+            "time_loss_s": 1323.99,
+            "speed_ms": 1.4481958007812499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 370,
+            "left": 369
+          },
+          {
+            "edge_id": "1196514116#0",
+            "sampled_seconds": 3900.0,
+            "density": 14.622937011718747,
+            "occupancy": 1.6408740234375,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1297.5299999999997,
+            "speed_ms": 15.0995849609375,
+            "departed": 0,
+            "arrived": 914,
+            "entered": 920,
+            "left": 0
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 92.55693603515624,
+            "occupancy": 16.23865966796875,
+            "waiting_time_s": 1027.0,
+            "time_loss_s": 1295.97,
+            "speed_ms": 4.4832080078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 318,
+            "left": 314
+          },
+          {
+            "edge_id": "1108993651",
+            "sampled_seconds": 3900.0,
+            "density": 15.89031494140625,
+            "occupancy": 5.23492431640625,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1167.3999999999999,
+            "speed_ms": 12.640830078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 793,
+            "left": 792
+          },
+          {
+            "edge_id": "1073384217#1",
+            "sampled_seconds": 3900.0,
+            "density": 12.5842822265625,
+            "occupancy": 1.4810034179687501,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1160.76,
+            "speed_ms": 14.9869384765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 724,
+            "left": 718
+          }
+        ],
+        "top_waiting_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 168.91499511718752,
+            "occupancy": 36.925166015625,
+            "waiting_time_s": 68356.40000000001,
+            "time_loss_s": 82268.39,
+            "speed_ms": 0.2943017578125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 246,
+            "left": 220
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 167.54827880859375,
+            "occupancy": 32.65557861328125,
+            "waiting_time_s": 48912.03,
+            "time_loss_s": 68229.48,
+            "speed_ms": 0.34060302734375003,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 282,
+            "left": 246
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 189.37801757812503,
+            "occupancy": 65.13871826171875,
+            "waiting_time_s": 38896.0,
+            "time_loss_s": 53570.64,
+            "speed_ms": 0.37078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 271
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 302.22102294921876,
+            "occupancy": 48.878388671875,
+            "waiting_time_s": 32844.73,
+            "time_loss_s": 43610.42,
+            "speed_ms": 0.40987792968750003,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 487,
+            "left": 467
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 184.13479736328125,
+            "occupancy": 62.37638427734375,
+            "waiting_time_s": 9050.92,
+            "time_loss_s": 11762.809999999998,
+            "speed_ms": 0.39505859374999996,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 271,
+            "left": 269
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.9294580078125,
+            "occupancy": 1.1401293945312498,
+            "waiting_time_s": 7011.5,
+            "time_loss_s": 9333.870000000003,
+            "speed_ms": 7.9301708984375,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 160.0214501953125,
+            "occupancy": 55.8023388671875,
+            "waiting_time_s": 4695.5,
+            "time_loss_s": 5970.29,
+            "speed_ms": 1.13777587890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 306,
+            "left": 301
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 203.6579931640625,
+            "occupancy": 61.800588378906255,
+            "waiting_time_s": 4678.18,
+            "time_loss_s": 5536.74,
+            "speed_ms": 0.424267578125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 269,
+            "left": 267
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.626513671875,
+            "occupancy": 14.410329589843752,
+            "waiting_time_s": 4124.79,
+            "time_loss_s": 4887.449999999999,
+            "speed_ms": 0.9752954101562499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 97.79203125000001,
+            "occupancy": 11.3740087890625,
+            "waiting_time_s": 3563.0,
+            "time_loss_s": 4113.83,
+            "speed_ms": 0.9405322265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 52.59341552734375,
+            "occupancy": 7.579663085937501,
+            "waiting_time_s": 2474.5,
+            "time_loss_s": 2902.9800000000005,
+            "speed_ms": 1.94946044921875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 137.1570654296875,
+            "occupancy": 22.84267333984375,
+            "waiting_time_s": 2227.0,
+            "time_loss_s": 3134.8900000000003,
+            "speed_ms": 2.5891552734375005,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 314,
+            "left": 308
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.4052490234375,
+            "occupancy": 0.92165771484375,
+            "waiting_time_s": 1932.0,
+            "time_loss_s": 4470.2,
+            "speed_ms": 13.54629150390625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 68.780107421875,
+            "occupancy": 11.91162841796875,
+            "waiting_time_s": 1217.5,
+            "time_loss_s": 1986.37,
+            "speed_ms": 4.07650390625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 290,
+            "left": 282
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 39.2404736328125,
+            "occupancy": 23.106369628906247,
+            "waiting_time_s": 1053.5,
+            "time_loss_s": 1412.93,
+            "speed_ms": 1.3885498046875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 269,
+            "left": 269
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 92.55693603515624,
+            "occupancy": 16.23865966796875,
+            "waiting_time_s": 1027.0,
+            "time_loss_s": 1295.97,
+            "speed_ms": 4.4832080078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 318,
+            "left": 314
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 135.36793212890626,
+            "occupancy": 14.68170166015625,
+            "waiting_time_s": 1008.5,
+            "time_loss_s": 1323.99,
+            "speed_ms": 1.4481958007812499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 370,
+            "left": 369
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 26.05493896484375,
+            "waiting_time_s": 947.5,
+            "time_loss_s": 1400.4399999999998,
+            "speed_ms": 0.6837231445312499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "1042112410",
+            "sampled_seconds": 3900.0,
+            "density": 333.2539135742187,
+            "occupancy": 22.917177734375002,
+            "waiting_time_s": 921.5,
+            "time_loss_s": 1108.95,
+            "speed_ms": 1.0864599609374999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 467,
+            "left": 467
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 106.33906982421875,
+            "occupancy": 11.88797119140625,
+            "waiting_time_s": 841.5,
+            "time_loss_s": 1452.13,
+            "speed_ms": 1.90828857421875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "27934854#7",
+            "sampled_seconds": 3900.0,
+            "density": 48.638720703124996,
+            "occupancy": 8.307158203125,
+            "waiting_time_s": 709.5,
+            "time_loss_s": 950.97,
+            "speed_ms": 6.9584985351562505,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 323,
+            "left": 318
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 14.81968505859375,
+            "occupancy": 2.747705078125,
+            "waiting_time_s": 568.5,
+            "time_loss_s": 1384.5700000000002,
+            "speed_ms": 6.1484033203125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 370
+          },
+          {
+            "edge_id": "631197944#3",
+            "sampled_seconds": 3900.0,
+            "density": 16.726728515625002,
+            "occupancy": 1.9334619140624998,
+            "waiting_time_s": 559.0,
+            "time_loss_s": 940.31,
+            "speed_ms": 7.0506005859375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 301
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 23.342258300781246,
+            "occupancy": 2.5771728515624996,
+            "waiting_time_s": 549.5,
+            "time_loss_s": 1069.41,
+            "speed_ms": 7.031218261718751,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 567,
+            "left": 567
+          },
+          {
+            "edge_id": "1311812959#0",
+            "sampled_seconds": 3900.0,
+            "density": 8.84096435546875,
+            "occupancy": 0.9299462890625001,
+            "waiting_time_s": 541.5,
+            "time_loss_s": 630.71,
+            "speed_ms": 2.9562915039062503,
+            "departed": 85,
+            "arrived": 0,
+            "entered": 0,
+            "left": 85
+          }
+        ],
+        "intersection_approach_delay": [
+          {
+            "junction_id": "1417443722",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 87805.1,
+            "total_waiting_time_s": 73034.6,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271078",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 68229.5,
+            "total_waiting_time_s": 48912.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "1417443736",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 53570.6,
+            "total_waiting_time_s": 38896.0,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "6196977039",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 43628.9,
+            "total_waiting_time_s": 32844.7,
+            "road_names": []
+          },
+          {
+            "junction_id": "cluster_10282769895_10775075568_11964440742_11964440743",
+            "is_traffic_light": true,
+            "approach_edges": 3,
+            "total_time_loss_s": 11904.3,
+            "total_waiting_time_s": 10162.3,
+            "road_names": [
+              "Hosur Road",
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12196455086",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 11762.8,
+            "total_waiting_time_s": 9050.9,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_12074449288_12074449292",
+            "is_traffic_light": true,
+            "approach_edges": 1,
+            "total_time_loss_s": 9333.9,
+            "total_waiting_time_s": 7011.5,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_1417443740_1417443741",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 5970.3,
+            "total_waiting_time_s": 4695.5,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271106",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 4470.2,
+            "total_waiting_time_s": 1932.0,
+            "road_names": [
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "306611415",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 3134.9,
+            "total_waiting_time_s": 2227.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "12040966323",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2902.5,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Ragigudda-Silk Board Integrated Flyover"
+            ]
+          },
+          {
+            "junction_id": "4105324822",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2255.1,
+            "total_waiting_time_s": 1008.5,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "10118500634",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1986.4,
+            "total_waiting_time_s": 1217.5,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "11664293096",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1726.6,
+            "total_waiting_time_s": 475.5,
+            "road_names": [
+              "Hosur Road",
+              "Silkboard Double Decker Flyover"
+            ]
+          },
+          {
+            "junction_id": "9593357279",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1602.2,
+            "total_waiting_time_s": 921.5,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "1123386062",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1492.5,
+            "total_waiting_time_s": 1008.5,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "3805003790",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1476.0,
+            "total_waiting_time_s": 841.5,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "2399992907",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1412.9,
+            "total_waiting_time_s": 1053.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_306611966_7478115610",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1393.6,
+            "total_waiting_time_s": 289.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "1123386065",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1384.6,
+            "total_waiting_time_s": 568.5,
+            "road_names": []
+          },
+          {
+            "junction_id": "cluster_10282796509_10282796511_10855370147_1723795924",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1302.7,
+            "total_waiting_time_s": 652.5,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "618248521",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1297.5,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "10081671364",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1296.0,
+            "total_waiting_time_s": 1027.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_11809900885_11809900886_1837005138_260911861_#1more",
+            "is_traffic_light": true,
+            "approach_edges": 2,
+            "total_time_loss_s": 1180.2,
+            "total_waiting_time_s": 719.0,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "494271091",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1167.4,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 43,
+        "demand_id": "silk_board_v1_evening_peak_seed43",
+        "demand_config_hash": "a74938316d727028",
+        "variant_id": "include_unresolved",
+        "departed": 3226,
+        "arrived": 2904,
+        "remaining": 322,
+        "loaded": 3226,
+        "backlog": 0,
+        "teleports": 1,
+        "sumo_teleports": 1,
+        "collisions": 0,
+        "mean_travel_time_s": 266.113,
+        "mean_waiting_time_s": 61.683,
+        "mean_time_loss_s": 89.951,
+        "mean_speed_ms": null,
+        "mean_route_length_m": 2462.328,
+        "completed_trips": 2904,
+        "ambulance_completed": true,
+        "ambulance_travel_time_s": 144.0,
+        "ambulance_waiting_time_s": 0.0,
+        "ambulance_time_loss_s": 15.27,
+        "ambulance_route_edges": [
+          "312063814#2",
+          "312063814#3",
+          "1155963376#0",
+          "-229976708#19",
+          "-229976708#18",
+          "-229976708#17",
+          "-229976708#16",
+          "-229976708#15",
+          "-229976708#14",
+          "-229976708#13",
+          "-229976708#12",
+          "-229976708#10",
+          "-229976708#9",
+          "-229976708#7",
+          "-229976708#6",
+          "-229976708#5",
+          "-229976708#4",
+          "-726834057#5",
+          "-726834057#4",
+          "-726834057#3",
+          "-726834057#2",
+          "-726834057#1",
+          "-1118275525",
+          "-1109599647",
+          "-1109599644",
+          "-1109599642",
+          "243553545#4",
+          "491889864#4",
+          "491889864#5"
+        ],
+        "ambulance_route_length_m": 2134.23,
+        "ambulance_used_unresolved": false,
+        "vehicles_using_unresolved": 192,
+        "wall_clock_s": 163.25,
+        "output_dir": "simulation/results/silk_board_v1_evening_peak_seed43",
+        "top_delay_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 213.67120849609375,
+            "occupancy": 40.04493896484375,
+            "waiting_time_s": 84878.5,
+            "time_loss_s": 98562.05,
+            "speed_ms": 0.4061474609375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 253,
+            "left": 230
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 161.92468994140626,
+            "occupancy": 35.46118408203125,
+            "waiting_time_s": 51265.42999999999,
+            "time_loss_s": 66026.73,
+            "speed_ms": 0.53181396484375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 288,
+            "left": 253
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 276.5152221679687,
+            "occupancy": 42.90322265625,
+            "waiting_time_s": 33449.649999999994,
+            "time_loss_s": 44550.79000000001,
+            "speed_ms": 0.53767822265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 467,
+            "left": 455
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 194.60041259765626,
+            "occupancy": 65.8933837890625,
+            "waiting_time_s": 33186.5,
+            "time_loss_s": 41405.29,
+            "speed_ms": 0.33486083984375004,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 274,
+            "left": 242
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.930903320312499,
+            "occupancy": 1.1408007812499998,
+            "waiting_time_s": 7071.0,
+            "time_loss_s": 9435.24,
+            "speed_ms": 7.928496093750001,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 148.82624755859374,
+            "occupancy": 57.4360498046875,
+            "waiting_time_s": 6913.5,
+            "time_loss_s": 8763.83,
+            "speed_ms": 0.26935302734375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 242,
+            "left": 238
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 193.05982666015626,
+            "occupancy": 62.59657958984375,
+            "waiting_time_s": 7277.0,
+            "time_loss_s": 8590.66,
+            "speed_ms": 0.8173461914062501,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 280,
+            "left": 274
+          },
+          {
+            "edge_id": "27934854#6",
+            "sampled_seconds": 3900.0,
+            "density": 158.527841796875,
+            "occupancy": 20.948908691406253,
+            "waiting_time_s": 5466.0,
+            "time_loss_s": 5961.07,
+            "speed_ms": 3.30183837890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 258,
+            "left": 239
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 126.089267578125,
+            "occupancy": 20.40400390625,
+            "waiting_time_s": 4090.5,
+            "time_loss_s": 5515.15,
+            "speed_ms": 1.19335205078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 295,
+            "left": 288
+          },
+          {
+            "edge_id": "27934854#7",
+            "sampled_seconds": 3900.0,
+            "density": 203.1074169921875,
+            "occupancy": 35.37659423828125,
+            "waiting_time_s": 4835.5,
+            "time_loss_s": 5235.65,
+            "speed_ms": 2.276611328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 304,
+            "left": 291
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.7508544921875,
+            "occupancy": 14.33290283203125,
+            "waiting_time_s": 4218.0,
+            "time_loss_s": 4976.26,
+            "speed_ms": 0.97223876953125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 139.5813037109375,
+            "occupancy": 32.6025830078125,
+            "waiting_time_s": 3863.5,
+            "time_loss_s": 4911.08,
+            "speed_ms": 0.93705078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 284,
+            "left": 280
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.41312255859375,
+            "occupancy": 0.9288867187500001,
+            "waiting_time_s": 1927.5,
+            "time_loss_s": 4448.28,
+            "speed_ms": 13.537333984375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 177.89379150390624,
+            "occupancy": 58.6626416015625,
+            "waiting_time_s": 3726.5,
+            "time_loss_s": 4423.549999999999,
+            "speed_ms": 0.30293701171875004,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 238,
+            "left": 236
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 102.0667138671875,
+            "occupancy": 11.27114501953125,
+            "waiting_time_s": 3611.0,
+            "time_loss_s": 4175.97,
+            "speed_ms": 0.92473876953125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 192.0113916015625,
+            "occupancy": 37.27612060546875,
+            "waiting_time_s": 3189.5,
+            "time_loss_s": 3480.25,
+            "speed_ms": 2.114404296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 290,
+            "left": 284
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 53.968046875,
+            "occupancy": 7.79485107421875,
+            "waiting_time_s": 2502.0,
+            "time_loss_s": 2928.93,
+            "speed_ms": 1.83201171875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "886153772",
+            "sampled_seconds": 3900.0,
+            "density": 9.76410888671875,
+            "occupancy": 1.70465576171875,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 2910.1600000000003,
+            "speed_ms": 10.7456640625,
+            "departed": 412,
+            "arrived": 0,
+            "entered": 0,
+            "left": 393
+          },
+          {
+            "edge_id": "1109948700#0",
+            "sampled_seconds": 3900.0,
+            "density": 32.3128369140625,
+            "occupancy": 5.5165429687500005,
+            "waiting_time_s": 1596.5,
+            "time_loss_s": 2452.2,
+            "speed_ms": 5.01396484375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 295,
+            "left": 295
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 10.24719970703125,
+            "occupancy": 1.870546875,
+            "waiting_time_s": 519.0,
+            "time_loss_s": 1569.54,
+            "speed_ms": 10.144091796875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 388,
+            "left": 384
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 91.9231982421875,
+            "occupancy": 9.710039062500002,
+            "waiting_time_s": 877.5,
+            "time_loss_s": 1465.59,
+            "speed_ms": 2.08841552734375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 24.7266015625,
+            "waiting_time_s": 954.5,
+            "time_loss_s": 1397.3799999999999,
+            "speed_ms": 0.7234765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 156.6499267578125,
+            "occupancy": 16.63716064453125,
+            "waiting_time_s": 974.0,
+            "time_loss_s": 1285.3200000000002,
+            "speed_ms": 1.4159912109375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 370,
+            "left": 369
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 14.959780273437499,
+            "occupancy": 2.77217041015625,
+            "waiting_time_s": 550.0,
+            "time_loss_s": 1282.61,
+            "speed_ms": 6.037321777343751,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 370
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 26.327770996093747,
+            "occupancy": 3.08892578125,
+            "waiting_time_s": 750.5,
+            "time_loss_s": 1260.3899999999999,
+            "speed_ms": 6.6583447265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 567,
+            "left": 567
+          }
+        ],
+        "top_waiting_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 213.67120849609375,
+            "occupancy": 40.04493896484375,
+            "waiting_time_s": 84878.5,
+            "time_loss_s": 98562.05,
+            "speed_ms": 0.4061474609375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 253,
+            "left": 230
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 161.92468994140626,
+            "occupancy": 35.46118408203125,
+            "waiting_time_s": 51265.42999999999,
+            "time_loss_s": 66026.73,
+            "speed_ms": 0.53181396484375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 288,
+            "left": 253
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 276.5152221679687,
+            "occupancy": 42.90322265625,
+            "waiting_time_s": 33449.649999999994,
+            "time_loss_s": 44550.79000000001,
+            "speed_ms": 0.53767822265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 467,
+            "left": 455
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 194.60041259765626,
+            "occupancy": 65.8933837890625,
+            "waiting_time_s": 33186.5,
+            "time_loss_s": 41405.29,
+            "speed_ms": 0.33486083984375004,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 274,
+            "left": 242
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 193.05982666015626,
+            "occupancy": 62.59657958984375,
+            "waiting_time_s": 7277.0,
+            "time_loss_s": 8590.66,
+            "speed_ms": 0.8173461914062501,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 280,
+            "left": 274
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.930903320312499,
+            "occupancy": 1.1408007812499998,
+            "waiting_time_s": 7071.0,
+            "time_loss_s": 9435.24,
+            "speed_ms": 7.928496093750001,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 148.82624755859374,
+            "occupancy": 57.4360498046875,
+            "waiting_time_s": 6913.5,
+            "time_loss_s": 8763.83,
+            "speed_ms": 0.26935302734375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 242,
+            "left": 238
+          },
+          {
+            "edge_id": "27934854#6",
+            "sampled_seconds": 3900.0,
+            "density": 158.527841796875,
+            "occupancy": 20.948908691406253,
+            "waiting_time_s": 5466.0,
+            "time_loss_s": 5961.07,
+            "speed_ms": 3.30183837890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 258,
+            "left": 239
+          },
+          {
+            "edge_id": "27934854#7",
+            "sampled_seconds": 3900.0,
+            "density": 203.1074169921875,
+            "occupancy": 35.37659423828125,
+            "waiting_time_s": 4835.5,
+            "time_loss_s": 5235.65,
+            "speed_ms": 2.276611328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 304,
+            "left": 291
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.7508544921875,
+            "occupancy": 14.33290283203125,
+            "waiting_time_s": 4218.0,
+            "time_loss_s": 4976.26,
+            "speed_ms": 0.97223876953125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 126.089267578125,
+            "occupancy": 20.40400390625,
+            "waiting_time_s": 4090.5,
+            "time_loss_s": 5515.15,
+            "speed_ms": 1.19335205078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 295,
+            "left": 288
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 139.5813037109375,
+            "occupancy": 32.6025830078125,
+            "waiting_time_s": 3863.5,
+            "time_loss_s": 4911.08,
+            "speed_ms": 0.93705078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 284,
+            "left": 280
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 177.89379150390624,
+            "occupancy": 58.6626416015625,
+            "waiting_time_s": 3726.5,
+            "time_loss_s": 4423.549999999999,
+            "speed_ms": 0.30293701171875004,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 238,
+            "left": 236
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 102.0667138671875,
+            "occupancy": 11.27114501953125,
+            "waiting_time_s": 3611.0,
+            "time_loss_s": 4175.97,
+            "speed_ms": 0.92473876953125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 192.0113916015625,
+            "occupancy": 37.27612060546875,
+            "waiting_time_s": 3189.5,
+            "time_loss_s": 3480.25,
+            "speed_ms": 2.114404296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 290,
+            "left": 284
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 53.968046875,
+            "occupancy": 7.79485107421875,
+            "waiting_time_s": 2502.0,
+            "time_loss_s": 2928.93,
+            "speed_ms": 1.83201171875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.41312255859375,
+            "occupancy": 0.9288867187500001,
+            "waiting_time_s": 1927.5,
+            "time_loss_s": 4448.28,
+            "speed_ms": 13.537333984375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "1109948700#0",
+            "sampled_seconds": 3900.0,
+            "density": 32.3128369140625,
+            "occupancy": 5.5165429687500005,
+            "waiting_time_s": 1596.5,
+            "time_loss_s": 2452.2,
+            "speed_ms": 5.01396484375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 295,
+            "left": 295
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 156.6499267578125,
+            "occupancy": 16.63716064453125,
+            "waiting_time_s": 974.0,
+            "time_loss_s": 1285.3200000000002,
+            "speed_ms": 1.4159912109375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 370,
+            "left": 369
+          },
+          {
+            "edge_id": "1042112410",
+            "sampled_seconds": 3900.0,
+            "density": 333.28218261718746,
+            "occupancy": 29.37426025390625,
+            "waiting_time_s": 962.0,
+            "time_loss_s": 1140.5,
+            "speed_ms": 1.00248291015625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 454,
+            "left": 453
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 24.7266015625,
+            "waiting_time_s": 954.5,
+            "time_loss_s": 1397.3799999999999,
+            "speed_ms": 0.7234765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 91.9231982421875,
+            "occupancy": 9.710039062500002,
+            "waiting_time_s": 877.5,
+            "time_loss_s": 1465.59,
+            "speed_ms": 2.08841552734375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 26.327770996093747,
+            "occupancy": 3.08892578125,
+            "waiting_time_s": 750.5,
+            "time_loss_s": 1260.3899999999999,
+            "speed_ms": 6.6583447265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 567,
+            "left": 567
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 38.22081298828125,
+            "occupancy": 27.58480712890625,
+            "waiting_time_s": 718.5,
+            "time_loss_s": 991.2700000000001,
+            "speed_ms": 0.70709716796875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 238,
+            "left": 238
+          },
+          {
+            "edge_id": "464465165#0",
+            "sampled_seconds": 3900.0,
+            "density": 4.978032226562499,
+            "occupancy": 0.5824462890625,
+            "waiting_time_s": 628.5,
+            "time_loss_s": 932.0399999999998,
+            "speed_ms": 13.44932373046875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          }
+        ],
+        "intersection_approach_delay": [
+          {
+            "junction_id": "1417443722",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 102985.6,
+            "total_waiting_time_s": 88605.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271078",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 66026.7,
+            "total_waiting_time_s": 51265.4,
+            "road_names": []
+          },
+          {
+            "junction_id": "6196977039",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 44569.9,
+            "total_waiting_time_s": 33449.6,
+            "road_names": []
+          },
+          {
+            "junction_id": "1417443736",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 41405.3,
+            "total_waiting_time_s": 33186.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_10282769895_10775075568_11964440742_11964440743",
+            "is_traffic_light": true,
+            "approach_edges": 3,
+            "total_time_loss_s": 12081.2,
+            "total_waiting_time_s": 10331.0,
+            "road_names": [
+              "Hosur Road",
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_12074449288_12074449292",
+            "is_traffic_light": true,
+            "approach_edges": 1,
+            "total_time_loss_s": 9435.2,
+            "total_waiting_time_s": 7071.0,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12196455086",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 8763.8,
+            "total_waiting_time_s": 6913.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_1417443740_1417443741",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 8590.7,
+            "total_waiting_time_s": 7277.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "cluster_306611966_7478115610",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 7058.8,
+            "total_waiting_time_s": 5783.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "10118500634",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 5515.1,
+            "total_waiting_time_s": 4090.5,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "1417443754",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 5235.6,
+            "total_waiting_time_s": 4835.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "306611415",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 4911.1,
+            "total_waiting_time_s": 3863.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "494271106",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 4448.3,
+            "total_waiting_time_s": 1927.5,
+            "road_names": [
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "10081671364",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 3480.2,
+            "total_waiting_time_s": 3189.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "12040966323",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2910.2,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Ragigudda-Silk Board Integrated Flyover"
+            ]
+          },
+          {
+            "junction_id": "12196449734",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2452.2,
+            "total_waiting_time_s": 1596.5,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "4105324822",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2129.1,
+            "total_waiting_time_s": 990.5,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "11664293096",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1694.3,
+            "total_waiting_time_s": 519.0,
+            "road_names": [
+              "Hosur Road",
+              "Silkboard Double Decker Flyover"
+            ]
+          },
+          {
+            "junction_id": "9593357279",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1648.0,
+            "total_waiting_time_s": 962.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_10282796509_10282796511_10855370147_1723795924",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1499.0,
+            "total_waiting_time_s": 848.5,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "3805003790",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1493.5,
+            "total_waiting_time_s": 880.5,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "1123386062",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1479.1,
+            "total_waiting_time_s": 974.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "1123386065",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1282.6,
+            "total_waiting_time_s": 550.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "618248521",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1247.1,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_11809900885_11809900886_1837005138_260911861_#1more",
+            "is_traffic_light": true,
+            "approach_edges": 2,
+            "total_time_loss_s": 1181.6,
+            "total_waiting_time_s": 721.0,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 44,
+        "demand_id": "silk_board_v1_evening_peak_seed44",
+        "demand_config_hash": "ff2579a9689c576d",
+        "variant_id": "include_unresolved",
+        "departed": 3226,
+        "arrived": 2929,
+        "remaining": 296,
+        "loaded": 3226,
+        "backlog": 0,
+        "teleports": 0,
+        "sumo_teleports": 0,
+        "collisions": 0,
+        "mean_travel_time_s": 245.228,
+        "mean_waiting_time_s": 43.767,
+        "mean_time_loss_s": 69.126,
+        "mean_speed_ms": null,
+        "mean_route_length_m": 2456.009,
+        "completed_trips": 2930,
+        "ambulance_completed": true,
+        "ambulance_travel_time_s": 146.0,
+        "ambulance_waiting_time_s": 0.0,
+        "ambulance_time_loss_s": 17.31,
+        "ambulance_route_edges": [
+          "312063814#2",
+          "312063814#3",
+          "1155963376#0",
+          "-229976708#19",
+          "-229976708#18",
+          "-229976708#17",
+          "-229976708#16",
+          "-229976708#15",
+          "-229976708#14",
+          "-229976708#13",
+          "-229976708#12",
+          "-229976708#10",
+          "-229976708#9",
+          "-229976708#7",
+          "-229976708#6",
+          "-229976708#5",
+          "-229976708#4",
+          "-726834057#5",
+          "-726834057#4",
+          "-726834057#3",
+          "-726834057#2",
+          "-726834057#1",
+          "-1118275525",
+          "-1109599647",
+          "-1109599644",
+          "-1109599642",
+          "243553545#4",
+          "491889864#4",
+          "491889864#5"
+        ],
+        "ambulance_route_length_m": 2134.23,
+        "ambulance_used_unresolved": false,
+        "vehicles_using_unresolved": 192,
+        "wall_clock_s": 147.23,
+        "output_dir": "simulation/results/silk_board_v1_evening_peak_seed44",
+        "top_delay_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 178.1442724609375,
+            "occupancy": 37.4919287109375,
+            "waiting_time_s": 56964.76,
+            "time_loss_s": 67636.68000000001,
+            "speed_ms": 0.39373046874999995,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 247,
+            "left": 224
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 192.428681640625,
+            "occupancy": 36.66572021484375,
+            "waiting_time_s": 45113.520000000004,
+            "time_loss_s": 60436.81999999999,
+            "speed_ms": 0.448212890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 285,
+            "left": 247
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 298.7434228515625,
+            "occupancy": 47.97090576171875,
+            "waiting_time_s": 30977.42,
+            "time_loss_s": 41609.2,
+            "speed_ms": 0.3981201171875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 499,
+            "left": 479
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 160.7598388671875,
+            "occupancy": 53.782666015625,
+            "waiting_time_s": 18796.0,
+            "time_loss_s": 25017.42,
+            "speed_ms": 0.7492431640625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 311,
+            "left": 283
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.941804199218751,
+            "occupancy": 1.140791015625,
+            "waiting_time_s": 7072.0,
+            "time_loss_s": 9431.170000000002,
+            "speed_ms": 7.9224658203125,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 154.02581787109375,
+            "occupancy": 60.588049316406256,
+            "waiting_time_s": 5866.5,
+            "time_loss_s": 7650.700000000002,
+            "speed_ms": 0.43766357421874996,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 283,
+            "left": 278
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 91.16673828124999,
+            "occupancy": 14.410009765625,
+            "waiting_time_s": 4276.8099999999995,
+            "time_loss_s": 5043.74,
+            "speed_ms": 0.9664868164062499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.40215087890625,
+            "occupancy": 0.9232714843750001,
+            "waiting_time_s": 1976.5,
+            "time_loss_s": 4489.740000000001,
+            "speed_ms": 13.55676513671875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 102.44917236328125,
+            "occupancy": 11.27490966796875,
+            "waiting_time_s": 3751.5,
+            "time_loss_s": 4323.700000000001,
+            "speed_ms": 0.88132568359375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 264,
+            "left": 264
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 173.5070654296875,
+            "occupancy": 53.2014892578125,
+            "waiting_time_s": 3524.5,
+            "time_loss_s": 4105.19,
+            "speed_ms": 0.40397949218749996,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 278,
+            "left": 276
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 68.96053466796874,
+            "occupancy": 10.33722900390625,
+            "waiting_time_s": 2612.5,
+            "time_loss_s": 3061.8800000000006,
+            "speed_ms": 1.09771728515625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "886153772",
+            "sampled_seconds": 3900.0,
+            "density": 10.084130859375,
+            "occupancy": 1.74736328125,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 2996.17,
+            "speed_ms": 10.502587890625,
+            "departed": 412,
+            "arrived": 0,
+            "entered": 0,
+            "left": 392
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 80.72572509765625,
+            "occupancy": 12.995410156250001,
+            "waiting_time_s": 1491.5,
+            "time_loss_s": 2394.57,
+            "speed_ms": 3.06287109375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 285
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 68.29634765624999,
+            "occupancy": 24.66643798828125,
+            "waiting_time_s": 1173.0,
+            "time_loss_s": 1896.5600000000002,
+            "speed_ms": 4.22583984375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 320,
+            "left": 312
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 10.40204833984375,
+            "occupancy": 1.9136108398437501,
+            "waiting_time_s": 530.5,
+            "time_loss_s": 1660.5199999999998,
+            "speed_ms": 9.92369384765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 386,
+            "left": 382
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 68.81182861328125,
+            "occupancy": 7.4467626953125,
+            "waiting_time_s": 890.0,
+            "time_loss_s": 1484.5600000000002,
+            "speed_ms": 2.8876904296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 22.42396484375,
+            "waiting_time_s": 924.0,
+            "time_loss_s": 1372.48,
+            "speed_ms": 0.80862548828125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "1196514116#0",
+            "sampled_seconds": 3900.0,
+            "density": 14.9974560546875,
+            "occupancy": 1.67972412109375,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1313.1100000000001,
+            "speed_ms": 15.158984375000001,
+            "departed": 0,
+            "arrived": 926,
+            "entered": 929,
+            "left": 0
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 136.65047119140624,
+            "occupancy": 14.884111328124998,
+            "waiting_time_s": 900.0,
+            "time_loss_s": 1208.19,
+            "speed_ms": 1.46681640625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 370,
+            "left": 370
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 15.22874755859375,
+            "occupancy": 2.7584082031249997,
+            "waiting_time_s": 504.5,
+            "time_loss_s": 1152.49,
+            "speed_ms": 5.945388183593749,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 370
+          },
+          {
+            "edge_id": "1073384217#1",
+            "sampled_seconds": 3900.0,
+            "density": 12.7026708984375,
+            "occupancy": 1.49539306640625,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1136.38,
+            "speed_ms": 14.9227880859375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 724,
+            "left": 717
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 17.28568603515625,
+            "occupancy": 1.945361328125,
+            "waiting_time_s": 586.0,
+            "time_loss_s": 1072.76,
+            "speed_ms": 10.079411621093751,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 566,
+            "left": 566
+          },
+          {
+            "edge_id": "1108993651",
+            "sampled_seconds": 3900.0,
+            "density": 15.6569384765625,
+            "occupancy": 5.21731201171875,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1041.4099999999999,
+            "speed_ms": 12.83962158203125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 794,
+            "left": 791
+          },
+          {
+            "edge_id": "380980308#0",
+            "sampled_seconds": 3900.0,
+            "density": 10.95584228515625,
+            "occupancy": 1.2777563476562501,
+            "waiting_time_s": 23.0,
+            "time_loss_s": 1041.15,
+            "speed_ms": 14.1486474609375,
+            "departed": 626,
+            "arrived": 0,
+            "entered": 0,
+            "left": 624
+          },
+          {
+            "edge_id": "312063814#2",
+            "sampled_seconds": 3900.0,
+            "density": 17.35026611328125,
+            "occupancy": 2.06841064453125,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1030.3000000000002,
+            "speed_ms": 14.950390625,
+            "departed": 1014,
+            "arrived": 0,
+            "entered": 0,
+            "left": 1004
+          }
+        ],
+        "top_waiting_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 178.1442724609375,
+            "occupancy": 37.4919287109375,
+            "waiting_time_s": 56964.76,
+            "time_loss_s": 67636.68000000001,
+            "speed_ms": 0.39373046874999995,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 247,
+            "left": 224
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 192.428681640625,
+            "occupancy": 36.66572021484375,
+            "waiting_time_s": 45113.520000000004,
+            "time_loss_s": 60436.81999999999,
+            "speed_ms": 0.448212890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 285,
+            "left": 247
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 298.7434228515625,
+            "occupancy": 47.97090576171875,
+            "waiting_time_s": 30977.42,
+            "time_loss_s": 41609.2,
+            "speed_ms": 0.3981201171875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 499,
+            "left": 479
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 160.7598388671875,
+            "occupancy": 53.782666015625,
+            "waiting_time_s": 18796.0,
+            "time_loss_s": 25017.42,
+            "speed_ms": 0.7492431640625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 311,
+            "left": 283
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.941804199218751,
+            "occupancy": 1.140791015625,
+            "waiting_time_s": 7072.0,
+            "time_loss_s": 9431.170000000002,
+            "speed_ms": 7.9224658203125,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 154.02581787109375,
+            "occupancy": 60.588049316406256,
+            "waiting_time_s": 5866.5,
+            "time_loss_s": 7650.700000000002,
+            "speed_ms": 0.43766357421874996,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 283,
+            "left": 278
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 91.16673828124999,
+            "occupancy": 14.410009765625,
+            "waiting_time_s": 4276.8099999999995,
+            "time_loss_s": 5043.74,
+            "speed_ms": 0.9664868164062499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 102.44917236328125,
+            "occupancy": 11.27490966796875,
+            "waiting_time_s": 3751.5,
+            "time_loss_s": 4323.700000000001,
+            "speed_ms": 0.88132568359375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 264,
+            "left": 264
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 173.5070654296875,
+            "occupancy": 53.2014892578125,
+            "waiting_time_s": 3524.5,
+            "time_loss_s": 4105.19,
+            "speed_ms": 0.40397949218749996,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 278,
+            "left": 276
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 68.96053466796874,
+            "occupancy": 10.33722900390625,
+            "waiting_time_s": 2612.5,
+            "time_loss_s": 3061.8800000000006,
+            "speed_ms": 1.09771728515625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.40215087890625,
+            "occupancy": 0.9232714843750001,
+            "waiting_time_s": 1976.5,
+            "time_loss_s": 4489.740000000001,
+            "speed_ms": 13.55676513671875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 80.72572509765625,
+            "occupancy": 12.995410156250001,
+            "waiting_time_s": 1491.5,
+            "time_loss_s": 2394.57,
+            "speed_ms": 3.06287109375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 285
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 68.29634765624999,
+            "occupancy": 24.66643798828125,
+            "waiting_time_s": 1173.0,
+            "time_loss_s": 1896.5600000000002,
+            "speed_ms": 4.22583984375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 320,
+            "left": 312
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 22.42396484375,
+            "waiting_time_s": 924.0,
+            "time_loss_s": 1372.48,
+            "speed_ms": 0.80862548828125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 136.65047119140624,
+            "occupancy": 14.884111328124998,
+            "waiting_time_s": 900.0,
+            "time_loss_s": 1208.19,
+            "speed_ms": 1.46681640625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 370,
+            "left": 370
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 68.81182861328125,
+            "occupancy": 7.4467626953125,
+            "waiting_time_s": 890.0,
+            "time_loss_s": 1484.5600000000002,
+            "speed_ms": 2.8876904296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1042112410",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 19.9524462890625,
+            "waiting_time_s": 778.5,
+            "time_loss_s": 959.13,
+            "speed_ms": 1.33288818359375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 478,
+            "left": 477
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 17.28568603515625,
+            "occupancy": 1.945361328125,
+            "waiting_time_s": 586.0,
+            "time_loss_s": 1072.76,
+            "speed_ms": 10.079411621093751,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 566,
+            "left": 566
+          },
+          {
+            "edge_id": "631197944#3",
+            "sampled_seconds": 3900.0,
+            "density": 16.7808984375,
+            "occupancy": 1.9361572265625,
+            "waiting_time_s": 563.0,
+            "time_loss_s": 942.11,
+            "speed_ms": 7.01761474609375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 301
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 36.1560693359375,
+            "occupancy": 21.372617187499998,
+            "waiting_time_s": 562.0,
+            "time_loss_s": 791.8000000000001,
+            "speed_ms": 1.3584326171875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 278,
+            "left": 278
+          },
+          {
+            "edge_id": "1311812959#0",
+            "sampled_seconds": 3900.0,
+            "density": 8.85908935546875,
+            "occupancy": 0.92835693359375,
+            "waiting_time_s": 543.0,
+            "time_loss_s": 628.4499999999999,
+            "speed_ms": 2.95349365234375,
+            "departed": 85,
+            "arrived": 0,
+            "entered": 0,
+            "left": 85
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 10.40204833984375,
+            "occupancy": 1.9136108398437501,
+            "waiting_time_s": 530.5,
+            "time_loss_s": 1660.5199999999998,
+            "speed_ms": 9.92369384765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 386,
+            "left": 382
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 15.22874755859375,
+            "occupancy": 2.7584082031249997,
+            "waiting_time_s": 504.5,
+            "time_loss_s": 1152.49,
+            "speed_ms": 5.945388183593749,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 370
+          },
+          {
+            "edge_id": "464465165#0",
+            "sampled_seconds": 3900.0,
+            "density": 4.67650390625,
+            "occupancy": 0.5440966796875,
+            "waiting_time_s": 380.0,
+            "time_loss_s": 665.0500000000001,
+            "speed_ms": 13.86017822265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 264
+          },
+          {
+            "edge_id": "464465163#0",
+            "sampled_seconds": 3900.0,
+            "density": 16.733837890625,
+            "occupancy": 1.96663330078125,
+            "waiting_time_s": 245.5,
+            "time_loss_s": 516.54,
+            "speed_ms": 9.4379443359375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 567,
+            "left": 566
+          }
+        ],
+        "intersection_approach_delay": [
+          {
+            "junction_id": "1417443722",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 71741.9,
+            "total_waiting_time_s": 60489.3,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271078",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 60436.8,
+            "total_waiting_time_s": 45113.5,
+            "road_names": []
+          },
+          {
+            "junction_id": "6196977039",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 41627.1,
+            "total_waiting_time_s": 30977.4,
+            "road_names": []
+          },
+          {
+            "junction_id": "1417443736",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 25017.4,
+            "total_waiting_time_s": 18796.0,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_10282769895_10775075568_11964440742_11964440743",
+            "is_traffic_light": true,
+            "approach_edges": 3,
+            "total_time_loss_s": 12429.3,
+            "total_waiting_time_s": 10640.8,
+            "road_names": [
+              "Hosur Road",
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_12074449288_12074449292",
+            "is_traffic_light": true,
+            "approach_edges": 1,
+            "total_time_loss_s": 9431.2,
+            "total_waiting_time_s": 7072.0,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12196455086",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 7650.7,
+            "total_waiting_time_s": 5866.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "494271106",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 4489.7,
+            "total_waiting_time_s": 1976.5,
+            "road_names": [
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12040966323",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2996.2,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Ragigudda-Silk Board Integrated Flyover"
+            ]
+          },
+          {
+            "junction_id": "10118500634",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2394.6,
+            "total_waiting_time_s": 1491.5,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "4105324822",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2179.6,
+            "total_waiting_time_s": 1003.0,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "cluster_1417443740_1417443741",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1896.6,
+            "total_waiting_time_s": 1173.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "11664293096",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1792.8,
+            "total_waiting_time_s": 530.5,
+            "road_names": [
+              "Hosur Road",
+              "Silkboard Double Decker Flyover"
+            ]
+          },
+          {
+            "junction_id": "3805003790",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1511.6,
+            "total_waiting_time_s": 890.0,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "9593357279",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1454.7,
+            "total_waiting_time_s": 778.5,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "1123386062",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1380.6,
+            "total_waiting_time_s": 900.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_10282796509_10282796511_10855370147_1723795924",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1318.0,
+            "total_waiting_time_s": 700.5,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "618248521",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1313.1,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_306611966_7478115610",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1277.3,
+            "total_waiting_time_s": 259.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_11809900885_11809900886_1837005138_260911861_#1more",
+            "is_traffic_light": true,
+            "approach_edges": 2,
+            "total_time_loss_s": 1178.5,
+            "total_waiting_time_s": 721.0,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "1123386065",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1152.5,
+            "total_waiting_time_s": 504.5,
+            "road_names": []
+          },
+          {
+            "junction_id": "2471287780",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1136.4,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "494271091",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1041.4,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "2619300330",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1041.2,
+            "total_waiting_time_s": 23.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "11928375876",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1030.3,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 45,
+        "demand_id": "silk_board_v1_evening_peak_seed45",
+        "demand_config_hash": "7637f7d2807931d0",
+        "variant_id": "include_unresolved",
+        "departed": 3226,
+        "arrived": 2884,
+        "remaining": 341,
+        "loaded": 3226,
+        "backlog": 0,
+        "teleports": 4,
+        "sumo_teleports": 4,
+        "collisions": 0,
+        "mean_travel_time_s": 264.086,
+        "mean_waiting_time_s": 57.905,
+        "mean_time_loss_s": 86.526,
+        "mean_speed_ms": null,
+        "mean_route_length_m": 2470.287,
+        "completed_trips": 2885,
+        "ambulance_completed": true,
+        "ambulance_travel_time_s": 146.5,
+        "ambulance_waiting_time_s": 0.0,
+        "ambulance_time_loss_s": 17.55,
+        "ambulance_route_edges": [
+          "312063814#2",
+          "312063814#3",
+          "1155963376#0",
+          "-229976708#19",
+          "-229976708#18",
+          "-229976708#17",
+          "-229976708#16",
+          "-229976708#15",
+          "-229976708#14",
+          "-229976708#13",
+          "-229976708#12",
+          "-229976708#10",
+          "-229976708#9",
+          "-229976708#7",
+          "-229976708#6",
+          "-229976708#5",
+          "-229976708#4",
+          "-726834057#5",
+          "-726834057#4",
+          "-726834057#3",
+          "-726834057#2",
+          "-726834057#1",
+          "-1118275525",
+          "-1109599647",
+          "-1109599644",
+          "-1109599642",
+          "243553545#4",
+          "491889864#4",
+          "491889864#5"
+        ],
+        "ambulance_route_length_m": 2134.23,
+        "ambulance_used_unresolved": false,
+        "vehicles_using_unresolved": 192,
+        "wall_clock_s": 165.69,
+        "output_dir": "simulation/results/silk_board_v1_evening_peak_seed45",
+        "top_delay_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 244.8976513671875,
+            "occupancy": 47.6376220703125,
+            "waiting_time_s": 75878.5,
+            "time_loss_s": 87376.12000000001,
+            "speed_ms": 0.23297119140625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 235,
+            "left": 195
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 171.97633789062502,
+            "occupancy": 37.77075927734375,
+            "waiting_time_s": 55339.73,
+            "time_loss_s": 72229.39,
+            "speed_ms": 0.53296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 277,
+            "left": 235
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 189.48690429687503,
+            "occupancy": 66.31684326171876,
+            "waiting_time_s": 38589.5,
+            "time_loss_s": 52108.84999999999,
+            "speed_ms": 0.34942382812499995,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 291,
+            "left": 264
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 301.8972607421875,
+            "occupancy": 48.781337890625,
+            "waiting_time_s": 37392.39,
+            "time_loss_s": 48115.240000000005,
+            "speed_ms": 0.3764453125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 451,
+            "left": 432
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 184.57310546875,
+            "occupancy": 57.00833251953125,
+            "waiting_time_s": 8236.5,
+            "time_loss_s": 10456.63,
+            "speed_ms": 0.37658935546875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 264,
+            "left": 259
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.93216796875,
+            "occupancy": 1.1407666015625,
+            "waiting_time_s": 7002.5,
+            "time_loss_s": 9331.059999999998,
+            "speed_ms": 7.9329736328125,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 176.5540625,
+            "occupancy": 31.85485107421875,
+            "waiting_time_s": 7229.0,
+            "time_loss_s": 8810.59,
+            "speed_ms": 0.72052734375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 283,
+            "left": 277
+          },
+          {
+            "edge_id": "1109948700#0",
+            "sampled_seconds": 3900.0,
+            "density": 103.76357666015625,
+            "occupancy": 20.55380859375,
+            "waiting_time_s": 6520.5,
+            "time_loss_s": 8546.59,
+            "speed_ms": 2.2501611328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 295,
+            "left": 286
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 186.82198730468747,
+            "occupancy": 59.09369628906251,
+            "waiting_time_s": 6557.15,
+            "time_loss_s": 7942.749999999999,
+            "speed_ms": 0.82138916015625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 298,
+            "left": 291
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 235.63704101562502,
+            "occupancy": 63.66797119140625,
+            "waiting_time_s": 5391.5,
+            "time_loss_s": 6122.91,
+            "speed_ms": 0.33450439453124997,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 259,
+            "left": 256
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.7372412109375,
+            "occupancy": 14.3611767578125,
+            "waiting_time_s": 4221.87,
+            "time_loss_s": 4984.06,
+            "speed_ms": 0.9720605468749999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.40451904296875,
+            "occupancy": 0.92337646484375,
+            "waiting_time_s": 1974.0,
+            "time_loss_s": 4528.999999999999,
+            "speed_ms": 13.53808837890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 111.55303466796875,
+            "occupancy": 12.88998779296875,
+            "waiting_time_s": 3659.5,
+            "time_loss_s": 4242.17,
+            "speed_ms": 0.81378173828125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 139.46012939453124,
+            "occupancy": 28.50502685546875,
+            "waiting_time_s": 2810.5,
+            "time_loss_s": 3773.4500000000003,
+            "speed_ms": 1.521162109375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 305,
+            "left": 299
+          },
+          {
+            "edge_id": "27934854#7",
+            "sampled_seconds": 3900.0,
+            "density": 124.92630859375,
+            "occupancy": 19.9563916015625,
+            "waiting_time_s": 2590.0,
+            "time_loss_s": 3034.74,
+            "speed_ms": 4.0515966796875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 317,
+            "left": 309
+          },
+          {
+            "edge_id": "886153772",
+            "sampled_seconds": 3900.0,
+            "density": 9.86037353515625,
+            "occupancy": 1.71117919921875,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 2955.87,
+            "speed_ms": 10.707551269531251,
+            "departed": 412,
+            "arrived": 0,
+            "entered": 0,
+            "left": 394
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 67.951689453125,
+            "occupancy": 11.018544921875,
+            "waiting_time_s": 2507.5,
+            "time_loss_s": 2950.9699999999993,
+            "speed_ms": 1.1155517578125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "1109948700#1",
+            "sampled_seconds": 3900.0,
+            "density": 177.6144091796875,
+            "occupancy": 29.096613769531253,
+            "waiting_time_s": 2408.0,
+            "time_loss_s": 2858.6499999999996,
+            "speed_ms": 1.08666259765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 286,
+            "left": 282
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 172.8904296875,
+            "occupancy": 28.626977539062498,
+            "waiting_time_s": 2469.0,
+            "time_loss_s": 2817.69,
+            "speed_ms": 3.4506591796875004,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 309,
+            "left": 305
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 10.793994140625001,
+            "occupancy": 2.01012939453125,
+            "waiting_time_s": 639.0,
+            "time_loss_s": 1758.8899999999999,
+            "speed_ms": 9.83358154296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 388,
+            "left": 385
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 42.03961181640625,
+            "occupancy": 4.3723095703125,
+            "waiting_time_s": 1050.13,
+            "time_loss_s": 1747.66,
+            "speed_ms": 5.78736328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 568,
+            "left": 567
+          },
+          {
+            "edge_id": "27934854#6",
+            "sampled_seconds": 3900.0,
+            "density": 49.53515625,
+            "occupancy": 7.2461523437499995,
+            "waiting_time_s": 1207.5,
+            "time_loss_s": 1697.5700000000002,
+            "speed_ms": 6.511806640625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 258,
+            "left": 252
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 16.3144677734375,
+            "occupancy": 2.93515869140625,
+            "waiting_time_s": 817.0,
+            "time_loss_s": 1682.98,
+            "speed_ms": 5.53530029296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 372
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 106.13634765625,
+            "occupancy": 10.70164794921875,
+            "waiting_time_s": 983.5,
+            "time_loss_s": 1599.45,
+            "speed_ms": 1.97741455078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 28.034519042968746,
+            "occupancy": 20.39401611328125,
+            "waiting_time_s": 1203.5,
+            "time_loss_s": 1519.9299999999998,
+            "speed_ms": 0.97885986328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 259,
+            "left": 259
+          }
+        ],
+        "top_waiting_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 244.8976513671875,
+            "occupancy": 47.6376220703125,
+            "waiting_time_s": 75878.5,
+            "time_loss_s": 87376.12000000001,
+            "speed_ms": 0.23297119140625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 235,
+            "left": 195
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 171.97633789062502,
+            "occupancy": 37.77075927734375,
+            "waiting_time_s": 55339.73,
+            "time_loss_s": 72229.39,
+            "speed_ms": 0.53296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 277,
+            "left": 235
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 189.48690429687503,
+            "occupancy": 66.31684326171876,
+            "waiting_time_s": 38589.5,
+            "time_loss_s": 52108.84999999999,
+            "speed_ms": 0.34942382812499995,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 291,
+            "left": 264
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 301.8972607421875,
+            "occupancy": 48.781337890625,
+            "waiting_time_s": 37392.39,
+            "time_loss_s": 48115.240000000005,
+            "speed_ms": 0.3764453125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 451,
+            "left": 432
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 184.57310546875,
+            "occupancy": 57.00833251953125,
+            "waiting_time_s": 8236.5,
+            "time_loss_s": 10456.63,
+            "speed_ms": 0.37658935546875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 264,
+            "left": 259
+          },
+          {
+            "edge_id": "377124830",
+            "sampled_seconds": 3900.0,
+            "density": 176.5540625,
+            "occupancy": 31.85485107421875,
+            "waiting_time_s": 7229.0,
+            "time_loss_s": 8810.59,
+            "speed_ms": 0.72052734375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 283,
+            "left": 277
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.93216796875,
+            "occupancy": 1.1407666015625,
+            "waiting_time_s": 7002.5,
+            "time_loss_s": 9331.059999999998,
+            "speed_ms": 7.9329736328125,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 186.82198730468747,
+            "occupancy": 59.09369628906251,
+            "waiting_time_s": 6557.15,
+            "time_loss_s": 7942.749999999999,
+            "speed_ms": 0.82138916015625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 298,
+            "left": 291
+          },
+          {
+            "edge_id": "1109948700#0",
+            "sampled_seconds": 3900.0,
+            "density": 103.76357666015625,
+            "occupancy": 20.55380859375,
+            "waiting_time_s": 6520.5,
+            "time_loss_s": 8546.59,
+            "speed_ms": 2.2501611328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 295,
+            "left": 286
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 235.63704101562502,
+            "occupancy": 63.66797119140625,
+            "waiting_time_s": 5391.5,
+            "time_loss_s": 6122.91,
+            "speed_ms": 0.33450439453124997,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 259,
+            "left": 256
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.7372412109375,
+            "occupancy": 14.3611767578125,
+            "waiting_time_s": 4221.87,
+            "time_loss_s": 4984.06,
+            "speed_ms": 0.9720605468749999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 111.55303466796875,
+            "occupancy": 12.88998779296875,
+            "waiting_time_s": 3659.5,
+            "time_loss_s": 4242.17,
+            "speed_ms": 0.81378173828125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 139.46012939453124,
+            "occupancy": 28.50502685546875,
+            "waiting_time_s": 2810.5,
+            "time_loss_s": 3773.4500000000003,
+            "speed_ms": 1.521162109375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 305,
+            "left": 299
+          },
+          {
+            "edge_id": "27934854#7",
+            "sampled_seconds": 3900.0,
+            "density": 124.92630859375,
+            "occupancy": 19.9563916015625,
+            "waiting_time_s": 2590.0,
+            "time_loss_s": 3034.74,
+            "speed_ms": 4.0515966796875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 317,
+            "left": 309
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 67.951689453125,
+            "occupancy": 11.018544921875,
+            "waiting_time_s": 2507.5,
+            "time_loss_s": 2950.9699999999993,
+            "speed_ms": 1.1155517578125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 172.8904296875,
+            "occupancy": 28.626977539062498,
+            "waiting_time_s": 2469.0,
+            "time_loss_s": 2817.69,
+            "speed_ms": 3.4506591796875004,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 309,
+            "left": 305
+          },
+          {
+            "edge_id": "1109948700#1",
+            "sampled_seconds": 3900.0,
+            "density": 177.6144091796875,
+            "occupancy": 29.096613769531253,
+            "waiting_time_s": 2408.0,
+            "time_loss_s": 2858.6499999999996,
+            "speed_ms": 1.08666259765625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 286,
+            "left": 282
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.40451904296875,
+            "occupancy": 0.92337646484375,
+            "waiting_time_s": 1974.0,
+            "time_loss_s": 4528.999999999999,
+            "speed_ms": 13.53808837890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "27934854#6",
+            "sampled_seconds": 3900.0,
+            "density": 49.53515625,
+            "occupancy": 7.2461523437499995,
+            "waiting_time_s": 1207.5,
+            "time_loss_s": 1697.5700000000002,
+            "speed_ms": 6.511806640625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 258,
+            "left": 252
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 28.034519042968746,
+            "occupancy": 20.39401611328125,
+            "waiting_time_s": 1203.5,
+            "time_loss_s": 1519.9299999999998,
+            "speed_ms": 0.97885986328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 259,
+            "left": 259
+          },
+          {
+            "edge_id": "1042112410",
+            "sampled_seconds": 3900.0,
+            "density": 333.25448242187497,
+            "occupancy": 24.21766357421875,
+            "waiting_time_s": 1160.5,
+            "time_loss_s": 1342.42,
+            "speed_ms": 0.8897363281249999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 432,
+            "left": 431
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 172.33601562500002,
+            "occupancy": 18.4578369140625,
+            "waiting_time_s": 1107.0,
+            "time_loss_s": 1444.2999999999997,
+            "speed_ms": 1.243701171875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 371,
+            "left": 370
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 42.03961181640625,
+            "occupancy": 4.3723095703125,
+            "waiting_time_s": 1050.13,
+            "time_loss_s": 1747.66,
+            "speed_ms": 5.78736328125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 568,
+            "left": 567
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 106.13634765625,
+            "occupancy": 10.70164794921875,
+            "waiting_time_s": 983.5,
+            "time_loss_s": 1599.45,
+            "speed_ms": 1.97741455078125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 22.897089843750003,
+            "waiting_time_s": 933.5,
+            "time_loss_s": 1371.29,
+            "speed_ms": 0.8893872070312501,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          }
+        ],
+        "intersection_approach_delay": [
+          {
+            "junction_id": "1417443722",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 93499.0,
+            "total_waiting_time_s": 81270.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271078",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 72229.4,
+            "total_waiting_time_s": 55339.7,
+            "road_names": []
+          },
+          {
+            "junction_id": "1417443736",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 52108.8,
+            "total_waiting_time_s": 38589.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "6196977039",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 48134.4,
+            "total_waiting_time_s": 37392.4,
+            "road_names": []
+          },
+          {
+            "junction_id": "cluster_10282769895_10775075568_11964440742_11964440743",
+            "is_traffic_light": true,
+            "approach_edges": 3,
+            "total_time_loss_s": 12177.2,
+            "total_waiting_time_s": 10388.9,
+            "road_names": [
+              "Hosur Road",
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12196455086",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 10456.6,
+            "total_waiting_time_s": 8236.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_12074449288_12074449292",
+            "is_traffic_light": true,
+            "approach_edges": 1,
+            "total_time_loss_s": 9331.1,
+            "total_waiting_time_s": 7002.5,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "10118500634",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 8810.6,
+            "total_waiting_time_s": 7229.0,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "12196449734",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 8546.6,
+            "total_waiting_time_s": 6520.5,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "cluster_1417443740_1417443741",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 7942.7,
+            "total_waiting_time_s": 6557.1,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271106",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 4529.0,
+            "total_waiting_time_s": 1974.0,
+            "road_names": [
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "306611415",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 3773.5,
+            "total_waiting_time_s": 2810.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "1417443754",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 3034.7,
+            "total_waiting_time_s": 2590.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "12040966323",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2955.9,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Ragigudda-Silk Board Integrated Flyover"
+            ]
+          },
+          {
+            "junction_id": "3740373535",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2858.6,
+            "total_waiting_time_s": 2408.0,
+            "road_names": [
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "10081671364",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2817.7,
+            "total_waiting_time_s": 2469.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_306611966_7478115610",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2667.2,
+            "total_waiting_time_s": 1398.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "4105324822",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2225.8,
+            "total_waiting_time_s": 1004.0,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "cluster_10282796509_10282796511_10855370147_1723795924",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2043.2,
+            "total_waiting_time_s": 1211.6,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "11664293096",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1888.7,
+            "total_waiting_time_s": 639.0,
+            "road_names": [
+              "Hosur Road",
+              "Silkboard Double Decker Flyover"
+            ]
+          },
+          {
+            "junction_id": "9593357279",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1879.0,
+            "total_waiting_time_s": 1160.5,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "1123386065",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1683.0,
+            "total_waiting_time_s": 817.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "3805003790",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1623.4,
+            "total_waiting_time_s": 983.5,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "1123386062",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1619.9,
+            "total_waiting_time_s": 1107.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "2399992907",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1519.9,
+            "total_waiting_time_s": 1203.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 46,
+        "demand_id": "silk_board_v1_evening_peak_seed46",
+        "demand_config_hash": "436a9db95aa7f710",
+        "variant_id": "include_unresolved",
+        "departed": 3226,
+        "arrived": 2938,
+        "remaining": 288,
+        "loaded": 3226,
+        "backlog": 0,
+        "teleports": 0,
+        "sumo_teleports": 0,
+        "collisions": 0,
+        "mean_travel_time_s": 278.211,
+        "mean_waiting_time_s": 67.688,
+        "mean_time_loss_s": 102.365,
+        "mean_speed_ms": null,
+        "mean_route_length_m": 2452.971,
+        "completed_trips": 2938,
+        "ambulance_completed": true,
+        "ambulance_travel_time_s": 147.0,
+        "ambulance_waiting_time_s": 0.0,
+        "ambulance_time_loss_s": 18.36,
+        "ambulance_route_edges": [
+          "312063814#2",
+          "312063814#3",
+          "1155963376#0",
+          "-229976708#19",
+          "-229976708#18",
+          "-229976708#17",
+          "-229976708#16",
+          "-229976708#15",
+          "-229976708#14",
+          "-229976708#13",
+          "-229976708#12",
+          "-229976708#10",
+          "-229976708#9",
+          "-229976708#7",
+          "-229976708#6",
+          "-229976708#5",
+          "-229976708#4",
+          "-726834057#5",
+          "-726834057#4",
+          "-726834057#3",
+          "-726834057#2",
+          "-726834057#1",
+          "-1118275525",
+          "-1109599647",
+          "-1109599644",
+          "-1109599642",
+          "243553545#4",
+          "491889864#4",
+          "491889864#5"
+        ],
+        "ambulance_route_length_m": 2134.23,
+        "ambulance_used_unresolved": false,
+        "vehicles_using_unresolved": 192,
+        "wall_clock_s": 159.93,
+        "output_dir": "simulation/results/silk_board_v1_evening_peak_seed46",
+        "top_delay_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 177.62088134765625,
+            "occupancy": 36.465595703125004,
+            "waiting_time_s": 68939.18,
+            "time_loss_s": 84308.51000000001,
+            "speed_ms": 0.359794921875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 261,
+            "left": 235
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 143.2026123046875,
+            "occupancy": 26.05947509765625,
+            "waiting_time_s": 43772.04000000001,
+            "time_loss_s": 64373.23,
+            "speed_ms": 0.53140380859375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 292,
+            "left": 261
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 189.95411621093749,
+            "occupancy": 64.905791015625,
+            "waiting_time_s": 41187.0,
+            "time_loss_s": 59004.77,
+            "speed_ms": 0.43911376953125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 278
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 291.6320556640625,
+            "occupancy": 45.5128271484375,
+            "waiting_time_s": 33382.94,
+            "time_loss_s": 44618.89,
+            "speed_ms": 0.5288232421875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 506,
+            "left": 487
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 179.41444580078127,
+            "occupancy": 62.210270996093755,
+            "waiting_time_s": 9122.73,
+            "time_loss_s": 11851.39,
+            "speed_ms": 0.52081298828125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 278,
+            "left": 273
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.95093994140625,
+            "occupancy": 1.14014404296875,
+            "waiting_time_s": 7066.5,
+            "time_loss_s": 9426.5,
+            "speed_ms": 7.92199951171875,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 181.16597656250002,
+            "occupancy": 63.1476416015625,
+            "waiting_time_s": 7378.5,
+            "time_loss_s": 8944.920000000002,
+            "speed_ms": 0.8720605468749999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 306,
+            "left": 302
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 182.59501953125,
+            "occupancy": 55.13656494140625,
+            "waiting_time_s": 4589.5,
+            "time_loss_s": 5403.56,
+            "speed_ms": 0.6098583984374999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 273,
+            "left": 272
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 158.98654296875,
+            "occupancy": 29.44040771484375,
+            "waiting_time_s": 3927.52,
+            "time_loss_s": 5106.99,
+            "speed_ms": 0.9912060546875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 313,
+            "left": 307
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.37944091796876,
+            "occupancy": 14.294157714843749,
+            "waiting_time_s": 4173.0,
+            "time_loss_s": 4930.96,
+            "speed_ms": 0.9765283203124999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.4036083984375,
+            "occupancy": 0.92337890625,
+            "waiting_time_s": 2026.0,
+            "time_loss_s": 4550.870000000001,
+            "speed_ms": 13.55439697265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 102.64947021484375,
+            "occupancy": 11.03185302734375,
+            "waiting_time_s": 3591.0,
+            "time_loss_s": 4162.280000000001,
+            "speed_ms": 0.89386474609375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 53.108125,
+            "occupancy": 7.7003466796875,
+            "waiting_time_s": 2500.5,
+            "time_loss_s": 2951.13,
+            "speed_ms": 1.84285888671875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "886153772",
+            "sampled_seconds": 3900.0,
+            "density": 9.99267578125,
+            "occupancy": 1.73941650390625,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 2940.7,
+            "speed_ms": 10.5367822265625,
+            "departed": 412,
+            "arrived": 0,
+            "entered": 0,
+            "left": 393
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 113.1700341796875,
+            "occupancy": 18.2868505859375,
+            "waiting_time_s": 1792.5,
+            "time_loss_s": 2156.74,
+            "speed_ms": 1.8314111328124998,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 318,
+            "left": 313
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 10.80283935546875,
+            "occupancy": 1.9639770507812502,
+            "waiting_time_s": 543.0,
+            "time_loss_s": 1635.8500000000001,
+            "speed_ms": 9.90974853515625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 389,
+            "left": 385
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 79.576025390625,
+            "occupancy": 9.09453369140625,
+            "waiting_time_s": 844.5,
+            "time_loss_s": 1479.7100000000003,
+            "speed_ms": 2.40311279296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "1196514116#0",
+            "sampled_seconds": 3900.0,
+            "density": 16.969296875,
+            "occupancy": 1.85378173828125,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1326.41,
+            "speed_ms": 15.123857421875,
+            "departed": 0,
+            "arrived": 933,
+            "entered": 939,
+            "left": 0
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 21.4644189453125,
+            "waiting_time_s": 845.0,
+            "time_loss_s": 1296.16,
+            "speed_ms": 0.8596337890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 151.699453125,
+            "occupancy": 16.37808349609375,
+            "waiting_time_s": 989.0,
+            "time_loss_s": 1287.1399999999999,
+            "speed_ms": 1.3724707031249999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 371,
+            "left": 370
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 65.347509765625,
+            "occupancy": 27.758044433593753,
+            "waiting_time_s": 880.5,
+            "time_loss_s": 1206.7900000000002,
+            "speed_ms": 1.1190649414062501,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 273,
+            "left": 273
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 15.035097656249999,
+            "occupancy": 2.6854565429687502,
+            "waiting_time_s": 520.5,
+            "time_loss_s": 1205.9099999999999,
+            "speed_ms": 6.182841796875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 372
+          },
+          {
+            "edge_id": "1073384217#1",
+            "sampled_seconds": 3900.0,
+            "density": 12.531733398437499,
+            "occupancy": 1.47416015625,
+            "waiting_time_s": 0.0,
+            "time_loss_s": 1160.6799999999998,
+            "speed_ms": 14.99748291015625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 723,
+            "left": 716
+          },
+          {
+            "edge_id": "1042112410",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 21.47580322265625,
+            "waiting_time_s": 972.0,
+            "time_loss_s": 1155.32,
+            "speed_ms": 1.5359228515624999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 486,
+            "left": 485
+          },
+          {
+            "edge_id": "380980308#0",
+            "sampled_seconds": 3900.0,
+            "density": 11.075859375,
+            "occupancy": 1.2830712890625,
+            "waiting_time_s": 21.5,
+            "time_loss_s": 1042.7399999999998,
+            "speed_ms": 13.99815673828125,
+            "departed": 626,
+            "arrived": 0,
+            "entered": 0,
+            "left": 624
+          }
+        ],
+        "top_waiting_edges": [
+          {
+            "edge_id": "744561216#0",
+            "sampled_seconds": 3900.0,
+            "density": 177.62088134765625,
+            "occupancy": 36.465595703125004,
+            "waiting_time_s": 68939.18,
+            "time_loss_s": 84308.51000000001,
+            "speed_ms": 0.359794921875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 261,
+            "left": 235
+          },
+          {
+            "edge_id": "370328588#2",
+            "sampled_seconds": 3900.0,
+            "density": 143.2026123046875,
+            "occupancy": 26.05947509765625,
+            "waiting_time_s": 43772.04000000001,
+            "time_loss_s": 64373.23,
+            "speed_ms": 0.53140380859375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 292,
+            "left": 261
+          },
+          {
+            "edge_id": "544999264#1",
+            "sampled_seconds": 3900.0,
+            "density": 189.95411621093749,
+            "occupancy": 64.905791015625,
+            "waiting_time_s": 41187.0,
+            "time_loss_s": 59004.77,
+            "speed_ms": 0.43911376953125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 278
+          },
+          {
+            "edge_id": "744561216#3",
+            "sampled_seconds": 3900.0,
+            "density": 291.6320556640625,
+            "occupancy": 45.5128271484375,
+            "waiting_time_s": 33382.94,
+            "time_loss_s": 44618.89,
+            "speed_ms": 0.5288232421875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 506,
+            "left": 487
+          },
+          {
+            "edge_id": "128220197#1",
+            "sampled_seconds": 3900.0,
+            "density": 179.41444580078127,
+            "occupancy": 62.210270996093755,
+            "waiting_time_s": 9122.73,
+            "time_loss_s": 11851.39,
+            "speed_ms": 0.52081298828125,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 278,
+            "left": 273
+          },
+          {
+            "edge_id": "230402870",
+            "sampled_seconds": 3900.0,
+            "density": 181.16597656250002,
+            "occupancy": 63.1476416015625,
+            "waiting_time_s": 7378.5,
+            "time_loss_s": 8944.920000000002,
+            "speed_ms": 0.8720605468749999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 306,
+            "left": 302
+          },
+          {
+            "edge_id": "631197944#1",
+            "sampled_seconds": 3900.0,
+            "density": 9.95093994140625,
+            "occupancy": 1.14014404296875,
+            "waiting_time_s": 7066.5,
+            "time_loss_s": 9426.5,
+            "speed_ms": 7.92199951171875,
+            "departed": 304,
+            "arrived": 0,
+            "entered": 0,
+            "left": 301
+          },
+          {
+            "edge_id": "1379614784#0",
+            "sampled_seconds": 3900.0,
+            "density": 182.59501953125,
+            "occupancy": 55.13656494140625,
+            "waiting_time_s": 4589.5,
+            "time_loss_s": 5403.56,
+            "speed_ms": 0.6098583984374999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 273,
+            "left": 272
+          },
+          {
+            "edge_id": "1393474724#1",
+            "sampled_seconds": 3900.0,
+            "density": 90.37944091796876,
+            "occupancy": 14.294157714843749,
+            "waiting_time_s": 4173.0,
+            "time_loss_s": 4930.96,
+            "speed_ms": 0.9765283203124999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 293,
+            "left": 290
+          },
+          {
+            "edge_id": "27934854#9",
+            "sampled_seconds": 3900.0,
+            "density": 158.98654296875,
+            "occupancy": 29.44040771484375,
+            "waiting_time_s": 3927.52,
+            "time_loss_s": 5106.99,
+            "speed_ms": 0.9912060546875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 313,
+            "left": 307
+          },
+          {
+            "edge_id": "464465165#3",
+            "sampled_seconds": 3900.0,
+            "density": 102.64947021484375,
+            "occupancy": 11.03185302734375,
+            "waiting_time_s": 3591.0,
+            "time_loss_s": 4162.280000000001,
+            "speed_ms": 0.89386474609375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 265,
+            "left": 265
+          },
+          {
+            "edge_id": "172853382#6",
+            "sampled_seconds": 3900.0,
+            "density": 53.108125,
+            "occupancy": 7.7003466796875,
+            "waiting_time_s": 2500.5,
+            "time_loss_s": 2951.13,
+            "speed_ms": 1.84285888671875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 210,
+            "left": 210
+          },
+          {
+            "edge_id": "92196679#0",
+            "sampled_seconds": 3900.0,
+            "density": 5.4036083984375,
+            "occupancy": 0.92337890625,
+            "waiting_time_s": 2026.0,
+            "time_loss_s": 4550.870000000001,
+            "speed_ms": 13.55439697265625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 293
+          },
+          {
+            "edge_id": "27934854#8",
+            "sampled_seconds": 3900.0,
+            "density": 113.1700341796875,
+            "occupancy": 18.2868505859375,
+            "waiting_time_s": 1792.5,
+            "time_loss_s": 2156.74,
+            "speed_ms": 1.8314111328124998,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 318,
+            "left": 313
+          },
+          {
+            "edge_id": "245809758#2",
+            "sampled_seconds": 3900.0,
+            "density": 151.699453125,
+            "occupancy": 16.37808349609375,
+            "waiting_time_s": 989.0,
+            "time_loss_s": 1287.1399999999999,
+            "speed_ms": 1.3724707031249999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 371,
+            "left": 370
+          },
+          {
+            "edge_id": "1042112410",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 21.47580322265625,
+            "waiting_time_s": 972.0,
+            "time_loss_s": 1155.32,
+            "speed_ms": 1.5359228515624999,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 486,
+            "left": 485
+          },
+          {
+            "edge_id": "1506497135",
+            "sampled_seconds": 3900.0,
+            "density": 65.347509765625,
+            "occupancy": 27.758044433593753,
+            "waiting_time_s": 880.5,
+            "time_loss_s": 1206.7900000000002,
+            "speed_ms": 1.1190649414062501,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 273,
+            "left": 273
+          },
+          {
+            "edge_id": "1109948513",
+            "sampled_seconds": 3900.0,
+            "density": 333.33,
+            "occupancy": 21.4644189453125,
+            "waiting_time_s": 845.0,
+            "time_loss_s": 1296.16,
+            "speed_ms": 0.8596337890625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 296,
+            "left": 295
+          },
+          {
+            "edge_id": "380709621",
+            "sampled_seconds": 3900.0,
+            "density": 79.576025390625,
+            "occupancy": 9.09453369140625,
+            "waiting_time_s": 844.5,
+            "time_loss_s": 1479.7100000000003,
+            "speed_ms": 2.40311279296875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 565,
+            "left": 565
+          },
+          {
+            "edge_id": "27934854#7",
+            "sampled_seconds": 3900.0,
+            "density": 32.362736816406255,
+            "occupancy": 6.15370849609375,
+            "waiting_time_s": 591.0,
+            "time_loss_s": 861.56,
+            "speed_ms": 4.2554833984375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 322,
+            "left": 318
+          },
+          {
+            "edge_id": "1311812959#0",
+            "sampled_seconds": 3900.0,
+            "density": 8.9369970703125,
+            "occupancy": 0.9388134765625,
+            "waiting_time_s": 574.0,
+            "time_loss_s": 665.5300000000001,
+            "speed_ms": 2.9385595703125,
+            "departed": 85,
+            "arrived": 0,
+            "entered": 0,
+            "left": 85
+          },
+          {
+            "edge_id": "631197944#3",
+            "sampled_seconds": 3900.0,
+            "density": 16.89759521484375,
+            "occupancy": 1.94696533203125,
+            "waiting_time_s": 561.0,
+            "time_loss_s": 946.1099999999999,
+            "speed_ms": 6.92917724609375,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 301,
+            "left": 301
+          },
+          {
+            "edge_id": "1299917512",
+            "sampled_seconds": 3900.0,
+            "density": 10.80283935546875,
+            "occupancy": 1.9639770507812502,
+            "waiting_time_s": 543.0,
+            "time_loss_s": 1635.8500000000001,
+            "speed_ms": 9.90974853515625,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 389,
+            "left": 385
+          },
+          {
+            "edge_id": "245809758#0",
+            "sampled_seconds": 3900.0,
+            "density": 15.035097656249999,
+            "occupancy": 2.6854565429687502,
+            "waiting_time_s": 520.5,
+            "time_loss_s": 1205.9099999999999,
+            "speed_ms": 6.182841796875,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 374,
+            "left": 372
+          },
+          {
+            "edge_id": "464465163#1",
+            "sampled_seconds": 3900.0,
+            "density": 16.78818115234375,
+            "occupancy": 2.00831298828125,
+            "waiting_time_s": 516.0,
+            "time_loss_s": 1014.04,
+            "speed_ms": 9.853334960937499,
+            "departed": 0,
+            "arrived": 0,
+            "entered": 567,
+            "left": 566
+          }
+        ],
+        "intersection_approach_delay": [
+          {
+            "junction_id": "1417443722",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 89712.1,
+            "total_waiting_time_s": 73528.7,
+            "road_names": []
+          },
+          {
+            "junction_id": "494271078",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 64373.2,
+            "total_waiting_time_s": 43772.0,
+            "road_names": []
+          },
+          {
+            "junction_id": "1417443736",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 59004.8,
+            "total_waiting_time_s": 41187.0,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "6196977039",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 44637.1,
+            "total_waiting_time_s": 33382.9,
+            "road_names": []
+          },
+          {
+            "junction_id": "cluster_10282769895_10775075568_11964440742_11964440743",
+            "is_traffic_light": true,
+            "approach_edges": 3,
+            "total_time_loss_s": 12044.4,
+            "total_waiting_time_s": 10264.5,
+            "road_names": [
+              "Hosur Road",
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12196455086",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 11851.4,
+            "total_waiting_time_s": 9122.7,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_12074449288_12074449292",
+            "is_traffic_light": true,
+            "approach_edges": 1,
+            "total_time_loss_s": 9426.5,
+            "total_waiting_time_s": 7066.5,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_1417443740_1417443741",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 8944.9,
+            "total_waiting_time_s": 7378.5,
+            "road_names": []
+          },
+          {
+            "junction_id": "306611415",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 5107.0,
+            "total_waiting_time_s": 3927.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "494271106",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 4550.9,
+            "total_waiting_time_s": 2026.0,
+            "road_names": [
+              "Madiwala Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "12040966323",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2940.7,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Ragigudda-Silk Board Integrated Flyover"
+            ]
+          },
+          {
+            "junction_id": "10081671364",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 2156.7,
+            "total_waiting_time_s": 1792.5,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "4105324822",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 2109.2,
+            "total_waiting_time_s": 920.0,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "11664293096",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1760.3,
+            "total_waiting_time_s": 543.0,
+            "road_names": [
+              "Hosur Road",
+              "Silkboard Double Decker Flyover"
+            ]
+          },
+          {
+            "junction_id": "9593357279",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1690.4,
+            "total_waiting_time_s": 972.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "3805003790",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1509.9,
+            "total_waiting_time_s": 846.0,
+            "road_names": [
+              "Outer Ring Road",
+              "Srinagar - Kanyakumari Highway"
+            ]
+          },
+          {
+            "junction_id": "1123386062",
+            "is_traffic_light": false,
+            "approach_edges": 2,
+            "total_time_loss_s": 1464.0,
+            "total_waiting_time_s": 989.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "618248521",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1326.4,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Hosur Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_10282796509_10282796511_10855370147_1723795924",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1259.4,
+            "total_waiting_time_s": 630.5,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_306611966_7478115610",
+            "is_traffic_light": false,
+            "approach_edges": 3,
+            "total_time_loss_s": 1253.7,
+            "total_waiting_time_s": 211.0,
+            "road_names": [
+              "15th Cross Road"
+            ]
+          },
+          {
+            "junction_id": "2399992907",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1206.8,
+            "total_waiting_time_s": 880.5,
+            "road_names": [
+              "2nd Cross Road"
+            ]
+          },
+          {
+            "junction_id": "1123386065",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1205.9,
+            "total_waiting_time_s": 520.5,
+            "road_names": []
+          },
+          {
+            "junction_id": "2471287780",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1160.7,
+            "total_waiting_time_s": 0.0,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          },
+          {
+            "junction_id": "cluster_11809900885_11809900886_1837005138_260911861_#1more",
+            "is_traffic_light": true,
+            "approach_edges": 2,
+            "total_time_loss_s": 1155.3,
+            "total_waiting_time_s": 692.0,
+            "road_names": [
+              "Sarjapura Road"
+            ]
+          },
+          {
+            "junction_id": "2619300330",
+            "is_traffic_light": false,
+            "approach_edges": 1,
+            "total_time_loss_s": 1042.7,
+            "total_waiting_time_s": 21.5,
+            "road_names": [
+              "Outer Ring Road"
+            ]
+          }
+        ]
+      }
+    ],
+    "data_class": "SIMULATED_DATA",
+    "interpretation": "These distributions describe how much this simulation's output moves when only the random seed changes. They are a measure of the model's internal variability, NOT of agreement with observed Bengaluru traffic. The demand, vehicle behaviour and signal programs are the same estimated assumptions in every run."
+  }
+}

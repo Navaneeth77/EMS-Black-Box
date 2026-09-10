@@ -1,0 +1,43 @@
+{
+  "dataset_id": "phase3_baseline",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 3 baseline traffic simulation for silk_board_v1, period evening_peak, seed 20260910. Vehicle movements, travel times, waiting times and time loss produced by SUMO from an assumed demand model over the OpenStreetMap-derived network.",
+  "source_name": "EMS Black Box Phase 3 baseline",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T04:25:43Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/baseline_validation.json",
+  "estimation_basis": null,
+  "produced_by": "demand:dcf9b62dc428549a net:2c23d6f96c30bf22",
+  "random_seed": 20260910,
+  "derived_from": [
+    "silk_board_v1_osm_raw",
+    "silk_board_v1_network_processed",
+    "silk_board_v1_sumo_network",
+    "sumo_network_review"
+  ],
+  "processing_steps": [
+    "Wrote flow definitions from the committed demand configuration (14 OD flows, 6 vehicle types).",
+    "Routed with duarouter using the recorded seed, without --ignore-errors or --repair: an unroutable OD pair is a finding, not something to skip.",
+    "Validated routes: connectivity, grade transitions, boundary entry and exit, and use of infrastructure whose status Phase 2.5 left unresolved.",
+    "Simulated under TraCI control with SUMO 1.27.1 at 0.5s steps to 3900s.",
+    "Recorded teleports per vehicle and cross-checked the count against SUMO's own tally.",
+    "Took per-trip figures from SUMO's tripinfo output and totals from its statistics output rather than reconstructing them."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "THE DEMAND IS NOT MEASURED BENGALURU TRAFFIC. Flow rates, vehicle mix and time-of-day scaling are ESTIMATED_DATA chosen by this project. Absolute travel times describe this modelled traffic, not the real junction. They are a baseline to subtract a counterfactual from.",
+    "Vehicle-type parameters are ESTIMATED_DATA. None was measured at Silk Board. Two-wheeler lane-filtering in particular is modelled by an uncalibrated lcAssertive value and drives saturation flow.",
+    "The ambulance origin, destination and departure time are configuration choices, not a real EMS dispatch record.",
+    "Traffic is boundary-to-boundary only. Trips beginning or ending inside the study area are not modelled, so the mix is skewed toward through-traffic.",
+    "Traffic-light programs are netconvert defaults and remain ESTIMATED_DATA. No real Bengaluru signal timing exists in this project.",
+    "Free-flow speed is SUMO-supplied on most edges, so reported time loss is an over-estimate where the default exceeds the real limit. See the lane_and_speed_provenance section of demand_report.json."
+  ],
+  "notes": "3226 vehicles departed, 2937 arrived, 0 teleports. Ambulance completed: True. Config: simulation/config/silk_board_v1_evening_peak_seed20260910_s0p5.sumocfg."
+}

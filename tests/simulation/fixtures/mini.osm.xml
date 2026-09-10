@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hand-written minimal OSM extract for unit tests.
+
+  This is a TEST FIXTURE, not data about anywhere. Its coordinates are round
+  numbers near (0, 0) precisely so it can never be mistaken for a real place or
+  accidentally used as study-area input. It exercises the parser's handling of
+  bridges, layers, one-way inference, ramps, turn restrictions, signals and
+  under-construction ways.
+-->
+<osm version="0.6" generator="ems-black-box test fixture">
+  <bounds minlat="0.0000000" minlon="0.0000000" maxlat="0.0100000" maxlon="0.0100000"/>
+
+  <node id="1" lat="0.000000" lon="0.000000" version="1"/>
+  <node id="2" lat="0.001000" lon="0.000000" version="1"/>
+  <node id="3" lat="0.002000" lon="0.000000" version="1"/>
+  <node id="4" lat="0.001000" lon="0.001000" version="1"/>
+  <node id="5" lat="0.001000" lon="-0.001000" version="1"/>
+  <node id="6" lat="0.003000" lon="0.000000" version="1"/>
+  <node id="7" lat="0.000800" lon="0.000000" version="1">
+    <tag k="highway" v="traffic_signals"/>
+  </node>
+  <node id="8" lat="0.002000" lon="0.002000" version="1"/>
+  <node id="9" lat="0.004000" lon="0.000000" version="1"/>
+
+  <!-- Ground-level trunk through the junction. Two ways so node 2 has degree 3+. -->
+  <way id="100" version="3">
+    <nd ref="1"/><nd ref="7"/><nd ref="2"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="name" v="Test Trunk South"/>
+    <tag k="lanes" v="3"/>
+    <tag k="maxspeed" v="60"/>
+    <tag k="oneway" v="no"/>
+  </way>
+  <way id="101" version="2">
+    <nd ref="2"/><nd ref="3"/><nd ref="6"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="name" v="Test Trunk North"/>
+    <tag k="lanes" v="3"/>
+  </way>
+
+  <!-- Crossing primary at grade. -->
+  <way id="102" version="1">
+    <nd ref="5"/><nd ref="2"/><nd ref="4"/>
+    <tag k="highway" v="primary"/>
+    <tag k="name" v="Test Cross Road"/>
+    <tag k="lanes" v="2"/>
+  </way>
+
+  <!-- ELEVATED: a flyover over the junction. Must not be flattened. -->
+  <way id="200" version="5">
+    <nd ref="1"/><nd ref="2"/><nd ref="3"/>
+    <tag k="highway" v="trunk"/>
+    <tag k="name" v="Test Flyover"/>
+    <tag k="bridge" v="yes"/>
+    <tag k="layer" v="1"/>
+    <tag k="lanes" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+
+  <!-- Second deck, layer 2. -->
+  <way id="201" version="1">
+    <nd ref="2"/><nd ref="3"/><nd ref="6"/>
+    <tag k="highway" v="primary"/>
+    <tag k="name" v="Test Upper Deck"/>
+    <tag k="bridge" v="viaduct"/>
+    <tag k="layer" v="2"/>
+    <tag k="oneway" v="yes"/>
+  </way>
+
+  <!-- Ramp connecting the levels. -->
+  <way id="202" version="1">
+    <nd ref="3"/><nd ref="8"/>
+    <tag k="highway" v="trunk_link"/>
+    <tag k="name" v="Test Ramp"/>
+  </way>
+
+  <!-- Tunnel. -->
+  <way id="203" version="1">
+    <nd ref="5"/><nd ref="1"/>
+    <tag k="highway" v="secondary"/>
+    <tag k="tunnel" v="yes"/>
+    <tag k="layer" v="-1"/>
+    <tag k="name" v="Test Underpass"/>
+  </way>
+
+  <!-- Roundabout: one-way is implied, not tagged. -->
+  <way id="204" version="1">
+    <nd ref="6"/><nd ref="9"/><nd ref="6"/>
+    <tag k="highway" v="primary"/>
+    <tag k="junction" v="roundabout"/>
+  </way>
+
+  <!-- Non-numeric maxspeed; must NOT be resolved to a number. -->
+  <way id="205" version="1">
+    <nd ref="4"/><nd ref="8"/>
+    <tag k="highway" v="residential"/>
+    <tag k="maxspeed" v="IN:urban"/>
+  </way>
+
+  <!-- Under construction: excluded from the drivable network, reported. -->
+  <way id="300" version="1">
+    <nd ref="8"/><nd ref="9"/>
+    <tag k="highway" v="construction"/>
+    <tag k="construction" v="primary"/>
+    <tag k="name" v="Test Future Road"/>
+  </way>
+
+  <!-- Not a road at all. -->
+  <way id="301" version="1">
+    <nd ref="4"/><nd ref="5"/>
+    <tag k="highway" v="footway"/>
+  </way>
+
+  <relation id="400" version="1">
+    <member type="way" ref="100" role="from"/>
+    <member type="node" ref="2" role="via"/>
+    <member type="way" ref="102" role="to"/>
+    <tag k="type" v="restriction"/>
+    <tag k="restriction" v="no_left_turn"/>
+  </relation>
+</osm>

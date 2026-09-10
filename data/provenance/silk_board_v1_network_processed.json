@@ -1,0 +1,78 @@
+{
+  "dataset_id": "silk_board_v1_network_processed",
+  "data_class": "PUBLICLY_SOURCED_DATA",
+  "description": "Road network tables for Central Silk Board Junction, Bengaluru, derived from the raw OSM extract. Attributes are preserved from OSM; none are inferred.",
+  "source_name": "OpenStreetMap (derived)",
+  "source_url": "https://overpass.kumi.systems/api/interpreter",
+  "source_licence": "ODbL 1.0",
+  "source_attribution": "© OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)",
+  "retrieved_at": "2026-09-09T16:12:40Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1",
+  "estimation_basis": null,
+  "produced_by": null,
+  "random_seed": null,
+  "derived_from": [
+    "silk_board_v1_osm_raw"
+  ],
+  "processing_steps": [
+    "Parsed OSM XML with the standard library; no geometry simplification.",
+    "Selected ways whose highway tag is drivable (707 edges).",
+    "Preserved OSM tags verbatim; added clearly-named derived columns (is_bridge, is_tunnel, layer_effective, oneway_normalised, lanes_parsed, maxspeed_kmh) alongside, never replacing, the originals.",
+    "Computed edge length in metres by projecting to UTM 43N (EPSG:32643).",
+    "Identified junctions as nodes shared by 3 or more distinct drivable ways.",
+    "Clustered major-road junction nodes within 40 m into distinct intersections, and associated traffic_signals nodes within 60 m by proximity. Both are inferences by this project, flagged as such on every row; OSM asserts neither.",
+    "Extracted type=restriction relations as structured records, unapplied.",
+    "Ran the Phase 1 validation suite; report written alongside the data."
+  ],
+  "tool_versions": {
+    "python": "3.11.14",
+    "geopandas": "1.1.4",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "osmnx": "2.1.1"
+  },
+  "study_area": {
+    "area_id": "silk_board_v1",
+    "display_name": "Central Silk Board Junction, Bengaluru",
+    "anchor": {
+      "lat": 12.917236,
+      "lon": 77.623262
+    },
+    "anchor_derivation": "Length-weighted centroid, in UTM 43N (EPSG:32643), of the five OpenStreetMap highway ways whose name tag is exactly 'Silk Board Flyover' or 'Silk Board Interchange' (way/40696221, way/40696222, way/1208112302, way/1208112303, way/1254771465), as present in an OSM extract retrieved 2026-09-09. Chosen over a geocoder result because Nominatim returns bus stops and a landuse polygon for this name, none of which sit on the carriageway; and over the Hosur Road x Outer Ring Road crossing because those two corridors share no node and do not cross in plan view within the extract - the interchange is grade-separated and connected only through link ways.",
+    "anchor_source_ways": [
+      "way/40696221",
+      "way/40696222",
+      "way/1208112302",
+      "way/1208112303",
+      "way/1254771465"
+    ],
+    "half_extent_m": 800.0,
+    "bbox": {
+      "min_lon": 77.615889,
+      "min_lat": 12.910001,
+      "max_lon": 77.630635,
+      "max_lat": 12.924471
+    },
+    "bbox_api_order": "77.615889,12.910001,77.630635,12.924471",
+    "extent_m": {
+      "width": 1600.0,
+      "height": 1600.0
+    },
+    "area_km2": 2.56,
+    "notes": "Covers the Silk Board interchange core plus its immediate approaches on Hosur Road (NH-44), Outer Ring Road and Sarjapura Road.\n\nSIZING. The brief was 'approximately 5-10 intersections'. That target is not reachable under a topological definition: even a 400 m box contains 12 nodes where three or more through-roads meet, because the interchange decomposes into many ramp splits and merges and the ORR/Hosur corridors carry frequent slip-road connections. Measured three ways, this box contains 122 junction nodes on any drivable way, 22 distinct major-road intersections after clustering, and 5 intersections with a mapped traffic signal. The last is the count that matches the brief, and it is also the one that matters for this project: signal-controlled intersections are the only places an EMS priority policy can act. Smaller boxes were rejected because they shorten the approaches without reducing the intersection count much, and Silk Board's queues are the phenomenon under study. Larger boxes were rejected because at ~1.1 km half-extent the OSM API refuses the request (50,000-node cap).\n\nSCOPE LIMIT. This box does NOT cover the full length of the Silkboard Double Decker Flyover, whose OSM ways run about 2.8 km west toward Ragigudda. Traffic entering along that viaduct will appear at the study-area boundary rather than being simulated from its true origin.\n\nAPPROACH LENGTH. 800 m of approach on each corridor may prove short relative to observed Silk Board queues. If Phase 3 shows queues reaching the boundary, the box must be widened - as a new area_id, with runs repeated - rather than the results reported as-is."
+  },
+  "limitations": [
+    "extract_declares_bounds: Extract has no <bounds> element; served area could not be confirmed from the file",
+    "attribute_coverage_lanes_parsed: lanes: 125/707 edges (18%). Missing values are left as null - not defaulted.",
+    "attribute_coverage_maxspeed_kmh: maxspeed (numeric): 85/707 edges (12%). Missing values are left as null - not defaulted.",
+    "oneway_explicitly_tagged: one-way status explicitly tagged on 150/707 edges (21%); the remainder are treated as bidirectional per OSM convention, recorded in oneway_basis",
+    "non_current_infrastructure_flagged: 12 ways tagged highway=construction/proposed. These are excluded from the drivable network. Whether they are open to traffic today cannot be determined from OSM alone.",
+    "no_under_construction_markers_in_drivable_network: 1 drivable edges have names marking them under construction (['Ragigudda-Silk Board Integrated Flyover (u/c)']). They are tagged as open roads but named as incomplete; OSM cannot resolve which is current.",
+    "Derived columns are transformations of OSM tags, not new information. Where a tag was absent the derived value is null; no defaults were applied.",
+    "Junction identification is topological. It does not assert that each junction is signal-controlled, nor how it operates.",
+    "Turn restrictions are recorded but not applied to the geometry; SUMO enforces turning movements at conversion time."
+  ],
+  "notes": "Validation: 0 error(s), 6 warning(s). Full report at data/processed/silk_board_v1/validation_report.json."
+}

@@ -1,0 +1,19 @@
+# EMS Black Box - simulation
+# Target: Python 3.11  (see docs/ENVIRONMENT.md)
+#
+# NOTE: traci and sumolib are NOT listed here. They ship inside the SUMO
+# installation (SUMO_HOME/tools) and must match the installed SUMO version
+# exactly. Pinning a PyPI copy invites a version skew that shows up as
+# confusing TraCI protocol errors. ems_sim.runner.sumo_env resolves the path
+# at runtime instead.
+
+# --- Geospatial -----------------------------------------------------------
+osmnx>=1.9,<3.0        # OSM graph download + simplification
+geopandas>=1.0         # spatial dataframes for intersection/edge tables
+shapely>=2.0           # geometry operations
+pyproj>=3.6            # WGS84 <-> UTM 43N projection (see network/coordinates.py)
+
+# --- Support --------------------------------------------------------------
+numpy>=1.26
+lxml>=5.0              # parsing SUMO XML outputs
+pydantic>=2.8,<3.0     # scenario config models (shared shape with the backend)

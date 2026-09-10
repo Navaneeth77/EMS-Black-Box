@@ -1,0 +1,38 @@
+{
+  "dataset_id": "phase4_multi_seed_include_unresolved",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 4 multi-seed baseline for silk_board_v1: 5 runs of an identical scenario differing only in random seed, with aggregate statistics and simulation bottleneck rankings.",
+  "source_name": "EMS Black Box Phase 4",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T04:47:58Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/calibration/multi_seed_summary_include_unresolved.json",
+  "estimation_basis": null,
+  "produced_by": "seeds:[42, 43, 44, 45, 46] variant:include_unresolved",
+  "random_seed": 42,
+  "derived_from": [
+    "phase3_baseline",
+    "silk_board_v1_sumo_network"
+  ],
+  "processing_steps": [
+    "Ran the same scenario with seeds [42, 43, 44, 45, 46].",
+    "Collected per-run vehicle totals, trip statistics, per-edge aggregated measurements and the ambulance trip.",
+    "Aggregated across seeds: mean, median, stdev, min, max, percentiles, with every individual run retained.",
+    "Ranked simulation bottlenecks by how many seeds agree on them."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "Seed variance measures this model's internal variability. It does NOT establish agreement with observed Bengaluru traffic.",
+    "Demand rates, vehicle mix and vehicle behaviour are ESTIMATED_DATA and are identical across all seeds, so their uncertainty does not appear in this spread at all.",
+    "Traffic-light programs are netconvert defaults (ESTIMATED_DATA).",
+    "Bottleneck rankings are simulation bottlenecks. Nothing here shows they correspond to congestion at the real junction.",
+    "Scenario variant: include_unresolved. Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
+  ],
+  "notes": "5 seeds, 799s wall clock. Ambulance completed in 5/5 runs."
+}

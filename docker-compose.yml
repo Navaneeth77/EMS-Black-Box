@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------------------
+# EMS Black Box - local services
+#
+# Nothing in the application depends on Postgres yet. The service sits behind a
+# Compose profile so that a bare `docker compose up` does nothing: the database
+# only starts when you ask for it explicitly.
+#
+#   docker compose --profile database up -d
+#   docker compose --profile database down          # stop, keep data
+#   docker compose --profile database down -v       # stop, delete data
+#
+# PostGIS will hold: ingested road geometry, intersection registry, simulation
+# run metadata (config hash + seed), and per-run measurement tables. Until the
+# ingestion pipeline exists there is nothing to store, so leaving this off is
+# the correct default.
+# ---------------------------------------------------------------------------
+
+services:
+  postgis:
+    # PostgreSQL 16 with the PostGIS 3.4 extension pre-installed.
+    image: postgis/postgis:16-3.4
+    container_name: ems-black-box-postgis
+    profiles: ["database"]
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ems_black_box
+      POSTGRES_USER: ems
+      # Local development only. Never reuse this anywhere that matters.
+      POSTGRES_PASSWORD: ems_local_dev
+      # Deterministic collation keeps query results stable across machines,
+      # which matters when comparing counterfactual runs.
+      POSTGRES_INITDB_ARGS: "--locale=C.UTF-8 --encoding=UTF8"
+    ports:
+      # Host 5433 avoids clashing with a native Postgres on the usual 5432.
+      - "5433:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+      # Scripts here run once, in filename order, on first initialisation only.
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ems -d ems_black_box"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgis_data:
+    name: ems_black_box_postgis_data
