@@ -37,7 +37,6 @@ from typing import Any
 
 from ems_sim.policies.base import AmbulanceObservation, BasePolicy
 from ems_sim.policies.policies import NormalPolicy
-from ems_sim.policies.state import PolicyState
 from ems_sim.policies.tls_map import GREEN_CHARS, RouteTls
 
 SATURATION_FLOW_VEH_PER_S_PER_LANE = 0.45
@@ -81,6 +80,7 @@ class EmsPredictivePolicy(BasePolicy):
         self.transition_s: dict[str, float] = {}
         self._route_index: int | None = None
         self._decisions: list[dict[str, Any]] = []
+        self._traci = None
 
     # --- lifecycle --------------------------------------------------------
 
@@ -183,76 +183,49 @@ class EmsPredictivePolicy(BasePolicy):
 
     # --- state machine ----------------------------------------------------
 
-    def on_step(self, sim_time_s: float, ambulance: AmbulanceObservation, traci_module) -> None:
-        for entry in self.actionable:
-            control = self.control[entry.tls_id]
-            ahead = self._ahead_of(entry, ambulance)
-            assessment = self._assessment(entry, ambulance, traci_module) if ahead else None
+    # --- the rule, as the shared state machine consumes it -----------------
 
-            if control.state is PolicyState.NORMAL:
-                if ahead and assessment and assessment["trigger"]:
-                    self._decisions.append({"sim_time_s": sim_time_s, "tls_id": entry.tls_id,
-                                            **assessment})
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.REQUESTED,
-                        f"estimated {assessment['eta_s']:.0f} s from the stop line at "
-                        f"{assessment['distance_m']:.0f} m and "
-                        f"{assessment['speed_ms']:.1f} m/s, within the "
-                        f"{assessment['lead_time_s']:.0f} s the signal needs "
-                        f"({assessment['transition_s']:.0f} s transition + "
-                        f"{assessment['clearance_s']:.0f} s queue + "
-                        f"{assessment['margin_s']:.0f} s margin)",
-                        sim_time_s,
-                        ambulance,
-                        traci_module,
-                    )
-            elif control.state is PolicyState.REQUESTED:
-                # Once asked, the request stands until the ambulance is through or
-                # the hold expires. Withdrawing it because the ambulance slowed in
-                # the queue would cancel priority exactly when it is needed.
-                if not ahead:
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.CLEARING,
-                        "ambulance passed the signal before priority was granted",
-                        sim_time_s,
-                        ambulance,
-                        traci_module,
-                    )
-                elif self._serve_priority(entry, sim_time_s, traci_module):
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.PRIORITY_ACTIVE,
-                        "a phase serving the ambulance movement is now green",
-                        sim_time_s,
-                        ambulance,
-                        traci_module,
-                    )
-            elif control.state is PolicyState.PRIORITY_ACTIVE:
-                if not ahead or self._priority_expired(entry.tls_id, sim_time_s):
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.CLEARING,
-                        "ambulance passed the signal"
-                        if not ahead
-                        else f"priority held for the maximum {self.max_priority_s:.0f} s",
-                        sim_time_s,
-                        ambulance,
-                        traci_module,
-                    )
-                else:
-                    self._serve_priority(entry, sim_time_s, traci_module)
-            elif control.state is PolicyState.CLEARING:
-                self._release(entry, sim_time_s, traci_module)
-                self._transition(
-                    entry.tls_id,
-                    PolicyState.NORMAL,
-                    "signal returned to its own program",
-                    sim_time_s,
-                    ambulance,
-                    traci_module,
-                )
+    def _is_relevant(
+        self, entry: RouteTls, ambulance: AmbulanceObservation, sim_time_s: float
+    ) -> bool:
+        return self._ahead_of(entry, ambulance)
+
+    def _wants_priority(
+        self, entry: RouteTls, ambulance: AmbulanceObservation, sim_time_s: float
+    ) -> tuple[bool, str]:
+        """Ask when the estimated arrival no longer leaves the signal enough time.
+
+        Everything the decision used is recorded, not just its outcome: the
+        distance, the speed, the eta, the transition time the controller needs,
+        the queue clearance estimate and the margin. A rule that only logged
+        "requested" could not be checked against its own formula.
+        """
+        assessment = self._assessment(entry, ambulance, self._traci)
+        if not assessment["trigger"]:
+            return False, "estimated arrival still leaves the signal enough time"
+        self._decisions.append(
+            {"sim_time_s": sim_time_s, "tls_id": entry.tls_id, **assessment}
+        )
+        return True, (
+            f"estimated {assessment['eta_s']:.0f} s from the stop line at "
+            f"{assessment['distance_m']:.0f} m and "
+            f"{assessment['speed_ms']:.1f} m/s, within the "
+            f"{assessment['lead_time_s']:.0f} s the signal needs "
+            f"({assessment['transition_s']:.0f} s transition + "
+            f"{assessment['clearance_s']:.0f} s queue + "
+            f"{assessment['margin_s']:.0f} s margin)"
+        )
+
+    def on_step(self, sim_time_s: float, ambulance: AmbulanceObservation, traci_module) -> None:
+        # The assessment needs TraCI (it reads SUMO's own halting count for the
+        # queue term) and the shared machine does not pass it to the activation
+        # hook, so it is held for the duration of the step rather than smuggled
+        # through the observation.
+        self._traci = traci_module
+        try:
+            super().on_step(sim_time_s, ambulance, traci_module)
+        finally:
+            self._traci = None
 
 
 HISTORICAL_POLICIES: dict[str, type[BasePolicy]] = {

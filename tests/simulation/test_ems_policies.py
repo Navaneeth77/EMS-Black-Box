@@ -76,13 +76,31 @@ class TestPolicyStateMachine:
     def test_the_documented_cycle_is_valid(self) -> None:
         chain = [
             PolicyState.NORMAL,
+            PolicyState.DETECTED,
             PolicyState.REQUESTED,
+            PolicyState.TRANSITIONING,
             PolicyState.PRIORITY_ACTIVE,
             PolicyState.CLEARING,
+            PolicyState.RESTORING,
             PolicyState.NORMAL,
         ]
         for previous, new in zip(chain[:-1], chain[1:], strict=True):
             assert is_valid_transition(previous, new), f"{previous} -> {new}"
+
+    def test_a_signal_can_be_watched_without_being_asked_for(self) -> None:
+        """DETECTED is "the ambulance is coming", not "priority was requested".
+        A signal can stop being relevant before anything is ever asked of it."""
+        assert is_valid_transition(PolicyState.NORMAL, PolicyState.DETECTED)
+        assert is_valid_transition(PolicyState.DETECTED, PolicyState.NORMAL)
+        assert not is_valid_transition(PolicyState.NORMAL, PolicyState.REQUESTED)
+
+    def test_requested_is_distinct_from_the_signal_having_moved(self) -> None:
+        """The gap between asking and the signal answering is a measured
+        quantity, so the two cannot be the same state."""
+        assert is_valid_transition(PolicyState.REQUESTED, PolicyState.TRANSITIONING)
+        assert is_valid_transition(PolicyState.TRANSITIONING, PolicyState.PRIORITY_ACTIVE)
+        # A signal already on a serving phase never has to transition.
+        assert is_valid_transition(PolicyState.REQUESTED, PolicyState.PRIORITY_ACTIVE)
 
     def test_priority_cannot_be_granted_without_a_request(self) -> None:
         """Skipping REQUESTED would mean the signal was changed before the
@@ -93,9 +111,12 @@ class TestPolicyStateMachine:
         """Cross traffic is owed a lawful transition, not a snap back."""
         assert not is_valid_transition(PolicyState.PRIORITY_ACTIVE, PolicyState.NORMAL)
 
-    def test_an_abandoned_request_may_return_to_normal(self) -> None:
-        """The ambulance can turn off an approach before priority was granted."""
-        assert is_valid_transition(PolicyState.REQUESTED, PolicyState.NORMAL)
+    def test_an_abandoned_request_clears_rather_than_snapping_back(self) -> None:
+        """The ambulance can pass before priority was granted. The signal still
+        goes through CLEARING and RESTORING: something was asked of it, and the
+        record has to show it being let go."""
+        assert is_valid_transition(PolicyState.REQUESTED, PolicyState.CLEARING)
+        assert not is_valid_transition(PolicyState.REQUESTED, PolicyState.NORMAL)
 
     def test_staying_in_a_state_is_not_a_transition(self) -> None:
         for state in PolicyState:
@@ -200,8 +221,48 @@ class TestRouteTlsSelection:
 
 
 class TestPolicyRegistry:
-    def test_all_four_policies_are_registered(self) -> None:
-        assert set(POLICY_ORDER) == {"NORMAL", "EMS_NEXT", "EMS_ROLLING", "EMS_FULL_PREEMPTION"}
+    def test_every_policy_is_registered(self) -> None:
+        assert set(POLICY_ORDER) == {
+            "NORMAL",
+            "EMS_NEXT",
+            "EMS_ROLLING",
+            "EMS_FULL_SCOPE",
+            "EMS_FULL_PREEMPTION",
+        }
+
+    def test_the_scope_experiment_holds_every_other_parameter_equal(self) -> None:
+        """EMS_ROLLING -> EMS_FULL_SCOPE must differ in activation scope alone,
+        or the comparison measures three changes at once and attributes them to
+        one. EMS_FULL_PREEMPTION is the one that does differ in three, and says
+        so."""
+        from ems_sim.policies.policies import SCOPE_EXPERIMENT
+
+        rolling = make_policy("EMS_ROLLING")
+        scope = make_policy("EMS_FULL_SCOPE")
+        for parameter in ("min_green_s", "hold_extension_s", "max_priority_s"):
+            assert getattr(rolling, parameter) == getattr(scope, parameter), parameter
+        assert "EMS_FULL_PREEMPTION" not in SCOPE_EXPERIMENT
+
+        aggressive = make_policy("EMS_FULL_PREEMPTION")
+        differs = [
+            p
+            for p in ("min_green_s", "hold_extension_s", "max_priority_s")
+            if getattr(aggressive, p) != getattr(rolling, p)
+        ]
+        assert differs, "the aggressive bound must actually be more aggressive"
+        report = aggressive.on_simulation_end()["parameters"]
+        assert "differs_from_rolling_in" in report
+
+    def test_min_green_and_hold_extension_are_independent(self) -> None:
+        """One number used to mean both "never truncate below this" and "put this
+        much green back each step", so changing a policy's truncation aggression
+        silently changed how persistently it held."""
+        policy = make_policy("EMS_NEXT", min_green_s=2.0)
+        assert policy.min_green_s == 2.0
+        assert policy.hold_extension_s == 5.0
+        other = make_policy("EMS_NEXT", hold_extension_s=11.0)
+        assert other.min_green_s == 5.0
+        assert other.hold_extension_s == 11.0
 
     def test_normal_is_first_so_it_runs_before_its_counterfactuals(self) -> None:
         assert POLICY_ORDER[0] == "NORMAL"

@@ -26,8 +26,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from ems_sim.counterfactual.queues import queue_clearance_report
 from ems_sim.disturbance.incident import IncidentConfig, IncidentController
 from ems_sim.policies.base import AmbulanceObservation, BasePolicy
+from ems_sim.policies.conflicts import ConflictWatcher, foe_matrix
 from ems_sim.policies.tls_map import RouteTls, load_programs, traffic_lights_on_route
 from ems_sim.runner.measurements import RunMeasurements, TeleportEvent, VehicleTrip
 from ems_sim.runner.sumo_env import SumoInstallation, require_sumo
@@ -118,6 +120,9 @@ class PolicyRunResult:
     queue_report: dict[str, Any] = field(default_factory=dict)
     ambulance_arrived_at_s: float | None = None
     signal_timeline: dict[str, list[list[Any]]] = field(default_factory=dict)
+    conflict_report: dict[str, Any] = field(default_factory=dict)
+    queue_by_tls: dict[str, list[list[float]]] = field(default_factory=dict)
+    queue_clearance: dict[str, Any] = field(default_factory=dict)
 
     @property
     def ambulance(self) -> VehicleTrip | None:
@@ -148,6 +153,13 @@ class PolicyRunResult:
             return False, (
                 f"{len(self.signal_conflicts)} signal state(s) were observed that the "
                 f"program does not define"
+            )
+        conflicts = self.conflict_report.get("conflict_count", 0)
+        if conflicts:
+            return False, (
+                f"{conflicts} unsafe signal state(s) or change(s) were observed: "
+                f"conflicting movements were given green together, or swapped without "
+                f"clearance"
             )
         return True, "valid"
 
@@ -180,6 +192,8 @@ class PolicyRunResult:
             "route_traffic_lights": self.route_tls,
             "policy_report": self.policy_report,
             "signal_conflicts": [c.as_dict() for c in self.signal_conflicts],
+            "signal_conflict_check": self.conflict_report,
+            "queue_clearance": self.queue_clearance,
         }
 
 
@@ -266,6 +280,7 @@ def run_policy(
     ambulance_route: list[str],
     installation: SumoInstallation | None = None,
     sample_interval_s: float = 30.0,
+    queue_sample_interval_s: float = 5.0,
     incident: IncidentConfig | None = None,
     stop_on_ambulance_arrival: bool = False,
     record_signal_timeline: bool = False,
@@ -279,7 +294,13 @@ def run_policy(
     programs = load_programs(net_file)
     route_tls = traffic_lights_on_route(ambulance_route, programs)
     allowed_states = {tls_id: set(program.phase_states) for tls_id, program in programs.items()}
-    watched = [entry.tls_id for entry in route_tls]
+    watched = sorted({entry.tls_id for entry in route_tls})
+    # Two independent checks on the signals, because they catch different faults.
+    # `allowed_states` catches a state the program does not define at all — the
+    # signature of something writing a state string directly. The watcher catches
+    # a state that IS in the program but is unsafe against the junction's own foe
+    # matrix, and unsafe changes between two states that are each legal.
+    conflicts_watcher = ConflictWatcher(foe_matrix(net_file))
 
     port = free_port()
     command = build_sumo_command(options, traci_port=None, installation=installation)
@@ -287,6 +308,7 @@ def run_policy(
 
     measurements = RunMeasurements(sample_interval_s=sample_interval_s)
     conflicts: list[SignalConflict] = []
+    queue_by_tls: dict[str, list[list[float]]] = {}
     edge_times: dict[str, float] = {}
     signal_waits: list[dict[str, Any]] = []
     stop_count = 0
@@ -351,6 +373,21 @@ def run_policy(
         stop_line_pos = {
             entry.tls_id: traci.lane.getLength(f"{entry.approach_edge}_0") for entry in route_tls
         }
+
+        # Lanes to watch per signal, for the queue in front of it. The claim a
+        # priority policy makes is that the queue discharges; measuring it means
+        # counting the vehicles SUMO itself calls halted on the approach, not
+        # inferring from the fact that the ambulance moved.
+        approach_lanes: dict[str, list[str]] = {}
+        for entry in route_tls:
+            lanes: list[str] = []
+            with contextlib.suppress(Exception):
+                lanes = [
+                    f"{entry.approach_edge}_{i}"
+                    for i in range(traci.edge.getLaneNumber(entry.approach_edge))
+                ]
+            approach_lanes.setdefault(entry.tls_id, []).extend(lanes)
+        queue_by_tls: dict[str, list[list[float]]] = {tls_id: [] for tls_id in approach_lanes}
 
         while traci.simulation.getMinExpectedNumber() > 0:
             traci.simulationStep()
@@ -566,6 +603,18 @@ def run_policy(
                             signal_waits.append(event)
                     was_halted = halted
 
+            if approach_lanes and (
+                abs((now / queue_sample_interval_s) - round(now / queue_sample_interval_s)) < 1e-9
+            ):
+                for tls_id, lanes in approach_lanes.items():
+                    halting = 0
+                    vehicles = 0
+                    for lane in lanes:
+                        with contextlib.suppress(Exception):
+                            halting += traci.lane.getLastStepHaltingNumber(lane)
+                            vehicles += traci.lane.getLastStepVehicleNumber(lane)
+                    queue_by_tls[tls_id].append([now, halting, vehicles])
+
             # Record before the policy acts this step: the state read here is the
             # one that governed the movement SUMO just computed, so a vehicle and
             # the lamp beside it describe the same instant. Read-only; it cannot
@@ -581,6 +630,7 @@ def run_policy(
             # --- validate every watched signal against its program ---------
             for tls_id in watched:
                 state = traci.trafficlight.getRedYellowGreenState(tls_id)
+                conflicts_watcher.observe(tls_id, state, now)
                 if state not in allowed_states.get(tls_id, set()):
                     conflicts.append(
                         SignalConflict(
@@ -632,6 +682,9 @@ def run_policy(
         ambulance_stop_count=stop_count,
     )
     result.incident_report = incidents.report()
+    result.conflict_report = conflicts_watcher.report()
+    result.queue_by_tls = queue_by_tls
+    result.queue_clearance = queue_clearance_report(result.policy_report, queue_by_tls)
     result.ambulance_arrived_at_s = ambulance_arrived_at
     result.signal_timeline = signal_timeline
     result.queue_series = queue_series

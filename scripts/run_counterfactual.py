@@ -181,6 +181,16 @@ def main() -> int:
         "every policy of a seed, so a paired comparison still differs only in "
         "the policy.",
     )
+    parser.add_argument(
+        "--result-label",
+        default="",
+        help="Namespace the OUTPUT files without changing the scenario. The demand "
+        "id, the routes and therefore the scenario hash stay exactly as they are, "
+        "so a labelled run is the same scenario as the unlabelled one and can be "
+        "compared with it directly; only the result filenames and the SUMO output "
+        "directory differ. Used to re-run a frozen matrix under corrected code "
+        "without overwriting the frozen results.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -228,6 +238,10 @@ def main() -> int:
     if incident is not None:
         prefix = f"inc_{prefix}"
     config = replace(config, demand_id=f"cf_{prefix}{args.area}_{args.trip}_seed{args.seed}")
+    # The label names the *analysis*, never the scenario: it is deliberately not
+    # part of demand_id, so a labelled run reads the same routes file and hashes
+    # to the same scenario as the run it is being compared with.
+    label = f"{args.result_label.strip('_')}_" if args.result_label else ""
 
     print(f"Counterfactual replay — {args.area}, trip {args.trip}, seed {args.seed}")
     print(f"  network   : {net_file.relative_to(REPO_ROOT)}")
@@ -290,7 +304,9 @@ def main() -> int:
     started = time.monotonic()
     for name in args.policies:
         print(f"\n=== {name} ===", flush=True)
-        output_dir = REPO_ROOT / "simulation" / "results" / f"{config.demand_id}_{name}"
+        output_dir = (
+            REPO_ROOT / "simulation" / "results" / f"{config.demand_id}_{label}{name}"
+        )
         output_dir.mkdir(parents=True, exist_ok=True)
         options = SumoRunOptions(
             net_file=net_file,
@@ -390,17 +406,17 @@ def main() -> int:
         "incident": incident.as_dict() if incident else None,
     }
 
-    (ems_dir / f"route_traffic_lights_{prefix}{args.trip}_seed{args.seed}.json").write_text(
+    (ems_dir / f"route_traffic_lights_{label}{prefix}{args.trip}_seed{args.seed}.json").write_text(
         json.dumps({"reproducibility": reproducibility, "summary": summary}, indent=2) + "\n",
         encoding="utf-8",
     )
     for name, result in results.items():
-        (cf_dir / f"{prefix}{args.trip}_seed{args.seed}_{name}.json").write_text(
+        (cf_dir / f"{label}{prefix}{args.trip}_seed{args.seed}_{name}.json").write_text(
             json.dumps({"reproducibility": reproducibility, "run": result.as_dict()}, indent=2)
             + "\n",
             encoding="utf-8",
         )
-    (cf_dir / f"{prefix}{args.trip}_seed{args.seed}_comparisons.json").write_text(
+    (cf_dir / f"{label}{prefix}{args.trip}_seed{args.seed}_comparisons.json").write_text(
         json.dumps(
             {
                 "reproducibility": reproducibility,
@@ -415,7 +431,7 @@ def main() -> int:
 
     write_record(
         ProvenanceRecord(
-            dataset_id=f"phase5_counterfactual_{prefix}{args.trip}_seed{args.seed}",
+            dataset_id=f"phase5_counterfactual_{label}{prefix}{args.trip}_seed{args.seed}",
             data_class=DataClass.SIMULATED,
             description=(
                 f"Phase 5 counterfactual replay for {args.area}, seed {args.seed}: "
@@ -427,9 +443,9 @@ def main() -> int:
             source_name="EMS Black Box Phase 5",
             retrieved_at=utc_now_iso(),
             file_path=str(
-                (cf_dir / f"{prefix}{args.trip}_seed{args.seed}_comparisons.json").relative_to(
-                    REPO_ROOT
-                )
+                (
+                    cf_dir / f"{label}{prefix}{args.trip}_seed{args.seed}_comparisons.json"
+                ).relative_to(REPO_ROOT)
             ),
             derived_from=[
                 "phase3_baseline",

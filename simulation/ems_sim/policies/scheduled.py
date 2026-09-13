@@ -24,7 +24,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from ems_sim.policies.base import AmbulanceObservation, BasePolicy, PolicyState
+from ems_sim.policies.base import AmbulanceObservation, BasePolicy
+from ems_sim.policies.tls_map import RouteTls
 
 
 class ScheduledPerturbationPolicy(BasePolicy):
@@ -62,70 +63,29 @@ class ScheduledPerturbationPolicy(BasePolicy):
     def _active(self, tls_id: str, sim_time_s: float) -> bool:
         return any(start <= sim_time_s <= end for start, end in self.schedule.get(tls_id, []))
 
-    def on_step(self, sim_time_s: float, ambulance: AmbulanceObservation, traci_module) -> None:
-        # ``ambulance`` is accepted to satisfy the policy interface and is
-        # deliberately never read: an absent ambulance must not change what this
-        # policy does, or it would not be a control.
+    def _is_relevant(
+        self, entry: RouteTls, ambulance: AmbulanceObservation, sim_time_s: float
+    ) -> bool:
+        """Relevance here is the timetable, not the ambulance.
+
+        ``ambulance`` is accepted to satisfy the policy interface and is
+        deliberately never read: an absent ambulance must not change what this
+        policy does, or it would not be a control.
+        """
         del ambulance
-        blind = AmbulanceObservation(present=False)
+        return self._active(entry.tls_id, sim_time_s)
 
-        for entry in self.actionable:
-            control = self.control[entry.tls_id]
-            active = self._active(entry.tls_id, sim_time_s)
+    def _wants_priority(
+        self, entry: RouteTls, ambulance: AmbulanceObservation, sim_time_s: float
+    ) -> tuple[bool, str]:
+        del ambulance
+        return True, "scheduled intervention window is open"
 
-            if control.state is PolicyState.NORMAL:
-                if active:
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.REQUESTED,
-                        "scheduled intervention window opened",
-                        sim_time_s,
-                        blind,
-                        traci_module,
-                    )
-            elif control.state is PolicyState.REQUESTED:
-                if not active:
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.CLEARING,
-                        "scheduled window closed before priority was granted",
-                        sim_time_s,
-                        blind,
-                        traci_module,
-                    )
-                elif self._serve_priority(entry, sim_time_s, traci_module):
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.PRIORITY_ACTIVE,
-                        "a phase serving the scheduled movement is now green",
-                        sim_time_s,
-                        blind,
-                        traci_module,
-                    )
-            elif control.state is PolicyState.PRIORITY_ACTIVE:
-                if not active or self._priority_expired(entry.tls_id, sim_time_s):
-                    self._transition(
-                        entry.tls_id,
-                        PolicyState.CLEARING,
-                        "scheduled window closed"
-                        if not active
-                        else f"priority held for the maximum {self.max_priority_s:.0f} s",
-                        sim_time_s,
-                        blind,
-                        traci_module,
-                    )
-                else:
-                    self._serve_priority(entry, sim_time_s, traci_module)
-            elif control.state is PolicyState.CLEARING:
-                self._release(entry, sim_time_s, traci_module)
-                self._transition(
-                    entry.tls_id,
-                    PolicyState.NORMAL,
-                    "signal returned to its own program",
-                    sim_time_s,
-                    blind,
-                    traci_module,
-                )
+    def on_step(self, sim_time_s: float, ambulance: AmbulanceObservation, traci_module) -> None:
+        # The ambulance is blanked before the machine sees it, so no branch of
+        # the shared machine can read a position even by accident.
+        del ambulance
+        super().on_step(sim_time_s, AmbulanceObservation(present=False), traci_module)
 
 
 def envelope_from_transitions(

@@ -99,9 +99,26 @@ class TlsProgram:
         return green / self.cycle_length_s
 
 
+class RouteMappingError(RuntimeError):
+    """A traffic light could not be placed on the route with confidence.
+
+    Raised rather than defaulted. The earlier version of this module gave an
+    unplaceable signal ``route_index = 10**6``, which every policy then read as
+    "so far ahead it will never be reached" — a signal silently dropped out of
+    the experiment while still appearing in the record as one of its inputs.
+    """
+
+
 @dataclass
 class RouteTls:
-    """A traffic light on a route, with the links that route uses."""
+    """One *encounter* between a route and a traffic light.
+
+    Not "a traffic light on the route": a route that passes the same junction
+    twice meets it twice, at different points and possibly on different
+    movements, and those are two encounters with separate signal states to
+    request. Each gets its own entry with its own ``route_index``, and ``key``
+    distinguishes them wherever a policy keeps per-signal bookkeeping.
+    """
 
     tls_id: str
     program: TlsProgram
@@ -110,6 +127,11 @@ class RouteTls:
     exit_edge: str
     route_index: int
     """Position of the approach edge in the route, for ordering."""
+
+    @property
+    def key(self) -> str:
+        """Identifies this encounter, where ``tls_id`` alone would collide."""
+        return f"{self.tls_id}@{self.route_index}"
 
     @property
     def green_fraction(self) -> float:
@@ -191,27 +213,57 @@ def traffic_lights_on_route(
     the route. Matching the from-edge alone would pick up movements at the same
     junction that the ambulance does not make, and preempting those would impose
     cost for no benefit.
+
+    Three things this deliberately does not do, each of which the earlier version
+    did and each of which loses a signal without saying so:
+
+    * It does not key route positions by edge. A route may use the same edge
+      twice; a dict would keep only the last occurrence and misplace the signal.
+    * It does not collapse a traffic light to its first matching movement. One
+      light can control two different movements the route makes, at two
+      different points; each is recorded separately, with the links that belong
+      to it.
+    * It does not invent a position for a signal it cannot place. That raises.
     """
-    positions = {edge: index for index, edge in enumerate(route_edges)}
-    consecutive = set(zip(route_edges[:-1], route_edges[1:], strict=False))
+    positions: dict[str, list[int]] = {}
+    for index, edge in enumerate(route_edges):
+        positions.setdefault(edge, []).append(index)
+    consecutive: dict[tuple[str, str], list[int]] = {}
+    for index, (first, second) in enumerate(zip(route_edges[:-1], route_edges[1:], strict=False)):
+        consecutive.setdefault((first, second), []).append(index)
 
     found: list[RouteTls] = []
     for tls_id, program in programs.items():
-        matching = [link for link in program.links if (link.from_edge, link.to_edge) in consecutive]
-        if not matching:
-            continue
-        approach = matching[0].from_edge
-        found.append(
-            RouteTls(
-                tls_id=tls_id,
-                program=program,
-                ambulance_links=sorted({link.link_index for link in matching}),
-                approach_edge=approach,
-                exit_edge=matching[0].to_edge,
-                route_index=positions.get(approach, 10**6),
-            )
-        )
-    return sorted(found, key=lambda item: item.route_index)
+        # Group this light's matching links by the movement they serve, so links
+        # that are lanes of one movement stay together and links belonging to a
+        # different movement do not.
+        by_movement: dict[tuple[str, str], list[ControlledLink]] = {}
+        for link in program.links:
+            movement = (link.from_edge, link.to_edge)
+            if movement in consecutive:
+                by_movement.setdefault(movement, []).append(link)
+
+        for (approach, exit_edge), links in by_movement.items():
+            where = consecutive.get((approach, exit_edge))
+            if not where:
+                raise RouteMappingError(
+                    f"{tls_id} controls {approach} -> {exit_edge}, which was matched "
+                    f"against the route but cannot be located in it. The mapping is "
+                    f"inconsistent and any result attributed to this signal would be "
+                    f"attributed to the wrong place."
+                )
+            for route_index in where:
+                found.append(
+                    RouteTls(
+                        tls_id=tls_id,
+                        program=program,
+                        ambulance_links=sorted({link.link_index for link in links}),
+                        approach_edge=approach,
+                        exit_edge=exit_edge,
+                        route_index=route_index,
+                    )
+                )
+    return sorted(found, key=lambda item: (item.route_index, item.tls_id, item.exit_edge))
 
 
 def summarise_route_tls(route_tls: list[RouteTls]) -> dict[str, Any]:
