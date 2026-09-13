@@ -7,13 +7,13 @@ priority is granted without ever creating a conflicting green.
 > performance in Bengaluru. No ambulance GPS trace, dispatch record or observed
 > signal timing was used, because none was available.
 
-Companions: [`PHASE5A_CONTROL.md`](PHASE5A_CONTROL.md) (**scenario index, the
+Companions: [`archive/PHASE5A_CONTROL.md`](archive/PHASE5A_CONTROL.md) (**scenario index, the
 detector correction, and the control experiment — start here**) ·
 [`COUNTERFACTUAL_REPLAY.md`](COUNTERFACTUAL_REPLAY.md) (the original `signalised`
 result) · [`EMS_DELAY_ATTRIBUTION.md`](EMS_DELAY_ATTRIBUTION.md) (per-intersection)
 
 > The route analysis in section 4 describes the **`signalised`** trip. Two later
-> trips exist; [`PHASE5A_CONTROL.md`](PHASE5A_CONTROL.md) section 1 tabulates all
+> trips exist; [`archive/PHASE5A_CONTROL.md`](archive/PHASE5A_CONTROL.md) section 1 tabulates all
 > three. The policies themselves are unchanged across all of them.
 
 ---

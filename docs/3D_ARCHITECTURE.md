@@ -9,8 +9,8 @@ real, and what is reconstructed.
 > ambulance journey in Bengaluru. The road network and building footprints come
 > from OpenStreetMap; the heights and elevations you can see do not.
 
-Companions: [`FINAL_RND_REPORT.md`](FINAL_RND_REPORT.md) (the research this
-visualises) · [`3D_READINESS.md`](3D_READINESS.md) (the gate) ·
+Companions: [`archive/FINAL_RND_REPORT.md`](archive/FINAL_RND_REPORT.md) (the research this
+visualises) · [`archive/3D_READINESS.md`](archive/3D_READINESS.md) (the gate) ·
 [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
 ---
@@ -399,7 +399,7 @@ placed, and every signal renders permanently dark. **Nothing errors.**
 Fixed, and the exporter now **raises** if a traffic light exports with no
 program, because a signal drawn dark for a whole run silently misrepresents the
 simulation. All 8 now export `static`, offset 0, 3/4/6 phases, 90 s cycle —
-matching the audit in `FINAL_RND_REPORT.md` section 9.
+matching the audit in `archive/FINAL_RND_REPORT.md` section 9.
 
 ### End-to-end verification after the fixes
 

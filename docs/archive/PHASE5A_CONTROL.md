@@ -18,8 +18,8 @@ support.
 > from a distribution spanning -47,918 to +75,979 s. Kept as the record of how
 > the control was first built and what it first showed.
 
-Companions: [`EMS_SIGNAL_POLICIES.md`](EMS_SIGNAL_POLICIES.md) (how the policies
-work) · [`COUNTERFACTUAL_REPLAY.md`](COUNTERFACTUAL_REPLAY.md) (the original
+Companions: [`EMS_SIGNAL_POLICIES.md`](../EMS_SIGNAL_POLICIES.md) (how the policies
+work) · [`COUNTERFACTUAL_REPLAY.md`](../COUNTERFACTUAL_REPLAY.md) (the original
 Phase 5 result)
 
 ---

@@ -212,7 +212,7 @@ UI as a measurement will be read as a measurement.
 
 ## 5. Build order
 
-Working simulation before visual polish; see `docs/ROADMAP.md`. The dependency is
+Working simulation before visual polish; see `docs/archive/ROADMAP.md`. The dependency is
 real rather than a preference: the state schema, the coordinate transform and the
 scene geometry all follow from what the network and the TraCI loop actually
 produce. Building the 3D view first would mean designing it against imagined data

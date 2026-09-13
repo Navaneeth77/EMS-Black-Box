@@ -9,7 +9,7 @@ side by side on one clock.
 
 > **HISTORICAL_DEMO is not the research result.** The frozen research experiment
 > (20 runs, seeds 42–46 × 4 policies) and its figures in
-> [`FINAL_RESULTS.md`](FINAL_RESULTS.md) were not modified, regenerated or re-run.
+> [`archive/FINAL_RESULTS.md`](archive/FINAL_RESULTS.md) were not modified, regenerated or re-run.
 > Validation check C22 compares all 178 frozen research files against SHA-256
 > hashes taken before this work began: 0 changed, 0 added. HISTORICAL_DEMO has its
 > own network variant, policy, trip, demand and output namespace, and its numbers

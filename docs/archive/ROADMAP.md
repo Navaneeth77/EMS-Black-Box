@@ -25,7 +25,7 @@ reachability, tests pass. No simulation, no data.
 **Done — acquisition and validation.** Study area defined and anchored to OSM
 geometry; extract downloaded, validated (33 checks, 0 errors) and written to
 `data/processed/silk_board_v1/` with two chained provenance records. Full
-report: [`docs/STUDY_AREA.md`](STUDY_AREA.md).
+report: [`docs/STUDY_AREA.md`](../STUDY_AREA.md).
 
 ```bash
 python scripts/ingest_study_area.py
@@ -56,7 +56,7 @@ once results exist.
 Network converted with `netconvert` from a committed `.netccfg` and structurally
 validated: 1,515 edges, 664 junctions, 12 traffic lights, 1 connected component,
 and the flyover verified grade-separated (8 plan-view crossings, 0 sharing a
-junction). Full report: [`docs/SUMO_CONVERSION.md`](SUMO_CONVERSION.md).
+junction). Full report: [`docs/SUMO_CONVERSION.md`](../SUMO_CONVERSION.md).
 
 ```bash
 python scripts/build_sumo_network.py
@@ -76,7 +76,7 @@ See §11 of the conversion doc.
 ### Phase 2.5 — Network review and correction ✅
 
 Six open Phase 2 items investigated; report:
-[`docs/SUMO_NETWORK_REVIEW.md`](SUMO_NETWORK_REVIEW.md).
+[`docs/SUMO_NETWORK_REVIEW.md`](../SUMO_NETWORK_REVIEW.md).
 
 ```bash
 python scripts/build_sumo_network.py    # rebuild, revalidate, regenerate the review
@@ -103,8 +103,8 @@ and the free-flow speed for 166 edges defaulted to ≥80 km/h.
 
 Seven vehicle types, a seeded boundary-to-boundary demand model, deterministic
 routing, and a TraCI baseline run. Reports:
-[`docs/TRAFFIC_DEMAND.md`](TRAFFIC_DEMAND.md) and
-[`docs/BASELINE_SIMULATION.md`](BASELINE_SIMULATION.md).
+[`docs/TRAFFIC_DEMAND.md`](../TRAFFIC_DEMAND.md) and
+[`docs/BASELINE_SIMULATION.md`](../BASELINE_SIMULATION.md).
 
 ```bash
 python scripts/run_baseline.py
@@ -129,8 +129,8 @@ a measurement of Bengaluru traffic.
 
 Multi-seed baseline, determinism verification, sensitivity experiments and
 parameter audits. Reports:
-[`docs/BASELINE_CALIBRATION.md`](BASELINE_CALIBRATION.md) and
-[`docs/BASELINE_UNCERTAINTY.md`](BASELINE_UNCERTAINTY.md).
+[`docs/BASELINE_CALIBRATION.md`](../BASELINE_CALIBRATION.md) and
+[`docs/BASELINE_UNCERTAINTY.md`](../BASELINE_UNCERTAINTY.md).
 
 ```bash
 python scripts/run_multi_seed_baseline.py    # seeds 42-46
@@ -179,9 +179,9 @@ runs, and the ambulance's travel time is read from SUMO output.
 
 Four policies (NORMAL, EMS_NEXT, EMS_ROLLING, EMS_FULL_PREEMPTION), paired
 scenario verification, and per-intersection attribution. Reports:
-[`EMS_SIGNAL_POLICIES.md`](EMS_SIGNAL_POLICIES.md),
-[`COUNTERFACTUAL_REPLAY.md`](COUNTERFACTUAL_REPLAY.md),
-[`EMS_DELAY_ATTRIBUTION.md`](EMS_DELAY_ATTRIBUTION.md).
+[`EMS_SIGNAL_POLICIES.md`](../EMS_SIGNAL_POLICIES.md),
+[`COUNTERFACTUAL_REPLAY.md`](../COUNTERFACTUAL_REPLAY.md),
+[`EMS_DELAY_ATTRIBUTION.md`](../EMS_DELAY_ATTRIBUTION.md).
 
 ```bash
 python scripts/run_counterfactual.py --seed 42

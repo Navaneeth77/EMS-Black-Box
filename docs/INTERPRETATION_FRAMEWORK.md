@@ -81,4 +81,4 @@ preserved rather than tuned away:
 Neither was removed to make the story cleaner. Where a scenario was changed, the
 reason was that the *instrument* was broken — a disturbance that blocked a lane
 carrying zero vehicles is not a null result, it is a defect — and the change is
-recorded in `COUNCIL_LOG.md` with the measurement that forced it.
+recorded in `archive/COUNCIL_LOG.md` with the measurement that forced it.

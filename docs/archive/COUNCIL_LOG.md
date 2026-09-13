@@ -52,7 +52,7 @@ re-checks. Kept terse on purpose; the reasoning lives in the code and in
 
 ## HISTORICAL_DEMO phase
 
-Frozen research untouched throughout. Details are in [`HISTORICAL_DEMO.md`](HISTORICAL_DEMO.md).
+Frozen research untouched throughout. Details are in [`HISTORICAL_DEMO.md`](../HISTORICAL_DEMO.md).
 
 | # | Role | Task | Finding | Change | Checks | Verdict |
 |---|---|---|---|---|---|---|

@@ -4,7 +4,7 @@
     python scripts/final_validation.py --prefix inc_two_signal
 
 Reads committed run outputs only; runs nothing. Produces
-``docs/FINAL_VALIDATION.md`` and a machine-readable companion.
+``docs/archive/FINAL_VALIDATION.md`` and a machine-readable companion.
 
 Every seed and every policy is reported, including the ones whose numbers are
 unhelpful. Selecting seeds after seeing their results is the failure mode this
@@ -298,7 +298,7 @@ def main() -> int:
             f"{entry['mean_recoverable_delay_s']:>7.2f} s  (n={entry['observations']})"
         )
     write_markdown(payload, REPO_ROOT / "docs" / "FINAL_VALIDATION.md")
-    print(f"  wrote {out.relative_to(REPO_ROOT)} and docs/FINAL_VALIDATION.md")
+    print(f"  wrote {out.relative_to(REPO_ROOT)} and docs/archive/FINAL_VALIDATION.md")
     return 0
 
 

@@ -2,7 +2,7 @@
 
 The Three.js / React Three Fiber scene. **Empty on purpose.**
 
-The scene is Phase 6 (see `docs/ROADMAP.md`). Building it now would mean
+The scene is Phase 6 (see `docs/archive/ROADMAP.md`). Building it now would mean
 designing against imagined data: its geometry comes from the SUMO network, its
 per-frame updates from the state schema the TraCI loop produces, and its
 coordinate transform from the projection recorded in the `.net.xml`. None of

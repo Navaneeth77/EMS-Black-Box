@@ -6,7 +6,7 @@ step has run would mean guessing at the shape of data that does not exist, and
 guessed schemas tend to get filled with guessed values.
 
 They arrive in the roadmap phase that first produces the data — see
-docs/ROADMAP.md.
+docs/archive/ROADMAP.md.
 """
 
 from __future__ import annotations

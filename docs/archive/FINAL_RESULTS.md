@@ -4,7 +4,7 @@ Five seeds, four policies, one disturbed scenario. Every statement below is
 tagged **OBSERVED** (a number SUMO produced), **ASSUMED** (an input this project
 chose because no source existed), or **INTERPRETED** (what the two together
 appear to mean). The rules for those labels are in
-[`INTERPRETATION_FRAMEWORK.md`](INTERPRETATION_FRAMEWORK.md).
+[`INTERPRETATION_FRAMEWORK.md`](../INTERPRETATION_FRAMEWORK.md).
 
 > Nothing here is a measurement of real ambulance performance or real traffic in
 > Bengaluru. No ambulance GPS trace, dispatch record, signal timing or traffic
@@ -165,7 +165,7 @@ Scene validation: 577 checks, 0 failures, 132,778 vehicle samples.
 **ASSUMED.** None of the following is sourced; each was chosen by this project
 because no measurement was available, and each conditions every result above.
 Full table with consequences in
-[`INTERPRETATION_FRAMEWORK.md`](INTERPRETATION_FRAMEWORK.md).
+[`INTERPRETATION_FRAMEWORK.md`](../INTERPRETATION_FRAMEWORK.md).
 
 | Input | Class | Why it matters here |
 |---|---|---|
@@ -182,7 +182,7 @@ Full table with consequences in
 ## 10. Recommended research conclusion
 
 **INTERPRETED, and conditional on every assumption in
-[`INTERPRETATION_FRAMEWORK.md`](INTERPRETATION_FRAMEWORK.md):**
+[`INTERPRETATION_FRAMEWORK.md`](../INTERPRETATION_FRAMEWORK.md):**
 
 1. Under this simulated disturbance, EMS signal priority reduced simulated
    ambulance travel time by **65–80 s** against a paired 284 s baseline,

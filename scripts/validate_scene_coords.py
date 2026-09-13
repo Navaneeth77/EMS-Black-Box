@@ -42,6 +42,15 @@ from ems_sim.viz.elevation import ElevationModel  # noqa: E402
 from ems_sim.viz.network_export import LayerIndex  # noqa: E402
 
 TOLERANCE_M = 0.02
+
+HEADING_ROUNDING_DEG = 0.0501
+"""Heading tolerance for the ambulance check: the exporter's own rounding.
+
+Angles are written to one decimal, so a recorded 241.16 is exported as 241.2 and
+the error is up to half of the last place — 0.05 exactly at the boundary. This is
+that half-place plus a float's worth of slack, and nothing more: it is a limit of
+the file format, not an allowance for the renderer to move anything.
+"""
 """Round-trip tolerance. Scene values are rounded to 2 dp on export, so the
 worst honest error is half a centimetre per axis; 2 cm leaves headroom without
 hiding a real mistake."""
@@ -465,6 +474,101 @@ def main() -> int:
         }
     )
 
+    # --------------------------------- 7. the ambulance's own trajectory is SUMO's
+    #
+    # Every other check samples vehicles. This one takes the ambulance alone and
+    # checks **every** frame of it against the recording, because the ambulance
+    # is the vehicle the whole demo is about and the one a renderer would be
+    # tempted to help along. If the scene's ambulance is not SUMO's ambulance —
+    # a smoothed path, an offset, a different vehicle entirely — this is where
+    # it shows.
+    ambulance_id = manifest.get("ambulance", {}).get("vehicle_id")
+    ambulance_rows = 0
+    ambulance_failures = 0
+    ambulance_missing = 0
+    worst_ambulance = 0.0
+    if ambulance_id:
+        index = vehicle_ids.index(ambulance_id) if ambulance_id in vehicle_ids else -1
+        fcd_ambulance: dict[float, dict] = {}
+        for _event, element in ET.iterparse(fcd_file, events=("end",)):
+            if element.tag != "timestep":
+                continue
+            t = round(float(element.get("time", 0.0)), 1)
+            if window[0] <= t <= window[1]:
+                for vehicle in element.findall("vehicle"):
+                    if vehicle.get("id") == ambulance_id:
+                        fcd_ambulance[t] = {
+                            "x": float(vehicle.get("x")),
+                            "y": float(vehicle.get("y")),
+                            "angle": float(vehicle.get("angle")),
+                            "lane": vehicle.get("lane", ""),
+                            "pos": float(vehicle.get("pos", 0.0)),
+                        }
+            element.clear()
+            if t > window[1]:
+                break
+
+        for frame_index, t in enumerate(times):
+            if index < 0:
+                break
+            frame = trajectories["frames"][frame_index]
+            if index not in frame["id"]:
+                continue
+            k = frame["id"].index(index)
+            truth = fcd_ambulance.get(round(t, 1))
+            if truth is None:
+                ambulance_missing += 1
+                continue
+            ambulance_rows += 1
+            expected = transform.sumo_to_scene(
+                truth["x"], truth["y"], elevation_model.at(truth["lane"], truth["pos"])
+            )
+            offset = math.sqrt(
+                (frame["x"][k] - expected[0]) ** 2
+                + (frame["y"][k] - expected[1]) ** 2
+                + (frame["z"][k] - expected[2]) ** 2
+            )
+            heading_error = abs(((frame["a"][k] - truth["angle"] + 180) % 360) - 180)
+            lane_matches = lane_ids[frame["l"][k]] == truth["lane"]
+            worst_ambulance = max(worst_ambulance, offset)
+            if (
+                offset > TOLERANCE_M
+                or heading_error > HEADING_ROUNDING_DEG
+                or not lane_matches
+            ):
+                ambulance_failures += 1
+                rows.append(
+                    {
+                        "check": "ambulance_is_the_recorded_vehicle",
+                        "vehicle_id": ambulance_id,
+                        "timestep_s": t,
+                        "offset_m": round(offset, 4),
+                        "heading_error_deg": round(heading_error, 4),
+                        "scene_lane": lane_ids[frame["l"][k]],
+                        "recorded_lane": truth["lane"],
+                        "result": "FAIL",
+                    }
+                )
+    failures += ambulance_failures + ambulance_missing
+    rows.append(
+        {
+            "check": "ambulance_is_the_recorded_vehicle",
+            "vehicle_id": ambulance_id,
+            "frames_checked": ambulance_rows,
+            "frames_with_no_recording": ambulance_missing,
+            "mismatches": ambulance_failures,
+            "worst_offset_m": round(worst_ambulance, 4),
+            "tolerance_m": TOLERANCE_M,
+            "heading_tolerance_deg": HEADING_ROUNDING_DEG,
+            "note": (
+                "Every frame of the ambulance, not a sample: its scene position, "
+                "heading and lane must be the transform of SUMO's own record at "
+                "that timestamp."
+            ),
+            "result": "PASS" if (ambulance_failures + ambulance_missing) == 0 else "FAIL",
+        }
+    )
+
     summary = {
         "generated_at": manifest["generated_at"],
         "scene_dir": args.scene_dir,
@@ -499,7 +603,15 @@ def main() -> int:
     out.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 
     print("=== SCENE COORDINATE VALIDATION ===")
-    for name in ("round_trip", "georeference", "scale", "heading", "continuity", "elevation"):
+    for name in (
+        "round_trip",
+        "georeference",
+        "scale",
+        "heading",
+        "continuity",
+        "elevation",
+        "ambulance_is_the_recorded_vehicle",
+    ):
         subset = [r for r in rows if r["check"] == name]
         failed = [r for r in subset if r.get("result") == "FAIL"]
         errors = [r["total_error_m"] for r in subset if "total_error_m" in r]

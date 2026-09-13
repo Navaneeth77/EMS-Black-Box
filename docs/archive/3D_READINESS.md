@@ -46,7 +46,7 @@ does not claim to be, and the visualisation must not imply otherwise.
 | `data/processed/silk_board_v1/elevated_and_underground.geojson` | 24 grade-separated ways with `layer_effective` — **required** for correct flyover/underpass rendering |
 | `data/processed/silk_board_v1/network.gpkg` | Full network geometry |
 
-Coordinate transform ([`ARCHITECTURE.md`](ARCHITECTURE.md)):
+Coordinate transform ([`ARCHITECTURE.md`](../ARCHITECTURE.md)):
 `x = sumo.x - ox`, `z = -(sumo.y - oy)`, `y = elevation`. Y is up in Three.js and
 north in SUMO — this axis swap is the single easiest thing to get wrong.
 
@@ -117,7 +117,7 @@ the experiment's result.
 The gap identified in section 2 has been closed. `SumoRunOptions` now supports
 `--fcd-output`, `scripts/export_scene.py` produces the scene payload, and an
 interactive R3F viewer renders it. Full account:
-[`3D_ARCHITECTURE.md`](3D_ARCHITECTURE.md).
+[`3D_ARCHITECTURE.md`](../3D_ARCHITECTURE.md).
 
 The milestone below — verify an on-screen position against its SUMO position by
 direct comparison rather than by eye — **has been met and exceeded**:

@@ -6,7 +6,7 @@ a route that returns a number before the simulation exists would return a made-u
 one. The shape of these endpoints is also not yet knowable: it should follow from
 what the TraCI loop actually produces, not from a guess made in advance.
 
-Planned surface (see docs/ARCHITECTURE.md and docs/ROADMAP.md):
+Planned surface (see docs/ARCHITECTURE.md and docs/archive/ROADMAP.md):
 
     POST   /api/simulation/runs            start a run from a saved config + seed
     GET    /api/simulation/runs/{run_id}   run status and metadata

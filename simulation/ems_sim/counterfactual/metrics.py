@@ -293,7 +293,7 @@ def paired_comparison(normal: PolicyRunResult, policy: PolicyRunResult) -> dict[
             "time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by "
             "the chaotic response of netconvert's unoptimised fixed-time plans to "
             "being perturbed, not by the ambulance. Retained as a diagnostic of that "
-            "sensitivity. See docs/FINAL_RND_REPORT.md section 18."
+            "sensitivity. See docs/archive/FINAL_RND_REPORT.md section 18."
         ),
         "net_system_impact_s": (
             round(traffic_cost_s - (time_saved or 0.0), 3) if traffic_cost_s is not None else None

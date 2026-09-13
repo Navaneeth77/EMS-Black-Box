@@ -70,17 +70,17 @@ def read_projection(net_file: Path) -> NetworkProjection:
     This is the entry point for every conversion: the network file is the single
     authority on how geographic coordinates map to simulation coordinates.
     """
-    raise NotImplementedError("Requires a built SUMO network. See docs/ROADMAP.md.")
+    raise NotImplementedError("Requires a built SUMO network. See docs/archive/ROADMAP.md.")
 
 
 def geo_to_sumo(lon: float, lat: float, projection: NetworkProjection) -> tuple[float, float]:
     """WGS84 ``(lon, lat)`` to SUMO network ``(x, y)`` in metres."""
-    raise NotImplementedError("Requires a built SUMO network. See docs/ROADMAP.md.")
+    raise NotImplementedError("Requires a built SUMO network. See docs/archive/ROADMAP.md.")
 
 
 def sumo_to_geo(x: float, y: float, projection: NetworkProjection) -> tuple[float, float]:
     """SUMO network ``(x, y)`` to WGS84 ``(lon, lat)``."""
-    raise NotImplementedError("Requires a built SUMO network. See docs/ROADMAP.md.")
+    raise NotImplementedError("Requires a built SUMO network. See docs/archive/ROADMAP.md.")
 
 
 def sumo_to_scene(
@@ -94,4 +94,4 @@ def sumo_to_scene(
     Applies the Z sign flip described in the module docstring and re-anchors to
     ``scene_origin`` to keep magnitudes inside float32's useful precision.
     """
-    raise NotImplementedError("Pending the state schema this will feed. See docs/ROADMAP.md.")
+    raise NotImplementedError("Pending the state schema this will feed. See docs/archive/ROADMAP.md.")

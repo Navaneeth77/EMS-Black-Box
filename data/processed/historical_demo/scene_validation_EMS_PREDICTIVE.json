@@ -51,7 +51,7 @@
     "heading_deg": "adaptive: atan(lateral_allowance / chord) + margin"
   },
   "totals": {
-    "checks": 637,
+    "checks": 638,
     "failures": 0,
     "round_trip_samples": 552,
     "heading_samples": 40,
@@ -15694,6 +15694,18 @@
       "elevated_lanes_in_network": 42,
       "mismatches": 0,
       "tolerance_m": 0.02,
+      "result": "PASS"
+    },
+    {
+      "check": "ambulance_is_the_recorded_vehicle",
+      "vehicle_id": "ambulance_historical_demo",
+      "frames_checked": 255,
+      "frames_with_no_recording": 0,
+      "mismatches": 0,
+      "worst_offset_m": 0.0,
+      "tolerance_m": 0.02,
+      "heading_tolerance_deg": 0.0501,
+      "note": "Every frame of the ambulance, not a sample: its scene position, heading and lane must be the transform of SUMO's own record at that timestamp.",
       "result": "PASS"
     }
   ]

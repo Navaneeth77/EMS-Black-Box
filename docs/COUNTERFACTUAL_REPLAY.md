@@ -2,7 +2,7 @@
 
 Results of running one identical scenario under four signal policies.
 
-> ### Superseded in part — read [`PHASE5A_CONTROL.md`](PHASE5A_CONTROL.md) first
+> ### Superseded in part — read [`archive/PHASE5A_CONTROL.md`](archive/PHASE5A_CONTROL.md) first
 >
 > This document records the **`signalised` trip** result and is kept unchanged as
 > that record. Two things have happened since.

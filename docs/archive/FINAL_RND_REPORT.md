@@ -10,8 +10,8 @@ before any 3D visualisation work begins.
 > in it may be quoted as one.
 
 Companions: [`PHASE5A_CONTROL.md`](PHASE5A_CONTROL.md) ·
-[`EMS_SIGNAL_POLICIES.md`](EMS_SIGNAL_POLICIES.md) ·
-[`COUNTERFACTUAL_REPLAY.md`](COUNTERFACTUAL_REPLAY.md) ·
+[`EMS_SIGNAL_POLICIES.md`](../EMS_SIGNAL_POLICIES.md) ·
+[`COUNTERFACTUAL_REPLAY.md`](../COUNTERFACTUAL_REPLAY.md) ·
 [`3D_READINESS.md`](3D_READINESS.md)
 
 ---
@@ -46,7 +46,7 @@ Six stages, of which the first three and the last are complete:
 | 5 | React + Three.js / R3F scene | not started (gated by this report) |
 | 6 | Analysis, counterfactual pairing, provenance | complete |
 
-Coordinate frames are defined in [`ARCHITECTURE.md`](ARCHITECTURE.md): WGS84
+Coordinate frames are defined in [`ARCHITECTURE.md`](../ARCHITECTURE.md): WGS84
 degrees in OSM, metres `(x, y)` with Y north in the SUMO network (projection
 recorded in the `.net.xml` `<location>` element), and metres with **Y up** in a
 Three.js scene via `x = sumo.x - ox`, `z = -(sumo.y - oy)`, `y = elevation`.
@@ -77,7 +77,7 @@ east–west, and Sarjapura Road.
 | Size | 4,800,643 bytes |
 | Classification | `PUBLICLY_SOURCED_DATA` |
 
-The project's data-integrity scheme ([`DATA_INTEGRITY.md`](DATA_INTEGRITY.md))
+The project's data-integrity scheme ([`DATA_INTEGRITY.md`](../DATA_INTEGRITY.md))
 requires every dataset to carry a class and the evidence that class demands.
 `ESTIMATED_DATA` must carry its `estimation_basis`; `SIMULATED_DATA` must carry
 `produced_by` and `random_seed`. **No artefact in this project is labelled

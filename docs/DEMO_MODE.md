@@ -4,7 +4,7 @@ A presentation scenario for the 3D digital twin, kept strictly separate from the
 frozen research experiment.
 
 > **Demo numbers are not research results.** The research result is the frozen
-> 5-seed × 4-policy experiment in [`FINAL_RESULTS.md`](FINAL_RESULTS.md). Demo
+> 5-seed × 4-policy experiment in [`archive/FINAL_RESULTS.md`](archive/FINAL_RESULTS.md). Demo
 > mode runs a *different* scenario — denser demand and four simultaneous
 > obstructions — so its travel times and savings are larger and must never be
 > quoted in place of the research figures.
@@ -98,7 +98,7 @@ phase learned the hard way that an obstruction on an empty lane does nothing:
 The saving shown in the HUD is computed from the demo's own paired NORMAL run and
 is labelled *"demo paired run (NOT the research experiment)"*. An earlier export
 displayed the *research* seed-42 saving (78.5 s) against demo traffic; that
-contamination was caught and removed (see `COUNCIL_LOG.md`).
+contamination was caught and removed (see `archive/COUNCIL_LOG.md`).
 
 ## 5. How EMS priority is made visible — without faking it
 
