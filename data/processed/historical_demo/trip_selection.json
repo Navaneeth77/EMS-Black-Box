@@ -1,0 +1,593 @@
+{
+  "mode": "HISTORICAL_DEMO",
+  "generated_at": "2026-09-13T11:03:07Z",
+  "network_file": "simulation/sumo/silk_board_v1_hdemo/silk_board_v1_hdemo.net.xml",
+  "network_sha256": "c960638e7c2f778831d78a4917f9f8f3dbc1d02530b8f92c7d46d08bb0fa814f",
+  "rule": [
+    "Fixed before any HISTORICAL_DEMO simulation and without reference to any travel time or time saved.",
+    "1. Route every boundary entry -> exit pair of the demo network with duarouter (free flow, seed 42, the project's ambulance vType).",
+    "2. Keep routes that use a movement controlled by silk_board_4way.",
+    "3. Drop routes whose own path would draw another vehicle inside the ambulance. At every metre of the route, a second body is placed at every following gap SUMO could leave, ahead and behind, using the renderer's own body placement. A junction connection that reverses direction within a few metres turns a legal 8 m gap into 3 m of ground, and no 6 m vehicle could drive it.",
+    "4. Rank by how many of those metres share ground with a different road at the same level \u2014 measured the same way, by placing a car on the nearest point of the other road's lane \u2014 fewest first. SUMO does not couple vehicles across two roads digitised on the same ground, so the replay can draw them intersecting; every route through the four-way has some of this, so it is minimised, and the recording is then checked frame by frame. Flyover-over-road pairs and pieces of one way are not conflicts.",
+    "5. Then by the number of distinct traffic lights on the route whose ambulance movement is red in at least one phase (more first), then route length (shorter first), then origin and destination id.",
+    "6. Take the first. The departure time is then chosen by the scenario sweep (NORMAL runs only, no EMS policy and no travel time), so the ambulance reaches the four-way while a queue is standing there."
+  ],
+  "depart_time_s": 600.0,
+  "simulation_results_consulted": false,
+  "note": "Selected with duarouter only. No HISTORICAL_DEMO SUMO simulation existed when this record was written, so no travel time could have informed it.",
+  "counts": {
+    "pairs": 90,
+    "routable": 90,
+    "use_four_way": 41,
+    "rejected_for_undrivable_geometry": 8
+  },
+  "ranking_top_10": [
+    {
+      "origin": "312063814#2",
+      "destination": "1534247766#0",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 800.0,
+          "other_edge": "-229976708#19",
+          "other_lane": "-229976708#19_0",
+          "overlap_m": 0.19
+        }
+      ],
+      "shared_ground_conflict_count": 1,
+      "shared_ground_roads": [
+        "-229976708#19"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 2220.8,
+      "edge_count": 17
+    },
+    {
+      "origin": "312063814#2",
+      "destination": "610166539#2",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 1388.0,
+          "other_edge": "-1501709575",
+          "other_lane": "-1501709575_0",
+          "overlap_m": 0.24
+        },
+        {
+          "path_offset_m": 1389.0,
+          "other_edge": "-1501709575",
+          "other_lane": "-1501709575_0",
+          "overlap_m": 0.24
+        },
+        {
+          "path_offset_m": 800.0,
+          "other_edge": "-229976708#19",
+          "other_lane": "-229976708#19_0",
+          "overlap_m": 0.19
+        }
+      ],
+      "shared_ground_conflict_count": 3,
+      "shared_ground_roads": [
+        "-1501709575",
+        "-229976708#19"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 2544.3,
+      "edge_count": 20
+    },
+    {
+      "origin": "1109914039#1",
+      "destination": "1534247766#0",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 816.0,
+          "other_edge": "230423164",
+          "other_lane": "230423164_1",
+          "overlap_m": 0.61
+        },
+        {
+          "path_offset_m": 858.0,
+          "other_edge": "-1109948513",
+          "other_lane": "-1109948513_0",
+          "overlap_m": 0.07
+        },
+        {
+          "path_offset_m": 859.0,
+          "other_edge": "-1109948513",
+          "other_lane": "-1109948513_0",
+          "overlap_m": 0.07
+        },
+        {
+          "path_offset_m": 860.0,
+          "other_edge": "-1109948513",
+          "other_lane": "-1109948513_0",
+          "overlap_m": 0.07
+        }
+      ],
+      "shared_ground_conflict_count": 4,
+      "shared_ground_roads": [
+        "-1109948513",
+        "230423164"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 1723.4,
+      "edge_count": 13
+    },
+    {
+      "origin": "1109914039#1",
+      "destination": "610166539#2",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 816.0,
+          "other_edge": "230423164",
+          "other_lane": "230423164_1",
+          "overlap_m": 0.61
+        },
+        {
+          "path_offset_m": 891.0,
+          "other_edge": "-1501709575",
+          "other_lane": "-1501709575_0",
+          "overlap_m": 0.24
+        },
+        {
+          "path_offset_m": 858.0,
+          "other_edge": "-1109948513",
+          "other_lane": "-1109948513_0",
+          "overlap_m": 0.07
+        },
+        {
+          "path_offset_m": 859.0,
+          "other_edge": "-1109948513",
+          "other_lane": "-1109948513_0",
+          "overlap_m": 0.07
+        },
+        {
+          "path_offset_m": 860.0,
+          "other_edge": "-1109948513",
+          "other_lane": "-1109948513_0",
+          "overlap_m": 0.07
+        }
+      ],
+      "shared_ground_conflict_count": 5,
+      "shared_ground_roads": [
+        "-1109948513",
+        "-1501709575",
+        "230423164"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 2046.9,
+      "edge_count": 16
+    },
+    {
+      "origin": "1109914039#1",
+      "destination": "491889864#5",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 816.0,
+          "other_edge": "230423164",
+          "other_lane": "230423164_1",
+          "overlap_m": 0.61
+        },
+        {
+          "path_offset_m": 1398.0,
+          "other_edge": "-1280500777",
+          "other_lane": "-1280500777_0",
+          "overlap_m": 0.18
+        },
+        {
+          "path_offset_m": 1399.0,
+          "other_edge": "-1280500777",
+          "other_lane": "-1280500777_0",
+          "overlap_m": 0.18
+        },
+        {
+          "path_offset_m": 1400.0,
+          "other_edge": "-1280500777",
+          "other_lane": "-1280500777_0",
+          "overlap_m": 0.18
+        },
+        {
+          "path_offset_m": 1342.0,
+          "other_edge": "886153774",
+          "other_lane": "886153774_0",
+          "overlap_m": 0.17
+        }
+      ],
+      "shared_ground_conflict_count": 12,
+      "shared_ground_roads": [
+        "-1280500777",
+        "-886153775#1",
+        "230423164",
+        "886153774"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 1415.8,
+      "edge_count": 21
+    },
+    {
+      "origin": "1109914039#1",
+      "destination": "1196514116#0",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 888.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 3.05
+        },
+        {
+          "path_offset_m": 885.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 3.01
+        },
+        {
+          "path_offset_m": 889.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 2.89
+        },
+        {
+          "path_offset_m": 884.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 2.86
+        },
+        {
+          "path_offset_m": 886.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 2.85
+        }
+      ],
+      "shared_ground_conflict_count": 15,
+      "shared_ground_roads": [
+        "1411430414",
+        "1416769967",
+        "230423164"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 1630.3,
+      "edge_count": 19
+    },
+    {
+      "origin": "27934854#0",
+      "destination": "1534247766#0",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 1029.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.48
+        },
+        {
+          "path_offset_m": 1030.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.46
+        },
+        {
+          "path_offset_m": 1031.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.44
+        },
+        {
+          "path_offset_m": 1032.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.41
+        },
+        {
+          "path_offset_m": 1106.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 1.4
+        }
+      ],
+      "shared_ground_conflict_count": 36,
+      "shared_ground_roads": [
+        "1110164238#1",
+        "1411430414"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 2025.8,
+      "edge_count": 22
+    },
+    {
+      "origin": "27934854#0",
+      "destination": "610166539#2",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 1029.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.48
+        },
+        {
+          "path_offset_m": 1030.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.46
+        },
+        {
+          "path_offset_m": 1031.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.44
+        },
+        {
+          "path_offset_m": 1032.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.41
+        },
+        {
+          "path_offset_m": 1106.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 1.4
+        }
+      ],
+      "shared_ground_conflict_count": 38,
+      "shared_ground_roads": [
+        "-1501709575",
+        "1110164238#1",
+        "1411430414"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 2349.3,
+      "edge_count": 25
+    },
+    {
+      "origin": "886153772",
+      "destination": "491889864#5",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 4526.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.49
+        },
+        {
+          "path_offset_m": 4527.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.47
+        },
+        {
+          "path_offset_m": 4528.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.45
+        },
+        {
+          "path_offset_m": 4603.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 1.43
+        },
+        {
+          "path_offset_m": 4529.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.42
+        }
+      ],
+      "shared_ground_conflict_count": 46,
+      "shared_ground_roads": [
+        "-1280500777",
+        "-886153775#1",
+        "1110164238#1",
+        "1411430414",
+        "886153774"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 5088.8,
+      "edge_count": 35
+    },
+    {
+      "origin": "27934854#0",
+      "destination": "491889864#5",
+      "routable": true,
+      "uses_four_way": true,
+      "drawn_body_conflicts": [],
+      "drawn_body_conflict_count": 0,
+      "shared_ground_conflicts": [
+        {
+          "path_offset_m": 1029.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.48
+        },
+        {
+          "path_offset_m": 1030.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.46
+        },
+        {
+          "path_offset_m": 1031.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.44
+        },
+        {
+          "path_offset_m": 1032.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_1",
+          "overlap_m": 1.41
+        },
+        {
+          "path_offset_m": 1106.0,
+          "other_edge": "1411430414",
+          "other_lane": "1411430414_0",
+          "overlap_m": 1.4
+        }
+      ],
+      "shared_ground_conflict_count": 48,
+      "shared_ground_roads": [
+        "-1280500777",
+        "-886153775#1",
+        "1110164238#1",
+        "1411430414",
+        "886153774"
+      ],
+      "red_exposed_traffic_lights": [
+        "silk_board_4way"
+      ],
+      "red_exposed_count": 1,
+      "traffic_lights_on_route": [
+        "silk_board_4way"
+      ],
+      "length_m": 1717.9,
+      "edge_count": 28
+    }
+  ],
+  "chosen": {
+    "origin": "312063814#2",
+    "destination": "1534247766#0",
+    "routable": true,
+    "uses_four_way": true,
+    "drawn_body_conflicts": [],
+    "drawn_body_conflict_count": 0,
+    "shared_ground_conflicts": [
+      {
+        "path_offset_m": 800.0,
+        "other_edge": "-229976708#19",
+        "other_lane": "-229976708#19_0",
+        "overlap_m": 0.19
+      }
+    ],
+    "shared_ground_conflict_count": 1,
+    "shared_ground_roads": [
+      "-229976708#19"
+    ],
+    "red_exposed_traffic_lights": [
+      "silk_board_4way"
+    ],
+    "red_exposed_count": 1,
+    "traffic_lights_on_route": [
+      "silk_board_4way"
+    ],
+    "length_m": 2220.8,
+    "edge_count": 17,
+    "route_edges": [
+      "312063814#2",
+      "312063814#3",
+      "1155963376#0",
+      "1155963376#1",
+      "380707240",
+      "1454345481",
+      "377132617#0",
+      "377132617#1",
+      "377132617#2",
+      "377132617#3",
+      "377132617#4",
+      "1303068639#0",
+      "1303068639#1",
+      "-1109948513",
+      "1073384217#0",
+      "1073384217#1",
+      "1534247766#0"
+    ]
+  },
+  "trip_config": {
+    "origin_edge": "312063814#2",
+    "destination_edge": "1534247766#0",
+    "depart_time_s": 600.0,
+    "vehicle_type": "ambulance",
+    "trip_label": "historical_demo",
+    "basis": "ESTIMATED_DATA. Origin, destination and departure are configuration choices, not a real EMS dispatch. The route was selected by ems_sim.historical.trip.TRIP_RULE and the departure by the scenario sweep; both used the network and NORMAL runs only, never a time saved.",
+    "vehicle_id": "ambulance_historical_demo",
+    "data_class": "ESTIMATED_DATA",
+    "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+  }
+}

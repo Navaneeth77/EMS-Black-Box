@@ -1,0 +1,646 @@
+{
+  "mode": "HISTORICAL_DEMO",
+  "generated_at": "2026-09-13T13:28:48Z",
+  "rerun": true,
+  "checks": [
+    {
+      "id": "C01",
+      "check": "every investigated source documented with the required fields and a URL",
+      "result": "PASS",
+      "detail": {
+        "sources": [
+          "BSMILE_ELEVATED_CORRIDOR_DPR",
+          "CMP2019_DRAFT",
+          "CTTP_2011",
+          "IJIRSET2017",
+          "NGT_TUNNEL_DPR_2025",
+          "RMP2031_DRAFT_VOL3"
+        ],
+        "missing_fields": {
+          "CMP2019_DRAFT": [],
+          "RMP2031_DRAFT_VOL3": [],
+          "IJIRSET2017": [],
+          "NGT_TUNNEL_DPR_2025": [],
+          "BSMILE_ELEVATED_CORRIDOR_DPR": [],
+          "CTTP_2011": []
+        }
+      }
+    },
+    {
+      "id": "C02",
+      "check": "observed file holds only OBSERVED values and matches its CSV",
+      "result": "PASS",
+      "detail": {
+        "peak_hour_volume_vehicles": [
+          22634.0,
+          "vehicles per hour"
+        ],
+        "peak_hour_volume_pcu": [
+          18180.0,
+          "PCU per hour"
+        ],
+        "daily_volume_vehicles": [
+          323099.0,
+          "vehicles per 24 hours"
+        ],
+        "daily_volume_pcu": [
+          281521.0,
+          "PCU per 24 hours"
+        ],
+        "car_share_of_vehicles": [
+          0.53,
+          "fraction of vehicles"
+        ],
+        "existing_cycle_length_s": [
+          450.0,
+          "seconds"
+        ]
+      }
+    },
+    {
+      "id": "C03",
+      "check": "peak-hour vehicles, peak-hour PCU and 24-hour volumes never interchanged",
+      "result": "PASS",
+      "detail": {
+        "step1": {
+          "value": 22634.0,
+          "unit": "vehicles per hour"
+        },
+        "snapshot": [
+          "22,634 vehicles in the peak hour",
+          "18,180 PCU in the peak hour",
+          "323,099 vehicles in 24 hours"
+        ]
+      }
+    },
+    {
+      "id": "C04",
+      "check": "conversion chain labelled; car share preserved exactly; input = observed x k",
+      "result": "PASS",
+      "detail": {
+        "labels": [
+          "OBSERVED",
+          "DERIVED",
+          "ESTIMATED",
+          "ESTIMATED",
+          "OBSERVED share preserved; remainder ESTIMATED",
+          "SIMULATED"
+        ],
+        "k": 0.25,
+        "sumo_input_vph": 5658.497,
+        "observed_x_k": 5658.5,
+        "car_share_range": [
+          0.5299995531682965,
+          0.5300004791624933
+        ]
+      }
+    },
+    {
+      "id": "C05",
+      "check": "UI data says OBSERVED vs SIMULATED and never implies GPS traces",
+      "result": "PASS",
+      "detail": {
+        "replay_statement": "SUMO replay generated from historical observed demand",
+        "not_gps": "Vehicles are simulated by SUMO. They are not historical GPS traces."
+      }
+    },
+    {
+      "id": "C06",
+      "check": "separate output namespace (scene/historical, hdemo_ results)",
+      "result": "PASS",
+      "detail": {
+        "ems_fcd": "simulation/results/hdemo_silk_board_v1_seed42_k0.25_d700_fcd_hdemo_EMS_PREDICTIVE/fcd.xml",
+        "normal_fcd": "simulation/results/hdemo_silk_board_v1_seed42_k0.25_d700_fcd_hdemo_NORMAL/fcd.xml"
+      }
+    },
+    {
+      "id": "C07",
+      "check": "paired runs share demand, seed, network, trip, route and disturbance",
+      "result": "PASS",
+      "detail": {
+        "demand_config_hash": true,
+        "network_sha256": true,
+        "seed": true,
+        "trip": true,
+        "route": true,
+        "disturbance": true,
+        "window_begin": true,
+        "departure": true,
+        "only_policy_differs": true
+      }
+    },
+    {
+      "id": "C08",
+      "check": "every vehicle identical in both recordings until the EMS run intervenes",
+      "result": "PASS",
+      "detail": {
+        "timesteps_identical": 794,
+        "intervention_starts_s": 793.5,
+        "ambulance_departs_s": 700.0,
+        "first_policy_transition_s": 793.5,
+        "first_divergence_s": 794.0,
+        "bound": "the first policy transition, not the ambulance's departure: nothing in the EMS run reaches another vehicle until a signal changes"
+      }
+    },
+    {
+      "id": "C09",
+      "check": "comparison is the difference of the two recorded travel times",
+      "result": "PASS",
+      "detail": {
+        "baseline_travel_time_s": 532.0,
+        "policy_travel_time_s": 255.0,
+        "time_saved_s": 277.0
+      }
+    },
+    {
+      "id": "C10",
+      "check": "both runs stop at the ambulance's recorded arrival",
+      "result": "PASS",
+      "detail": {
+        "EMS": {
+          "arrived_at_s": 955.5,
+          "last_frame_s": 955.0,
+          "ambulance_in_last_frame": false,
+          "stopped_within_one_step": true
+        },
+        "NORMAL": {
+          "arrived_at_s": 1232.5,
+          "last_frame_s": 1232.0,
+          "ambulance_in_last_frame": false,
+          "stopped_within_one_step": true
+        }
+      }
+    },
+    {
+      "id": "C11",
+      "check": "the ambulance's movement through the four-way is exposed to red",
+      "result": "PASS",
+      "detail": {
+        "red_exposed_on_route": [
+          "silk_board_4way"
+        ],
+        "traffic_lights_on_route": [
+          "silk_board_4way"
+        ],
+        "signals_in_scene": 5
+      }
+    },
+    {
+      "id": "C12",
+      "check": "the four-way is a real SUMO traffic light in the network the runs used",
+      "result": "PASS",
+      "detail": {
+        "phases": 12,
+        "controlled_links": 9,
+        "replaces": [
+          "3805003789",
+          "306594280",
+          "494271080",
+          "2971089260"
+        ]
+      }
+    },
+    {
+      "id": "C13",
+      "check": "every recorded lamp state is a program state with one character per link",
+      "result": "PASS",
+      "detail": {
+        "invalid": {}
+      }
+    },
+    {
+      "id": "C14",
+      "check": "the four-way never released two approaches at once (either run)",
+      "result": "PASS",
+      "detail": {
+        "violations": []
+      }
+    },
+    {
+      "id": "C15",
+      "check": "no movement went from green to red without amber (all signals, both runs)",
+      "result": "PASS",
+      "detail": {
+        "violations": []
+      }
+    },
+    {
+      "id": "C16",
+      "check": "NORMAL was held on its way to the four-way; EMS crossed it on green, held less",
+      "result": "PASS",
+      "detail": {
+        "normal": {
+          "standing_s": 309.0,
+          "longest_red_halt_s": 0.0
+        },
+        "ems": {
+          "standing_s": 25.0,
+          "longest_red_halt_s": 0.0
+        },
+        "ems_left_approach_s": 881.0,
+        "ems_state_at_crossing": "rrrrGGrrr",
+        "required_normal_standing_s": 60.0,
+        "note": "the ambulance is held in the queue well before the stop line, so the halt at the red is not where NORMAL loses its time"
+      }
+    },
+    {
+      "id": "C17",
+      "check": "EMS priority changed the four-way's applied state, and only after its request",
+      "result": "PASS",
+      "detail": {
+        "first_request_s": 793.5,
+        "first_timeline_difference_s": 794.5,
+        "ems_changes_near": [
+          [
+            794.5,
+            "ryyyrrrrr"
+          ],
+          [
+            797.5,
+            "rrrrrrrrr"
+          ],
+          [
+            799.5,
+            "Grrrrrrrr"
+          ],
+          [
+            804.5,
+            "yrrrrrrrr"
+          ],
+          [
+            807.5,
+            "rrrrrrrrr"
+          ],
+          [
+            809.5,
+            "rrrrrrGGG"
+          ],
+          [
+            814.5,
+            "rrrrrryyy"
+          ],
+          [
+            817.5,
+            "rrrrrrrrr"
+          ],
+          [
+            819.5,
+            "rrrrGGrrr"
+          ],
+          [
+            887.5,
+            "rrrryyrrr"
+          ],
+          [
+            890.5,
+            "rrrrrrrrr"
+          ],
+          [
+            892.5,
+            "rGGGrrrrr"
+          ]
+        ],
+        "normal_changes_near": [
+          [
+            895.5,
+            "ryyyrrrrr"
+          ],
+          [
+            898.5,
+            "rrrrrrrrr"
+          ],
+          [
+            900.5,
+            "Grrrrrrrr"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "C18",
+      "check": "while priority is shown active, every conflicting movement is red",
+      "result": "PASS",
+      "detail": {
+        "episodes": [
+          {
+            "start": 793.5,
+            "end": 883.0,
+            "active": [
+              819.5
+            ]
+          }
+        ],
+        "active_steps": 127,
+        "leaks": []
+      }
+    },
+    {
+      "id": "C20",
+      "check": "deterministic replay: SUMO rerun reproduces the exported EMS run",
+      "result": "PASS",
+      "detail": {
+        "routes_regenerated_identically_except_timestamp_header": true,
+        "arrival": true,
+        "travel_time": true,
+        "waiting_time": true,
+        "stops": true,
+        "transitions": true,
+        "all_signal_timelines": true,
+        "no_teleports_before_arrival": true,
+        "no_signal_conflicts": true
+      }
+    },
+    {
+      "id": "C19",
+      "check": "after release the four-way follows its own phase order and durations",
+      "result": "PASS",
+      "detail": {
+        "release_s": 883.0,
+        "dwell_after_release": [
+          {
+            "state": "rrrryyrrr",
+            "recorded_s": 3.0,
+            "programmed_s": 3
+          },
+          {
+            "state": "rrrrrrrrr",
+            "recorded_s": 2.0,
+            "programmed_s": 2
+          },
+          {
+            "state": "rGGGrrrrr",
+            "recorded_s": 107.5,
+            "programmed_s": 107.5
+          },
+          {
+            "state": "ryyyrrrrr",
+            "recorded_s": 3.0,
+            "programmed_s": 3
+          },
+          {
+            "state": "rrrrrrrrr",
+            "recorded_s": 2.0,
+            "programmed_s": 2
+          },
+          {
+            "state": "Grrrrrrrr",
+            "recorded_s": 107.5,
+            "programmed_s": 107.5
+          },
+          {
+            "state": "yrrrrrrrr",
+            "recorded_s": 3.0,
+            "programmed_s": 3
+          },
+          {
+            "state": "rrrrrrrrr",
+            "recorded_s": 2.0,
+            "programmed_s": 2
+          }
+        ],
+        "policy_transitions_after_release": 0
+      }
+    },
+    {
+      "id": "C21",
+      "check": "flyover: no deck end hangs above the road it joins; vehicles match elevation",
+      "result": "PASS",
+      "detail": {
+        "elevated_lane_ends_checked": 52,
+        "floating_ends": [],
+        "scene_validation_passed": {
+          "EMS_PREDICTIVE": true,
+          "NORMAL": true
+        }
+      }
+    },
+    {
+      "id": "C22",
+      "check": "frozen research outputs byte-identical to the pre-HISTORICAL_DEMO reference",
+      "result": "PASS",
+      "detail": {
+        "files_checked": 178,
+        "changed": [],
+        "added": []
+      }
+    },
+    {
+      "id": "C23",
+      "check": "frontend controls present: PAUSE/1x/2x/4x/8x, SINGLE/COMPARE, Intersection camera",
+      "result": "PASS",
+      "detail": {
+        "behaviour_tested_by": "frontend/src/scene/lib/__tests__/historicalDemo.test.ts"
+      }
+    },
+    {
+      "id": "C24",
+      "check": "NORMAL: the ambulance is caught behind a queue, not leading it",
+      "result": "PASS",
+      "detail": {
+        "queue_joined": {
+          "sim_time_s": 849.5,
+          "edge_id": "377132617#0",
+          "distance_to_stop_line_m": 219.2,
+          "vehicles_ahead": 37,
+          "vehicles_ahead_halted": 32,
+          "stopped_by_signal": false
+        },
+        "required_vehicles_ahead": 12,
+        "required_distance_m": 25.0
+      }
+    },
+    {
+      "id": "C25",
+      "check": "EMS: priority was requested well before the ambulance reached the four-way",
+      "result": "PASS",
+      "detail": {
+        "request": {
+          "tls_id": "silk_board_4way",
+          "sim_time_s": 793.5,
+          "distance_to_stop_line_m": 548.2367160611062,
+          "ambulance_speed_ms": 11.41825790398848,
+          "activation_distance_m": 549.3,
+          "eta_s": 48.0,
+          "lead_time_s": 48.1,
+          "transition_s": 35.0,
+          "queue_clearance_s": 1.1,
+          "reason": "estimated 48 s from the stop line at 548 m and 11.4 m/s, within the 48 s the signal needs (35 s transition + 1 s queue + 12 s margin)"
+        },
+        "reached_approach_s": 879.0,
+        "crossed_stop_line_s": 881.0,
+        "lead_time_s": 87.5,
+        "required_distance_m": 150.0,
+        "required_lead_s": 20.0,
+        "policy_parameters": "activation_distance_m = max(speed, min_speed) x (transition_s + clearance_s + margin_s), capped at max_request_distance_m"
+      }
+    },
+    {
+      "id": "C26",
+      "check": "EMS: the queue in front of the ambulance discharged before it arrived",
+      "result": "PASS",
+      "detail": {
+        "green_started_s": 819.5,
+        "vehicles_ahead_at_green": 43,
+        "crossed_stop_line_s": 881.0,
+        "vehicles_ahead_at_crossing": 0,
+        "cleared_fraction_allowed": 0.4
+      }
+    },
+    {
+      "id": "C27",
+      "check": "the intersection camera has a clear line of sight, and no footprint sits on the road",
+      "result": "PASS",
+      "detail": {
+        "camera": {
+          "position": [
+            569.71,
+            46.0,
+            52.8
+          ],
+          "target": [
+            512.06,
+            2.0,
+            -37.32
+          ],
+          "stop_line": [
+            505.93,
+            0.0,
+            -66.69
+          ],
+          "basis": "130 m back down the ambulance's approach, 38 m to its right, 46 m up."
+        },
+        "buildings_blocking_the_shot": [],
+        "footprints_not_drawn_over_carriageway": 16,
+        "largest_excluded": [
+          {
+            "id": "1508372362",
+            "type": "construction",
+            "area_m2": 2830.5,
+            "carriageway_overlap_m": 596.0
+          },
+          {
+            "id": "1240080100",
+            "type": "train_station",
+            "area_m2": 4101.0,
+            "carriageway_overlap_m": 440.0
+          },
+          {
+            "id": "1240080101",
+            "type": "train_station",
+            "area_m2": 4690.1,
+            "carriageway_overlap_m": 412.0
+          }
+        ],
+        "footprints_trimmed_off_the_carriageway": 915,
+        "area_trimmed_m2": 15341.8,
+        "trim_margin_m": 0.75,
+        "left_nothing_to_draw": 0
+      }
+    },
+    {
+      "id": "C28",
+      "check": "no vehicle was teleported and no signal state came from outside the programs",
+      "result": "PASS",
+      "detail": {
+        "EMS": {
+          "teleports": 0,
+          "signal_conflicts": 0,
+          "insertion_backlog_at_end": 0,
+          "departed": 1541,
+          "arrived": 826,
+          "note": "A teleport is SUMO removing a vehicle that waited too long. None is expected here: the demo's threshold outlasts a full cycle."
+        },
+        "NORMAL": {
+          "teleports": 0,
+          "signal_conflicts": 0,
+          "insertion_backlog_at_end": 16,
+          "departed": 1969,
+          "arrived": 1110,
+          "note": "A teleport is SUMO removing a vehicle that waited too long. None is expected here: the demo's threshold outlasts a full cycle."
+        }
+      }
+    },
+    {
+      "id": "C29",
+      "check": "the ambulance is never drawn inside a building, in either run",
+      "result": "PASS",
+      "detail": {
+        "tolerance_m": 0.05,
+        "EMS_PREDICTIVE": {
+          "frames": 316,
+          "buildings_drawn": 2484,
+          "building_intersections": 0,
+          "worst_building_intersections": [],
+          "vehicle_overlaps": 0,
+          "vehicle_overlaps_same_edge": 0,
+          "worst_vehicle_overlaps": []
+        },
+        "NORMAL": {
+          "frames": 593,
+          "buildings_drawn": 2484,
+          "building_intersections": 0,
+          "worst_building_intersections": [],
+          "vehicle_overlaps": 0,
+          "vehicle_overlaps_same_edge": 0,
+          "worst_vehicle_overlaps": []
+        }
+      }
+    },
+    {
+      "id": "C30",
+      "check": "the ambulance is never drawn inside another vehicle, in either run",
+      "result": "PASS",
+      "detail": {
+        "tolerance_m": 0.05,
+        "EMS_PREDICTIVE": {
+          "vehicle_overlaps": 0,
+          "vehicle_overlaps_same_edge": 0,
+          "worst_vehicle_overlaps": []
+        },
+        "NORMAL": {
+          "vehicle_overlaps": 0,
+          "vehicle_overlaps_same_edge": 0,
+          "worst_vehicle_overlaps": []
+        }
+      }
+    },
+    {
+      "id": "C31",
+      "check": "every vehicle is drawn at the length and width SUMO simulated it with",
+      "result": "PASS",
+      "detail": {
+        "types_checked": 7,
+        "mismatched": [],
+        "ambulance": [
+          6.0,
+          2.2
+        ]
+      }
+    },
+    {
+      "id": "C32",
+      "check": "the EMS run buys no SUMO behaviour the NORMAL run does not have",
+      "result": "PASS",
+      "detail": {
+        "EMS": {},
+        "NORMAL": {},
+        "demand_and_trip_identical": true,
+        "emergency_yielding": "SUMO's bluelight device was implemented and run; it stops the traffic in front of the ambulance in a corridor with nowhere to pull over, and the ambulance never arrives. Measurements in ems_sim.historical.policy.demo_run_options."
+      }
+    },
+    {
+      "id": "C33",
+      "check": "priority clears the ambulance's corridor, not the rest of the network",
+      "result": "PASS",
+      "detail": {
+        "at_s": 881.0,
+        "EMS": 181,
+        "NORMAL": 174,
+        "beyond_m": 250.0,
+        "required_fraction_of_normal": 0.8
+      }
+    }
+  ],
+  "passed": true,
+  "failed": []
+}

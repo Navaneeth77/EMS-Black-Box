@@ -1,0 +1,163 @@
+[
+  {
+    "osm_relation_id": "16226322",
+    "restriction": "no_left_turn",
+    "except": null,
+    "members": [
+      {
+        "type": "way",
+        "ref": "1453821325",
+        "role": "from"
+      },
+      {
+        "type": "node",
+        "ref": "4105324822",
+        "role": "via"
+      },
+      {
+        "type": "way",
+        "ref": "610101763",
+        "role": "to"
+      }
+    ],
+    "from": [
+      "1453821325"
+    ],
+    "via": [
+      "4105324822"
+    ],
+    "to": [
+      "610101763"
+    ]
+  },
+  {
+    "osm_relation_id": "18922630",
+    "restriction": "no_u_turn",
+    "except": null,
+    "members": [
+      {
+        "type": "way",
+        "ref": "1362809474",
+        "role": "from"
+      },
+      {
+        "type": "way",
+        "ref": "1331247892",
+        "role": "via"
+      },
+      {
+        "type": "way",
+        "ref": "476885790",
+        "role": "to"
+      }
+    ],
+    "from": [
+      "1362809474"
+    ],
+    "via": [
+      "1331247892"
+    ],
+    "to": [
+      "476885790"
+    ]
+  },
+  {
+    "osm_relation_id": "19229116",
+    "restriction": "no_right_turn",
+    "except": null,
+    "members": [
+      {
+        "type": "way",
+        "ref": "1393474724",
+        "role": "from"
+      },
+      {
+        "type": "way",
+        "ref": "1362809474",
+        "role": "via"
+      },
+      {
+        "type": "way",
+        "ref": "1331247892",
+        "role": "via"
+      },
+      {
+        "type": "way",
+        "ref": "1453814098",
+        "role": "to"
+      }
+    ],
+    "from": [
+      "1393474724"
+    ],
+    "via": [
+      "1362809474",
+      "1331247892"
+    ],
+    "to": [
+      "1453814098"
+    ]
+  },
+  {
+    "osm_relation_id": "20180295",
+    "restriction": "no_u_turn",
+    "except": null,
+    "members": [
+      {
+        "type": "way",
+        "ref": "1331247892",
+        "role": "from"
+      },
+      {
+        "type": "way",
+        "ref": "476885790",
+        "role": "via"
+      },
+      {
+        "type": "way",
+        "ref": "1109968033",
+        "role": "to"
+      }
+    ],
+    "from": [
+      "1331247892"
+    ],
+    "via": [
+      "476885790"
+    ],
+    "to": [
+      "1109968033"
+    ]
+  },
+  {
+    "osm_relation_id": "20671043",
+    "restriction": "no_u_turn",
+    "except": null,
+    "members": [
+      {
+        "type": "way",
+        "ref": "1109968033",
+        "role": "from"
+      },
+      {
+        "type": "way",
+        "ref": "1362809474",
+        "role": "via"
+      },
+      {
+        "type": "way",
+        "ref": "1331247892",
+        "role": "to"
+      }
+    ],
+    "from": [
+      "1109968033"
+    ],
+    "via": [
+      "1362809474"
+    ],
+    "to": [
+      "1331247892"
+    ]
+  }
+]

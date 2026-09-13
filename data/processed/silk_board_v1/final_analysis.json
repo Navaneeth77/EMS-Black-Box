@@ -1,0 +1,407 @@
+{
+  "trip": "two_signal",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "safety_validation": {
+    "runs_checked": 20,
+    "signal_conflicts_total": 0,
+    "ambulance_teleports": 0,
+    "network_teleports_total": 14,
+    "policy_transitions_checked": 220,
+    "seeds_with_consistent_paired_identity": 5,
+    "distinct_routes_across_seeds": 1,
+    "findings": [],
+    "passed": true
+  },
+  "ambulance_uncertainty": {
+    "normal_travel_time_s": {
+      "per_seed": {
+        "42": 184.5,
+        "43": 184.0,
+        "44": 184.5,
+        "45": 185.0,
+        "46": 184.5
+      },
+      "n": 5,
+      "mean": 184.5,
+      "median": 184.5,
+      "stdev": 0.3536,
+      "min": 184.0,
+      "max": 185.0
+    },
+    "normal_waiting_time_s": {
+      "per_seed": {
+        "42": 5.5,
+        "43": 7.0,
+        "44": 6.0,
+        "45": 6.0,
+        "46": 5.5
+      },
+      "n": 5,
+      "mean": 6.0,
+      "median": 6.0,
+      "stdev": 0.6124,
+      "min": 5.5,
+      "max": 7.0
+    },
+    "signal_wait_events": {
+      "NORMAL": {
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "45": 1,
+        "46": 1
+      },
+      "EMS_NEXT": {
+        "42": 0,
+        "43": 0,
+        "44": 0,
+        "45": 0,
+        "46": 0
+      },
+      "EMS_ROLLING": {
+        "42": 0,
+        "43": 0,
+        "44": 0,
+        "45": 0,
+        "46": 0
+      },
+      "EMS_FULL_PREEMPTION": {
+        "42": 0,
+        "43": 0,
+        "44": 0,
+        "45": 0,
+        "46": 0
+      }
+    },
+    "halts_actually_at_red": {
+      "NORMAL": {
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "45": 1,
+        "46": 1
+      },
+      "EMS_NEXT": {
+        "42": 0,
+        "43": 0,
+        "44": 0,
+        "45": 0,
+        "46": 0
+      },
+      "EMS_ROLLING": {
+        "42": 0,
+        "43": 0,
+        "44": 0,
+        "45": 0,
+        "46": 0
+      },
+      "EMS_FULL_PREEMPTION": {
+        "42": 0,
+        "43": 0,
+        "44": 0,
+        "45": 0,
+        "46": 0
+      }
+    },
+    "policies": {
+      "EMS_NEXT": {
+        "time_saved_s_per_seed": {
+          "42": 12.5,
+          "43": 13.0,
+          "44": 10.5,
+          "45": 12.5,
+          "46": 12.5
+        },
+        "time_saved_s": {
+          "n": 5,
+          "mean": 12.2,
+          "median": 12.5,
+          "stdev": 0.9747,
+          "min": 10.5,
+          "max": 13.0
+        },
+        "policy_travel_time_s": {
+          "per_seed": {
+            "42": 172.0,
+            "43": 171.0,
+            "44": 174.0,
+            "45": 172.5,
+            "46": 172.0
+          },
+          "n": 5,
+          "mean": 172.3,
+          "median": 172.0,
+          "stdev": 1.0954,
+          "min": 171.0,
+          "max": 174.0
+        },
+        "policy_waiting_time_s": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 0.0,
+            "44": 0.0,
+            "45": 0.0,
+            "46": 0.0
+          },
+          "n": 5,
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "paired_effect_size_mean_over_sd": 12.517,
+        "effect_size_note": "Mean paired difference divided by the standard deviation of the paired differences. Descriptive only. Five seeds is too few to support a significance claim and none is made."
+      },
+      "EMS_ROLLING": {
+        "time_saved_s_per_seed": {
+          "42": 12.5,
+          "43": 12.5,
+          "44": 13.0,
+          "45": 12.0,
+          "46": 12.5
+        },
+        "time_saved_s": {
+          "n": 5,
+          "mean": 12.5,
+          "median": 12.5,
+          "stdev": 0.3536,
+          "min": 12.0,
+          "max": 13.0
+        },
+        "policy_travel_time_s": {
+          "per_seed": {
+            "42": 172.0,
+            "43": 171.5,
+            "44": 171.5,
+            "45": 173.0,
+            "46": 172.0
+          },
+          "n": 5,
+          "mean": 172.0,
+          "median": 172.0,
+          "stdev": 0.6124,
+          "min": 171.5,
+          "max": 173.0
+        },
+        "policy_waiting_time_s": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 0.0,
+            "44": 0.0,
+            "45": 0.0,
+            "46": 0.0
+          },
+          "n": 5,
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "paired_effect_size_mean_over_sd": 35.351,
+        "effect_size_note": "Mean paired difference divided by the standard deviation of the paired differences. Descriptive only. Five seeds is too few to support a significance claim and none is made."
+      },
+      "EMS_FULL_PREEMPTION": {
+        "time_saved_s_per_seed": {
+          "42": 12.5,
+          "43": 13.5,
+          "44": 12.5,
+          "45": 12.0,
+          "46": 13.0
+        },
+        "time_saved_s": {
+          "n": 5,
+          "mean": 12.7,
+          "median": 12.5,
+          "stdev": 0.5701,
+          "min": 12.0,
+          "max": 13.5
+        },
+        "policy_travel_time_s": {
+          "per_seed": {
+            "42": 172.0,
+            "43": 170.5,
+            "44": 172.0,
+            "45": 173.0,
+            "46": 171.5
+          },
+          "n": 5,
+          "mean": 171.8,
+          "median": 172.0,
+          "stdev": 0.9083,
+          "min": 170.5,
+          "max": 173.0
+        },
+        "policy_waiting_time_s": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 0.0,
+            "44": 0.0,
+            "45": 0.0,
+            "46": 0.0
+          },
+          "n": 5,
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "paired_effect_size_mean_over_sd": 22.277,
+        "effect_size_note": "Mean paired difference divided by the standard deviation of the paired differences. Descriptive only. Five seeds is too few to support a significance claim and none is made."
+      }
+    }
+  },
+  "traffic_difference_in_differences": {
+    "EMS_NEXT": {
+      "experiment_delta_total_time_loss_s": {
+        "per_seed": {
+          "42": -25450.33,
+          "43": 429.32,
+          "44": 541.5,
+          "45": -13788.1,
+          "46": 21019.79
+        },
+        "n": 5,
+        "mean": -3449.564,
+        "median": 429.32,
+        "stdev": 17468.8483,
+        "min": -25450.33,
+        "max": 21019.79
+      },
+      "control_delta_total_time_loss_s": {
+        "per_seed": {
+          "42": -47917.66,
+          "43": 29606.54,
+          "44": 33085.68,
+          "45": 75978.62,
+          "46": 17552.27
+        },
+        "n": 5,
+        "mean": 21661.09,
+        "median": 29606.54,
+        "stdev": 44727.3137,
+        "min": -47917.66,
+        "max": 75978.62
+      },
+      "difference_in_differences_s": {
+        "per_seed": {
+          "42": 22467.33,
+          "43": -29177.22,
+          "44": -32544.18,
+          "45": -89766.72,
+          "46": 3467.52
+        },
+        "n": 5,
+        "mean": -25110.654,
+        "median": -29177.22,
+        "stdev": 42815.236,
+        "min": -89766.72,
+        "max": 22467.33
+      }
+    },
+    "EMS_ROLLING": {
+      "experiment_delta_total_time_loss_s": {
+        "per_seed": {
+          "42": -36597.93,
+          "43": -2319.88,
+          "44": 17396.16,
+          "45": -20307.41,
+          "46": 6280.63
+        },
+        "n": 5,
+        "mean": -7109.686,
+        "median": -2319.88,
+        "stdev": 21485.5518,
+        "min": -36597.93,
+        "max": 17396.16
+      },
+      "control_delta_total_time_loss_s": {
+        "per_seed": {
+          "42": -19554.62,
+          "43": 25891.55,
+          "44": 30842.01,
+          "45": 34266.76,
+          "46": 24422.15
+        },
+        "n": 5,
+        "mean": 19173.57,
+        "median": 25891.55,
+        "stdev": 22002.8886,
+        "min": -19554.62,
+        "max": 34266.76
+      },
+      "difference_in_differences_s": {
+        "per_seed": {
+          "42": -17043.31,
+          "43": -28211.43,
+          "44": -13445.85,
+          "45": -54574.17,
+          "46": -18141.52
+        },
+        "n": 5,
+        "mean": -26283.256,
+        "median": -18141.52,
+        "stdev": 16737.3619,
+        "min": -54574.17,
+        "max": -13445.85
+      }
+    },
+    "EMS_FULL_PREEMPTION": {
+      "experiment_delta_total_time_loss_s": {
+        "per_seed": {
+          "42": -33433.32,
+          "43": -28207.77,
+          "44": 7426.63,
+          "45": -7076.23,
+          "46": 27481.16
+        },
+        "n": 5,
+        "mean": -6761.906,
+        "median": -7076.23,
+        "stdev": 25225.4352,
+        "min": -33433.32,
+        "max": 27481.16
+      },
+      "control_delta_total_time_loss_s": {
+        "per_seed": {
+          "42": -27316.06,
+          "43": 16903.34,
+          "44": 17522.28,
+          "45": 18795.4,
+          "46": 7794.26
+        },
+        "n": 5,
+        "mean": 6739.844,
+        "median": 16903.34,
+        "stdev": 19530.8115,
+        "min": -27316.06,
+        "max": 18795.4
+      },
+      "difference_in_differences_s": {
+        "per_seed": {
+          "42": -6117.26,
+          "43": -45111.11,
+          "44": -10095.65,
+          "45": -25871.63,
+          "46": 19686.9
+        },
+        "n": 5,
+        "mean": -13501.75,
+        "median": -10095.65,
+        "stdev": 24082.0694,
+        "min": -45111.11,
+        "max": 19686.9
+      }
+    }
+  },
+  "data_class": "SIMULATED_DATA",
+  "interpretation": "Simulated results only. Not a measurement of real ambulance performance or real traffic in Bengaluru."
+}

@@ -1,0 +1,1010 @@
+{
+  "prefix": "inc_two_signal",
+  "seeds": [
+    {
+      "seed": 42,
+      "passed": true,
+      "checks": [
+        {
+          "check": "1_same_network",
+          "result": "PASS",
+          "detail": "2c23d6f96c30bf22"
+        },
+        {
+          "check": "2_same_demand",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "3_same_seed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "4_same_vehicle_mix",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "5_same_ambulance_route",
+          "result": "PASS",
+          "detail": "11 edges"
+        },
+        {
+          "check": "6_same_ambulance_od",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "7_same_disturbance",
+          "result": "PASS",
+          "detail": "\"3c43dded423b95d7\""
+        },
+        {
+          "check": "8_only_policy_differs",
+          "result": "PASS",
+          "detail": "ff9fa74f5992d70d"
+        },
+        {
+          "check": "9_no_ambulance_teleport",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "10_no_artificial_ambulance_speed",
+          "result": "PASS",
+          "detail": "max observed 19.31 m/s vs vType 19.44"
+        },
+        {
+          "check": "11_no_frontend_only_traffic",
+          "result": "PASS",
+          "detail": "589 scene checks, 0 failures, 471936 samples"
+        },
+        {
+          "check": "12_signal_states_from_sumo",
+          "result": "PASS",
+          "detail": "0 states outside the programs' own phase sets"
+        },
+        {
+          "check": "13_expected_tls_present",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "network_teleports_by_policy",
+          "result": "PASS",
+          "detail": "NORMAL=1, EMS_NEXT=0, EMS_ROLLING=1, EMS_FULL_PREEMPTION=3  [NOTE: 3 under one policy vs 1 under NORMAL \u2014 a teleported vehicle's travel time is not a time anyone drove]"
+        },
+        {
+          "check": "14_ambulance_completed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "15_metrics_from_simulation",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "16_scene_matches_research",
+          "result": "PASS",
+          "detail": "scene is the baseline export; no saving to cross-check"
+        }
+      ],
+      "policies": {
+        "NORMAL": {
+          "travel_time_s": 282.5,
+          "waiting_time_s": 53.5,
+          "time_loss_s": 96.43,
+          "stops": 2,
+          "route_length_m": 2541.52,
+          "transitions": 0,
+          "signal_changes": 0,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 18,
+            "mean_halting_vehicles": 2.15,
+            "max_lane_occupancy": 3.1336,
+            "mean_lane_occupancy": 0.4122,
+            "baseline_halting_vehicles": 1.93,
+            "peak_halting_during_incident": 15,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 203.18,
+            "route_max_queue_length_m": 76.78,
+            "route_mean_queue_length_m": 11.824
+          },
+          "incident_applied": true
+        },
+        "EMS_NEXT": {
+          "travel_time_s": 220.0,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 34.2,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 13,
+            "mean_halting_vehicles": 0.75,
+            "max_lane_occupancy": 0.8111,
+            "mean_lane_occupancy": 0.2385,
+            "baseline_halting_vehicles": 0.56,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 203.56,
+            "route_max_queue_length_m": 64.56,
+            "route_mean_queue_length_m": 9.385
+          },
+          "incident_applied": true
+        },
+        "EMS_ROLLING": {
+          "travel_time_s": 204.0,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 17.88,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 17,
+            "mean_halting_vehicles": 2.61,
+            "max_lane_occupancy": 1.3923,
+            "mean_lane_occupancy": 0.4415,
+            "baseline_halting_vehicles": 2.56,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 204.22,
+            "route_max_queue_length_m": 70.32,
+            "route_mean_queue_length_m": 11.436
+          },
+          "incident_applied": true
+        },
+        "EMS_FULL_PREEMPTION": {
+          "travel_time_s": 202.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 16.97,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 24,
+          "signal_changes": 7,
+          "conflicts": 0,
+          "teleports": 3,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 17,
+            "mean_halting_vehicles": 2.64,
+            "max_lane_occupancy": 0.9925,
+            "mean_lane_occupancy": 0.427,
+            "baseline_halting_vehicles": 2.57,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 202.79,
+            "route_max_queue_length_m": 70.34,
+            "route_mean_queue_length_m": 11.142
+          },
+          "incident_applied": true
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "passed": true,
+      "checks": [
+        {
+          "check": "1_same_network",
+          "result": "PASS",
+          "detail": "2c23d6f96c30bf22"
+        },
+        {
+          "check": "2_same_demand",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "3_same_seed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "4_same_vehicle_mix",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "5_same_ambulance_route",
+          "result": "PASS",
+          "detail": "11 edges"
+        },
+        {
+          "check": "6_same_ambulance_od",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "7_same_disturbance",
+          "result": "PASS",
+          "detail": "\"3c43dded423b95d7\""
+        },
+        {
+          "check": "8_only_policy_differs",
+          "result": "PASS",
+          "detail": "66ea1a298f1d7084"
+        },
+        {
+          "check": "9_no_ambulance_teleport",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "10_no_artificial_ambulance_speed",
+          "result": "PASS",
+          "detail": "max observed 19.39 m/s vs vType 19.44"
+        },
+        {
+          "check": "11_no_frontend_only_traffic",
+          "result": "PASS",
+          "detail": "589 scene checks, 0 failures, 471936 samples"
+        },
+        {
+          "check": "12_signal_states_from_sumo",
+          "result": "PASS",
+          "detail": "0 states outside the programs' own phase sets"
+        },
+        {
+          "check": "13_expected_tls_present",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "network_teleports_by_policy",
+          "result": "PASS",
+          "detail": "NORMAL=0, EMS_NEXT=0, EMS_ROLLING=1, EMS_FULL_PREEMPTION=4  [NOTE: 4 under one policy vs 0 under NORMAL \u2014 a teleported vehicle's travel time is not a time anyone drove]"
+        },
+        {
+          "check": "14_ambulance_completed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "15_metrics_from_simulation",
+          "result": "PASS",
+          "detail": ""
+        }
+      ],
+      "policies": {
+        "NORMAL": {
+          "travel_time_s": 286.0,
+          "waiting_time_s": 57.5,
+          "time_loss_s": 100.07,
+          "stops": 2,
+          "route_length_m": 2541.52,
+          "transitions": 0,
+          "signal_changes": 0,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 18,
+            "mean_halting_vehicles": 2.18,
+            "max_lane_occupancy": 0.8866,
+            "mean_lane_occupancy": 0.3897,
+            "baseline_halting_vehicles": 1.92,
+            "peak_halting_during_incident": 15,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 212.67,
+            "route_max_queue_length_m": 76.75,
+            "route_mean_queue_length_m": 11.969
+          },
+          "incident_applied": true
+        },
+        "EMS_NEXT": {
+          "travel_time_s": 217.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 31.27,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 14,
+            "mean_halting_vehicles": 0.89,
+            "max_lane_occupancy": 0.8111,
+            "mean_lane_occupancy": 0.2596,
+            "baseline_halting_vehicles": 0.7,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 204.04,
+            "route_max_queue_length_m": 59.65,
+            "route_mean_queue_length_m": 9.462
+          },
+          "incident_applied": true
+        },
+        "EMS_ROLLING": {
+          "travel_time_s": 205.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 19.36,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.4,
+            "max_lane_occupancy": 0.8866,
+            "mean_lane_occupancy": 0.4324,
+            "baseline_halting_vehicles": 2.3,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 204.82,
+            "route_max_queue_length_m": 66.91,
+            "route_mean_queue_length_m": 11.122
+          },
+          "incident_applied": true
+        },
+        "EMS_FULL_PREEMPTION": {
+          "travel_time_s": 204.0,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 17.79,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 24,
+          "signal_changes": 7,
+          "conflicts": 0,
+          "teleports": 4,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.43,
+            "max_lane_occupancy": 0.8866,
+            "mean_lane_occupancy": 0.4141,
+            "baseline_halting_vehicles": 2.29,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 202.88,
+            "route_max_queue_length_m": 66.86,
+            "route_mean_queue_length_m": 10.972
+          },
+          "incident_applied": true
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "passed": true,
+      "checks": [
+        {
+          "check": "1_same_network",
+          "result": "PASS",
+          "detail": "2c23d6f96c30bf22"
+        },
+        {
+          "check": "2_same_demand",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "3_same_seed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "4_same_vehicle_mix",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "5_same_ambulance_route",
+          "result": "PASS",
+          "detail": "11 edges"
+        },
+        {
+          "check": "6_same_ambulance_od",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "7_same_disturbance",
+          "result": "PASS",
+          "detail": "\"3c43dded423b95d7\""
+        },
+        {
+          "check": "8_only_policy_differs",
+          "result": "PASS",
+          "detail": "c6144c8f81d55e55"
+        },
+        {
+          "check": "9_no_ambulance_teleport",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "10_no_artificial_ambulance_speed",
+          "result": "PASS",
+          "detail": "max observed 19.32 m/s vs vType 19.44"
+        },
+        {
+          "check": "11_no_frontend_only_traffic",
+          "result": "PASS",
+          "detail": "589 scene checks, 0 failures, 471936 samples"
+        },
+        {
+          "check": "12_signal_states_from_sumo",
+          "result": "PASS",
+          "detail": "0 states outside the programs' own phase sets"
+        },
+        {
+          "check": "13_expected_tls_present",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "network_teleports_by_policy",
+          "result": "PASS",
+          "detail": "NORMAL=0, EMS_NEXT=0, EMS_ROLLING=1, EMS_FULL_PREEMPTION=1  [NOTE: 1 under one policy vs 0 under NORMAL \u2014 a teleported vehicle's travel time is not a time anyone drove]"
+        },
+        {
+          "check": "14_ambulance_completed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "15_metrics_from_simulation",
+          "result": "PASS",
+          "detail": ""
+        }
+      ],
+      "policies": {
+        "NORMAL": {
+          "travel_time_s": 282.0,
+          "waiting_time_s": 56.0,
+          "time_loss_s": 96.07,
+          "stops": 2,
+          "route_length_m": 2541.52,
+          "transitions": 0,
+          "signal_changes": 0,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 18,
+            "mean_halting_vehicles": 2.15,
+            "max_lane_occupancy": 0.8866,
+            "mean_lane_occupancy": 0.3878,
+            "baseline_halting_vehicles": 1.93,
+            "peak_halting_during_incident": 15,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 208.5,
+            "route_max_queue_length_m": 76.81,
+            "route_mean_queue_length_m": 12.021
+          },
+          "incident_applied": true
+        },
+        "EMS_NEXT": {
+          "travel_time_s": 219.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 33.53,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 13,
+            "mean_halting_vehicles": 0.78,
+            "max_lane_occupancy": 0.8111,
+            "mean_lane_occupancy": 0.2327,
+            "baseline_halting_vehicles": 0.59,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 204.25,
+            "route_max_queue_length_m": 64.58,
+            "route_mean_queue_length_m": 9.556
+          },
+          "incident_applied": true
+        },
+        "EMS_ROLLING": {
+          "travel_time_s": 204.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 18.9,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.42,
+            "max_lane_occupancy": 0.9375,
+            "mean_lane_occupancy": 0.4344,
+            "baseline_halting_vehicles": 2.33,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 202.69,
+            "route_max_queue_length_m": 66.87,
+            "route_mean_queue_length_m": 11.361
+          },
+          "incident_applied": true
+        },
+        "EMS_FULL_PREEMPTION": {
+          "travel_time_s": 203.0,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 17.06,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 24,
+          "signal_changes": 7,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.53,
+            "max_lane_occupancy": 0.9624,
+            "mean_lane_occupancy": 0.4217,
+            "baseline_halting_vehicles": 2.43,
+            "peak_halting_during_incident": 11,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 202.0,
+            "route_max_queue_length_m": 66.91,
+            "route_mean_queue_length_m": 11.263
+          },
+          "incident_applied": true
+        }
+      }
+    },
+    {
+      "seed": 45,
+      "passed": true,
+      "checks": [
+        {
+          "check": "1_same_network",
+          "result": "PASS",
+          "detail": "2c23d6f96c30bf22"
+        },
+        {
+          "check": "2_same_demand",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "3_same_seed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "4_same_vehicle_mix",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "5_same_ambulance_route",
+          "result": "PASS",
+          "detail": "11 edges"
+        },
+        {
+          "check": "6_same_ambulance_od",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "7_same_disturbance",
+          "result": "PASS",
+          "detail": "\"3c43dded423b95d7\""
+        },
+        {
+          "check": "8_only_policy_differs",
+          "result": "PASS",
+          "detail": "924618c038ef371a"
+        },
+        {
+          "check": "9_no_ambulance_teleport",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "10_no_artificial_ambulance_speed",
+          "result": "PASS",
+          "detail": "max observed 19.26 m/s vs vType 19.44"
+        },
+        {
+          "check": "11_no_frontend_only_traffic",
+          "result": "PASS",
+          "detail": "589 scene checks, 0 failures, 471936 samples"
+        },
+        {
+          "check": "12_signal_states_from_sumo",
+          "result": "PASS",
+          "detail": "0 states outside the programs' own phase sets"
+        },
+        {
+          "check": "13_expected_tls_present",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "network_teleports_by_policy",
+          "result": "PASS",
+          "detail": "NORMAL=2, EMS_NEXT=1, EMS_ROLLING=0, EMS_FULL_PREEMPTION=1"
+        },
+        {
+          "check": "14_ambulance_completed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "15_metrics_from_simulation",
+          "result": "PASS",
+          "detail": ""
+        }
+      ],
+      "policies": {
+        "NORMAL": {
+          "travel_time_s": 287.0,
+          "waiting_time_s": 59.5,
+          "time_loss_s": 101.19,
+          "stops": 2,
+          "route_length_m": 2541.52,
+          "transitions": 0,
+          "signal_changes": 0,
+          "conflicts": 0,
+          "teleports": 2,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 18,
+            "mean_halting_vehicles": 2.17,
+            "max_lane_occupancy": 0.9866,
+            "mean_lane_occupancy": 0.3994,
+            "baseline_halting_vehicles": 1.93,
+            "peak_halting_during_incident": 15,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 393.03,
+            "route_max_queue_length_m": 76.77,
+            "route_mean_queue_length_m": 11.853
+          },
+          "incident_applied": true
+        },
+        "EMS_NEXT": {
+          "travel_time_s": 218.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 32.93,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 13,
+            "mean_halting_vehicles": 0.82,
+            "max_lane_occupancy": 2.2865,
+            "mean_lane_occupancy": 0.2562,
+            "baseline_halting_vehicles": 0.62,
+            "peak_halting_during_incident": 12,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 393.03,
+            "route_max_queue_length_m": 52.15,
+            "route_mean_queue_length_m": 9.311
+          },
+          "incident_applied": true
+        },
+        "EMS_ROLLING": {
+          "travel_time_s": 204.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 18.63,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.4,
+            "max_lane_occupancy": 5.5875,
+            "mean_lane_occupancy": 0.4613,
+            "baseline_halting_vehicles": 2.3,
+            "peak_halting_during_incident": 12,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 393.03,
+            "route_max_queue_length_m": 66.9,
+            "route_mean_queue_length_m": 11.509
+          },
+          "incident_applied": true
+        },
+        "EMS_FULL_PREEMPTION": {
+          "travel_time_s": 204.0,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 18.0,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 24,
+          "signal_changes": 7,
+          "conflicts": 0,
+          "teleports": 1,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.67,
+            "max_lane_occupancy": 1.5439,
+            "mean_lane_occupancy": 0.435,
+            "baseline_halting_vehicles": 2.57,
+            "peak_halting_during_incident": 12,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 393.03,
+            "route_max_queue_length_m": 66.92,
+            "route_mean_queue_length_m": 11.187
+          },
+          "incident_applied": true
+        }
+      }
+    },
+    {
+      "seed": 46,
+      "passed": true,
+      "checks": [
+        {
+          "check": "1_same_network",
+          "result": "PASS",
+          "detail": "2c23d6f96c30bf22"
+        },
+        {
+          "check": "2_same_demand",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "3_same_seed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "4_same_vehicle_mix",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "5_same_ambulance_route",
+          "result": "PASS",
+          "detail": "11 edges"
+        },
+        {
+          "check": "6_same_ambulance_od",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "7_same_disturbance",
+          "result": "PASS",
+          "detail": "\"3c43dded423b95d7\""
+        },
+        {
+          "check": "8_only_policy_differs",
+          "result": "PASS",
+          "detail": "1df321de14af1a29"
+        },
+        {
+          "check": "9_no_ambulance_teleport",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "10_no_artificial_ambulance_speed",
+          "result": "PASS",
+          "detail": "max observed 19.39 m/s vs vType 19.44"
+        },
+        {
+          "check": "11_no_frontend_only_traffic",
+          "result": "PASS",
+          "detail": "589 scene checks, 0 failures, 471936 samples"
+        },
+        {
+          "check": "12_signal_states_from_sumo",
+          "result": "PASS",
+          "detail": "0 states outside the programs' own phase sets"
+        },
+        {
+          "check": "13_expected_tls_present",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "network_teleports_by_policy",
+          "result": "PASS",
+          "detail": "NORMAL=0, EMS_NEXT=0, EMS_ROLLING=0, EMS_FULL_PREEMPTION=0"
+        },
+        {
+          "check": "14_ambulance_completed",
+          "result": "PASS",
+          "detail": ""
+        },
+        {
+          "check": "15_metrics_from_simulation",
+          "result": "PASS",
+          "detail": ""
+        }
+      ],
+      "policies": {
+        "NORMAL": {
+          "travel_time_s": 282.5,
+          "waiting_time_s": 55.0,
+          "time_loss_s": 96.85,
+          "stops": 2,
+          "route_length_m": 2541.52,
+          "transitions": 0,
+          "signal_changes": 0,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 18,
+            "mean_halting_vehicles": 2.17,
+            "max_lane_occupancy": 1.9735,
+            "mean_lane_occupancy": 0.4037,
+            "baseline_halting_vehicles": 1.96,
+            "peak_halting_during_incident": 15,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 202.91,
+            "route_max_queue_length_m": 76.77,
+            "route_mean_queue_length_m": 11.86
+          },
+          "incident_applied": true
+        },
+        "EMS_NEXT": {
+          "travel_time_s": 219.0,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 33.36,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 13,
+            "mean_halting_vehicles": 0.81,
+            "max_lane_occupancy": 1.9735,
+            "mean_lane_occupancy": 0.2557,
+            "baseline_halting_vehicles": 0.62,
+            "peak_halting_during_incident": 12,
+            "recovery_time_s": 30.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 205.5,
+            "route_max_queue_length_m": 58.55,
+            "route_mean_queue_length_m": 9.579
+          },
+          "incident_applied": true
+        },
+        "EMS_ROLLING": {
+          "travel_time_s": 204.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 18.44,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 16,
+          "signal_changes": 5,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 17,
+            "mean_halting_vehicles": 2.53,
+            "max_lane_occupancy": 1.9735,
+            "mean_lane_occupancy": 0.4467,
+            "baseline_halting_vehicles": 2.42,
+            "peak_halting_during_incident": 12,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 177.73,
+            "route_max_queue_length_m": 69.46,
+            "route_mean_queue_length_m": 11.437
+          },
+          "incident_applied": true
+        },
+        "EMS_FULL_PREEMPTION": {
+          "travel_time_s": 204.5,
+          "waiting_time_s": 0.0,
+          "time_loss_s": 18.74,
+          "stops": 0,
+          "route_length_m": 2541.52,
+          "transitions": 24,
+          "signal_changes": 7,
+          "conflicts": 0,
+          "teleports": 0,
+          "queues": {
+            "samples": 129,
+            "max_halting_vehicles": 16,
+            "mean_halting_vehicles": 2.53,
+            "max_lane_occupancy": 1.9735,
+            "mean_lane_occupancy": 0.4297,
+            "baseline_halting_vehicles": 2.41,
+            "peak_halting_during_incident": 12,
+            "recovery_time_s": 90.0,
+            "source": "SUMO --queue-output queueing_length",
+            "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+            "available": true,
+            "network_max_queue_length_m": 198.09,
+            "route_max_queue_length_m": 66.91,
+            "route_mean_queue_length_m": 11.132
+          },
+          "incident_applied": true
+        }
+      }
+    }
+  ]
+}

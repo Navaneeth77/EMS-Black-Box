@@ -1,0 +1,218 @@
+{
+  "reproducibility": {
+    "generated_at": "2026-09-10T04:25:43Z",
+    "sumo_version": "1.27.1",
+    "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
+    "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+    "demand_config_hash": "dcf9b62dc428549a",
+    "seed": 20260910,
+    "step_length_s": 0.5,
+    "begin_s": 0.0,
+    "end_s": 3900.0,
+    "warmup_s": 300.0,
+    "period": "evening_peak",
+    "ambulance": {
+      "origin_edge": "312063814#2",
+      "destination_edge": "491889864#5",
+      "depart_time_s": 600.0,
+      "vehicle_type": "ambulance",
+      "trip_label": "baseline",
+      "basis": "ESTIMATED_DATA. Origin, destination and departure time are configuration choices by this project, not a real EMS dispatch. No ambulance call record for Silk Board was available.",
+      "vehicle_id": "ambulance_baseline",
+      "data_class": "ESTIMATED_DATA",
+      "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+    },
+    "vehicle_type_count": 7
+  },
+  "simulation": {
+    "steps_executed": 7800,
+    "sim_end_time_s": 3900.0,
+    "wall_clock_s": 157.88,
+    "sample_interval_s": 10.0,
+    "vehicles": {
+      "loaded": 3226,
+      "departed": 3226,
+      "arrived": 2937,
+      "still_running_at_end": 289,
+      "insertion_backlog_at_end": 0,
+      "trips_recorded": 3225,
+      "trips_completed": 2937
+    },
+    "teleports": {
+      "count": 0,
+      "sumo_reported_total": 0,
+      "observations_match_sumo": true,
+      "events": []
+    },
+    "collisions": 0
+  },
+  "ambulance": {
+    "vehicle_id": "ambulance_baseline",
+    "vehicle_type": "ambulance",
+    "origin_edge": "312063814#2",
+    "destination_edge": "491889864#5",
+    "configured_depart_s": 600.0,
+    "departed": true,
+    "actual_depart_s": 600.0,
+    "completed": true,
+    "arrival_s": 748.5,
+    "travel_time_s": 148.5,
+    "waiting_time_s": 0.5,
+    "time_loss_s": 20.18,
+    "route_length_m": 2134.23,
+    "stop_count": 1,
+    "teleported": false,
+    "route_edge_count": 29,
+    "data_class": "SIMULATED_DATA",
+    "note": "SIMULATED_DATA. The travel time of a simulated ambulance through simulated traffic, with no priority of any kind. Not a measurement of any real EMS journey."
+  },
+  "validation": {
+    "ok": true,
+    "counts": {
+      "total": 18,
+      "passed": 18,
+      "errors": 0,
+      "warnings": 0
+    },
+    "checks": [
+      {
+        "name": "routes_present",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "3226 routed vehicles using 165 distinct edges",
+        "value": 3226
+      },
+      {
+        "name": "routes_are_connected",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "Every one of 52955 route steps follows an existing connection.",
+        "value": 0
+      },
+      {
+        "name": "no_illegal_grade_transitions",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "No route changes grade except at a ramp or a deck touchdown.",
+        "value": 0
+      },
+      {
+        "name": "departures_within_demand_window",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "0 vehicle(s) depart outside the configured demand window",
+        "value": 0
+      },
+      {
+        "name": "unresolved_infrastructure_usage_recorded",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "192 vehicle(s) route over OSM way(s) whose operational status Phase 2.5 could not establish (['1351994264']). Their travel times are conditional on a fact nobody has verified. Excluding the infrastructure instead would isolate a 1.9 km carriageway, so it is left enabled and counted.",
+        "value": {
+          "vehicles": 192,
+          "ways": [
+            "1351994264"
+          ]
+        }
+      },
+      {
+        "name": "traffic_enters_at_boundary_sources",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "All traffic enters at the 8 documented boundary source edges.",
+        "value": []
+      },
+      {
+        "name": "traffic_leaves_at_boundary_sinks",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "All traffic leaves at the 6 documented boundary sink edges.",
+        "value": []
+      },
+      {
+        "name": "ambulance_has_a_route",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "The ambulance route covers 29 edges",
+        "value": 29
+      },
+      {
+        "name": "simulation_terminated_correctly",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "Simulation reached 3900.0s of a configured 3900.0s over 7800 steps",
+        "value": 3900.0
+      },
+      {
+        "name": "vehicles_departed",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "3226 vehicles departed of 3226 loaded",
+        "value": 3226
+      },
+      {
+        "name": "insertion_backlog_is_small",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "0 of 3226 vehicles were still waiting to be inserted at the end. A large backlog means the network could not accept the configured demand, so the traffic simulated is lighter than the configuration asked for.",
+        "value": 0
+      },
+      {
+        "name": "teleports_within_threshold",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "No teleports. Every recorded travel time is the time the vehicle actually spent driving its route.",
+        "value": {
+          "observed": 0,
+          "threshold": 10
+        }
+      },
+      {
+        "name": "teleport_observations_match_sumo",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "The control loop observed 0 teleport(s); SUMO reports 0. A mismatch means the loop missed some, and an unobserved teleport cannot be attributed to a trip.",
+        "value": {
+          "observed": 0,
+          "sumo": 0
+        }
+      },
+      {
+        "name": "no_collisions",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "0 collision(s) reported by SUMO",
+        "value": 0
+      },
+      {
+        "name": "ambulance_departed",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "The ambulance departed at 600.0s",
+        "value": true
+      },
+      {
+        "name": "ambulance_completed_its_route",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "The ambulance completed its route in 148.5s (0.5s waiting, 20.2s time loss)",
+        "value": true
+      },
+      {
+        "name": "ambulance_was_not_teleported",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "The ambulance drove its whole route without being teleported.",
+        "value": false
+      },
+      {
+        "name": "background_trips_completed",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "2937 of 3225 trips completed. Vehicles still running at the end are expected: demand runs to the end of the window, so the last departures cannot finish.",
+        "value": 2937
+      }
+    ]
+  },
+  "teleport_events": []
+}

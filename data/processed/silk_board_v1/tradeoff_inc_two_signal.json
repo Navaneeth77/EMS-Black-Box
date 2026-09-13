@@ -1,0 +1,614 @@
+{
+  "prefix": "inc_two_signal",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "missing_runs": [],
+  "paired_per_seed": {
+    "EMS_NEXT": {
+      "42": {
+        "travel_saved_s": 62.5,
+        "waiting_saved_s": 53.5,
+        "time_loss_reduction_s": 62.23,
+        "stop_reduction": 2,
+        "teleports_normal": 1,
+        "teleports_policy": 0,
+        "teleport_delta": -1,
+        "route_max_queue_m": 64.56,
+        "route_max_queue_delta_m": -12.22,
+        "max_halting": 13,
+        "recovery_time_s": 30.0,
+        "traffic_time_loss_delta_s": -12547.74,
+        "traffic_vehicles_delta": -9.0
+      },
+      "43": {
+        "travel_saved_s": 68.5,
+        "waiting_saved_s": 57.5,
+        "time_loss_reduction_s": 68.8,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 0,
+        "teleport_delta": 0,
+        "route_max_queue_m": 59.65,
+        "route_max_queue_delta_m": -17.1,
+        "max_halting": 14,
+        "recovery_time_s": 30.0,
+        "traffic_time_loss_delta_s": -5794.12,
+        "traffic_vehicles_delta": 3.0
+      },
+      "44": {
+        "travel_saved_s": 62.5,
+        "waiting_saved_s": 56.0,
+        "time_loss_reduction_s": 62.54,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 0,
+        "teleport_delta": 0,
+        "route_max_queue_m": 64.58,
+        "route_max_queue_delta_m": -12.23,
+        "max_halting": 13,
+        "recovery_time_s": 30.0,
+        "traffic_time_loss_delta_s": 2333.98,
+        "traffic_vehicles_delta": -12.0
+      },
+      "45": {
+        "travel_saved_s": 68.5,
+        "waiting_saved_s": 59.5,
+        "time_loss_reduction_s": 68.26,
+        "stop_reduction": 2,
+        "teleports_normal": 2,
+        "teleports_policy": 1,
+        "teleport_delta": -1,
+        "route_max_queue_m": 52.15,
+        "route_max_queue_delta_m": -24.62,
+        "max_halting": 13,
+        "recovery_time_s": 30.0,
+        "traffic_time_loss_delta_s": -45880.66,
+        "traffic_vehicles_delta": 59.0
+      },
+      "46": {
+        "travel_saved_s": 63.5,
+        "waiting_saved_s": 55.0,
+        "time_loss_reduction_s": 63.49,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 0,
+        "teleport_delta": 0,
+        "route_max_queue_m": 58.55,
+        "route_max_queue_delta_m": -18.22,
+        "max_halting": 13,
+        "recovery_time_s": 30.0,
+        "traffic_time_loss_delta_s": 40450.89,
+        "traffic_vehicles_delta": 1.0
+      }
+    },
+    "EMS_ROLLING": {
+      "42": {
+        "travel_saved_s": 78.5,
+        "waiting_saved_s": 53.5,
+        "time_loss_reduction_s": 78.55,
+        "stop_reduction": 2,
+        "teleports_normal": 1,
+        "teleports_policy": 1,
+        "teleport_delta": 0,
+        "route_max_queue_m": 70.32,
+        "route_max_queue_delta_m": -6.46,
+        "max_halting": 17,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": -11144.54,
+        "traffic_vehicles_delta": -4.0
+      },
+      "43": {
+        "travel_saved_s": 80.5,
+        "waiting_saved_s": 57.5,
+        "time_loss_reduction_s": 80.71,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 1,
+        "teleport_delta": 1,
+        "route_max_queue_m": 66.91,
+        "route_max_queue_delta_m": -9.84,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 56868.16,
+        "traffic_vehicles_delta": -20.0
+      },
+      "44": {
+        "travel_saved_s": 77.5,
+        "waiting_saved_s": 56.0,
+        "time_loss_reduction_s": 77.17,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 1,
+        "teleport_delta": 1,
+        "route_max_queue_m": 66.87,
+        "route_max_queue_delta_m": -9.94,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 3156.87,
+        "traffic_vehicles_delta": -22.0
+      },
+      "45": {
+        "travel_saved_s": 82.5,
+        "waiting_saved_s": 59.5,
+        "time_loss_reduction_s": 82.56,
+        "stop_reduction": 2,
+        "teleports_normal": 2,
+        "teleports_policy": 0,
+        "teleport_delta": -2,
+        "route_max_queue_m": 66.9,
+        "route_max_queue_delta_m": -9.87,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": -47061.16,
+        "traffic_vehicles_delta": 39.0
+      },
+      "46": {
+        "travel_saved_s": 78.0,
+        "waiting_saved_s": 55.0,
+        "time_loss_reduction_s": 78.41,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 0,
+        "teleport_delta": 0,
+        "route_max_queue_m": 69.46,
+        "route_max_queue_delta_m": -7.31,
+        "max_halting": 17,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 26112.13,
+        "traffic_vehicles_delta": 19.0
+      }
+    },
+    "EMS_FULL_PREEMPTION": {
+      "42": {
+        "travel_saved_s": 80.0,
+        "waiting_saved_s": 53.5,
+        "time_loss_reduction_s": 79.46,
+        "stop_reduction": 2,
+        "teleports_normal": 1,
+        "teleports_policy": 3,
+        "teleport_delta": 2,
+        "route_max_queue_m": 70.34,
+        "route_max_queue_delta_m": -6.44,
+        "max_halting": 17,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 20123.31,
+        "traffic_vehicles_delta": -49.0
+      },
+      "43": {
+        "travel_saved_s": 82.0,
+        "waiting_saved_s": 57.5,
+        "time_loss_reduction_s": 82.28,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 4,
+        "teleport_delta": 4,
+        "route_max_queue_m": 66.86,
+        "route_max_queue_delta_m": -9.89,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 57348.51,
+        "traffic_vehicles_delta": -11.0
+      },
+      "44": {
+        "travel_saved_s": 79.0,
+        "waiting_saved_s": 56.0,
+        "time_loss_reduction_s": 79.01,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 1,
+        "teleport_delta": 1,
+        "route_max_queue_m": 66.91,
+        "route_max_queue_delta_m": -9.9,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 845.42,
+        "traffic_vehicles_delta": 25.0
+      },
+      "45": {
+        "travel_saved_s": 83.0,
+        "waiting_saved_s": 59.5,
+        "time_loss_reduction_s": 83.19,
+        "stop_reduction": 2,
+        "teleports_normal": 2,
+        "teleports_policy": 1,
+        "teleport_delta": -1,
+        "route_max_queue_m": 66.92,
+        "route_max_queue_delta_m": -9.85,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": -32565.64,
+        "traffic_vehicles_delta": 44.0
+      },
+      "46": {
+        "travel_saved_s": 78.0,
+        "waiting_saved_s": 55.0,
+        "time_loss_reduction_s": 78.11,
+        "stop_reduction": 2,
+        "teleports_normal": 0,
+        "teleports_policy": 0,
+        "teleport_delta": 0,
+        "route_max_queue_m": 66.91,
+        "route_max_queue_delta_m": -9.86,
+        "max_halting": 16,
+        "recovery_time_s": 90.0,
+        "traffic_time_loss_delta_s": 39990.56,
+        "traffic_vehicles_delta": 16.0
+      }
+    }
+  },
+  "cross_seed": {
+    "EMS_NEXT": {
+      "travel_saved_s": {
+        "n": 5,
+        "mean": 65.1,
+        "median": 63.5,
+        "stdev": 3.13,
+        "min": 62.5,
+        "max": 68.5
+      },
+      "waiting_saved_s": {
+        "n": 5,
+        "mean": 56.3,
+        "median": 56.0,
+        "stdev": 2.308,
+        "min": 53.5,
+        "max": 59.5
+      },
+      "time_loss_reduction_s": {
+        "n": 5,
+        "mean": 65.064,
+        "median": 63.49,
+        "stdev": 3.204,
+        "min": 62.23,
+        "max": 68.8
+      },
+      "stop_reduction": {
+        "n": 5,
+        "mean": 2.0,
+        "median": 2,
+        "stdev": 0.0,
+        "min": 2,
+        "max": 2
+      },
+      "teleport_delta": {
+        "n": 5,
+        "mean": -0.4,
+        "median": 0,
+        "stdev": 0.548,
+        "min": -1,
+        "max": 0
+      },
+      "traffic_time_loss_delta_s": {
+        "n": 5,
+        "mean": -4287.53,
+        "median": -5794.12,
+        "stdev": 31007.499,
+        "min": -45880.66,
+        "max": 40450.89
+      },
+      "route_max_queue_m": {
+        "n": 5,
+        "mean": 59.898,
+        "median": 59.65,
+        "stdev": 5.137,
+        "min": 52.15,
+        "max": 64.58
+      }
+    },
+    "EMS_ROLLING": {
+      "travel_saved_s": {
+        "n": 5,
+        "mean": 79.4,
+        "median": 78.5,
+        "stdev": 2.074,
+        "min": 77.5,
+        "max": 82.5
+      },
+      "waiting_saved_s": {
+        "n": 5,
+        "mean": 56.3,
+        "median": 56.0,
+        "stdev": 2.308,
+        "min": 53.5,
+        "max": 59.5
+      },
+      "time_loss_reduction_s": {
+        "n": 5,
+        "mean": 79.48,
+        "median": 78.55,
+        "stdev": 2.142,
+        "min": 77.17,
+        "max": 82.56
+      },
+      "stop_reduction": {
+        "n": 5,
+        "mean": 2.0,
+        "median": 2,
+        "stdev": 0.0,
+        "min": 2,
+        "max": 2
+      },
+      "teleport_delta": {
+        "n": 5,
+        "mean": 0.0,
+        "median": 0,
+        "stdev": 1.225,
+        "min": -2,
+        "max": 1
+      },
+      "traffic_time_loss_delta_s": {
+        "n": 5,
+        "mean": 5586.292,
+        "median": 3156.87,
+        "stdev": 39079.141,
+        "min": -47061.16,
+        "max": 56868.16
+      },
+      "route_max_queue_m": {
+        "n": 5,
+        "mean": 68.092,
+        "median": 66.91,
+        "stdev": 1.669,
+        "min": 66.87,
+        "max": 70.32
+      }
+    },
+    "EMS_FULL_PREEMPTION": {
+      "travel_saved_s": {
+        "n": 5,
+        "mean": 80.4,
+        "median": 80.0,
+        "stdev": 2.074,
+        "min": 78.0,
+        "max": 83.0
+      },
+      "waiting_saved_s": {
+        "n": 5,
+        "mean": 56.3,
+        "median": 56.0,
+        "stdev": 2.308,
+        "min": 53.5,
+        "max": 59.5
+      },
+      "time_loss_reduction_s": {
+        "n": 5,
+        "mean": 80.41,
+        "median": 79.46,
+        "stdev": 2.201,
+        "min": 78.11,
+        "max": 83.19
+      },
+      "stop_reduction": {
+        "n": 5,
+        "mean": 2.0,
+        "median": 2,
+        "stdev": 0.0,
+        "min": 2,
+        "max": 2
+      },
+      "teleport_delta": {
+        "n": 5,
+        "mean": 1.2,
+        "median": 1,
+        "stdev": 1.924,
+        "min": -1,
+        "max": 4
+      },
+      "traffic_time_loss_delta_s": {
+        "n": 5,
+        "mean": 17148.432,
+        "median": 20123.31,
+        "stdev": 34942.582,
+        "min": -32565.64,
+        "max": 57348.51
+      },
+      "route_max_queue_m": {
+        "n": 5,
+        "mean": 67.588,
+        "median": 66.91,
+        "stdev": 1.539,
+        "min": 66.86,
+        "max": 70.34
+      }
+    }
+  },
+  "ordering": {
+    "per_seed": {
+      "42": {
+        "saved": {
+          "EMS_NEXT": 62.5,
+          "EMS_ROLLING": 78.5,
+          "EMS_FULL_PREEMPTION": 80.0
+        },
+        "next_le_rolling": true,
+        "rolling_le_full": true,
+        "full_ordering_holds": true,
+        "full_minus_rolling_s": 1.5
+      },
+      "43": {
+        "saved": {
+          "EMS_NEXT": 68.5,
+          "EMS_ROLLING": 80.5,
+          "EMS_FULL_PREEMPTION": 82.0
+        },
+        "next_le_rolling": true,
+        "rolling_le_full": true,
+        "full_ordering_holds": true,
+        "full_minus_rolling_s": 1.5
+      },
+      "44": {
+        "saved": {
+          "EMS_NEXT": 62.5,
+          "EMS_ROLLING": 77.5,
+          "EMS_FULL_PREEMPTION": 79.0
+        },
+        "next_le_rolling": true,
+        "rolling_le_full": true,
+        "full_ordering_holds": true,
+        "full_minus_rolling_s": 1.5
+      },
+      "45": {
+        "saved": {
+          "EMS_NEXT": 68.5,
+          "EMS_ROLLING": 82.5,
+          "EMS_FULL_PREEMPTION": 83.0
+        },
+        "next_le_rolling": true,
+        "rolling_le_full": true,
+        "full_ordering_holds": true,
+        "full_minus_rolling_s": 0.5
+      },
+      "46": {
+        "saved": {
+          "EMS_NEXT": 63.5,
+          "EMS_ROLLING": 78.0,
+          "EMS_FULL_PREEMPTION": 78.0
+        },
+        "next_le_rolling": true,
+        "rolling_le_full": true,
+        "full_ordering_holds": true,
+        "full_minus_rolling_s": 0.0
+      }
+    },
+    "holds_in": "5/5",
+    "robust": true
+  },
+  "outliers": [],
+  "disturbance_consistency": {
+    "per_seed": {
+      "42": {
+        "config_hash": "3c43dded423b95d7",
+        "applied": true,
+        "route_max_queue_m": 76.78,
+        "max_halting": 18,
+        "peak_halting_during": 15,
+        "recovery_time_s": 30.0,
+        "baseline_travel_s": 282.5,
+        "baseline_waiting_s": 53.5,
+        "baseline_stops": 2
+      },
+      "43": {
+        "config_hash": "3c43dded423b95d7",
+        "applied": true,
+        "route_max_queue_m": 76.75,
+        "max_halting": 18,
+        "peak_halting_during": 15,
+        "recovery_time_s": 30.0,
+        "baseline_travel_s": 286.0,
+        "baseline_waiting_s": 57.5,
+        "baseline_stops": 2
+      },
+      "44": {
+        "config_hash": "3c43dded423b95d7",
+        "applied": true,
+        "route_max_queue_m": 76.81,
+        "max_halting": 18,
+        "peak_halting_during": 15,
+        "recovery_time_s": 30.0,
+        "baseline_travel_s": 282.0,
+        "baseline_waiting_s": 56.0,
+        "baseline_stops": 2
+      },
+      "45": {
+        "config_hash": "3c43dded423b95d7",
+        "applied": true,
+        "route_max_queue_m": 76.77,
+        "max_halting": 18,
+        "peak_halting_during": 15,
+        "recovery_time_s": 30.0,
+        "baseline_travel_s": 287.0,
+        "baseline_waiting_s": 59.5,
+        "baseline_stops": 2
+      },
+      "46": {
+        "config_hash": "3c43dded423b95d7",
+        "applied": true,
+        "route_max_queue_m": 76.77,
+        "max_halting": 18,
+        "peak_halting_during": 15,
+        "recovery_time_s": 30.0,
+        "baseline_travel_s": 282.5,
+        "baseline_waiting_s": 55.0,
+        "baseline_stops": 2
+      }
+    },
+    "single_config_hash": true,
+    "config_hashes": [
+      "3c43dded423b95d7"
+    ]
+  },
+  "intersections": [
+    {
+      "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+      "mean_recoverable_s": 48.5,
+      "max_recoverable_s": 52.5,
+      "observations": 15,
+      "seeds_with_nonzero": 15,
+      "by_policy": {
+        "EMS_NEXT": {
+          "n": 5,
+          "mean": 47.7,
+          "median": 46.5,
+          "stdev": 2.253,
+          "min": 46.0,
+          "max": 51.5
+        },
+        "EMS_ROLLING": {
+          "n": 5,
+          "mean": 48.9,
+          "median": 48.5,
+          "stdev": 2.219,
+          "min": 46.5,
+          "max": 52.5
+        },
+        "EMS_FULL_PREEMPTION": {
+          "n": 5,
+          "mean": 48.9,
+          "median": 48.5,
+          "stdev": 2.104,
+          "min": 47.0,
+          "max": 52.5
+        }
+      }
+    },
+    {
+      "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+      "mean_recoverable_s": 0.0,
+      "max_recoverable_s": -0.0,
+      "observations": 15,
+      "seeds_with_nonzero": 0,
+      "by_policy": {
+        "EMS_NEXT": {
+          "n": 5,
+          "mean": 0.0,
+          "median": -0.0,
+          "stdev": 0.0,
+          "min": -0.0,
+          "max": -0.0
+        },
+        "EMS_ROLLING": {
+          "n": 5,
+          "mean": 0.0,
+          "median": -0.0,
+          "stdev": 0.0,
+          "min": -0.0,
+          "max": -0.0
+        },
+        "EMS_FULL_PREEMPTION": {
+          "n": 5,
+          "mean": 0.0,
+          "median": -0.0,
+          "stdev": 0.0,
+          "min": -0.0,
+          "max": -0.0
+        }
+      }
+    }
+  ],
+  "data_class": "SIMULATED_DATA"
+}

@@ -1,0 +1,69 @@
+{
+  "prefix": "inc_two_signal",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "runs_examined": 20,
+  "probes": [
+    {
+      "probe": "paired_scenario_identity",
+      "question": "Could the four runs of a seed actually be four different scenarios?",
+      "result": "SURVIVED",
+      "detail": "scenario hash identical within every seed; mismatched seeds: none"
+    },
+    {
+      "probe": "route_identity",
+      "question": "Did the ambulance simply take a shorter path under the EMS policies?",
+      "result": "SURVIVED",
+      "detail": "route identical across policies in every seed; NORMAL route lengths [2541.52]"
+    },
+    {
+      "probe": "no_artificial_speed",
+      "question": "Was the ambulance made faster rather than the signal made green?",
+      "result": "SURVIVED",
+      "detail": "max recorded ambulance speed within vType 19.44 m/s; violations: none"
+    },
+    {
+      "probe": "no_ambulance_teleport",
+      "question": "Did the ambulance skip the congestion via SUMO's gridlock escape?",
+      "result": "SURVIVED",
+      "detail": "ambulance teleported in: no run"
+    },
+    {
+      "probe": "disturbance_identity",
+      "question": "Did some runs get a different disturbance, or none at all?",
+      "result": "SURVIVED",
+      "detail": "config hashes ['3c43dded423b95d7']; unapplied in no run"
+    },
+    {
+      "probe": "disturbance_is_not_inert",
+      "question": "Is the disturbance actually perturbing the simulation, or silently doing nothing?",
+      "result": "SURVIVED",
+      "detail": "seeds where the incident changed neither arrivals nor ambulance travel: none"
+    },
+    {
+      "probe": "ordering_not_driven_by_one_seed",
+      "question": "Does the policy ordering depend on a single seed?",
+      "result": "SURVIVED",
+      "detail": "leave-one-out over [42, 43, 44, 45, 46]: ordering breaks when dropping no seed"
+    },
+    {
+      "probe": "no_frontend_only_effects",
+      "question": "Is the 3D view showing positions or states SUMO never produced?",
+      "result": "SURVIVED",
+      "detail": "589 scene checks, 0 failures, 471936 vehicle samples"
+    },
+    {
+      "probe": "signals_within_program",
+      "question": "Did a policy write a signal state the controller could not have produced?",
+      "result": "SURVIVED",
+      "detail": "0 signal states outside their programs' phase sets across 20 runs"
+    }
+  ],
+  "verdict": "SURVIVED",
+  "data_class": "SIMULATED_DATA"
+}

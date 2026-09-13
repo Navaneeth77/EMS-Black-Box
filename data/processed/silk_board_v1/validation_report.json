@@ -1,0 +1,342 @@
+{
+  "study_area": {
+    "area_id": "silk_board_v1",
+    "display_name": "Central Silk Board Junction, Bengaluru",
+    "anchor": {
+      "lat": 12.917236,
+      "lon": 77.623262
+    },
+    "anchor_derivation": "Length-weighted centroid, in UTM 43N (EPSG:32643), of the five OpenStreetMap highway ways whose name tag is exactly 'Silk Board Flyover' or 'Silk Board Interchange' (way/40696221, way/40696222, way/1208112302, way/1208112303, way/1254771465), as present in an OSM extract retrieved 2026-09-09. Chosen over a geocoder result because Nominatim returns bus stops and a landuse polygon for this name, none of which sit on the carriageway; and over the Hosur Road x Outer Ring Road crossing because those two corridors share no node and do not cross in plan view within the extract - the interchange is grade-separated and connected only through link ways.",
+    "anchor_source_ways": [
+      "way/40696221",
+      "way/40696222",
+      "way/1208112302",
+      "way/1208112303",
+      "way/1254771465"
+    ],
+    "half_extent_m": 800.0,
+    "bbox": {
+      "min_lon": 77.615889,
+      "min_lat": 12.910001,
+      "max_lon": 77.630635,
+      "max_lat": 12.924471
+    },
+    "bbox_api_order": "77.615889,12.910001,77.630635,12.924471",
+    "extent_m": {
+      "width": 1600.0,
+      "height": 1600.0
+    },
+    "area_km2": 2.56,
+    "notes": "Covers the Silk Board interchange core plus its immediate approaches on Hosur Road (NH-44), Outer Ring Road and Sarjapura Road.\n\nSIZING. The brief was 'approximately 5-10 intersections'. That target is not reachable under a topological definition: even a 400 m box contains 12 nodes where three or more through-roads meet, because the interchange decomposes into many ramp splits and merges and the ORR/Hosur corridors carry frequent slip-road connections. Measured three ways, this box contains 122 junction nodes on any drivable way, 22 distinct major-road intersections after clustering, and 5 intersections with a mapped traffic signal. The last is the count that matches the brief, and it is also the one that matters for this project: signal-controlled intersections are the only places an EMS priority policy can act. Smaller boxes were rejected because they shorten the approaches without reducing the intersection count much, and Silk Board's queues are the phenomenon under study. Larger boxes were rejected because at ~1.1 km half-extent the OSM API refuses the request (50,000-node cap).\n\nSCOPE LIMIT. This box does NOT cover the full length of the Silkboard Double Decker Flyover, whose OSM ways run about 2.8 km west toward Ragigudda. Traffic entering along that viaduct will appear at the study-area boundary rather than being simulated from its true origin.\n\nAPPROACH LENGTH. 800 m of approach on each corridor may prove short relative to observed Silk Board queues. If Phase 3 shows queues reaching the boundary, the box must be widened - as a new area_id, with runs repeated - rather than the results reported as-is."
+  },
+  "counts": {
+    "osm_nodes_total": 20283,
+    "osm_ways_total": 4269,
+    "osm_ways_with_highway": 842,
+    "osm_relations_total": 5,
+    "drivable_edges": 707,
+    "junctions": 120,
+    "junctions_major": 37,
+    "intersections": 21,
+    "intersections_with_signal_nodes": 5,
+    "turn_restrictions": 5,
+    "dangling_node_refs": 0,
+    "non_current_highway_ways": 12
+  },
+  "metric_crs": "EPSG:32643",
+  "validation": {
+    "ok": true,
+    "counts": {
+      "total": 33,
+      "passed": 26,
+      "errors": 0,
+      "warnings": 6
+    },
+    "checks": [
+      {
+        "name": "extract_has_nodes",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "20,283 OSM nodes in extract",
+        "value": 20283
+      },
+      {
+        "name": "extract_has_drivable_edges",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "707 drivable road edges",
+        "value": 707
+      },
+      {
+        "name": "extract_declares_bounds",
+        "passed": false,
+        "severity": "WARNING",
+        "detail": "Extract has no <bounds> element; served area could not be confirmed from the file",
+        "value": null
+      },
+      {
+        "name": "geometry_overhang_recorded",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "Way geometry extends up to 2313 m beyond the box (expected: ways are returned in full when partly inside)",
+        "value": 2312.9
+      },
+      {
+        "name": "no_dangling_node_references",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "0 way node references had no matching node in the extract",
+        "value": 0
+      },
+      {
+        "name": "edge_geometry_valid",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "0 invalid edge geometries",
+        "value": 0
+      },
+      {
+        "name": "no_zero_length_edges",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "0 edges with zero length",
+        "value": 0
+      },
+      {
+        "name": "no_empty_geometries",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "0 empty geometries",
+        "value": 0
+      },
+      {
+        "name": "elevated_structures_present",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "20 bridge/viaduct edges found. Silk Board is a grade-separated interchange; an extract with none has lost the elevated corridor.",
+        "value": 20
+      },
+      {
+        "name": "bridges_carry_explicit_layer",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "19/20 bridge edges carry an explicit layer tag. Bridges without one rely on OSM's implicit ground-level default, which netconvert may resolve differently from the mapper's intent.",
+        "value": {
+          "with_layer": 19,
+          "total": 20
+        }
+      },
+      {
+        "name": "multiple_grade_levels_present",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "Bridge edges occupy layers [0, 1, 2]. At least one non-zero layer is required for the flyover to be a separate structure rather than a line across the junction.",
+        "value": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "name": "underground_structures_recorded",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "4 tunnel/underpass edges",
+        "value": 4
+      },
+      {
+        "name": "named_elevated_structures",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "Named elevated structures: Silkboard Double Decker Flyover, Silk Board Flyover, 1 A Main Road, Ragigudda-Silk Board Integrated Flyover, Silk Board Interchange, Ramp A",
+        "value": {
+          "Silkboard Double Decker Flyover": 5,
+          "Silk Board Flyover": 2,
+          "1 A Main Road": 1,
+          "Ragigudda-Silk Board Integrated Flyover": 1,
+          "Silk Board Interchange": 1,
+          "Ramp A": 1,
+          "Ragigudda-Silk Board Integrated Flyover (u/c)": 1
+        }
+      },
+      {
+        "name": "ramps_present",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "39 link/ramp edges. A grade-separated interchange connects its levels through ramps; none would mean the levels are unreachable from each other.",
+        "value": 39
+      },
+      {
+        "name": "junction_counts_recorded",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "120 junction nodes on any drivable way; 37 on major roads; 21 distinct major intersections after clustering; 5 of those have a traffic signal mapped nearby",
+        "value": {
+          "junction_nodes_all": 120,
+          "junction_nodes_major": 37,
+          "intersections_clustered": 21,
+          "intersections_with_signal_nodes": 5
+        }
+      },
+      {
+        "name": "study_area_has_intersections",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "21 major intersections identified",
+        "value": 21
+      },
+      {
+        "name": "signalised_intersections_in_target_range",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "5 intersections have a mapped traffic signal (study-area target: 5-10). This is the EMS-relevant count: signal priority can only act where a signal exists.",
+        "value": 5
+      },
+      {
+        "name": "signal_association_is_derived",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "Signals are associated with intersections by proximity, not by any OSM relation: in this extract every highway=traffic_signals node belongs to exactly one way and sits back from the junction centre. The association is an inference by this project, and a nearby signal node does not establish that the intersection is signal-controlled today.",
+        "value": {
+          "method": "proximity",
+          "asserted_by_osm": false
+        }
+      },
+      {
+        "name": "attribute_coverage_lanes_parsed",
+        "passed": false,
+        "severity": "WARNING",
+        "detail": "lanes: 125/707 edges (18%). Missing values are left as null - not defaulted.",
+        "value": 0.1768
+      },
+      {
+        "name": "attribute_coverage_maxspeed_kmh",
+        "passed": false,
+        "severity": "WARNING",
+        "detail": "maxspeed (numeric): 85/707 edges (12%). Missing values are left as null - not defaulted.",
+        "value": 0.1202
+      },
+      {
+        "name": "attribute_coverage_name",
+        "passed": false,
+        "severity": "INFO",
+        "detail": "road name: 205/707 edges (29%). Missing values are left as null - not defaulted.",
+        "value": 0.29
+      },
+      {
+        "name": "attribute_coverage_highway",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "road classification: 707/707 edges (100%). Complete.",
+        "value": 1.0
+      },
+      {
+        "name": "oneway_explicitly_tagged",
+        "passed": false,
+        "severity": "WARNING",
+        "detail": "one-way status explicitly tagged on 150/707 edges (21%); the remainder are treated as bidirectional per OSM convention, recorded in oneway_basis",
+        "value": 0.2122
+      },
+      {
+        "name": "turn_restrictions_extracted",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "5 turn-restriction relations. OSM restriction coverage in Indian cities is sparse; absence here means unmapped, not unrestricted.",
+        "value": 5
+      },
+      {
+        "name": "turn_restriction_types",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "types: {'no_left_turn': 1, 'no_u_turn': 3, 'no_right_turn': 1}",
+        "value": {
+          "no_left_turn": 1,
+          "no_u_turn": 3,
+          "no_right_turn": 1
+        }
+      },
+      {
+        "name": "traffic_signal_nodes_present",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "18 nodes tagged highway=traffic_signals",
+        "value": 18
+      },
+      {
+        "name": "signal_timings_unavailable",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "OSM supplies signal LOCATIONS only. No cycle time, split or offset is present in this extract, and none is published for Bengaluru. Any timing used later is ESTIMATED_DATA and must be labelled as such.",
+        "value": {
+          "timings_in_source": 0
+        }
+      },
+      {
+        "name": "non_current_infrastructure_flagged",
+        "passed": false,
+        "severity": "WARNING",
+        "detail": "12 ways tagged highway=construction/proposed. These are excluded from the drivable network. Whether they are open to traffic today cannot be determined from OSM alone.",
+        "value": [
+          "1273062496",
+          "1346655597",
+          "1354937903",
+          "1354937904",
+          "1354937906",
+          "1354937907",
+          "SV Road to Bommanahalli Elevated Corridor",
+          "SV Road to Bommanahalli Elevated Corridor",
+          "SV Road to Bommanahalli Elevated Corridor",
+          "SV Road to Bommanahalli Elevated Corridor"
+        ]
+      },
+      {
+        "name": "no_under_construction_markers_in_drivable_network",
+        "passed": false,
+        "severity": "WARNING",
+        "detail": "1 drivable edges have names marking them under construction (['Ragigudda-Silk Board Integrated Flyover (u/c)']). They are tagged as open roads but named as incomplete; OSM cannot resolve which is current.",
+        "value": [
+          "Ragigudda-Silk Board Integrated Flyover (u/c)"
+        ]
+      },
+      {
+        "name": "highway_class_breakdown",
+        "passed": true,
+        "severity": "INFO",
+        "detail": "{'residential': 383, 'service': 159, 'trunk': 48, 'tertiary': 36, 'primary': 25, 'trunk_link': 24, 'primary_link': 15, 'living_street': 14, 'secondary': 2, 'unclassified': 1}",
+        "value": {
+          "residential": 383,
+          "service": 159,
+          "trunk": 48,
+          "tertiary": 36,
+          "primary": 25,
+          "trunk_link": 24,
+          "primary_link": 15,
+          "living_street": 14,
+          "secondary": 2,
+          "unclassified": 1
+        }
+      },
+      {
+        "name": "no_unclassified_road_tag",
+        "passed": true,
+        "severity": "WARNING",
+        "detail": "0 edges tagged highway=road (OSM's explicit 'classification unknown')",
+        "value": 0
+      },
+      {
+        "name": "metric_crs_is_utm_43n",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "Metric CRS used for all metre-valued figures is EPSG:32643; expected EPSG:32643 (UTM 43N) for Bengaluru.",
+        "value": "EPSG:32643"
+      },
+      {
+        "name": "extract_extent_is_local",
+        "passed": true,
+        "severity": "ERROR",
+        "detail": "Way geometry extends up to 2.3 km beyond the study-area box (limit 25 km). Some overhang is expected because ways are returned whole; this much means the query pulled in far more than the study area.",
+        "value": 2.31
+      }
+    ]
+  }
+}
