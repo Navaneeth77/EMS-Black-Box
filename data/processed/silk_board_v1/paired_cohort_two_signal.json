@@ -1,0 +1,5060 @@
+{
+  "generated_at": "2026-09-13T22:03:57Z",
+  "area": "silk_board_v1",
+  "scenario_prefix": "two_signal_",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "policies": [
+    "EMS_FULL_PREEMPTION",
+    "EMS_NEXT",
+    "EMS_ROLLING"
+  ],
+  "baseline_policy": "NORMAL",
+  "method": "Every generated vehicle is classified in both arms before any metric is computed. Travel-time metrics exclude teleported trips. The paired common cohort \u2014 vehicles that completed without a teleport in both arms \u2014 is the only view valid for a causal claim; the survivorship-biased view is reported beside it so the size of the bias is visible.",
+  "reanalysis_of": "frozen runs; no simulation was re-run",
+  "sign_flips_vs_biased_view": 2,
+  "summary": {
+    "EMS_FULL_PREEMPTION": {
+      "seeds": 5,
+      "per_seed": [
+        {
+          "seed": 42,
+          "paired_cohort_size": 2858,
+          "paired_mean_time_loss_delta_s_per_vehicle": -9.009,
+          "paired_total_time_loss_delta_s": -25747.7,
+          "survivorship_biased_total_time_loss_delta_s": -33433.32,
+          "bias_s": -7685.6,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": 1
+        },
+        {
+          "seed": 43,
+          "paired_cohort_size": 2841,
+          "paired_mean_time_loss_delta_s_per_vehicle": -11.727,
+          "paired_total_time_loss_delta_s": -33316.4,
+          "survivorship_biased_total_time_loss_delta_s": -28207.77,
+          "bias_s": 5108.6,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -6
+        },
+        {
+          "seed": 44,
+          "paired_cohort_size": 2908,
+          "paired_mean_time_loss_delta_s_per_vehicle": 3.613,
+          "paired_total_time_loss_delta_s": 10506.6,
+          "survivorship_biased_total_time_loss_delta_s": 7426.63,
+          "bias_s": -3080.0,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": 1
+        },
+        {
+          "seed": 45,
+          "paired_cohort_size": 2859,
+          "paired_mean_time_loss_delta_s_per_vehicle": -13.531,
+          "paired_total_time_loss_delta_s": -38685.1,
+          "survivorship_biased_total_time_loss_delta_s": -7076.23,
+          "bias_s": 31608.9,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -51
+        },
+        {
+          "seed": 46,
+          "paired_cohort_size": 2869,
+          "paired_mean_time_loss_delta_s_per_vehicle": 9.35,
+          "paired_total_time_loss_delta_s": 26825.1,
+          "survivorship_biased_total_time_loss_delta_s": 27481.16,
+          "bias_s": 656.1,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -13
+        }
+      ],
+      "paired_mean_time_loss_delta_s_per_vehicle": {
+        "mean": -4.261,
+        "stdev": 10.142,
+        "min": -13.531,
+        "max": 9.35,
+        "standard_error": 4.536
+      },
+      "distinguishable_from_zero": false
+    },
+    "EMS_NEXT": {
+      "seeds": 5,
+      "per_seed": [
+        {
+          "seed": 42,
+          "paired_cohort_size": 2877,
+          "paired_mean_time_loss_delta_s_per_vehicle": -13.113,
+          "paired_total_time_loss_delta_s": -37726.1,
+          "survivorship_biased_total_time_loss_delta_s": -25450.33,
+          "bias_s": 12275.8,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -29
+        },
+        {
+          "seed": 43,
+          "paired_cohort_size": 2818,
+          "paired_mean_time_loss_delta_s_per_vehicle": 12.742,
+          "paired_total_time_loss_delta_s": 35907.0,
+          "survivorship_biased_total_time_loss_delta_s": 429.32,
+          "bias_s": -35477.7,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": 30
+        },
+        {
+          "seed": 44,
+          "paired_cohort_size": 2913,
+          "paired_mean_time_loss_delta_s_per_vehicle": -1.007,
+          "paired_total_time_loss_delta_s": -2933.4,
+          "survivorship_biased_total_time_loss_delta_s": 541.5,
+          "bias_s": 3474.9,
+          "sign_differs_from_biased_view": true,
+          "unfinished_delta_policy_minus_normal": 1
+        },
+        {
+          "seed": 45,
+          "paired_cohort_size": 2871,
+          "paired_mean_time_loss_delta_s_per_vehicle": -17.778,
+          "paired_total_time_loss_delta_s": -51040.6,
+          "survivorship_biased_total_time_loss_delta_s": -13788.1,
+          "bias_s": 37252.5,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -67
+        },
+        {
+          "seed": 46,
+          "paired_cohort_size": 2869,
+          "paired_mean_time_loss_delta_s_per_vehicle": 8.165,
+          "paired_total_time_loss_delta_s": 23425.4,
+          "survivorship_biased_total_time_loss_delta_s": 21019.79,
+          "bias_s": -2405.6,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -11
+        }
+      ],
+      "paired_mean_time_loss_delta_s_per_vehicle": {
+        "mean": -2.198,
+        "stdev": 13.171,
+        "min": -17.778,
+        "max": 12.742,
+        "standard_error": 5.89
+      },
+      "distinguishable_from_zero": false
+    },
+    "EMS_ROLLING": {
+      "seeds": 5,
+      "per_seed": [
+        {
+          "seed": 42,
+          "paired_cohort_size": 2877,
+          "paired_mean_time_loss_delta_s_per_vehicle": -19.403,
+          "paired_total_time_loss_delta_s": -55822.4,
+          "survivorship_biased_total_time_loss_delta_s": -36597.93,
+          "bias_s": 19224.5,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -29
+        },
+        {
+          "seed": 43,
+          "paired_cohort_size": 2851,
+          "paired_mean_time_loss_delta_s_per_vehicle": -2.02,
+          "paired_total_time_loss_delta_s": -5759.0,
+          "survivorship_biased_total_time_loss_delta_s": -2319.88,
+          "bias_s": 3439.1,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -9
+        },
+        {
+          "seed": 44,
+          "paired_cohort_size": 2906,
+          "paired_mean_time_loss_delta_s_per_vehicle": 4.952,
+          "paired_total_time_loss_delta_s": 14390.5,
+          "survivorship_biased_total_time_loss_delta_s": 17396.16,
+          "bias_s": 3005.7,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": 6
+        },
+        {
+          "seed": 45,
+          "paired_cohort_size": 2880,
+          "paired_mean_time_loss_delta_s_per_vehicle": -19.861,
+          "paired_total_time_loss_delta_s": -57199.7,
+          "survivorship_biased_total_time_loss_delta_s": -20307.41,
+          "bias_s": 36892.3,
+          "sign_differs_from_biased_view": false,
+          "unfinished_delta_policy_minus_normal": -78
+        },
+        {
+          "seed": 46,
+          "paired_cohort_size": 2867,
+          "paired_mean_time_loss_delta_s_per_vehicle": -2.968,
+          "paired_total_time_loss_delta_s": -8509.3,
+          "survivorship_biased_total_time_loss_delta_s": 6280.63,
+          "bias_s": 14789.9,
+          "sign_differs_from_biased_view": true,
+          "unfinished_delta_policy_minus_normal": -33
+        }
+      ],
+      "paired_mean_time_loss_delta_s_per_vehicle": {
+        "mean": -7.86,
+        "stdev": 11.174,
+        "min": -19.861,
+        "max": 4.952,
+        "standard_error": 4.997
+      },
+      "distinguishable_from_zero": false
+    }
+  },
+  "pairs": [
+    {
+      "seed": 42,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_FULL_PREEMPTION",
+      "generated_count": 3226,
+      "paired_count": 2858,
+      "excluded_count": 367,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2898,
+          "completed_after_teleport": 0,
+          "unfinished": 328,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2898,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2897,
+          "completed_after_teleport": 0,
+          "unfinished": 329,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2897,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 783410.5,
+              "mean": 270.4213,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 177216.0,
+              "mean": 61.1722,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 271976.19,
+              "mean": 93.882,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2896,
+            "duration_s": {
+              "n": 2896,
+              "total": 749942.0,
+              "mean": 258.9579,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2896,
+              "total": 155097.5,
+              "mean": 53.5558,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2896,
+              "total": 238542.87,
+              "mean": 82.3698,
+              "median": 18.765
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 783410.5,
+                "policy": 749942.0,
+                "absolute": -33468.5,
+                "percent": -4.272
+              },
+              "mean": {
+                "normal": 270.4213,
+                "policy": 258.9579,
+                "absolute": -11.463,
+                "percent": -4.239
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 177216.0,
+                "policy": 155097.5,
+                "absolute": -22118.5,
+                "percent": -12.481
+              },
+              "mean": {
+                "normal": 61.1722,
+                "policy": 53.5558,
+                "absolute": -7.616,
+                "percent": -12.451
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 271976.19,
+                "policy": 238542.87,
+                "absolute": -33433.32,
+                "percent": -12.293
+              },
+              "mean": {
+                "normal": 93.882,
+                "policy": 82.3698,
+                "absolute": -11.512,
+                "percent": -12.262
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 783410.5,
+              "mean": 270.4213,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 177216.0,
+              "mean": 61.1722,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 271976.19,
+              "mean": 93.882,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2896,
+            "duration_s": {
+              "n": 2896,
+              "total": 749942.0,
+              "mean": 258.9579,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2896,
+              "total": 155097.5,
+              "mean": 53.5558,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2896,
+              "total": 238542.87,
+              "mean": 82.3698,
+              "median": 18.765
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 783410.5,
+                "policy": 749942.0,
+                "absolute": -33468.5,
+                "percent": -4.272
+              },
+              "mean": {
+                "normal": 270.4213,
+                "policy": 258.9579,
+                "absolute": -11.463,
+                "percent": -4.239
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 177216.0,
+                "policy": 155097.5,
+                "absolute": -22118.5,
+                "percent": -12.481
+              },
+              "mean": {
+                "normal": 61.1722,
+                "policy": 53.5558,
+                "absolute": -7.616,
+                "percent": -12.451
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 271976.19,
+                "policy": 238542.87,
+                "absolute": -33433.32,
+                "percent": -12.293
+              },
+              "mean": {
+                "normal": 93.882,
+                "policy": 82.3698,
+                "absolute": -11.512,
+                "percent": -12.262
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2858,
+            "duration_s": {
+              "n": 2858,
+              "total": 752140.5,
+              "mean": 263.1702,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2858,
+              "total": 157930.5,
+              "mean": 55.2591,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2858,
+              "total": 245824.69,
+              "mean": 86.0128,
+              "median": 18.085
+            }
+          },
+          "policy": {
+            "vehicle_count": 2858,
+            "duration_s": {
+              "n": 2858,
+              "total": 726419.5,
+              "mean": 254.1706,
+              "median": 171.75
+            },
+            "waiting_s": {
+              "n": 2858,
+              "total": 140717.5,
+              "mean": 49.2364,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2858,
+              "total": 220076.65,
+              "mean": 77.0037,
+              "median": 18.59
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 752140.5,
+                "policy": 726419.5,
+                "absolute": -25721.0,
+                "percent": -3.42
+              },
+              "mean": {
+                "normal": 263.1702,
+                "policy": 254.1706,
+                "absolute": -9.0,
+                "percent": -3.42
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 157930.5,
+                "policy": 140717.5,
+                "absolute": -17213.0,
+                "percent": -10.899
+              },
+              "mean": {
+                "normal": 55.2591,
+                "policy": 49.2364,
+                "absolute": -6.023,
+                "percent": -10.899
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 245824.69,
+                "policy": 220076.65,
+                "absolute": -25748.04,
+                "percent": -10.474
+              },
+              "mean": {
+                "normal": 86.0128,
+                "policy": 77.0037,
+                "absolute": -9.009,
+                "percent": -10.474
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 328,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 329,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 39,
+        "completed_only_in_policy": 38,
+        "unfinished_delta_policy_minus_normal": 1,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "435e3fc2d17d4bdc",
+      "policy_scenario_hash": "435e3fc2d17d4bdc"
+    },
+    {
+      "seed": 42,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_NEXT",
+      "generated_count": 3226,
+      "paired_count": 2877,
+      "excluded_count": 348,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2898,
+          "completed_after_teleport": 0,
+          "unfinished": 328,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2898,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2927,
+          "completed_after_teleport": 0,
+          "unfinished": 299,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2927,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 783410.5,
+              "mean": 270.4213,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 177216.0,
+              "mean": 61.1722,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 271976.19,
+              "mean": 93.882,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2926,
+            "duration_s": {
+              "n": 2926,
+              "total": 761433.0,
+              "mean": 260.23,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2926,
+              "total": 156606.0,
+              "mean": 53.5222,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2926,
+              "total": 246525.86,
+              "mean": 84.2535,
+              "median": 19.085
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 783410.5,
+                "policy": 761433.0,
+                "absolute": -21977.5,
+                "percent": -2.805
+              },
+              "mean": {
+                "normal": 270.4213,
+                "policy": 260.23,
+                "absolute": -10.191,
+                "percent": -3.769
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 177216.0,
+                "policy": 156606.0,
+                "absolute": -20610.0,
+                "percent": -11.63
+              },
+              "mean": {
+                "normal": 61.1722,
+                "policy": 53.5222,
+                "absolute": -7.65,
+                "percent": -12.506
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 271976.19,
+                "policy": 246525.86,
+                "absolute": -25450.33,
+                "percent": -9.358
+              },
+              "mean": {
+                "normal": 93.882,
+                "policy": 84.2535,
+                "absolute": -9.629,
+                "percent": -10.256
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 783410.5,
+              "mean": 270.4213,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 177216.0,
+              "mean": 61.1722,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 271976.19,
+              "mean": 93.882,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2926,
+            "duration_s": {
+              "n": 2926,
+              "total": 761433.0,
+              "mean": 260.23,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2926,
+              "total": 156606.0,
+              "mean": 53.5222,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2926,
+              "total": 246525.86,
+              "mean": 84.2535,
+              "median": 19.085
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 783410.5,
+                "policy": 761433.0,
+                "absolute": -21977.5,
+                "percent": -2.805
+              },
+              "mean": {
+                "normal": 270.4213,
+                "policy": 260.23,
+                "absolute": -10.191,
+                "percent": -3.769
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 177216.0,
+                "policy": 156606.0,
+                "absolute": -20610.0,
+                "percent": -11.63
+              },
+              "mean": {
+                "normal": 61.1722,
+                "policy": 53.5222,
+                "absolute": -7.65,
+                "percent": -12.506
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 271976.19,
+                "policy": 246525.86,
+                "absolute": -25450.33,
+                "percent": -9.358
+              },
+              "mean": {
+                "normal": 93.882,
+                "policy": 84.2535,
+                "absolute": -9.629,
+                "percent": -10.256
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2877,
+            "duration_s": {
+              "n": 2877,
+              "total": 768810.0,
+              "mean": 267.2263,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2877,
+              "total": 168398.5,
+              "mean": 58.5327,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2877,
+              "total": 260091.23,
+              "mean": 90.4036,
+              "median": 18.2
+            }
+          },
+          "policy": {
+            "vehicle_count": 2877,
+            "duration_s": {
+              "n": 2877,
+              "total": 731101.0,
+              "mean": 254.1192,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2877,
+              "total": 138704.0,
+              "mean": 48.2113,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2877,
+              "total": 222365.61,
+              "mean": 77.2908,
+              "median": 18.79
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 768810.0,
+                "policy": 731101.0,
+                "absolute": -37709.0,
+                "percent": -4.905
+              },
+              "mean": {
+                "normal": 267.2263,
+                "policy": 254.1192,
+                "absolute": -13.107,
+                "percent": -4.905
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 168398.5,
+                "policy": 138704.0,
+                "absolute": -29694.5,
+                "percent": -17.633
+              },
+              "mean": {
+                "normal": 58.5327,
+                "policy": 48.2113,
+                "absolute": -10.321,
+                "percent": -17.634
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 260091.23,
+                "policy": 222365.61,
+                "absolute": -37725.62,
+                "percent": -14.505
+              },
+              "mean": {
+                "normal": 90.4036,
+                "policy": 77.2908,
+                "absolute": -13.113,
+                "percent": -14.505
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 328,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 299,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 20,
+        "completed_only_in_policy": 49,
+        "unfinished_delta_policy_minus_normal": -29,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "435e3fc2d17d4bdc",
+      "policy_scenario_hash": "435e3fc2d17d4bdc"
+    },
+    {
+      "seed": 42,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_ROLLING",
+      "generated_count": 3226,
+      "paired_count": 2877,
+      "excluded_count": 348,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2898,
+          "completed_after_teleport": 0,
+          "unfinished": 328,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2898,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2927,
+          "completed_after_teleport": 0,
+          "unfinished": 299,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2927,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 783410.5,
+              "mean": 270.4213,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 177216.0,
+              "mean": 61.1722,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 271976.19,
+              "mean": 93.882,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2926,
+            "duration_s": {
+              "n": 2926,
+              "total": 750323.5,
+              "mean": 256.4332,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2926,
+              "total": 147892.0,
+              "mean": 50.5441,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2926,
+              "total": 235378.26,
+              "mean": 80.4437,
+              "median": 19.47
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 783410.5,
+                "policy": 750323.5,
+                "absolute": -33087.0,
+                "percent": -4.223
+              },
+              "mean": {
+                "normal": 270.4213,
+                "policy": 256.4332,
+                "absolute": -13.988,
+                "percent": -5.173
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 177216.0,
+                "policy": 147892.0,
+                "absolute": -29324.0,
+                "percent": -16.547
+              },
+              "mean": {
+                "normal": 61.1722,
+                "policy": 50.5441,
+                "absolute": -10.628,
+                "percent": -17.374
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 271976.19,
+                "policy": 235378.26,
+                "absolute": -36597.93,
+                "percent": -13.456
+              },
+              "mean": {
+                "normal": 93.882,
+                "policy": 80.4437,
+                "absolute": -13.438,
+                "percent": -14.314
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 783410.5,
+              "mean": 270.4213,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 177216.0,
+              "mean": 61.1722,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 271976.19,
+              "mean": 93.882,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2926,
+            "duration_s": {
+              "n": 2926,
+              "total": 750323.5,
+              "mean": 256.4332,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2926,
+              "total": 147892.0,
+              "mean": 50.5441,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2926,
+              "total": 235378.26,
+              "mean": 80.4437,
+              "median": 19.47
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 783410.5,
+                "policy": 750323.5,
+                "absolute": -33087.0,
+                "percent": -4.223
+              },
+              "mean": {
+                "normal": 270.4213,
+                "policy": 256.4332,
+                "absolute": -13.988,
+                "percent": -5.173
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 177216.0,
+                "policy": 147892.0,
+                "absolute": -29324.0,
+                "percent": -16.547
+              },
+              "mean": {
+                "normal": 61.1722,
+                "policy": 50.5441,
+                "absolute": -10.628,
+                "percent": -17.374
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 271976.19,
+                "policy": 235378.26,
+                "absolute": -36597.93,
+                "percent": -13.456
+              },
+              "mean": {
+                "normal": 93.882,
+                "policy": 80.4437,
+                "absolute": -13.438,
+                "percent": -14.314
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2877,
+            "duration_s": {
+              "n": 2877,
+              "total": 773331.0,
+              "mean": 268.7977,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2877,
+              "total": 172158.5,
+              "mean": 59.8396,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2877,
+              "total": 264653.01,
+              "mean": 91.9892,
+              "median": 18.2
+            }
+          },
+          "policy": {
+            "vehicle_count": 2877,
+            "duration_s": {
+              "n": 2877,
+              "total": 717548.0,
+              "mean": 249.4084,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2877,
+              "total": 127574.0,
+              "mean": 44.3427,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2877,
+              "total": 208828.92,
+              "mean": 72.5857,
+              "median": 18.91
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 773331.0,
+                "policy": 717548.0,
+                "absolute": -55783.0,
+                "percent": -7.213
+              },
+              "mean": {
+                "normal": 268.7977,
+                "policy": 249.4084,
+                "absolute": -19.389,
+                "percent": -7.213
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 172158.5,
+                "policy": 127574.0,
+                "absolute": -44584.5,
+                "percent": -25.897
+              },
+              "mean": {
+                "normal": 59.8396,
+                "policy": 44.3427,
+                "absolute": -15.497,
+                "percent": -25.897
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 264653.01,
+                "policy": 208828.92,
+                "absolute": -55824.09,
+                "percent": -21.093
+              },
+              "mean": {
+                "normal": 91.9892,
+                "policy": 72.5857,
+                "absolute": -19.403,
+                "percent": -21.093
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 328,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 299,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 20,
+        "completed_only_in_policy": 49,
+        "unfinished_delta_policy_minus_normal": -29,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "435e3fc2d17d4bdc",
+      "policy_scenario_hash": "435e3fc2d17d4bdc"
+    },
+    {
+      "seed": 43,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_FULL_PREEMPTION",
+      "generated_count": 3226,
+      "paired_count": 2841,
+      "excluded_count": 384,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2876,
+          "completed_after_teleport": 0,
+          "unfinished": 350,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2876,
+          "teleport_count": 4,
+          "teleport_rate": 0.00124
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2882,
+          "completed_after_teleport": 0,
+          "unfinished": 344,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2882,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2875,
+            "duration_s": {
+              "n": 2875,
+              "total": 798774.5,
+              "mean": 277.8346,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2875,
+              "total": 204413.0,
+              "mean": 71.1002,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2875,
+              "total": 290704.09,
+              "mean": 101.1145,
+              "median": 18.12
+            }
+          },
+          "policy": {
+            "vehicle_count": 2881,
+            "duration_s": {
+              "n": 2881,
+              "total": 771410.0,
+              "mean": 267.7577,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2881,
+              "total": 179424.0,
+              "mean": 62.2784,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2881,
+              "total": 262496.32,
+              "mean": 91.1129,
+              "median": 18.53
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 798774.5,
+                "policy": 771410.0,
+                "absolute": -27364.5,
+                "percent": -3.426
+              },
+              "mean": {
+                "normal": 277.8346,
+                "policy": 267.7577,
+                "absolute": -10.077,
+                "percent": -3.627
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 204413.0,
+                "policy": 179424.0,
+                "absolute": -24989.0,
+                "percent": -12.225
+              },
+              "mean": {
+                "normal": 71.1002,
+                "policy": 62.2784,
+                "absolute": -8.822,
+                "percent": -12.408
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 290704.09,
+                "policy": 262496.32,
+                "absolute": -28207.77,
+                "percent": -9.703
+              },
+              "mean": {
+                "normal": 101.1145,
+                "policy": 91.1129,
+                "absolute": -10.002,
+                "percent": -9.891
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2875,
+            "duration_s": {
+              "n": 2875,
+              "total": 798774.5,
+              "mean": 277.8346,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2875,
+              "total": 204413.0,
+              "mean": 71.1002,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2875,
+              "total": 290704.09,
+              "mean": 101.1145,
+              "median": 18.12
+            }
+          },
+          "policy": {
+            "vehicle_count": 2881,
+            "duration_s": {
+              "n": 2881,
+              "total": 771410.0,
+              "mean": 267.7577,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2881,
+              "total": 179424.0,
+              "mean": 62.2784,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2881,
+              "total": 262496.32,
+              "mean": 91.1129,
+              "median": 18.53
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 798774.5,
+                "policy": 771410.0,
+                "absolute": -27364.5,
+                "percent": -3.426
+              },
+              "mean": {
+                "normal": 277.8346,
+                "policy": 267.7577,
+                "absolute": -10.077,
+                "percent": -3.627
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 204413.0,
+                "policy": 179424.0,
+                "absolute": -24989.0,
+                "percent": -12.225
+              },
+              "mean": {
+                "normal": 71.1002,
+                "policy": 62.2784,
+                "absolute": -8.822,
+                "percent": -12.408
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 290704.09,
+                "policy": 262496.32,
+                "absolute": -28207.77,
+                "percent": -9.703
+              },
+              "mean": {
+                "normal": 101.1145,
+                "policy": 91.1129,
+                "absolute": -10.002,
+                "percent": -9.891
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2841,
+            "duration_s": {
+              "n": 2841,
+              "total": 769453.0,
+              "mean": 270.8388,
+              "median": 171.0
+            },
+            "waiting_s": {
+              "n": 2841,
+              "total": 184791.0,
+              "mean": 65.0444,
+              "median": 0.0
+            },
+            "time_loss_s": {
+              "n": 2841,
+              "total": 265954.22,
+              "mean": 93.6129,
+              "median": 17.68
+            }
+          },
+          "policy": {
+            "vehicle_count": 2841,
+            "duration_s": {
+              "n": 2841,
+              "total": 736138.0,
+              "mean": 259.1123,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2841,
+              "total": 155445.0,
+              "mean": 54.7149,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2841,
+              "total": 232637.86,
+              "mean": 81.8859,
+              "median": 18.08
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 769453.0,
+                "policy": 736138.0,
+                "absolute": -33315.0,
+                "percent": -4.33
+              },
+              "mean": {
+                "normal": 270.8388,
+                "policy": 259.1123,
+                "absolute": -11.726,
+                "percent": -4.33
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 184791.0,
+                "policy": 155445.0,
+                "absolute": -29346.0,
+                "percent": -15.881
+              },
+              "mean": {
+                "normal": 65.0444,
+                "policy": 54.7149,
+                "absolute": -10.329,
+                "percent": -15.881
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 265954.22,
+                "policy": 232637.86,
+                "absolute": -33316.36,
+                "percent": -12.527
+              },
+              "mean": {
+                "normal": 93.6129,
+                "policy": 81.8859,
+                "absolute": -11.727,
+                "percent": -12.527
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 350,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 344,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 34,
+        "completed_only_in_policy": 40,
+        "unfinished_delta_policy_minus_normal": -6,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "f572c2bb3ce7e2aa",
+      "policy_scenario_hash": "f572c2bb3ce7e2aa"
+    },
+    {
+      "seed": 43,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_NEXT",
+      "generated_count": 3226,
+      "paired_count": 2818,
+      "excluded_count": 407,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2876,
+          "completed_after_teleport": 0,
+          "unfinished": 350,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2876,
+          "teleport_count": 4,
+          "teleport_rate": 0.00124
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2846,
+          "completed_after_teleport": 0,
+          "unfinished": 380,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2846,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2875,
+            "duration_s": {
+              "n": 2875,
+              "total": 798774.5,
+              "mean": 277.8346,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2875,
+              "total": 204413.0,
+              "mean": 71.1002,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2875,
+              "total": 290704.09,
+              "mean": 101.1145,
+              "median": 18.12
+            }
+          },
+          "policy": {
+            "vehicle_count": 2845,
+            "duration_s": {
+              "n": 2845,
+              "total": 795190.0,
+              "mean": 279.5044,
+              "median": 171.0
+            },
+            "waiting_s": {
+              "n": 2845,
+              "total": 204478.0,
+              "mean": 71.8728,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2845,
+              "total": 291133.41,
+              "mean": 102.3316,
+              "median": 17.8
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 798774.5,
+                "policy": 795190.0,
+                "absolute": -3584.5,
+                "percent": -0.449
+              },
+              "mean": {
+                "normal": 277.8346,
+                "policy": 279.5044,
+                "absolute": 1.67,
+                "percent": 0.601
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 204413.0,
+                "policy": 204478.0,
+                "absolute": 65.0,
+                "percent": 0.032
+              },
+              "mean": {
+                "normal": 71.1002,
+                "policy": 71.8728,
+                "absolute": 0.773,
+                "percent": 1.087
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 290704.09,
+                "policy": 291133.41,
+                "absolute": 429.32,
+                "percent": 0.148
+              },
+              "mean": {
+                "normal": 101.1145,
+                "policy": 102.3316,
+                "absolute": 1.217,
+                "percent": 1.204
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2875,
+            "duration_s": {
+              "n": 2875,
+              "total": 798774.5,
+              "mean": 277.8346,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2875,
+              "total": 204413.0,
+              "mean": 71.1002,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2875,
+              "total": 290704.09,
+              "mean": 101.1145,
+              "median": 18.12
+            }
+          },
+          "policy": {
+            "vehicle_count": 2845,
+            "duration_s": {
+              "n": 2845,
+              "total": 795190.0,
+              "mean": 279.5044,
+              "median": 171.0
+            },
+            "waiting_s": {
+              "n": 2845,
+              "total": 204478.0,
+              "mean": 71.8728,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2845,
+              "total": 291133.41,
+              "mean": 102.3316,
+              "median": 17.8
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 798774.5,
+                "policy": 795190.0,
+                "absolute": -3584.5,
+                "percent": -0.449
+              },
+              "mean": {
+                "normal": 277.8346,
+                "policy": 279.5044,
+                "absolute": 1.67,
+                "percent": 0.601
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 204413.0,
+                "policy": 204478.0,
+                "absolute": 65.0,
+                "percent": 0.032
+              },
+              "mean": {
+                "normal": 71.1002,
+                "policy": 71.8728,
+                "absolute": 0.773,
+                "percent": 1.087
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 290704.09,
+                "policy": 291133.41,
+                "absolute": 429.32,
+                "percent": 0.148
+              },
+              "mean": {
+                "normal": 101.1145,
+                "policy": 102.3316,
+                "absolute": 1.217,
+                "percent": 1.204
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2818,
+            "duration_s": {
+              "n": 2818,
+              "total": 743043.5,
+              "mean": 263.6776,
+              "median": 170.5
+            },
+            "waiting_s": {
+              "n": 2818,
+              "total": 165761.5,
+              "mean": 58.8224,
+              "median": 0.0
+            },
+            "time_loss_s": {
+              "n": 2818,
+              "total": 242518.37,
+              "mean": 86.0605,
+              "median": 17.485
+            }
+          },
+          "policy": {
+            "vehicle_count": 2818,
+            "duration_s": {
+              "n": 2818,
+              "total": 778962.5,
+              "mean": 276.4239,
+              "median": 171.0
+            },
+            "waiting_s": {
+              "n": 2818,
+              "total": 194590.5,
+              "mean": 69.0527,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2818,
+              "total": 278425.01,
+              "mean": 98.8023,
+              "median": 17.64
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 743043.5,
+                "policy": 778962.5,
+                "absolute": 35919.0,
+                "percent": 4.834
+              },
+              "mean": {
+                "normal": 263.6776,
+                "policy": 276.4239,
+                "absolute": 12.746,
+                "percent": 4.834
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 165761.5,
+                "policy": 194590.5,
+                "absolute": 28829.0,
+                "percent": 17.392
+              },
+              "mean": {
+                "normal": 58.8224,
+                "policy": 69.0527,
+                "absolute": 10.23,
+                "percent": 17.392
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 242518.37,
+                "policy": 278425.01,
+                "absolute": 35906.64,
+                "percent": 14.806
+              },
+              "mean": {
+                "normal": 86.0605,
+                "policy": 98.8023,
+                "absolute": 12.742,
+                "percent": 14.806
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 350,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 380,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 57,
+        "completed_only_in_policy": 27,
+        "unfinished_delta_policy_minus_normal": 30,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "f572c2bb3ce7e2aa",
+      "policy_scenario_hash": "f572c2bb3ce7e2aa"
+    },
+    {
+      "seed": 43,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_ROLLING",
+      "generated_count": 3226,
+      "paired_count": 2851,
+      "excluded_count": 374,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2876,
+          "completed_after_teleport": 0,
+          "unfinished": 350,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2876,
+          "teleport_count": 4,
+          "teleport_rate": 0.00124
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2885,
+          "completed_after_teleport": 0,
+          "unfinished": 341,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2885,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2875,
+            "duration_s": {
+              "n": 2875,
+              "total": 798774.5,
+              "mean": 277.8346,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2875,
+              "total": 204413.0,
+              "mean": 71.1002,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2875,
+              "total": 290704.09,
+              "mean": 101.1145,
+              "median": 18.12
+            }
+          },
+          "policy": {
+            "vehicle_count": 2884,
+            "duration_s": {
+              "n": 2884,
+              "total": 797711.0,
+              "mean": 276.5988,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2884,
+              "total": 194440.5,
+              "mean": 67.4204,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2884,
+              "total": 288384.21,
+              "mean": 99.9945,
+              "median": 18.4
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 798774.5,
+                "policy": 797711.0,
+                "absolute": -1063.5,
+                "percent": -0.133
+              },
+              "mean": {
+                "normal": 277.8346,
+                "policy": 276.5988,
+                "absolute": -1.236,
+                "percent": -0.445
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 204413.0,
+                "policy": 194440.5,
+                "absolute": -9972.5,
+                "percent": -4.879
+              },
+              "mean": {
+                "normal": 71.1002,
+                "policy": 67.4204,
+                "absolute": -3.68,
+                "percent": -5.176
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 290704.09,
+                "policy": 288384.21,
+                "absolute": -2319.88,
+                "percent": -0.798
+              },
+              "mean": {
+                "normal": 101.1145,
+                "policy": 99.9945,
+                "absolute": -1.12,
+                "percent": -1.108
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2875,
+            "duration_s": {
+              "n": 2875,
+              "total": 798774.5,
+              "mean": 277.8346,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2875,
+              "total": 204413.0,
+              "mean": 71.1002,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2875,
+              "total": 290704.09,
+              "mean": 101.1145,
+              "median": 18.12
+            }
+          },
+          "policy": {
+            "vehicle_count": 2884,
+            "duration_s": {
+              "n": 2884,
+              "total": 797711.0,
+              "mean": 276.5988,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2884,
+              "total": 194440.5,
+              "mean": 67.4204,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2884,
+              "total": 288384.21,
+              "mean": 99.9945,
+              "median": 18.4
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 798774.5,
+                "policy": 797711.0,
+                "absolute": -1063.5,
+                "percent": -0.133
+              },
+              "mean": {
+                "normal": 277.8346,
+                "policy": 276.5988,
+                "absolute": -1.236,
+                "percent": -0.445
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 204413.0,
+                "policy": 194440.5,
+                "absolute": -9972.5,
+                "percent": -4.879
+              },
+              "mean": {
+                "normal": 71.1002,
+                "policy": 67.4204,
+                "absolute": -3.68,
+                "percent": -5.176
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 290704.09,
+                "policy": 288384.21,
+                "absolute": -2319.88,
+                "percent": -0.798
+              },
+              "mean": {
+                "normal": 101.1145,
+                "policy": 99.9945,
+                "absolute": -1.12,
+                "percent": -1.108
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2851,
+            "duration_s": {
+              "n": 2851,
+              "total": 777927.5,
+              "mean": 272.8613,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2851,
+              "total": 190106.0,
+              "mean": 66.6805,
+              "median": 0.0
+            },
+            "time_loss_s": {
+              "n": 2851,
+              "total": 272980.63,
+              "mean": 95.7491,
+              "median": 17.73
+            }
+          },
+          "policy": {
+            "vehicle_count": 2851,
+            "duration_s": {
+              "n": 2851,
+              "total": 772181.5,
+              "mean": 270.8458,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2851,
+              "total": 178874.5,
+              "mean": 62.741,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2851,
+              "total": 267222.23,
+              "mean": 93.7293,
+              "median": 18.02
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 777927.5,
+                "policy": 772181.5,
+                "absolute": -5746.0,
+                "percent": -0.739
+              },
+              "mean": {
+                "normal": 272.8613,
+                "policy": 270.8458,
+                "absolute": -2.016,
+                "percent": -0.739
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 190106.0,
+                "policy": 178874.5,
+                "absolute": -11231.5,
+                "percent": -5.908
+              },
+              "mean": {
+                "normal": 66.6805,
+                "policy": 62.741,
+                "absolute": -3.939,
+                "percent": -5.908
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 272980.63,
+                "policy": 267222.23,
+                "absolute": -5758.4,
+                "percent": -2.109
+              },
+              "mean": {
+                "normal": 95.7491,
+                "policy": 93.7293,
+                "absolute": -2.02,
+                "percent": -2.109
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 350,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 341,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 24,
+        "completed_only_in_policy": 33,
+        "unfinished_delta_policy_minus_normal": -9,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "f572c2bb3ce7e2aa",
+      "policy_scenario_hash": "f572c2bb3ce7e2aa"
+    },
+    {
+      "seed": 44,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_FULL_PREEMPTION",
+      "generated_count": 3226,
+      "paired_count": 2908,
+      "excluded_count": 317,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2934,
+          "completed_after_teleport": 2,
+          "unfinished": 290,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2936,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2935,
+          "completed_after_teleport": 0,
+          "unfinished": 291,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2935,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2935,
+            "duration_s": {
+              "n": 2935,
+              "total": 732371.0,
+              "mean": 249.5302,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2935,
+              "total": 141060.0,
+              "mean": 48.0613,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2935,
+              "total": 215705.32,
+              "mean": 73.4941,
+              "median": 19.05
+            }
+          },
+          "policy": {
+            "vehicle_count": 2934,
+            "duration_s": {
+              "n": 2934,
+              "total": 739911.5,
+              "mean": 252.1852,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2934,
+              "total": 143744.5,
+              "mean": 48.9927,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2934,
+              "total": 223131.95,
+              "mean": 76.0504,
+              "median": 19.235
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 732371.0,
+                "policy": 739911.5,
+                "absolute": 7540.5,
+                "percent": 1.03
+              },
+              "mean": {
+                "normal": 249.5302,
+                "policy": 252.1852,
+                "absolute": 2.655,
+                "percent": 1.064
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 141060.0,
+                "policy": 143744.5,
+                "absolute": 2684.5,
+                "percent": 1.903
+              },
+              "mean": {
+                "normal": 48.0613,
+                "policy": 48.9927,
+                "absolute": 0.931,
+                "percent": 1.938
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 215705.32,
+                "policy": 223131.95,
+                "absolute": 7426.63,
+                "percent": 3.443
+              },
+              "mean": {
+                "normal": 73.4941,
+                "policy": 76.0504,
+                "absolute": 2.556,
+                "percent": 3.478
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2933,
+            "duration_s": {
+              "n": 2933,
+              "total": 730637.0,
+              "mean": 249.1091,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2933,
+              "total": 139812.0,
+              "mean": 47.6686,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2933,
+              "total": 214332.36,
+              "mean": 73.0762,
+              "median": 19.04
+            }
+          },
+          "policy": {
+            "vehicle_count": 2934,
+            "duration_s": {
+              "n": 2934,
+              "total": 739911.5,
+              "mean": 252.1852,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2934,
+              "total": 143744.5,
+              "mean": 48.9927,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2934,
+              "total": 223131.95,
+              "mean": 76.0504,
+              "median": 19.235
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 730637.0,
+                "policy": 739911.5,
+                "absolute": 9274.5,
+                "percent": 1.269
+              },
+              "mean": {
+                "normal": 249.1091,
+                "policy": 252.1852,
+                "absolute": 3.076,
+                "percent": 1.235
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 139812.0,
+                "policy": 143744.5,
+                "absolute": 3932.5,
+                "percent": 2.813
+              },
+              "mean": {
+                "normal": 47.6686,
+                "policy": 48.9927,
+                "absolute": 1.324,
+                "percent": 2.778
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 214332.36,
+                "policy": 223131.95,
+                "absolute": 8799.59,
+                "percent": 4.106
+              },
+              "mean": {
+                "normal": 73.0762,
+                "policy": 76.0504,
+                "absolute": 2.974,
+                "percent": 4.07
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2908,
+            "duration_s": {
+              "n": 2908,
+              "total": 716435.5,
+              "mean": 246.3671,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2908,
+              "total": 131307.0,
+              "mean": 45.1537,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2908,
+              "total": 203154.48,
+              "mean": 69.8606,
+              "median": 18.655
+            }
+          },
+          "policy": {
+            "vehicle_count": 2908,
+            "duration_s": {
+              "n": 2908,
+              "total": 726937.5,
+              "mean": 249.9785,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2908,
+              "total": 136842.0,
+              "mean": 47.0571,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2908,
+              "total": 213660.36,
+              "mean": 73.4733,
+              "median": 19.02
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 716435.5,
+                "policy": 726937.5,
+                "absolute": 10502.0,
+                "percent": 1.466
+              },
+              "mean": {
+                "normal": 246.3671,
+                "policy": 249.9785,
+                "absolute": 3.611,
+                "percent": 1.466
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 131307.0,
+                "policy": 136842.0,
+                "absolute": 5535.0,
+                "percent": 4.215
+              },
+              "mean": {
+                "normal": 45.1537,
+                "policy": 47.0571,
+                "absolute": 1.903,
+                "percent": 4.215
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 203154.48,
+                "policy": 213660.36,
+                "absolute": 10505.88,
+                "percent": 5.171
+              },
+              "mean": {
+                "normal": 69.8606,
+                "policy": 73.4733,
+                "absolute": 3.613,
+                "percent": 5.171
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 290,
+          "completed_after_teleport": 2,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 291,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 25,
+        "completed_only_in_policy": 26,
+        "unfinished_delta_policy_minus_normal": 1,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "ae7e4b5ed344e933",
+      "policy_scenario_hash": "ae7e4b5ed344e933"
+    },
+    {
+      "seed": 44,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_NEXT",
+      "generated_count": 3226,
+      "paired_count": 2913,
+      "excluded_count": 312,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2934,
+          "completed_after_teleport": 2,
+          "unfinished": 290,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2936,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2935,
+          "completed_after_teleport": 0,
+          "unfinished": 291,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2935,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2935,
+            "duration_s": {
+              "n": 2935,
+              "total": 732371.0,
+              "mean": 249.5302,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2935,
+              "total": 141060.0,
+              "mean": 48.0613,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2935,
+              "total": 215705.32,
+              "mean": 73.4941,
+              "median": 19.05
+            }
+          },
+          "policy": {
+            "vehicle_count": 2934,
+            "duration_s": {
+              "n": 2934,
+              "total": 732822.5,
+              "mean": 249.7691,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2934,
+              "total": 138187.0,
+              "mean": 47.0985,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2934,
+              "total": 216246.82,
+              "mean": 73.7038,
+              "median": 19.425
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 732371.0,
+                "policy": 732822.5,
+                "absolute": 451.5,
+                "percent": 0.062
+              },
+              "mean": {
+                "normal": 249.5302,
+                "policy": 249.7691,
+                "absolute": 0.239,
+                "percent": 0.096
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 141060.0,
+                "policy": 138187.0,
+                "absolute": -2873.0,
+                "percent": -2.037
+              },
+              "mean": {
+                "normal": 48.0613,
+                "policy": 47.0985,
+                "absolute": -0.963,
+                "percent": -2.003
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 215705.32,
+                "policy": 216246.82,
+                "absolute": 541.5,
+                "percent": 0.251
+              },
+              "mean": {
+                "normal": 73.4941,
+                "policy": 73.7038,
+                "absolute": 0.21,
+                "percent": 0.285
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2933,
+            "duration_s": {
+              "n": 2933,
+              "total": 730637.0,
+              "mean": 249.1091,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2933,
+              "total": 139812.0,
+              "mean": 47.6686,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2933,
+              "total": 214332.36,
+              "mean": 73.0762,
+              "median": 19.04
+            }
+          },
+          "policy": {
+            "vehicle_count": 2934,
+            "duration_s": {
+              "n": 2934,
+              "total": 732822.5,
+              "mean": 249.7691,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2934,
+              "total": 138187.0,
+              "mean": 47.0985,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2934,
+              "total": 216246.82,
+              "mean": 73.7038,
+              "median": 19.425
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 730637.0,
+                "policy": 732822.5,
+                "absolute": 2185.5,
+                "percent": 0.299
+              },
+              "mean": {
+                "normal": 249.1091,
+                "policy": 249.7691,
+                "absolute": 0.66,
+                "percent": 0.265
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 139812.0,
+                "policy": 138187.0,
+                "absolute": -1625.0,
+                "percent": -1.162
+              },
+              "mean": {
+                "normal": 47.6686,
+                "policy": 47.0985,
+                "absolute": -0.57,
+                "percent": -1.196
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 214332.36,
+                "policy": 216246.82,
+                "absolute": 1914.46,
+                "percent": 0.893
+              },
+              "mean": {
+                "normal": 73.0762,
+                "policy": 73.7038,
+                "absolute": 0.628,
+                "percent": 0.859
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2913,
+            "duration_s": {
+              "n": 2913,
+              "total": 720410.5,
+              "mean": 247.3088,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2913,
+              "total": 134315.5,
+              "mean": 46.109,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2913,
+              "total": 206702.17,
+              "mean": 70.9585,
+              "median": 18.72
+            }
+          },
+          "policy": {
+            "vehicle_count": 2913,
+            "duration_s": {
+              "n": 2913,
+              "total": 717486.5,
+              "mean": 246.305,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2913,
+              "total": 128475.0,
+              "mean": 44.104,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2913,
+              "total": 203768.09,
+              "mean": 69.9513,
+              "median": 19.24
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 720410.5,
+                "policy": 717486.5,
+                "absolute": -2924.0,
+                "percent": -0.406
+              },
+              "mean": {
+                "normal": 247.3088,
+                "policy": 246.305,
+                "absolute": -1.004,
+                "percent": -0.406
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 134315.5,
+                "policy": 128475.0,
+                "absolute": -5840.5,
+                "percent": -4.348
+              },
+              "mean": {
+                "normal": 46.109,
+                "policy": 44.104,
+                "absolute": -2.005,
+                "percent": -4.348
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 206702.17,
+                "policy": 203768.09,
+                "absolute": -2934.08,
+                "percent": -1.419
+              },
+              "mean": {
+                "normal": 70.9585,
+                "policy": 69.9513,
+                "absolute": -1.007,
+                "percent": -1.419
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 290,
+          "completed_after_teleport": 2,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 291,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 20,
+        "completed_only_in_policy": 21,
+        "unfinished_delta_policy_minus_normal": 1,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "ae7e4b5ed344e933",
+      "policy_scenario_hash": "ae7e4b5ed344e933"
+    },
+    {
+      "seed": 44,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_ROLLING",
+      "generated_count": 3226,
+      "paired_count": 2906,
+      "excluded_count": 319,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2934,
+          "completed_after_teleport": 2,
+          "unfinished": 290,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2936,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2930,
+          "completed_after_teleport": 0,
+          "unfinished": 296,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2930,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2935,
+            "duration_s": {
+              "n": 2935,
+              "total": 732371.0,
+              "mean": 249.5302,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2935,
+              "total": 141060.0,
+              "mean": 48.0613,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2935,
+              "total": 215705.32,
+              "mean": 73.4941,
+              "median": 19.05
+            }
+          },
+          "policy": {
+            "vehicle_count": 2929,
+            "duration_s": {
+              "n": 2929,
+              "total": 749088.5,
+              "mean": 255.7489,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2929,
+              "total": 148097.0,
+              "mean": 50.5623,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2929,
+              "total": 233101.48,
+              "mean": 79.584,
+              "median": 19.28
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 732371.0,
+                "policy": 749088.5,
+                "absolute": 16717.5,
+                "percent": 2.283
+              },
+              "mean": {
+                "normal": 249.5302,
+                "policy": 255.7489,
+                "absolute": 6.219,
+                "percent": 2.492
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 141060.0,
+                "policy": 148097.0,
+                "absolute": 7037.0,
+                "percent": 4.989
+              },
+              "mean": {
+                "normal": 48.0613,
+                "policy": 50.5623,
+                "absolute": 2.501,
+                "percent": 5.204
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 215705.32,
+                "policy": 233101.48,
+                "absolute": 17396.16,
+                "percent": 8.065
+              },
+              "mean": {
+                "normal": 73.4941,
+                "policy": 79.584,
+                "absolute": 6.09,
+                "percent": 8.286
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2933,
+            "duration_s": {
+              "n": 2933,
+              "total": 730637.0,
+              "mean": 249.1091,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2933,
+              "total": 139812.0,
+              "mean": 47.6686,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2933,
+              "total": 214332.36,
+              "mean": 73.0762,
+              "median": 19.04
+            }
+          },
+          "policy": {
+            "vehicle_count": 2929,
+            "duration_s": {
+              "n": 2929,
+              "total": 749088.5,
+              "mean": 255.7489,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2929,
+              "total": 148097.0,
+              "mean": 50.5623,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2929,
+              "total": 233101.48,
+              "mean": 79.584,
+              "median": 19.28
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 730637.0,
+                "policy": 749088.5,
+                "absolute": 18451.5,
+                "percent": 2.525
+              },
+              "mean": {
+                "normal": 249.1091,
+                "policy": 255.7489,
+                "absolute": 6.64,
+                "percent": 2.665
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 139812.0,
+                "policy": 148097.0,
+                "absolute": 8285.0,
+                "percent": 5.926
+              },
+              "mean": {
+                "normal": 47.6686,
+                "policy": 50.5623,
+                "absolute": 2.894,
+                "percent": 6.07
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 214332.36,
+                "policy": 233101.48,
+                "absolute": 18769.12,
+                "percent": 8.757
+              },
+              "mean": {
+                "normal": 73.0762,
+                "policy": 79.584,
+                "absolute": 6.508,
+                "percent": 8.905
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2906,
+            "duration_s": {
+              "n": 2906,
+              "total": 717647.0,
+              "mean": 246.9535,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2906,
+              "total": 132929.0,
+              "mean": 45.7429,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2906,
+              "total": 204823.21,
+              "mean": 70.4829,
+              "median": 18.63
+            }
+          },
+          "policy": {
+            "vehicle_count": 2906,
+            "duration_s": {
+              "n": 2906,
+              "total": 732024.0,
+              "mean": 251.9009,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2906,
+              "total": 137610.5,
+              "mean": 47.3539,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2906,
+              "total": 219212.54,
+              "mean": 75.4345,
+              "median": 19.09
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 717647.0,
+                "policy": 732024.0,
+                "absolute": 14377.0,
+                "percent": 2.003
+              },
+              "mean": {
+                "normal": 246.9535,
+                "policy": 251.9009,
+                "absolute": 4.947,
+                "percent": 2.003
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 132929.0,
+                "policy": 137610.5,
+                "absolute": 4681.5,
+                "percent": 3.522
+              },
+              "mean": {
+                "normal": 45.7429,
+                "policy": 47.3539,
+                "absolute": 1.611,
+                "percent": 3.522
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 204823.21,
+                "policy": 219212.54,
+                "absolute": 14389.33,
+                "percent": 7.025
+              },
+              "mean": {
+                "normal": 70.4829,
+                "policy": 75.4345,
+                "absolute": 4.952,
+                "percent": 7.025
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 290,
+          "completed_after_teleport": 2,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 296,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 27,
+        "completed_only_in_policy": 23,
+        "unfinished_delta_policy_minus_normal": 6,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "ae7e4b5ed344e933",
+      "policy_scenario_hash": "ae7e4b5ed344e933"
+    },
+    {
+      "seed": 45,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_FULL_PREEMPTION",
+      "generated_count": 3226,
+      "paired_count": 2859,
+      "excluded_count": 366,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2890,
+          "completed_after_teleport": 1,
+          "unfinished": 335,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2891,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2941,
+          "completed_after_teleport": 1,
+          "unfinished": 284,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2942,
+          "teleport_count": 1,
+          "teleport_rate": 0.00031
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2890,
+            "duration_s": {
+              "n": 2890,
+              "total": 760606.0,
+              "mean": 263.1855,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2890,
+              "total": 168261.5,
+              "mean": 58.222,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2890,
+              "total": 247698.14,
+              "mean": 85.7087,
+              "median": 18.37
+            }
+          },
+          "policy": {
+            "vehicle_count": 2941,
+            "duration_s": {
+              "n": 2941,
+              "total": 759807.5,
+              "mean": 258.3501,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2941,
+              "total": 155955.0,
+              "mean": 53.0279,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2941,
+              "total": 240621.91,
+              "mean": 81.8164,
+              "median": 18.76
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 760606.0,
+                "policy": 759807.5,
+                "absolute": -798.5,
+                "percent": -0.105
+              },
+              "mean": {
+                "normal": 263.1855,
+                "policy": 258.3501,
+                "absolute": -4.835,
+                "percent": -1.837
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 168261.5,
+                "policy": 155955.0,
+                "absolute": -12306.5,
+                "percent": -7.314
+              },
+              "mean": {
+                "normal": 58.222,
+                "policy": 53.0279,
+                "absolute": -5.194,
+                "percent": -8.921
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 247698.14,
+                "policy": 240621.91,
+                "absolute": -7076.23,
+                "percent": -2.857
+              },
+              "mean": {
+                "normal": 85.7087,
+                "policy": 81.8164,
+                "absolute": -3.892,
+                "percent": -4.541
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2889,
+            "duration_s": {
+              "n": 2889,
+              "total": 759274.0,
+              "mean": 262.8155,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2889,
+              "total": 167223.5,
+              "mean": 57.8828,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2889,
+              "total": 246544.74,
+              "mean": 85.3391,
+              "median": 18.37
+            }
+          },
+          "policy": {
+            "vehicle_count": 2940,
+            "duration_s": {
+              "n": 2940,
+              "total": 758827.5,
+              "mean": 258.1046,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2940,
+              "total": 155266.0,
+              "mean": 52.8116,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2940,
+              "total": 239806.72,
+              "mean": 81.5669,
+              "median": 18.76
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 759274.0,
+                "policy": 758827.5,
+                "absolute": -446.5,
+                "percent": -0.059
+              },
+              "mean": {
+                "normal": 262.8155,
+                "policy": 258.1046,
+                "absolute": -4.711,
+                "percent": -1.792
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 167223.5,
+                "policy": 155266.0,
+                "absolute": -11957.5,
+                "percent": -7.151
+              },
+              "mean": {
+                "normal": 57.8828,
+                "policy": 52.8116,
+                "absolute": -5.071,
+                "percent": -8.761
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 246544.74,
+                "policy": 239806.72,
+                "absolute": -6738.02,
+                "percent": -2.733
+              },
+              "mean": {
+                "normal": 85.3391,
+                "policy": 81.5669,
+                "absolute": -3.772,
+                "percent": -4.42
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2859,
+            "duration_s": {
+              "n": 2859,
+              "total": 737577.5,
+              "mean": 257.9844,
+              "median": 172.0
+            },
+            "waiting_s": {
+              "n": 2859,
+              "total": 153558.0,
+              "mean": 53.7104,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2859,
+              "total": 228703.63,
+              "mean": 79.9943,
+              "median": 18.15
+            }
+          },
+          "policy": {
+            "vehicle_count": 2859,
+            "duration_s": {
+              "n": 2859,
+              "total": 698884.0,
+              "mean": 244.4505,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2859,
+              "total": 118069.5,
+              "mean": 41.2975,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2859,
+              "total": 190018.49,
+              "mean": 66.4633,
+              "median": 18.01
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 737577.5,
+                "policy": 698884.0,
+                "absolute": -38693.5,
+                "percent": -5.246
+              },
+              "mean": {
+                "normal": 257.9844,
+                "policy": 244.4505,
+                "absolute": -13.534,
+                "percent": -5.246
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 153558.0,
+                "policy": 118069.5,
+                "absolute": -35488.5,
+                "percent": -23.111
+              },
+              "mean": {
+                "normal": 53.7104,
+                "policy": 41.2975,
+                "absolute": -12.413,
+                "percent": -23.111
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 228703.63,
+                "policy": 190018.49,
+                "absolute": -38685.14,
+                "percent": -16.915
+              },
+              "mean": {
+                "normal": 79.9943,
+                "policy": 66.4633,
+                "absolute": -13.531,
+                "percent": -16.915
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 335,
+          "completed_after_teleport": 1,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 284,
+          "completed_after_teleport": 1,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 30,
+        "completed_only_in_policy": 81,
+        "unfinished_delta_policy_minus_normal": -51,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "204b864e0acaf836",
+      "policy_scenario_hash": "204b864e0acaf836"
+    },
+    {
+      "seed": 45,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_NEXT",
+      "generated_count": 3226,
+      "paired_count": 2871,
+      "excluded_count": 354,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2890,
+          "completed_after_teleport": 1,
+          "unfinished": 335,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2891,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2958,
+          "completed_after_teleport": 0,
+          "unfinished": 268,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2958,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2890,
+            "duration_s": {
+              "n": 2890,
+              "total": 760606.0,
+              "mean": 263.1855,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2890,
+              "total": 168261.5,
+              "mean": 58.222,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2890,
+              "total": 247698.14,
+              "mean": 85.7087,
+              "median": 18.37
+            }
+          },
+          "policy": {
+            "vehicle_count": 2957,
+            "duration_s": {
+              "n": 2957,
+              "total": 754780.0,
+              "mean": 255.2519,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2957,
+              "total": 150347.0,
+              "mean": 50.8444,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2957,
+              "total": 233910.04,
+              "mean": 79.1038,
+              "median": 19.27
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 760606.0,
+                "policy": 754780.0,
+                "absolute": -5826.0,
+                "percent": -0.766
+              },
+              "mean": {
+                "normal": 263.1855,
+                "policy": 255.2519,
+                "absolute": -7.934,
+                "percent": -3.014
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 168261.5,
+                "policy": 150347.0,
+                "absolute": -17914.5,
+                "percent": -10.647
+              },
+              "mean": {
+                "normal": 58.222,
+                "policy": 50.8444,
+                "absolute": -7.378,
+                "percent": -12.671
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 247698.14,
+                "policy": 233910.04,
+                "absolute": -13788.1,
+                "percent": -5.566
+              },
+              "mean": {
+                "normal": 85.7087,
+                "policy": 79.1038,
+                "absolute": -6.605,
+                "percent": -7.706
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2889,
+            "duration_s": {
+              "n": 2889,
+              "total": 759274.0,
+              "mean": 262.8155,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2889,
+              "total": 167223.5,
+              "mean": 57.8828,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2889,
+              "total": 246544.74,
+              "mean": 85.3391,
+              "median": 18.37
+            }
+          },
+          "policy": {
+            "vehicle_count": 2957,
+            "duration_s": {
+              "n": 2957,
+              "total": 754780.0,
+              "mean": 255.2519,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2957,
+              "total": 150347.0,
+              "mean": 50.8444,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2957,
+              "total": 233910.04,
+              "mean": 79.1038,
+              "median": 19.27
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 759274.0,
+                "policy": 754780.0,
+                "absolute": -4494.0,
+                "percent": -0.592
+              },
+              "mean": {
+                "normal": 262.8155,
+                "policy": 255.2519,
+                "absolute": -7.564,
+                "percent": -2.878
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 167223.5,
+                "policy": 150347.0,
+                "absolute": -16876.5,
+                "percent": -10.092
+              },
+              "mean": {
+                "normal": 57.8828,
+                "policy": 50.8444,
+                "absolute": -7.038,
+                "percent": -12.16
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 246544.74,
+                "policy": 233910.04,
+                "absolute": -12634.7,
+                "percent": -5.125
+              },
+              "mean": {
+                "normal": 85.3391,
+                "policy": 79.1038,
+                "absolute": -6.235,
+                "percent": -7.306
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2871,
+            "duration_s": {
+              "n": 2871,
+              "total": 747172.5,
+              "mean": 260.2482,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2871,
+              "total": 160044.0,
+              "mean": 55.745,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2871,
+              "total": 236852.46,
+              "mean": 82.4982,
+              "median": 18.25
+            }
+          },
+          "policy": {
+            "vehicle_count": 2871,
+            "duration_s": {
+              "n": 2871,
+              "total": 696128.5,
+              "mean": 242.469,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2871,
+              "total": 114153.5,
+              "mean": 39.7609,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2871,
+              "total": 185813.18,
+              "mean": 64.7207,
+              "median": 18.39
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 747172.5,
+                "policy": 696128.5,
+                "absolute": -51044.0,
+                "percent": -6.832
+              },
+              "mean": {
+                "normal": 260.2482,
+                "policy": 242.469,
+                "absolute": -17.779,
+                "percent": -6.832
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 160044.0,
+                "policy": 114153.5,
+                "absolute": -45890.5,
+                "percent": -28.674
+              },
+              "mean": {
+                "normal": 55.745,
+                "policy": 39.7609,
+                "absolute": -15.984,
+                "percent": -28.674
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 236852.46,
+                "policy": 185813.18,
+                "absolute": -51039.28,
+                "percent": -21.549
+              },
+              "mean": {
+                "normal": 82.4982,
+                "policy": 64.7207,
+                "absolute": -17.778,
+                "percent": -21.549
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 335,
+          "completed_after_teleport": 1,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 268,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 18,
+        "completed_only_in_policy": 86,
+        "unfinished_delta_policy_minus_normal": -67,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "204b864e0acaf836",
+      "policy_scenario_hash": "204b864e0acaf836"
+    },
+    {
+      "seed": 45,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_ROLLING",
+      "generated_count": 3226,
+      "paired_count": 2880,
+      "excluded_count": 345,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2890,
+          "completed_after_teleport": 1,
+          "unfinished": 335,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2891,
+          "teleport_count": 2,
+          "teleport_rate": 0.00062
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2969,
+          "completed_after_teleport": 0,
+          "unfinished": 257,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2969,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2890,
+            "duration_s": {
+              "n": 2890,
+              "total": 760606.0,
+              "mean": 263.1855,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2890,
+              "total": 168261.5,
+              "mean": 58.222,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2890,
+              "total": 247698.14,
+              "mean": 85.7087,
+              "median": 18.37
+            }
+          },
+          "policy": {
+            "vehicle_count": 2968,
+            "duration_s": {
+              "n": 2968,
+              "total": 749929.5,
+              "mean": 252.6717,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2968,
+              "total": 142613.5,
+              "mean": 48.0504,
+              "median": 1.5
+            },
+            "time_loss_s": {
+              "n": 2968,
+              "total": 227390.73,
+              "mean": 76.6141,
+              "median": 19.67
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 760606.0,
+                "policy": 749929.5,
+                "absolute": -10676.5,
+                "percent": -1.404
+              },
+              "mean": {
+                "normal": 263.1855,
+                "policy": 252.6717,
+                "absolute": -10.514,
+                "percent": -3.995
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 168261.5,
+                "policy": 142613.5,
+                "absolute": -25648.0,
+                "percent": -15.243
+              },
+              "mean": {
+                "normal": 58.222,
+                "policy": 48.0504,
+                "absolute": -10.172,
+                "percent": -17.47
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 247698.14,
+                "policy": 227390.73,
+                "absolute": -20307.41,
+                "percent": -8.198
+              },
+              "mean": {
+                "normal": 85.7087,
+                "policy": 76.6141,
+                "absolute": -9.095,
+                "percent": -10.611
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2889,
+            "duration_s": {
+              "n": 2889,
+              "total": 759274.0,
+              "mean": 262.8155,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2889,
+              "total": 167223.5,
+              "mean": 57.8828,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2889,
+              "total": 246544.74,
+              "mean": 85.3391,
+              "median": 18.37
+            }
+          },
+          "policy": {
+            "vehicle_count": 2968,
+            "duration_s": {
+              "n": 2968,
+              "total": 749929.5,
+              "mean": 252.6717,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2968,
+              "total": 142613.5,
+              "mean": 48.0504,
+              "median": 1.5
+            },
+            "time_loss_s": {
+              "n": 2968,
+              "total": 227390.73,
+              "mean": 76.6141,
+              "median": 19.67
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 759274.0,
+                "policy": 749929.5,
+                "absolute": -9344.5,
+                "percent": -1.231
+              },
+              "mean": {
+                "normal": 262.8155,
+                "policy": 252.6717,
+                "absolute": -10.144,
+                "percent": -3.86
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 167223.5,
+                "policy": 142613.5,
+                "absolute": -24610.0,
+                "percent": -14.717
+              },
+              "mean": {
+                "normal": 57.8828,
+                "policy": 48.0504,
+                "absolute": -9.832,
+                "percent": -16.987
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 246544.74,
+                "policy": 227390.73,
+                "absolute": -19154.01,
+                "percent": -7.769
+              },
+              "mean": {
+                "normal": 85.3391,
+                "policy": 76.6141,
+                "absolute": -8.725,
+                "percent": -10.224
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2880,
+            "duration_s": {
+              "n": 2880,
+              "total": 754278.5,
+              "mean": 261.9023,
+              "median": 172.75
+            },
+            "waiting_s": {
+              "n": 2880,
+              "total": 164396.0,
+              "mean": 57.0819,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2880,
+              "total": 242761.1,
+              "mean": 84.292,
+              "median": 18.29
+            }
+          },
+          "policy": {
+            "vehicle_count": 2880,
+            "duration_s": {
+              "n": 2880,
+              "total": 697050.5,
+              "mean": 242.0314,
+              "median": 171.5
+            },
+            "waiting_s": {
+              "n": 2880,
+              "total": 112526.0,
+              "mean": 39.0715,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2880,
+              "total": 185562.56,
+              "mean": 64.4314,
+              "median": 18.72
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 754278.5,
+                "policy": 697050.5,
+                "absolute": -57228.0,
+                "percent": -7.587
+              },
+              "mean": {
+                "normal": 261.9023,
+                "policy": 242.0314,
+                "absolute": -19.871,
+                "percent": -7.587
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 164396.0,
+                "policy": 112526.0,
+                "absolute": -51870.0,
+                "percent": -31.552
+              },
+              "mean": {
+                "normal": 57.0819,
+                "policy": 39.0715,
+                "absolute": -18.01,
+                "percent": -31.552
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 242761.1,
+                "policy": 185562.56,
+                "absolute": -57198.54,
+                "percent": -23.562
+              },
+              "mean": {
+                "normal": 84.292,
+                "policy": 64.4314,
+                "absolute": -19.861,
+                "percent": -23.562
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 335,
+          "completed_after_teleport": 1,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 257,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 9,
+        "completed_only_in_policy": 88,
+        "unfinished_delta_policy_minus_normal": -78,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "204b864e0acaf836",
+      "policy_scenario_hash": "204b864e0acaf836"
+    },
+    {
+      "seed": 46,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_FULL_PREEMPTION",
+      "generated_count": 3226,
+      "paired_count": 2869,
+      "excluded_count": 356,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2898,
+          "completed_after_teleport": 0,
+          "unfinished": 328,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2898,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2910,
+          "completed_after_teleport": 1,
+          "unfinished": 315,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2911,
+          "teleport_count": 1,
+          "teleport_rate": 0.00031
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 793553.5,
+              "mean": 273.9225,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 187938.0,
+              "mean": 64.8733,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 281793.53,
+              "mean": 97.2708,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2910,
+            "duration_s": {
+              "n": 2910,
+              "total": 822889.5,
+              "mean": 282.7799,
+              "median": 174.5
+            },
+            "waiting_s": {
+              "n": 2910,
+              "total": 207985.5,
+              "mean": 71.4727,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2910,
+              "total": 309274.69,
+              "mean": 106.28,
+              "median": 19.185
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 793553.5,
+                "policy": 822889.5,
+                "absolute": 29336.0,
+                "percent": 3.697
+              },
+              "mean": {
+                "normal": 273.9225,
+                "policy": 282.7799,
+                "absolute": 8.857,
+                "percent": 3.234
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 187938.0,
+                "policy": 207985.5,
+                "absolute": 20047.5,
+                "percent": 10.667
+              },
+              "mean": {
+                "normal": 64.8733,
+                "policy": 71.4727,
+                "absolute": 6.599,
+                "percent": 10.173
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 281793.53,
+                "policy": 309274.69,
+                "absolute": 27481.16,
+                "percent": 9.752
+              },
+              "mean": {
+                "normal": 97.2708,
+                "policy": 106.28,
+                "absolute": 9.009,
+                "percent": 9.262
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 793553.5,
+              "mean": 273.9225,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 187938.0,
+              "mean": 64.8733,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 281793.53,
+              "mean": 97.2708,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2909,
+            "duration_s": {
+              "n": 2909,
+              "total": 822172.5,
+              "mean": 282.6306,
+              "median": 174.5
+            },
+            "waiting_s": {
+              "n": 2909,
+              "total": 207475.0,
+              "mean": 71.3218,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2909,
+              "total": 308701.77,
+              "mean": 106.1195,
+              "median": 19.18
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 793553.5,
+                "policy": 822172.5,
+                "absolute": 28619.0,
+                "percent": 3.606
+              },
+              "mean": {
+                "normal": 273.9225,
+                "policy": 282.6306,
+                "absolute": 8.708,
+                "percent": 3.179
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 187938.0,
+                "policy": 207475.0,
+                "absolute": 19537.0,
+                "percent": 10.395
+              },
+              "mean": {
+                "normal": 64.8733,
+                "policy": 71.3218,
+                "absolute": 6.448,
+                "percent": 9.94
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 281793.53,
+                "policy": 308701.77,
+                "absolute": 26908.24,
+                "percent": 9.549
+              },
+              "mean": {
+                "normal": 97.2708,
+                "policy": 106.1195,
+                "absolute": 8.849,
+                "percent": 9.097
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2869,
+            "duration_s": {
+              "n": 2869,
+              "total": 773783.5,
+              "mean": 269.7049,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2869,
+              "total": 175751.0,
+              "mean": 61.2586,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2869,
+              "total": 265575.33,
+              "mean": 92.5672,
+              "median": 17.99
+            }
+          },
+          "policy": {
+            "vehicle_count": 2869,
+            "duration_s": {
+              "n": 2869,
+              "total": 800622.0,
+              "mean": 279.0596,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2869,
+              "total": 196216.5,
+              "mean": 68.3919,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2869,
+              "total": 292400.54,
+              "mean": 101.9172,
+              "median": 18.82
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 773783.5,
+                "policy": 800622.0,
+                "absolute": 26838.5,
+                "percent": 3.468
+              },
+              "mean": {
+                "normal": 269.7049,
+                "policy": 279.0596,
+                "absolute": 9.355,
+                "percent": 3.468
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 175751.0,
+                "policy": 196216.5,
+                "absolute": 20465.5,
+                "percent": 11.645
+              },
+              "mean": {
+                "normal": 61.2586,
+                "policy": 68.3919,
+                "absolute": 7.133,
+                "percent": 11.645
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 265575.33,
+                "policy": 292400.54,
+                "absolute": 26825.21,
+                "percent": 10.101
+              },
+              "mean": {
+                "normal": 92.5672,
+                "policy": 101.9172,
+                "absolute": 9.35,
+                "percent": 10.101
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 328,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 315,
+          "completed_after_teleport": 1,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 28,
+        "completed_only_in_policy": 40,
+        "unfinished_delta_policy_minus_normal": -13,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "f3265ddbb871018c",
+      "policy_scenario_hash": "f3265ddbb871018c"
+    },
+    {
+      "seed": 46,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_NEXT",
+      "generated_count": 3226,
+      "paired_count": 2869,
+      "excluded_count": 356,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2898,
+          "completed_after_teleport": 0,
+          "unfinished": 328,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2898,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2909,
+          "completed_after_teleport": 0,
+          "unfinished": 317,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2909,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 793553.5,
+              "mean": 273.9225,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 187938.0,
+              "mean": 64.8733,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 281793.53,
+              "mean": 97.2708,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2908,
+            "duration_s": {
+              "n": 2908,
+              "total": 816166.0,
+              "mean": 280.6623,
+              "median": 174.0
+            },
+            "waiting_s": {
+              "n": 2908,
+              "total": 199857.5,
+              "mean": 68.7268,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2908,
+              "total": 302813.32,
+              "mean": 104.1311,
+              "median": 18.93
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 793553.5,
+                "policy": 816166.0,
+                "absolute": 22612.5,
+                "percent": 2.85
+              },
+              "mean": {
+                "normal": 273.9225,
+                "policy": 280.6623,
+                "absolute": 6.74,
+                "percent": 2.46
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 187938.0,
+                "policy": 199857.5,
+                "absolute": 11919.5,
+                "percent": 6.342
+              },
+              "mean": {
+                "normal": 64.8733,
+                "policy": 68.7268,
+                "absolute": 3.853,
+                "percent": 5.94
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 281793.53,
+                "policy": 302813.32,
+                "absolute": 21019.79,
+                "percent": 7.459
+              },
+              "mean": {
+                "normal": 97.2708,
+                "policy": 104.1311,
+                "absolute": 6.86,
+                "percent": 7.053
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 793553.5,
+              "mean": 273.9225,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 187938.0,
+              "mean": 64.8733,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 281793.53,
+              "mean": 97.2708,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2908,
+            "duration_s": {
+              "n": 2908,
+              "total": 816166.0,
+              "mean": 280.6623,
+              "median": 174.0
+            },
+            "waiting_s": {
+              "n": 2908,
+              "total": 199857.5,
+              "mean": 68.7268,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2908,
+              "total": 302813.32,
+              "mean": 104.1311,
+              "median": 18.93
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 793553.5,
+                "policy": 816166.0,
+                "absolute": 22612.5,
+                "percent": 2.85
+              },
+              "mean": {
+                "normal": 273.9225,
+                "policy": 280.6623,
+                "absolute": 6.74,
+                "percent": 2.46
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 187938.0,
+                "policy": 199857.5,
+                "absolute": 11919.5,
+                "percent": 6.342
+              },
+              "mean": {
+                "normal": 64.8733,
+                "policy": 68.7268,
+                "absolute": 3.853,
+                "percent": 5.94
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 281793.53,
+                "policy": 302813.32,
+                "absolute": 21019.79,
+                "percent": 7.459
+              },
+              "mean": {
+                "normal": 97.2708,
+                "policy": 104.1311,
+                "absolute": 6.86,
+                "percent": 7.053
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2869,
+            "duration_s": {
+              "n": 2869,
+              "total": 772204.0,
+              "mean": 269.1544,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2869,
+              "total": 174467.5,
+              "mean": 60.8113,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2869,
+              "total": 263999.34,
+              "mean": 92.0179,
+              "median": 17.98
+            }
+          },
+          "policy": {
+            "vehicle_count": 2869,
+            "duration_s": {
+              "n": 2869,
+              "total": 795645.0,
+              "mean": 277.3249,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2869,
+              "total": 189344.5,
+              "mean": 65.9967,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2869,
+              "total": 287423.5,
+              "mean": 100.1825,
+              "median": 18.59
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 772204.0,
+                "policy": 795645.0,
+                "absolute": 23441.0,
+                "percent": 3.036
+              },
+              "mean": {
+                "normal": 269.1544,
+                "policy": 277.3249,
+                "absolute": 8.171,
+                "percent": 3.036
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 174467.5,
+                "policy": 189344.5,
+                "absolute": 14877.0,
+                "percent": 8.527
+              },
+              "mean": {
+                "normal": 60.8113,
+                "policy": 65.9967,
+                "absolute": 5.185,
+                "percent": 8.527
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 263999.34,
+                "policy": 287423.5,
+                "absolute": 23424.16,
+                "percent": 8.873
+              },
+              "mean": {
+                "normal": 92.0179,
+                "policy": 100.1825,
+                "absolute": 8.165,
+                "percent": 8.873
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 328,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 317,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 28,
+        "completed_only_in_policy": 39,
+        "unfinished_delta_policy_minus_normal": -11,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "f3265ddbb871018c",
+      "policy_scenario_hash": "f3265ddbb871018c"
+    },
+    {
+      "seed": 46,
+      "baseline_policy": "NORMAL",
+      "counterfactual_policy": "EMS_ROLLING",
+      "generated_count": 3226,
+      "paired_count": 2867,
+      "excluded_count": 358,
+      "cohort_counts": {
+        "normal": {
+          "generated_count": 3226,
+          "completed": 2898,
+          "completed_after_teleport": 0,
+          "unfinished": 328,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2898,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        },
+        "policy": {
+          "generated_count": 3226,
+          "completed": 2931,
+          "completed_after_teleport": 0,
+          "unfinished": 295,
+          "never_departed": 0,
+          "missing": 0,
+          "completed_count": 2931,
+          "teleport_count": 0,
+          "teleport_rate": 0.0
+        }
+      },
+      "views": {
+        "all_completed": {
+          "note": "SURVIVORSHIP-BIASED. Each arm's own completers, which are different vehicles. An arm that leaves more traffic unfinished drops its worst delays out of its own total. Reported so the size of the bias is visible; not valid for a causal claim.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 793553.5,
+              "mean": 273.9225,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 187938.0,
+              "mean": 64.8733,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 281793.53,
+              "mean": 97.2708,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2930,
+            "duration_s": {
+              "n": 2930,
+              "total": 803793.5,
+              "mean": 274.3323,
+              "median": 174.75
+            },
+            "waiting_s": {
+              "n": 2930,
+              "total": 190733.5,
+              "mean": 65.0968,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2930,
+              "total": 288074.16,
+              "mean": 98.3188,
+              "median": 19.47
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 793553.5,
+                "policy": 803793.5,
+                "absolute": 10240.0,
+                "percent": 1.29
+              },
+              "mean": {
+                "normal": 273.9225,
+                "policy": 274.3323,
+                "absolute": 0.41,
+                "percent": 0.15
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 187938.0,
+                "policy": 190733.5,
+                "absolute": 2795.5,
+                "percent": 1.487
+              },
+              "mean": {
+                "normal": 64.8733,
+                "policy": 65.0968,
+                "absolute": 0.224,
+                "percent": 0.345
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 281793.53,
+                "policy": 288074.16,
+                "absolute": 6280.63,
+                "percent": 2.229
+              },
+              "mean": {
+                "normal": 97.2708,
+                "policy": 98.3188,
+                "absolute": 1.048,
+                "percent": 1.077
+              }
+            }
+          }
+        },
+        "completed_not_teleported": {
+          "note": "Still different vehicle sets between the arms, but no trip here was moved by SUMO rather than driven.",
+          "normal": {
+            "vehicle_count": 2897,
+            "duration_s": {
+              "n": 2897,
+              "total": 793553.5,
+              "mean": 273.9225,
+              "median": 173.0
+            },
+            "waiting_s": {
+              "n": 2897,
+              "total": 187938.0,
+              "mean": 64.8733,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2897,
+              "total": 281793.53,
+              "mean": 97.2708,
+              "median": 18.34
+            }
+          },
+          "policy": {
+            "vehicle_count": 2930,
+            "duration_s": {
+              "n": 2930,
+              "total": 803793.5,
+              "mean": 274.3323,
+              "median": 174.75
+            },
+            "waiting_s": {
+              "n": 2930,
+              "total": 190733.5,
+              "mean": 65.0968,
+              "median": 1.0
+            },
+            "time_loss_s": {
+              "n": 2930,
+              "total": 288074.16,
+              "mean": 98.3188,
+              "median": 19.47
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 793553.5,
+                "policy": 803793.5,
+                "absolute": 10240.0,
+                "percent": 1.29
+              },
+              "mean": {
+                "normal": 273.9225,
+                "policy": 274.3323,
+                "absolute": 0.41,
+                "percent": 0.15
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 187938.0,
+                "policy": 190733.5,
+                "absolute": 2795.5,
+                "percent": 1.487
+              },
+              "mean": {
+                "normal": 64.8733,
+                "policy": 65.0968,
+                "absolute": 0.224,
+                "percent": 0.345
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 281793.53,
+                "policy": 288074.16,
+                "absolute": 6280.63,
+                "percent": 2.229
+              },
+              "mean": {
+                "normal": 97.2708,
+                "policy": 98.3188,
+                "absolute": 1.048,
+                "percent": 1.077
+              }
+            }
+          }
+        },
+        "paired_common_cohort": {
+          "note": "The same vehicles in both arms, each completing its route without a teleport in either. This is the view a paired causal claim rests on.",
+          "normal": {
+            "vehicle_count": 2867,
+            "duration_s": {
+              "n": 2867,
+              "total": 773040.0,
+              "mean": 269.6338,
+              "median": 172.5
+            },
+            "waiting_s": {
+              "n": 2867,
+              "total": 175213.0,
+              "mean": 61.1137,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2867,
+              "total": 265059.55,
+              "mean": 92.4519,
+              "median": 17.98
+            }
+          },
+          "policy": {
+            "vehicle_count": 2867,
+            "duration_s": {
+              "n": 2867,
+              "total": 764531.5,
+              "mean": 266.666,
+              "median": 173.5
+            },
+            "waiting_s": {
+              "n": 2867,
+              "total": 168153.5,
+              "mean": 58.6514,
+              "median": 0.5
+            },
+            "time_loss_s": {
+              "n": 2867,
+              "total": 256551.54,
+              "mean": 89.4843,
+              "median": 18.88
+            }
+          },
+          "deltas": {
+            "duration_s": {
+              "total": {
+                "normal": 773040.0,
+                "policy": 764531.5,
+                "absolute": -8508.5,
+                "percent": -1.101
+              },
+              "mean": {
+                "normal": 269.6338,
+                "policy": 266.666,
+                "absolute": -2.968,
+                "percent": -1.101
+              }
+            },
+            "waiting_s": {
+              "total": {
+                "normal": 175213.0,
+                "policy": 168153.5,
+                "absolute": -7059.5,
+                "percent": -4.029
+              },
+              "mean": {
+                "normal": 61.1137,
+                "policy": 58.6514,
+                "absolute": -2.462,
+                "percent": -4.029
+              }
+            },
+            "time_loss_s": {
+              "total": {
+                "normal": 265059.55,
+                "policy": 256551.54,
+                "absolute": -8508.01,
+                "percent": -3.21
+              },
+              "mean": {
+                "normal": 92.4519,
+                "policy": 89.4843,
+                "absolute": -2.968,
+                "percent": -3.21
+              }
+            }
+          }
+        }
+      },
+      "censored": {
+        "note": "What the paired cohort had to leave out. These vehicles were delayed too \u2014 an unfinished vehicle is one the run never saw the end of \u2014 so a difference in these counts is itself a result, and a policy that finishes fewer vehicles has not made the network faster.",
+        "normal": {
+          "unfinished": 328,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "policy": {
+          "unfinished": 295,
+          "completed_after_teleport": 0,
+          "never_departed": 0
+        },
+        "completed_only_in_normal": 30,
+        "completed_only_in_policy": 63,
+        "unfinished_delta_policy_minus_normal": -33,
+        "censored_delay_recoverable": false,
+        "censored_delay_note": "How much delay the unfinished vehicles had accumulated is not in these outputs: SUMO writes a tripinfo only for vehicles that finish unless --tripinfo-output.write-unfinished is set, which these runs did not set. Their count is exact; their delay is unknown and is not estimated here."
+      },
+      "ambulance_excluded_from_traffic_metrics": "ambulance_two_signal",
+      "data_class": "SIMULATED_DATA",
+      "scenario_hash": "f3265ddbb871018c",
+      "policy_scenario_hash": "f3265ddbb871018c"
+    }
+  ],
+  "data_class": "SIMULATED_DATA"
+}
