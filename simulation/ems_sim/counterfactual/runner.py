@@ -26,6 +26,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from ems_sim.disturbance.incident import IncidentConfig, IncidentController
 from ems_sim.policies.base import AmbulanceObservation, BasePolicy
 from ems_sim.policies.tls_map import RouteTls, load_programs, traffic_lights_on_route
 from ems_sim.runner.measurements import RunMeasurements, TeleportEvent, VehicleTrip
@@ -36,6 +37,47 @@ from ems_sim.runner.sumo_process import (
     free_port,
     sumo_environment,
 )
+
+
+def queue_summary(series: list[dict[str, Any]]) -> dict[str, Any]:
+    """Max/mean queue over the run, and how long any queue persisted.
+
+    ``recovery_time_s`` is the time from the incident clearing to the first
+    sample whose halting count is back within the pre-incident band. It is only
+    meaningful when there was an incident, and is ``None`` otherwise rather than
+    a number that looks like one.
+    """
+    if not series:
+        return {"samples": 0}
+    halting = [s["halting"] for s in series]
+    occupancy = [s.get("max_lane_occupancy", 0.0) for s in series]
+    during = [s for s in series if s.get("incident_active")]
+    before = [s["halting"] for s in series if not s.get("incident_active")]
+    baseline = (sum(before) / len(before)) if before else 0.0
+
+    recovery = None
+    if during:
+        end = max(s["sim_time_s"] for s in during)
+        for sample in series:
+            if sample["sim_time_s"] > end and sample["halting"] <= baseline * 1.2 + 1:
+                recovery = round(sample["sim_time_s"] - end, 1)
+                break
+    return {
+        "samples": len(series),
+        "max_halting_vehicles": max(halting),
+        "mean_halting_vehicles": round(sum(halting) / len(halting), 2),
+        "max_lane_occupancy": round(max(occupancy), 4),
+        "mean_lane_occupancy": round(sum(occupancy) / len(occupancy), 4),
+        "baseline_halting_vehicles": round(baseline, 2),
+        "peak_halting_during_incident": max((s["halting"] for s in during), default=None),
+        "recovery_time_s": recovery,
+        "source": "SUMO lane.getLastStepHaltingNumber / getLastStepOccupancy",
+        "queue_length_note": (
+            "Queue *length* in metres is taken from SUMO's own --queue-output, not "
+            "from this series. getLastStepLength is mean vehicle length and must "
+            "not be used for it."
+        ),
+    }
 
 
 @dataclass
@@ -71,6 +113,11 @@ class PolicyRunResult:
     ambulance_signal_waits: list[dict[str, Any]] = field(default_factory=list)
     ambulance_stop_count: int = 0
     output_dir: str = ""
+    incident_report: dict[str, Any] = field(default_factory=dict)
+    queue_series: list[dict[str, Any]] = field(default_factory=list)
+    queue_report: dict[str, Any] = field(default_factory=dict)
+    ambulance_arrived_at_s: float | None = None
+    signal_timeline: dict[str, list[list[Any]]] = field(default_factory=dict)
 
     @property
     def ambulance(self) -> VehicleTrip | None:
@@ -126,6 +173,10 @@ class PolicyRunResult:
                 "per_edge_time_s": self.ambulance_edge_times,
                 "signal_wait_events": self.ambulance_signal_waits,
             },
+            "incident": self.incident_report,
+            "ambulance_arrived_at_s": self.ambulance_arrived_at_s,
+            "queues": {**queue_summary(self.queue_series), **self.queue_report},
+            "queue_series": self.queue_series,
             "route_traffic_lights": self.route_tls,
             "policy_report": self.policy_report,
             "signal_conflicts": [c.as_dict() for c in self.signal_conflicts],
@@ -141,6 +192,72 @@ def _import_traci(installation: SumoInstallation):
     return traci
 
 
+def _queue_sample(traci_module, watched_lanes: list[str]) -> dict[str, float]:
+    """Halting vehicles on the watched lanes, as SUMO counts them.
+
+    ``getLastStepHaltingNumber`` is SUMO's own count of vehicles below its
+    halting speed threshold. Nothing here infers a queue from positions.
+
+    An earlier version of this also reported ``getLastStepLength`` as a queue
+    length. That was wrong: ``getLastStepLength`` is the **mean length of the
+    vehicles** on the lane, not the length of any queue, and it produced a
+    "maximum queue" of 12 m — which was a bus. True queue length comes from
+    SUMO's own ``--queue-output``, parsed after the run.
+    """
+    halting = 0
+    occupancy = 0.0
+    for lane in watched_lanes:
+        with contextlib.suppress(Exception):
+            halting += traci_module.lane.getLastStepHaltingNumber(lane)
+            occupancy = max(occupancy, traci_module.lane.getLastStepOccupancy(lane))
+    return {"halting": halting, "max_lane_occupancy": round(occupancy, 4)}
+
+
+def _traffic_ahead(
+    traci_module,
+    ambulance_id: str,
+    edge_id: str,
+    position_m: float,
+    downstream_edges: list[str],
+) -> dict[str, Any]:
+    """How much traffic stands between the ambulance and the signal ahead of it.
+
+    Counts what SUMO already has on the road: vehicles further along the edge the
+    ambulance is on, plus everything on the route edges between it and the
+    approach it is heading for. Read-only, and only when a demo asks for it — no
+    research run records it, and nothing here moves a vehicle.
+    """
+    ahead = 0
+    halted = 0
+
+    def tally(vehicle_ids, minimum_position: float | None) -> None:
+        nonlocal ahead, halted
+        for vehicle_id in vehicle_ids:
+            if vehicle_id == ambulance_id:
+                continue
+            with contextlib.suppress(Exception):
+                if (
+                    minimum_position is not None
+                    and traci_module.vehicle.getLanePosition(vehicle_id) <= minimum_position
+                ):
+                    continue
+                ahead += 1
+                if traci_module.vehicle.getSpeed(vehicle_id) < 0.1:
+                    halted += 1
+
+    with contextlib.suppress(Exception):
+        tally(traci_module.edge.getLastStepVehicleIDs(edge_id), position_m)
+    for downstream in downstream_edges:
+        with contextlib.suppress(Exception):
+            tally(traci_module.edge.getLastStepVehicleIDs(downstream), None)
+    return {
+        "edge_id": edge_id,
+        "downstream_edges": list(downstream_edges),
+        "count": ahead,
+        "halted": halted,
+    }
+
+
 def run_policy(
     options: SumoRunOptions,
     policy: BasePolicy,
@@ -149,6 +266,11 @@ def run_policy(
     ambulance_route: list[str],
     installation: SumoInstallation | None = None,
     sample_interval_s: float = 30.0,
+    incident: IncidentConfig | None = None,
+    stop_on_ambulance_arrival: bool = False,
+    record_signal_timeline: bool = False,
+    measure_distance_to_stop_line: bool = False,
+    record_queue_ahead: bool = False,
 ) -> PolicyRunResult:
     """Run one scenario under one policy."""
     installation = installation or require_sumo()
@@ -169,16 +291,66 @@ def run_policy(
     signal_waits: list[dict[str, Any]] = []
     stop_count = 0
 
+    ambulance_arrived_at: float | None = None
     previous_edge: str | None = None
     edge_entered_at: float | None = None
     was_halted = False
     started = time.monotonic()
+
+    # A single incident or a set; both expose on_step/report/edge_ids.
+    incidents = (
+        incident
+        if incident is not None and hasattr(incident, "controllers")
+        else IncidentController(incident)
+    )
+    # Queues are watched on the incident's own edge and on the ambulance's route
+    # edges, because those are the two places the research makes claims about.
+    queue_lanes: list[str] = []
+    queue_series: list[dict[str, Any]] = []
+    # Every traffic light's state as SUMO reports it, stored on change only.
+    # The renderer needs the *applied* state: reconstructing it from the static
+    # program is only faithful when no policy is acting, and an EMS run is
+    # exactly the case where the policy holds and truncates phases.
+    signal_timeline: dict[str, list[list[Any]]] = {}
+    all_tls_ids: list[str] = []
 
     try:
         traci.start(command, port=port)
         policy.on_simulation_start(route_tls, traci)
 
         route_positions = {edge: index for index, edge in enumerate(ambulance_route)}
+        if record_signal_timeline:
+            all_tls_ids = list(traci.trafficlight.getIDList())
+
+        watched_edges = list(ambulance_route)
+        incident_edges = (
+            list(incident.edge_ids)
+            if incident is not None and hasattr(incident, "edge_ids")
+            else ([incident.edge_id] if incident is not None else [])
+        )
+        for edge_id in incident_edges:
+            if edge_id not in watched_edges:
+                watched_edges.append(edge_id)
+        for edge_id in watched_edges:
+            with contextlib.suppress(Exception):
+                count = traci.edge.getLaneNumber(edge_id)
+                queue_lanes.extend(f"{edge_id}_{i}" for i in range(count))
+
+        # Distance to each signal's STOP LINE, for the signal-wait detector only.
+        #
+        # ``getDrivingDistance(veh, edge, 0.0)`` measures to the *start* of the
+        # approach edge. Once the ambulance is on that edge — which is the only
+        # place it can queue at a red — the target is behind it and TraCI returns
+        # INVALID_DOUBLE_VALUE (-2^30), so a ``0 <= d <= 60`` test can never fire.
+        # The stop line is at the far end of the approach edge, so that is what a
+        # "did a signal stop the ambulance" check has to measure to.
+        #
+        # Deliberately kept separate from ``observation.distance_to_tls_m``, which
+        # the policies consume: changing what the policies see would change their
+        # activation timing and make these runs incomparable with Phase 5's.
+        stop_line_pos = {
+            entry.tls_id: traci.lane.getLength(f"{entry.approach_edge}_0") for entry in route_tls
+        }
 
         while traci.simulation.getMinExpectedNumber() > 0:
             traci.simulationStep()
@@ -186,6 +358,24 @@ def run_policy(
             now = traci.simulation.getTime()
             measurements.sim_end_time_s = now
             if now >= options.end_s:
+                break
+
+            incidents.on_step(now, traci)
+            if (
+                queue_lanes
+                and abs((now / sample_interval_s) - round(now / sample_interval_s)) < 1e-9
+            ):
+                sample = _queue_sample(traci, queue_lanes)
+                sample["sim_time_s"] = now
+                sample["incident_active"] = incidents.active
+                queue_series.append(sample)
+
+            # Demo mode ends the run at the first step after the ambulance
+            # arrives. The research runs never do this: their traffic aggregate
+            # is measured over the whole window, and truncating it would change
+            # the denominator of every traffic metric.
+            if stop_on_ambulance_arrival and ambulance_arrived_at is not None:
+                measurements.sim_end_time_s = now
                 break
 
             for vehicle_id in traci.simulation.getStartingTeleportIDList():
@@ -229,6 +419,9 @@ def run_policy(
                     trip.arrival_s = now
                     if trip.depart_s is not None:
                         trip.travel_time_s = round(now - trip.depart_s, 3)
+                if vehicle_id == ambulance_id:
+                    # SUMO's own arrival event, not an inference from position.
+                    ambulance_arrived_at = now
                 if vehicle_id == ambulance_id and previous_edge is not None:
                     # Close the final edge here. Left to the end of the loop it
                     # would be measured to the simulation end rather than to
@@ -249,8 +442,17 @@ def run_policy(
                     observation.speed_ms = traci.vehicle.getSpeed(ambulance_id)
                     observation.route_index = route_positions.get(observation.edge_id)
                     for entry in route_tls:
+                        # Phase 5 measures to the *start* of the approach edge and its
+                        # policies are calibrated on that, so it stays the default. A
+                        # demo can ask for the stop line instead: that is where the
+                        # queue ends, and where an approaching driver judges from.
+                        target = (
+                            stop_line_pos[entry.tls_id]
+                            if measure_distance_to_stop_line
+                            else 0.0
+                        )
                         distance = traci.vehicle.getDrivingDistance(
-                            ambulance_id, entry.approach_edge, 0.0
+                            ambulance_id, entry.approach_edge, target
                         )
                         observation.distance_to_tls_m[entry.tls_id] = distance
                 except traci.TraCIException:
@@ -266,21 +468,113 @@ def run_policy(
                     halted = (observation.speed_ms or 0.0) < 0.1
                     if halted and not was_halted:
                         stop_count += 1
-                        near = [
-                            entry.tls_id
-                            for entry in route_tls
-                            if 0 <= observation.distance_to_tls_m.get(entry.tls_id, 1e9) <= 60.0
-                        ]
-                        if near:
-                            signal_waits.append(
-                                {
-                                    "sim_time_s": now,
-                                    "edge_id": observation.edge_id,
-                                    "tls_ids_within_60m": near,
-                                    "lane_position_m": observation.lane_position_m,
-                                }
+                        near = {}
+                        own_signal: dict[str, list[int]] = {}
+                        for entry in route_tls:
+                            to_stop_line = -1.0
+                            with contextlib.suppress(traci.TraCIException):
+                                to_stop_line = traci.vehicle.getDrivingDistance(
+                                    ambulance_id,
+                                    entry.approach_edge,
+                                    stop_line_pos[entry.tls_id],
+                                )
+                            if 0 <= to_stop_line <= 60.0:
+                                near[entry.tls_id] = round(to_stop_line, 1)
+                                own_signal[entry.tls_id] = entry.ambulance_links
+                        queue_ahead = None
+                        if record_queue_ahead:
+                            # Everything between the ambulance and the next signal on
+                            # its route: the queue it is caught in usually reaches back
+                            # over more than one edge.
+                            index = route_positions.get(observation.edge_id)
+                            target = next(
+                                (
+                                    entry
+                                    for entry in route_tls
+                                    if index is not None and entry.route_index >= index
+                                ),
+                                None,
                             )
+                            downstream = (
+                                ambulance_route[index + 1 : target.route_index + 1]
+                                if target is not None and index is not None
+                                else []
+                            )
+                            queue_ahead = _traffic_ahead(
+                                traci,
+                                ambulance_id,
+                                observation.edge_id,
+                                observation.lane_position_m or 0.0,
+                                downstream,
+                            )
+                            if target is not None:
+                                queue_ahead["towards_tls_id"] = target.tls_id
+                        # Halting *near* a signal is not the same as being stopped
+                        # *by* one. The ambulance can be held on a green approach by
+                        # the queue in front of it, and counting that as signal delay
+                        # would credit a priority policy with time it could never
+                        # recover. Classify the halt by the state of the ambulance's
+                        # own controlled links at that instant. When a demo asks for
+                        # the queue ahead, halts *away* from any stop line are recorded
+                        # too: being stuck at the back of a queue is the thing that
+                        # demo is about, and it happens nowhere near the stop line.
+                        if near or queue_ahead is not None:
+                            states = {
+                                tls_id: traci.trafficlight.getRedYellowGreenState(tls_id)
+                                for tls_id in near
+                            }
+                            own_movement = {}
+                            for tls_id, links in own_signal.items():
+                                chars = [
+                                    states[tls_id][i] for i in links if i < len(states[tls_id])
+                                ]
+                                own_movement[tls_id] = {
+                                    "link_indices": links,
+                                    "link_states": "".join(chars),
+                                    "red": bool(chars) and all(c in "rR" for c in chars),
+                                    "green": bool(chars) and any(c in "gG" for c in chars),
+                                }
+                            stopped_by_signal = any(m["red"] for m in own_movement.values())
+                            if not near:
+                                classification = "halted in traffic, away from any stop line"
+                            elif stopped_by_signal:
+                                classification = "held at red on the ambulance's own movement"
+                            else:
+                                classification = (
+                                    "halted near a signal that was NOT red for the "
+                                    "ambulance's movement — blocked by traffic ahead, not "
+                                    "by the signal"
+                                )
+                            event = {
+                                "sim_time_s": now,
+                                "edge_id": observation.edge_id,
+                                "tls_ids_within_60m": sorted(near),
+                                "distance_to_stop_line_m": near,
+                                "lane_position_m": observation.lane_position_m,
+                                "tls_states": states,
+                                "ambulance_own_movement": own_movement,
+                                "stopped_by_signal": stopped_by_signal,
+                                "classification": classification,
+                            }
+                            if queue_ahead is not None:
+                                event["queue_ahead"] = queue_ahead
+                                event["distance_to_tls_m"] = {
+                                    tls_id: round(value, 1)
+                                    for tls_id, value in observation.distance_to_tls_m.items()
+                                    if value is not None and value >= 0
+                                }
+                            signal_waits.append(event)
                     was_halted = halted
+
+            # Record before the policy acts this step: the state read here is the
+            # one that governed the movement SUMO just computed, so a vehicle and
+            # the lamp beside it describe the same instant. Read-only; it cannot
+            # change the simulation.
+            for tls_id in all_tls_ids:
+                current = traci.trafficlight.getRedYellowGreenState(tls_id)
+                history = signal_timeline.setdefault(tls_id, [])
+                if not history or history[-1][1] != current:
+                    history.append([now, current])
 
             policy.on_step(now, observation, traci)
 
@@ -337,6 +631,10 @@ def run_policy(
         ambulance_signal_waits=signal_waits,
         ambulance_stop_count=stop_count,
     )
+    result.incident_report = incidents.report()
+    result.ambulance_arrived_at_s = ambulance_arrived_at
+    result.signal_timeline = signal_timeline
+    result.queue_series = queue_series
     result._ambulance_id = ambulance_id
     return result
 

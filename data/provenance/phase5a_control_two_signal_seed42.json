@@ -1,0 +1,37 @@
+{
+  "dataset_id": "phase5a_control_two_signal_seed42",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 5a control: the EMS signal perturbations replayed into an ambulance-free network, to test whether the traffic-side improvement is caused by the ambulance or by the signal perturbation itself.",
+  "source_name": "EMS Black Box Phase 5a",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T14:18:54Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/control/two_signal_seed42_control.json",
+  "estimation_basis": null,
+  "produced_by": "scripts/run_control.py --seed 42 --trip two_signal",
+  "random_seed": 42,
+  "derived_from": [
+    "phase5_counterfactual_two_signal_seed42"
+  ],
+  "processing_steps": [
+    "Recorded each policy's watched-signal state timeline with the ambulance present.",
+    "Removed exactly one vehicle (the ambulance) from the demand.",
+    "Replayed each timeline step-for-step into the ambulance-free run.",
+    "Validated every replayed state against the program's phase set.",
+    "Paired every control against the ambulance-free NORMAL control."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "SIMULATED RESULT. Not a measurement of real traffic in Bengaluru.",
+    "Replay reproduces the signal timeline, not the mechanism that produced it.",
+    "One seed. Seeds 43-46 have not been run.",
+    "Signal programs are netconvert-generated ESTIMATED_DATA; the effect under test may be a property of that unoptimised timing."
+  ],
+  "notes": null
+}

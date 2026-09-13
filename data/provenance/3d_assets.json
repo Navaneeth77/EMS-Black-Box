@@ -1,0 +1,190 @@
+{
+  "dataset_id": "phase7_3d_vehicle_assets",
+  "data_class": "ESTIMATED_DATA",
+  "description": "3D vehicle representations used by the EMS Black Box viewer.",
+  "sourcing_outcome": "NO_SUITABLE_EXTERNAL_ASSETS_OBTAINED",
+  "sourcing_report": {
+    "network_access": "available; a Khronos sample GLB was downloaded successfully as a capability test (HTTP 200, valid glTF binary)",
+    "sources_searched": [
+      {
+        "source": "Khronos glTF-Sample-Assets model index (150 models)",
+        "url": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+        "vehicle_models_found": [
+          "CarConcept",
+          "CesiumMilkTruck",
+          "ToyCar",
+          "ClearCoatCarPaint",
+          "CarbonFibre"
+        ],
+        "rejected_because": "These are rendering-feature showcase assets, not traffic models. A stylised milk truck, a toy car and a concept car would misrepresent a Bengaluru vehicle fleet, and the set contains no motorcycle, no auto-rickshaw, no bus and no ambulance. Using them would put recognisable, wrong vehicles into a research scene."
+      }
+    ],
+    "not_obtained": [
+      "ambulance",
+      "car",
+      "motorcycle",
+      "auto_rickshaw",
+      "bus",
+      "truck",
+      "van"
+    ],
+    "conclusion": "No CC0 or permissively-licensed GLB/GLTF set covering the seven vehicle types this simulation uses - in particular an auto-rickshaw, which is essential to representing Bengaluru traffic honestly - was obtainable from reachable sources within this task. Rather than ship recognisable but wrong vehicles, or silently fall back to cubes, the viewer uses geometry authored by this project. The GLB loader and registry are in place, so a licensed asset set can be dropped in per vehicle type without a code change.",
+    "attempt_2": {
+      "date": "2026-09-11",
+      "method": "targeted, time-boxed: one web search plus direct unauthenticated fetches",
+      "sources_checked": [
+        {
+          "source": "Khronos glTF-Sample-Assets (150-model index)",
+          "url": "https://github.com/KhronosGroup/glTF-Sample-Assets",
+          "result": "reachable; only CarConcept / CesiumMilkTruck / ToyCar / ClearCoatCarPaint / CarbonFibre. No motorcycle, auto-rickshaw, bus or ambulance. Rejected as rendering showcases that would misrepresent the fleet."
+        },
+        {
+          "source": "beep2bleep/FreeAssetsByKenneyNLandQuaternius (Kenney + Quaternius CC0 mirror)",
+          "url": "https://github.com/beep2bleep/FreeAssetsByKenneyNLandQuaternius",
+          "result": "reachable; 59 GLB/GLTF files, of which **0 are vehicles**."
+        },
+        {
+          "source": "KenneyNL/Assets and nidorx/kenney-assets candidate paths",
+          "result": "HTTP 404 - no such raw paths."
+        },
+        {
+          "source": "pmndrs/market-assets",
+          "result": "HTTP 404."
+        },
+        {
+          "source": "GitHub code search API (extension:glb)",
+          "result": "HTTP 401 - requires authentication."
+        },
+        {
+          "source": "Poly Pizza API",
+          "url": "https://poly.pizza",
+          "result": "requires an API key."
+        }
+      ],
+      "properly_licensed_packs_identified_but_not_retrievable": [
+        {
+          "name": "Car Kit GLB Pack (50 models, based on Kenney's Car Kit)",
+          "creator": "Eclair Assets / Kenney",
+          "license": "CC0-1.0",
+          "url": "https://eclair-assets.itch.io/car-kit-glb-pack-50-free-cc0-3d-models",
+          "why_not_used": "itch.io download requires an interactive download flow (session + form POST); not retrievable from an unauthenticated direct URL."
+        },
+        {
+          "name": "Free Low Poly Vehicles Pack (17 vehicles incl. ambulance, bus, van, pickup)",
+          "creator": "RgsDev",
+          "license": "CC0-1.0",
+          "url": "https://rgsdev.itch.io/free-low-poly-vehicles-pack",
+          "why_not_used": "same itch.io download flow."
+        },
+        {
+          "name": "Quaternius Cars Pack / Public Transport Pack",
+          "creator": "Quaternius",
+          "license": "CC0-1.0",
+          "url": "https://quaternius.com",
+          "why_not_used": "site download flow; no unauthenticated raw GLB URL found."
+        }
+      ],
+      "conclusion": "Suitable CC0 vehicle packs demonstrably exist and are named above with their licences, but none is retrievable through an unauthenticated direct URL from this environment. No auto-rickshaw was found in any CC0 pack at all, which matters most for representing Bengaluru traffic honestly. The authored silhouettes are therefore kept - they are NOT GLB assets and are not described as such anywhere in the project."
+    }
+  },
+  "assets": [
+    {
+      "asset_name": "ambulance_authored_v2",
+      "vehicle_type": "ambulance",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project (generated procedurally in frontend/src/scene/lib/vehicleGeometry.ts)",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'ambulance' (length 6.0 m, width 2.2 m)",
+      "note": "Box-body ambulance: stepped patient compartment above a lower cab, raked windscreen, banded glazing, full-length Battenburg-style livery, roof light bar with separate red and blue lenses, headlights, tail lights, rear door line, wheel arches and hubbed wheels. Length and width are the SUMO vType's (6.0 x 2.2 m); all other proportions are authored. This is geometry built in code, NOT a downloaded GLB, and is not described as one anywhere."
+    },
+    {
+      "asset_name": "car_authored_v1",
+      "vehicle_type": "car",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'car' (4.5 x 1.8 m)"
+    },
+    {
+      "asset_name": "motorcycle_authored_v1",
+      "vehicle_type": "motorcycle",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'motorcycle' (2.2 x 0.8 m)",
+      "note": "Includes a rider volume, which is what makes a two-wheeler readable at traffic-scene distances."
+    },
+    {
+      "asset_name": "auto_rickshaw_authored_v1",
+      "vehicle_type": "auto",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'auto' (2.6 x 1.3 m)",
+      "note": "Three-wheel arrangement with a canopy, the silhouette that distinguishes an auto-rickshaw from a small car at a glance."
+    },
+    {
+      "asset_name": "bus_authored_v1",
+      "vehicle_type": "bus",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'bus' (12.0 x 2.5 m)"
+    },
+    {
+      "asset_name": "truck_authored_v1",
+      "vehicle_type": "truck",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'truck' (7.5 x 2.4 m)",
+      "note": "Separate cab and load body, so it is not read as a long bus."
+    },
+    {
+      "asset_name": "van_authored_v1",
+      "vehicle_type": "van",
+      "source_url": "authored in this repository",
+      "creator": "EMS Black Box project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "download_date": null,
+      "local_path": "frontend/src/scene/lib/vehicleGeometry.ts",
+      "dimensions_source": "SUMO vType 'van' (5.5 x 2.0 m)"
+    }
+  ],
+  "limitations": [
+    "These are authored representations, not scans or photogrammetry of real vehicles. No dimension other than overall length and width is sourced.",
+    "Overall length and width come from the SUMO vType, so a vehicle occupies the space the simulation gave it; heights and all styling are chosen.",
+    "They must not be read as evidence about vehicle types present at Silk Board. The fleet composition is the ESTIMATED demand mix, documented separately."
+  ],
+  "drop_in_instructions": "The registry already supports GLB; nothing about the renderer needs changing. 1) Download one of the CC0 packs named in sourcing_report.attempt_2 (Eclair/Kenney Car Kit or RgsDev Free Low Poly Vehicles are the closest fit, both CC0-1.0). 2) Put the file at frontend/public/models/<type>.glb, e.g. models/ambulance.glb. 3) In frontend/src/scene/lib/assetRegistry.ts set that type's entry to { glbUrl: '/models/<type>.glb', license: '<real licence>', creator: '<real creator>', source: 'glb' }. 4) Add the matching entry to the 'assets' array here with its real source_url, creator, license, license_url and download_date. The mesh must be modelled nose-forward along -Z and will be scaled to the SUMO vType's length and width. assetReport() will then show that type as 'glb' in the HUD, so the substitution is visible rather than silent.",
+  "authored_assets_remaining": [
+    "ambulance",
+    "car",
+    "motorcycle",
+    "auto",
+    "bus",
+    "truck",
+    "van"
+  ],
+  "explicit_statement": "The seven vehicle representations currently shipped are geometry authored in code by this project. They are NOT GLB/GLTF assets, are not derived from any third-party model, and must not be described as such.",
+  "revision": "v2 \u2014 ambulance geometry substantially rebuilt 2026-09-11; still authored, still not a GLB."
+}

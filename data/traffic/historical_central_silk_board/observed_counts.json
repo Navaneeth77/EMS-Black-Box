@@ -1,0 +1,113 @@
+{
+  "dataset_id": "historical_central_silk_board",
+  "schema_version": 1,
+  "mode": "HISTORICAL_DEMO",
+  "summary": "Historical OBSERVED traffic values for Central Silk Board Junction, Bengaluru, copied without change from the cited survey reports. Nothing in this file is derived, estimated or simulated. Derived and estimated quantities are computed from it by simulation/ems_sim/historical/demand.py and written to demand_conversion.json, each with its own label.",
+  "labels": {
+    "OBSERVED": "A value printed in a cited survey report, copied without change.",
+    "DERIVED": "Arithmetic on OBSERVED values from the same source (for example a ratio of two columns of one table). No assumption added.",
+    "ESTIMATED": "Needs an assumption made by this project, or combines values from different surveys.",
+    "SIMULATED": "Produced by SUMO: vehicle trajectories, signal states, queues and travel times."
+  },
+  "units_are_not_interchangeable": "Peak-hour vehicles, peak-hour PCU, 24-hour vehicles and 24-hour PCU are four different quantities. Code that consumes this file selects each by id and asserts its unit string; none may stand in for another.",
+  "location": {
+    "name": "Central Silk Board Junction",
+    "city": "Bengaluru, Karnataka, India",
+    "roads": "Hosur Road (NH-44) and Outer Ring Road",
+    "junction_type": "4-legged",
+    "junction_type_label": "OBSERVED",
+    "junction_type_sources": ["CMP2019_DRAFT", "IJIRSET2017"],
+    "legs_reported_by_ijirset2017": ["Madivala", "Agara", "Bommanahalli", "Jayadeva Hospital"],
+    "grade_separation_note": "IJIRSET 2017 reports a flyover carrying through traffic between Madivala and Bommanahalli. Whether the CMP/RMP junction count includes flyover traffic is not stated."
+  },
+  "observations": [
+    {
+      "id": "peak_hour_volume_vehicles",
+      "quantity": "Peak-hour traffic volume, whole junction",
+      "value": 22634,
+      "unit": "vehicles per hour",
+      "period": "Peak hour of a 24-hour classified turning volume count. The clock time of the peak hour is not reported.",
+      "survey_window": "December 2014 to April 2015 (RMP-2031 traffic survey campaign). The day on which Silk Board was counted is not reported.",
+      "label": "OBSERVED",
+      "source_id": "CMP2019_DRAFT",
+      "source_table": "Table 2-13: Total Volume for 24 hours and peak hour on surveyed location, row 11 (Silk Board Junction)",
+      "source_page": "printed page 2-24 (PDF page 73)",
+      "originating_survey_source_id": "RMP2031_DRAFT_VOL3"
+    },
+    {
+      "id": "peak_hour_volume_pcu",
+      "quantity": "Peak-hour traffic volume, whole junction, in passenger car units",
+      "value": 18180,
+      "unit": "PCU per hour",
+      "period": "Peak hour of a 24-hour classified turning volume count. The clock time of the peak hour is not reported.",
+      "survey_window": "December 2014 to April 2015 (RMP-2031 traffic survey campaign). The day on which Silk Board was counted is not reported.",
+      "label": "OBSERVED",
+      "source_id": "CMP2019_DRAFT",
+      "source_table": "Table 2-13: Total Volume for 24 hours and peak hour on surveyed location, row 11 (Silk Board Junction)",
+      "source_page": "printed page 2-24 (PDF page 73)",
+      "originating_survey_source_id": "RMP2031_DRAFT_VOL3"
+    },
+    {
+      "id": "daily_volume_vehicles",
+      "quantity": "24-hour traffic volume, whole junction",
+      "value": 323099,
+      "unit": "vehicles per 24 hours",
+      "period": "24 hours, one day",
+      "survey_window": "December 2014 to April 2015 (RMP-2031 traffic survey campaign). The day on which Silk Board was counted is not reported.",
+      "label": "OBSERVED",
+      "source_id": "CMP2019_DRAFT",
+      "source_table": "Table 2-13: Total Volume for 24 hours and peak hour on surveyed location, row 11 (Silk Board Junction)",
+      "source_page": "printed page 2-24 (PDF page 73)",
+      "originating_survey_source_id": "RMP2031_DRAFT_VOL3"
+    },
+    {
+      "id": "daily_volume_pcu",
+      "quantity": "24-hour traffic volume, whole junction, in passenger car units",
+      "value": 281521,
+      "unit": "PCU per 24 hours",
+      "period": "24 hours, one day",
+      "survey_window": "December 2014 to April 2015 (RMP-2031 traffic survey campaign). The day on which Silk Board was counted is not reported.",
+      "label": "OBSERVED",
+      "source_id": "CMP2019_DRAFT",
+      "source_table": "Table 2-13: Total Volume for 24 hours and peak hour on surveyed location, row 11 (Silk Board Junction)",
+      "source_page": "printed page 2-24 (PDF page 73)",
+      "originating_survey_source_id": "RMP2031_DRAFT_VOL3"
+    },
+    {
+      "id": "car_share_of_vehicles",
+      "quantity": "Share of cars in the total vehicle volume at Silk Board Intersection",
+      "value": 0.53,
+      "unit": "fraction of vehicles",
+      "unit_note": "Printed as a percentage: car (53% of total volume of vehicle).",
+      "period": "Not reported",
+      "survey_window": "Not reported. The paper was published in June 2017.",
+      "label": "OBSERVED",
+      "source_id": "IJIRSET2017",
+      "source_table": "Section VI, Silk Board Intersection, recommendation 6",
+      "source_page": "p. 10540",
+      "scope_caveat": "The figure is stated inside a recommendation about the left turn from the Agara arm. The paper does not say whether 53% is the share across the whole junction or for that movement only. This project uses it as the junction share and records that as an interpretation, not a fact.",
+      "different_survey_from": ["peak_hour_volume_vehicles", "peak_hour_volume_pcu", "daily_volume_vehicles", "daily_volume_pcu"]
+    },
+    {
+      "id": "existing_cycle_length_s",
+      "quantity": "Existing traffic signal cycle length at Silk Board Intersection",
+      "value": 450,
+      "unit": "seconds",
+      "period": "Not reported",
+      "survey_window": "Not reported. The paper was published in June 2017.",
+      "label": "OBSERVED",
+      "source_id": "IJIRSET2017",
+      "source_table": "Section VI, Silk Board Intersection, recommendation 8",
+      "source_page": "p. 10540",
+      "scope_caveat": "Cycle length only. The phase sequence and green splits are not given in extractable form. The paper's proposed 270 s cycle is a simulation proposal, not an observation, and is not recorded here."
+    }
+  ],
+  "not_reported_in_any_accessible_source": [
+    "Vehicle-class counts or percentages at Silk Board other than the car share",
+    "Turning movement counts or turning proportions per approach at Silk Board",
+    "Approach-wise (per arm) volumes at Silk Board",
+    "Signal phase sequence and green times at Silk Board",
+    "The exact date on which Silk Board was counted",
+    "The clock time of the Silk Board peak hour"
+  ]
+}

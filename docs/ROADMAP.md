@@ -204,7 +204,59 @@ which is why its waiting time was 0.0 s in every Phase 4 seed. Phase 5 selected 
 destination whose route passes signals; the Phase 3 trip is unchanged so Phase 4's
 numbers still stand.
 
-### Phase 5b — deferred
+### Phase 5a — scenario reselection, detector fix, and control ✅ seed 42 only
+
+Full account: [`PHASE5A_CONTROL.md`](PHASE5A_CONTROL.md).
+
+A new trip (`two_signal`, `1311812959#0` → `1196514116#0`) was selected against
+criteria fixed before any policy was run: two actionable signals with green
+fraction below 0.70, and a NORMAL baseline that actually stops the ambulance. The
+Phase 3 and Phase 5 trips are untouched and still runnable via `--trip`.
+
+**A measurement defect was found and fixed.** `signal_wait_events` measured
+distance to the start of the approach edge rather than the stop line, so it could
+essentially never fire. Phase 5's claim that the ambulance "never halts within
+60 m of a traffic light" does not follow from it.
+
+**Result: 12.5 s saved (184.5 s → 172.0 s), identical under all three EMS
+policies, 0 signal conflicts, 0 teleports.** 11.5 s attributed to `GS_cluster`.
+
+**But the traffic side came out negative** — every policy *reduced* network-wide
+time loss. A control replaying each policy's recorded signal timeline into an
+**ambulance-free** network reproduced the effect (−23,559 s, −5,161 s,
+−40,182 s), so it is the signal perturbation, not the ambulance. It is most
+likely an artefact of perturbing netconvert's unoptimised fixed-time plans.
+
+**Do not claim EMS priority improves general traffic.** The traffic-side metric
+in this model is currently uninterpretable as a policy cost.
+
+**Still seed 42 only. Seeds 43-46 have not been run.**
+
+### Phase 5b — control, multi-seed and the R&D gate ✅ seeds 42-46
+
+Full account: [`FINAL_RND_REPORT.md`](FINAL_RND_REPORT.md) ·
+gate: [`3D_READINESS.md`](3D_READINESS.md)
+
+Five seeds on Candidate D. **Under this simulation scenario the policies reduced
+simulated ambulance travel time by a mean of 12.2-12.7 s against a paired 184.5 s
+baseline** (sd 0.354-0.975 s), by removing one at-red halt that occurred in the
+baseline of every seed. 0 signal conflicts, 0 ambulance teleports, 220 legal
+transitions, 5/5 consistent paired identity.
+
+A **fixed-schedule control** (no ambulance logic, no replay override) showed the
+traffic-side term has **no stable sign across seeds** — it ranges from -47,918 to
++75,979 s with no ambulance in the network. The metric is now
+**`DIAGNOSTIC_ONLY`** and must never be reported as a cost or benefit of
+priority.
+
+A **speed sensitivity** on the edge carrying the attribution confirmed the
+finding survives at every OSM-stated speed for that road class (12.5-15.5 s
+saved), but showed the magnitude depends on **arrival phase**: under a different
+upstream speed assumption the ambulance met green and the saving fell to ~3 s.
+
+**Gate: READY FOR 3D.**
+
+### Phase 5c — deferred
 
 Fixed-time baseline; EMS preemption with realistic detection range and clearance
 time. Paired runs with `config_hash` and seed verification.

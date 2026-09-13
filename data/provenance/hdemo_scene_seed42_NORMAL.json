@@ -1,0 +1,40 @@
+{
+  "dataset_id": "hdemo_scene_seed42_NORMAL",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 7 3D scene export: SUMO network geometry, traffic-light layout, OSM building footprints and an FCD trajectory recording, all transformed into Three.js scene coordinates.",
+  "source_name": "EMS Black Box Phase 7",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-13T12:39:50Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "frontend/public/scene/historical/compare/manifest.json",
+  "estimation_basis": null,
+  "produced_by": "scripts/export_scene.py --seed 42 --trip two_signal",
+  "random_seed": 42,
+  "derived_from": [
+    "historical_central_silk_board",
+    "hdemo_trip_selection",
+    "hdemo_demand_scale_sweep"
+  ],
+  "processing_steps": [
+    "Ran SUMO with FCD output at the configured period, same seed and policy.",
+    "Transformed lane shapes, junctions and signal stop lines to scene metres.",
+    "Reconstructed elevation from OSM layer ordinals (the network is 2D).",
+    "Transformed FCD samples to scene metres without smoothing or resampling.",
+    "Estimated building heights deterministically from footprint area and type."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "SIMULATED RESULT. Not a measurement of real traffic in Bengaluru.",
+    "Road elevation is reconstructed from OSM layer ordinals, not surveyed.",
+    "Building heights are overwhelmingly estimated, not sourced.",
+    "Kerb strips are generated; the network contains no footway geometry.",
+    "Trajectories are clipped to the exported window."
+  ],
+  "notes": null
+}

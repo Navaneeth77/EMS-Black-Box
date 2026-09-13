@@ -1,0 +1,580 @@
+{
+  "mode": "HISTORICAL_DEMO",
+  "demand_id": "hdemo_silk_board_v1_seed42_k0.25_d700",
+  "seed": 42,
+  "config_hash": "4b32fc32c2584022",
+  "pipeline": [
+    {
+      "step": 1,
+      "label": "OBSERVED",
+      "what": "Silk Board peak-hour volume",
+      "value": 22634.0,
+      "unit": "vehicles per hour",
+      "source": {
+        "id": "peak_hour_volume_vehicles",
+        "quantity": "Peak-hour traffic volume, whole junction",
+        "value": 22634.0,
+        "unit": "vehicles per hour",
+        "period": "Peak hour of a 24-hour classified turning volume count. The clock time of the peak hour is not reported.",
+        "survey_window": "December 2014 to April 2015 (RMP-2031 traffic survey campaign). The day on which Silk Board was counted is not reported.",
+        "label": "OBSERVED",
+        "source_id": "CMP2019_DRAFT",
+        "source_table": "Table 2-13: Total Volume for 24 hours and peak hour on surveyed location, row 11 (Silk Board Junction)",
+        "source_page": "printed page 2-24 (PDF page 73)"
+      },
+      "not_used_in_its_place": [
+        "peak_hour_volume_pcu (PCU per hour)",
+        "daily_volume_vehicles (vehicles per 24 hours)",
+        "daily_volume_pcu (PCU per 24 hours)"
+      ]
+    },
+    {
+      "step": 2,
+      "label": "DERIVED",
+      "what": "Ratios from the same table, reported as context only",
+      "values": [
+        {
+          "id": "peak_hour_share_of_daily_vehicles",
+          "value": 0.070053,
+          "unit": "fraction",
+          "formula": "peak_hour_volume_vehicles / daily_volume_vehicles",
+          "calculation": "22634 / 323099",
+          "label": "DERIVED",
+          "used_for_demand": false
+        },
+        {
+          "id": "pcu_per_vehicle_peak_hour",
+          "value": 0.803216,
+          "unit": "PCU per vehicle",
+          "formula": "peak_hour_volume_pcu / peak_hour_volume_vehicles",
+          "calculation": "18180 / 22634",
+          "label": "DERIVED",
+          "used_for_demand": false,
+          "note": "The PCU factors the survey used are not reported, so this ratio cannot be inverted into a vehicle-class split."
+        },
+        {
+          "id": "pcu_per_vehicle_daily",
+          "value": 0.871315,
+          "unit": "PCU per vehicle",
+          "formula": "daily_volume_pcu / daily_volume_vehicles",
+          "calculation": "281521 / 323099",
+          "label": "DERIVED",
+          "used_for_demand": false
+        },
+        {
+          "id": "mean_hourly_vehicles_over_24h",
+          "value": 13462.46,
+          "unit": "vehicles per hour",
+          "formula": "daily_volume_vehicles / 24",
+          "calculation": "323099 / 24",
+          "label": "DERIVED",
+          "used_for_demand": false
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "label": "ESTIMATED",
+      "what": "Demand scale k: share of the observed hour given to SUMO",
+      "k": 0.25,
+      "calculation": "22634 veh/h x 0.25 = 5658.5 veh/h",
+      "target_sumo_input_vph": 5658.5,
+      "sumo_input_vph_after_rounding": 5658.497,
+      "why": "The modelled network cannot carry the observed hour. k and the ambulance's departure are chosen together, on grids fixed in advance: the most traffic the network carries validly, and the earliest departure at which the NORMAL ambulance is caught in the four-way's queue rather than leading it. Every run in that search is a NORMAL run; the rule never uses an EMS result.",
+      "selection": {
+        "rule": "Fixed before the sweep and evaluated on NORMAL runs only. For each k on the scale grid from the top down (a larger k is a larger share of the observed peak hour), and each departure on the departure grid from the earliest up: run NORMAL, stopping at the ambulance's arrival. Valid when 0 teleports, the ambulance arrived, 0 signal states outside the programs, and insertion backlog <= 5% of departed vehicles. Usable when, in addition, the ambulance's first halt within 400 m of the four-way stop line has at least 12 vehicles between it and that stop line and is at least 25 m back from it. Take the first usable pair. No EMS policy is run and no travel time is compared.",
+        "grid": [
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4
+        ],
+        "selected_k": 0.25,
+        "k_used": 0.25,
+        "rows": [
+          {
+            "k": 0.4,
+            "depart_s": 600.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 7,
+            "departed": 2905,
+            "insertion_backlog_at_end": 387,
+            "sumo_input_vph": 9053.6,
+            "vehicles_ahead_at_first_halt": 61
+          },
+          {
+            "k": 0.4,
+            "depart_s": 700.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 24,
+            "departed": 4025,
+            "insertion_backlog_at_end": 1339,
+            "sumo_input_vph": 9053.6,
+            "vehicles_ahead_at_first_halt": 62
+          },
+          {
+            "k": 0.4,
+            "depart_s": 800.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 25,
+            "departed": 4028,
+            "insertion_backlog_at_end": 1328,
+            "sumo_input_vph": 9053.6,
+            "vehicles_ahead_at_first_halt": 3
+          },
+          {
+            "k": 0.4,
+            "depart_s": 900.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 39,
+            "departed": 4792,
+            "insertion_backlog_at_end": 1926,
+            "sumo_input_vph": 9053.6,
+            "vehicles_ahead_at_first_halt": 35
+          },
+          {
+            "k": 0.4,
+            "depart_s": 1000.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 53,
+            "departed": 4635,
+            "insertion_backlog_at_end": 1840,
+            "sumo_input_vph": 9053.6,
+            "vehicles_ahead_at_first_halt": 89
+          },
+          {
+            "k": 0.35,
+            "depart_s": 600.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 33,
+            "departed": 4410,
+            "insertion_backlog_at_end": 1362,
+            "sumo_input_vph": 7921.899,
+            "vehicles_ahead_at_first_halt": 43
+          },
+          {
+            "k": 0.35,
+            "depart_s": 700.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 80,
+            "departed": 6098,
+            "insertion_backlog_at_end": 2526,
+            "sumo_input_vph": 7921.899,
+            "vehicles_ahead_at_first_halt": 0
+          },
+          {
+            "k": 0.35,
+            "depart_s": 800.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 35,
+            "departed": 4510,
+            "insertion_backlog_at_end": 1331,
+            "sumo_input_vph": 7921.899,
+            "vehicles_ahead_at_first_halt": 32
+          },
+          {
+            "k": 0.35,
+            "depart_s": 900.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 28,
+            "departed": 3967,
+            "insertion_backlog_at_end": 874,
+            "sumo_input_vph": 7921.899,
+            "vehicles_ahead_at_first_halt": 33
+          },
+          {
+            "k": 0.35,
+            "depart_s": 1000.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 22,
+            "departed": 3811,
+            "insertion_backlog_at_end": 947,
+            "sumo_input_vph": 7921.899,
+            "vehicles_ahead_at_first_halt": 14
+          },
+          {
+            "k": 0.3,
+            "depart_s": 600.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 2,
+            "departed": 2435,
+            "insertion_backlog_at_end": 60,
+            "sumo_input_vph": 6790.2,
+            "vehicles_ahead_at_first_halt": 67
+          },
+          {
+            "k": 0.3,
+            "depart_s": 700.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 2,
+            "departed": 2367,
+            "insertion_backlog_at_end": 35,
+            "sumo_input_vph": 6790.2,
+            "vehicles_ahead_at_first_halt": 39
+          },
+          {
+            "k": 0.3,
+            "depart_s": 800.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 4,
+            "departed": 2961,
+            "insertion_backlog_at_end": 230,
+            "sumo_input_vph": 6790.2,
+            "vehicles_ahead_at_first_halt": 9
+          },
+          {
+            "k": 0.3,
+            "depart_s": 900.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 56,
+            "departed": 5546,
+            "insertion_backlog_at_end": 1852,
+            "sumo_input_vph": 6790.2,
+            "vehicles_ahead_at_first_halt": 0
+          },
+          {
+            "k": 0.3,
+            "depart_s": 1000.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 70,
+            "departed": 5586,
+            "insertion_backlog_at_end": 1812,
+            "sumo_input_vph": 6790.2,
+            "vehicles_ahead_at_first_halt": 0
+          },
+          {
+            "k": 0.25,
+            "depart_s": 600.0,
+            "valid": false,
+            "usable": false,
+            "teleports": 7,
+            "departed": 3202,
+            "insertion_backlog_at_end": 186,
+            "sumo_input_vph": 5658.497,
+            "vehicles_ahead_at_first_halt": 80
+          },
+          {
+            "k": 0.25,
+            "depart_s": 700.0,
+            "valid": true,
+            "usable": true,
+            "teleports": 0,
+            "departed": 1969,
+            "insertion_backlog_at_end": 16,
+            "sumo_input_vph": 5658.497,
+            "vehicles_ahead_at_first_halt": 37
+          }
+        ],
+        "record": "data/processed/historical_demo/demand_scale_sweep.json"
+      }
+    },
+    {
+      "step": 4,
+      "label": "ESTIMATED",
+      "what": "Origin-destination spread",
+      "basis": "No Silk Board turning movement count was found. The research model's committed OD pairs keep their relative weights and are scaled so they total the step-3 input.",
+      "research_od_total_vph": 5880.0,
+      "multiplier_on_research_od": 0.96233,
+      "flows": [
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "491889864#5",
+          "label": "Hosur Rd south -> ORR west",
+          "research_weight_vph": 700,
+          "sumo_vph": 673.631,
+          "sumo_vph_by_type": {
+            "car": 357.0244,
+            "motorcycle": 213.9234,
+            "auto": 59.8985,
+            "bus": 12.8354,
+            "van": 17.1139,
+            "truck": 12.8354
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "1534247766#0",
+          "label": "Hosur Rd south -> ORR east",
+          "research_weight_vph": 650,
+          "sumo_vph": 625.514,
+          "sumo_vph_by_type": {
+            "car": 331.5224,
+            "motorcycle": 198.643,
+            "auto": 55.62,
+            "bus": 11.9186,
+            "van": 15.8914,
+            "truck": 11.9186
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "172853384#3",
+          "label": "Hosur Rd south -> Hosur Rd north",
+          "research_weight_vph": 500,
+          "sumo_vph": 481.165,
+          "sumo_vph_by_type": {
+            "car": 255.0175,
+            "motorcycle": 152.8024,
+            "auto": 42.7847,
+            "bus": 9.1681,
+            "van": 12.2242,
+            "truck": 9.1681
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "1196514116#0",
+          "label": "ORR east -> Hosur Rd south",
+          "research_weight_vph": 600,
+          "sumo_vph": 577.398,
+          "sumo_vph_by_type": {
+            "car": 306.0209,
+            "motorcycle": 183.3629,
+            "auto": 51.3416,
+            "bus": 11.0018,
+            "van": 14.669,
+            "truck": 11.0018
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "491889864#5",
+          "label": "ORR east -> ORR west (through)",
+          "research_weight_vph": 550,
+          "sumo_vph": 529.281,
+          "sumo_vph_by_type": {
+            "car": 280.5189,
+            "motorcycle": 168.0825,
+            "auto": 47.0631,
+            "bus": 10.0849,
+            "van": 13.4466,
+            "truck": 10.0849
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1196514116#0",
+          "label": "ORR west -> Hosur Rd south",
+          "research_weight_vph": 550,
+          "sumo_vph": 529.281,
+          "sumo_vph_by_type": {
+            "car": 280.5189,
+            "motorcycle": 168.0825,
+            "auto": 47.0631,
+            "bus": 10.0849,
+            "van": 13.4466,
+            "truck": 10.0849
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1534247766#0",
+          "label": "ORR west -> ORR east (through)",
+          "research_weight_vph": 500,
+          "sumo_vph": 481.165,
+          "sumo_vph_by_type": {
+            "car": 255.0175,
+            "motorcycle": 152.8024,
+            "auto": 42.7847,
+            "bus": 9.1681,
+            "van": 12.2242,
+            "truck": 9.1681
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "1196514116#0",
+          "label": "Sarjapura Rd -> Hosur Rd south",
+          "research_weight_vph": 300,
+          "sumo_vph": 288.699,
+          "sumo_vph_by_type": {
+            "car": 153.0105,
+            "motorcycle": 91.6814,
+            "auto": 25.6708,
+            "bus": 5.5009,
+            "van": 7.3345,
+            "truck": 5.5009
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "491889864#5",
+          "label": "Sarjapura Rd -> ORR west",
+          "research_weight_vph": 250,
+          "sumo_vph": 240.582,
+          "sumo_vph_by_type": {
+            "car": 127.5085,
+            "motorcycle": 76.401,
+            "auto": 21.3923,
+            "bus": 4.5841,
+            "van": 6.1121,
+            "truck": 4.5841
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "1311812959#0",
+          "to_edge": "350096404#1",
+          "label": "Sarjapura Rd local",
+          "research_weight_vph": 150,
+          "sumo_vph": 144.349,
+          "sumo_vph_by_type": {
+            "car": 76.505,
+            "motorcycle": 45.8406,
+            "auto": 12.8354,
+            "bus": 2.7504,
+            "van": 3.6672,
+            "truck": 2.7504
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "1196514116#0",
+          "label": "Ragigudda flyover -> Hosur Rd south",
+          "research_weight_vph": 400,
+          "sumo_vph": 384.932,
+          "sumo_vph_by_type": {
+            "car": 204.014,
+            "motorcycle": 122.2419,
+            "auto": 34.2277,
+            "bus": 7.3345,
+            "van": 9.7794,
+            "truck": 7.3345
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "886153773",
+          "label": "Ragigudda flyover through-movement",
+          "research_weight_vph": 350,
+          "sumo_vph": 336.815,
+          "sumo_vph_by_type": {
+            "car": 178.512,
+            "motorcycle": 106.9615,
+            "auto": 29.9492,
+            "bus": 6.4177,
+            "van": 8.5569,
+            "truck": 6.4177
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "148210030",
+          "to_edge": "1534247766#0",
+          "label": "Madiwala Underpass -> ORR east",
+          "research_weight_vph": 200,
+          "sumo_vph": 192.466,
+          "sumo_vph_by_type": {
+            "car": 102.007,
+            "motorcycle": 61.121,
+            "auto": 17.1139,
+            "bus": 3.6673,
+            "van": 4.8897,
+            "truck": 3.6673
+          },
+          "data_class": "ESTIMATED"
+        },
+        {
+          "from_edge": "684917326#0",
+          "to_edge": "1196514116#0",
+          "label": "Madiwala link -> Hosur Rd south",
+          "research_weight_vph": 180,
+          "sumo_vph": 173.219,
+          "sumo_vph_by_type": {
+            "car": 91.8061,
+            "motorcycle": 55.0087,
+            "auto": 15.4024,
+            "bus": 3.3005,
+            "van": 4.4007,
+            "truck": 3.3005
+          },
+          "data_class": "ESTIMATED"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "label": "OBSERVED share preserved; remainder ESTIMATED",
+      "what": "Vehicle composition applied to every OD flow",
+      "car_share": {
+        "value": 0.53,
+        "label": "OBSERVED",
+        "source_id": "IJIRSET2017"
+      },
+      "non_car_split": {
+        "values": {
+          "motorcycle": 0.317568,
+          "auto": 0.088919,
+          "bus": 0.019054,
+          "van": 0.025405,
+          "truck": 0.019054
+        },
+        "label": "ESTIMATED",
+        "basis": "The 47% that is not cars is split in the proportions of the research model's ESTIMATED mix (motorcycle 0.50, auto 0.14, bus 0.03, van 0.04, truck 0.03). No observed breakdown exists."
+      },
+      "cross_source_caveat": "The car share and the volume come from different surveys (IJIRSET 2017; RMP-2031 counts of Dec 2014-Apr 2015). Applying one to the other is ESTIMATED.",
+      "estimated_cars_in_observed_peak_hour": {
+        "value": 11996.02,
+        "calculation": "22634 x 0.53",
+        "label": "ESTIMATED",
+        "why_not_derived": "cross-source: share and volume are from different surveys"
+      }
+    },
+    {
+      "step": 6,
+      "label": "SIMULATED",
+      "what": "Vehicles routed by duarouter and simulated by SUMO",
+      "routed_vehicle_count": 6160,
+      "routed_vehicles_by_type": {
+        "ambulance": 1,
+        "auto": 551,
+        "bus": 118,
+        "car": 3256,
+        "motorcycle": 1954,
+        "truck": 118,
+        "van": 162
+      }
+    }
+  ],
+  "sumo_parameters": {
+    "time_to_teleport_s": {
+      "value": 600.0,
+      "label": "ESTIMATED",
+      "basis": "One observed 450 s cycle plus 150 s; see demand.TIME_TO_TELEPORT_S."
+    }
+  },
+  "not_claimed": [
+    "SUMO vehicle positions are not historical GPS traces.",
+    "Queues and travel times are simulated, not observed.",
+    "Turning proportions are not observed.",
+    "The non-car vehicle split is not observed."
+  ]
+}

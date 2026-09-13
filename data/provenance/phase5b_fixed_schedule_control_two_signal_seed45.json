@@ -1,0 +1,37 @@
+{
+  "dataset_id": "phase5b_fixed_schedule_control_two_signal_seed45",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 5b control: the EMS intervention envelopes applied on a fixed timetable in an ambulance-free network, with no state replay, to test whether generic signal perturbation reproduces the traffic-side effect.",
+  "source_name": "EMS Black Box Phase 5b",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T16:10:38Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/control/two_signal_seed45_fixed_schedule_control.json",
+  "estimation_basis": null,
+  "produced_by": "scripts/run_fixed_schedule_control.py --seed 45 --trip two_signal",
+  "random_seed": 45,
+  "derived_from": [
+    "phase5_counterfactual_two_signal_seed45"
+  ],
+  "processing_steps": [
+    "Recovered each EMS policy's intervention envelope from its recorded transitions.",
+    "Removed exactly one vehicle (the ambulance) from the demand.",
+    "Applied each envelope on a clock-driven policy that never reads the ambulance.",
+    "Granted priority by phase selection only; no signal state was written.",
+    "Paired every arm against the ambulance-free NORMAL arm."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "SIMULATED RESULT. Not a measurement of real traffic in Bengaluru.",
+    "One seed per invocation.",
+    "Signal programs are netconvert-generated ESTIMATED_DATA; the effect under test may be a property of that unoptimised timing.",
+    "The control demand differs from the experiment demand by one vehicle."
+  ],
+  "notes": null
+}

@@ -38,9 +38,10 @@ from ems_sim.counterfactual.metrics import (  # noqa: E402
 )
 from ems_sim.counterfactual.pairing import ScenarioIdentity, require_paired  # noqa: E402
 from ems_sim.counterfactual.runner import route_tls_for, run_policy  # noqa: E402
-from ems_sim.demand.ambulance import SIGNALISED_AMBULANCE_TRIP  # noqa: E402
+from ems_sim.demand.ambulance import AMBULANCE_TRIPS, TWO_SIGNAL_AMBULANCE_TRIP  # noqa: E402
 from ems_sim.demand.config import DemandPeriod, make_config  # noqa: E402
 from ems_sim.demand.generator import generate_demand  # noqa: E402
+from ems_sim.disturbance.incident import DEFAULT_INCIDENT  # noqa: E402
 from ems_sim.network.study_area import get_study_area  # noqa: E402
 from ems_sim.policies.policies import POLICY_ORDER, make_policy  # noqa: E402
 from ems_sim.policies.tls_map import summarise_route_tls  # noqa: E402
@@ -54,6 +55,88 @@ from ems_sim.provenance import (  # noqa: E402
 from ems_sim.runner.sumo_env import require_sumo  # noqa: E402
 from ems_sim.runner.sumo_process import SumoRunOptions  # noqa: E402
 
+SENSITIVITY_BASIS = (
+    "ASSUMED VALUE FOR SENSITIVITY TESTING — not real-world data, not a claim "
+    "about any speed limit in Bengaluru, and not to be quoted as one. The value "
+    "is grounded entirely inside this project's own network: of the 36 "
+    "highway.primary edges in silk_board_v1, the 22 where OSM states a maxspeed "
+    "state 25 km/h (2 edges), 40 km/h (4) and 60 km/h (16) — median and maximum "
+    "60 — while the 14 where OSM is silent all received netconvert's 100 km/h "
+    "default from its European type map. The sensitivity values are drawn from "
+    "that observed set of OSM-stated values for this road class in this network, "
+    "chosen before the runs and without reference to their outcome."
+)
+
+
+def write_speed_override_network(
+    net_file: Path, edge_ids: list[str], speed_kmh: float, label: str
+) -> tuple[Path, int]:
+    """Copy the network with the given edges' lane speeds overridden.
+
+    The committed network is never modified. The copy is written under a
+    ``sensitivity/`` directory and named for the variant, so a sensitivity
+    network cannot be picked up by a primary run.
+    """
+    import xml.etree.ElementTree as ET
+
+    speed_ms = speed_kmh / 3.6
+    tree = ET.parse(net_file)
+    root = tree.getroot()
+    wanted = set(edge_ids)
+    patched = 0
+    seen: set[str] = set()
+    for edge in root.findall("edge"):
+        if edge.get("id") not in wanted:
+            continue
+        seen.add(edge.get("id"))
+        for lane in edge.findall("lane"):
+            lane.set("speed", f"{speed_ms:.2f}")
+            patched += 1
+    missing = wanted - seen
+    if missing:
+        raise SystemExit(f"speed override named edges not in the network: {sorted(missing)}")
+
+    target = net_file.parent / "sensitivity" / f"{net_file.stem}_{label}.net.xml"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    tree.write(target, encoding="utf-8", xml_declaration=True)
+    return target, patched
+
+
+def queue_lengths_from_output(queue_file, watched: set[str]) -> dict:
+    """Max and mean queueing length, from SUMO's own --queue-output.
+
+    Reported for the ambulance's route and the incident edge separately from the
+    network as a whole, because a network-wide maximum says nothing about
+    whether the ambulance met a queue.
+    """
+    import xml.etree.ElementTree as ET
+
+    if not queue_file.is_file():
+        return {"available": False}
+    network_max = route_max = 0.0
+    route_total = 0.0
+    route_samples = 0
+    for _event, element in ET.iterparse(queue_file, events=("end",)):
+        if element.tag != "lane":
+            element.clear()
+            continue
+        length = float(element.get("queueing_length", 0.0))
+        network_max = max(network_max, length)
+        if element.get("id", "").rsplit("_", 1)[0] in watched:
+            route_max = max(route_max, length)
+            route_total += length
+            route_samples += 1
+        element.clear()
+    return {
+        "available": True,
+        "network_max_queue_length_m": round(network_max, 2),
+        "route_max_queue_length_m": round(route_max, 2),
+        "route_mean_queue_length_m": (
+            round(route_total / route_samples, 3) if route_samples else 0.0
+        ),
+        "source": "SUMO --queue-output queueing_length",
+    }
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(
@@ -64,6 +147,40 @@ def main() -> int:
     parser.add_argument("--policies", nargs="+", default=list(POLICY_ORDER))
     parser.add_argument("--duration", type=float, default=3600.0)
     parser.add_argument("--warmup", type=float, default=300.0)
+    parser.add_argument(
+        "--trip",
+        default=TWO_SIGNAL_AMBULANCE_TRIP.trip_label,
+        choices=sorted(AMBULANCE_TRIPS),
+        help="Which committed ambulance trip to run. The earlier trips stay "
+        "runnable so their published numbers can be reproduced.",
+    )
+    parser.add_argument(
+        "--speed-override-edges",
+        nargs="*",
+        default=[],
+        help="SENSITIVITY ONLY. Edge IDs whose lane speeds are overridden in a "
+        "copy of the network. The committed network is never modified.",
+    )
+    parser.add_argument(
+        "--speed-override-kmh",
+        type=float,
+        default=None,
+        help="SENSITIVITY ONLY. The assumed speed for those edges, in km/h.",
+    )
+    parser.add_argument(
+        "--sensitivity-label",
+        default=None,
+        help="SENSITIVITY ONLY. Names the variant. Required with a speed override; "
+        "namespaces the network, demand and every output so a sensitivity run can "
+        "never be mistaken for, or overwrite, a primary result.",
+    )
+    parser.add_argument(
+        "--incident",
+        action="store_true",
+        help="Apply the committed lane-blockage disturbance. Identical across "
+        "every policy of a seed, so a paired comparison still differs only in "
+        "the policy.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -71,7 +188,32 @@ def main() -> int:
     study_area = get_study_area(args.area)
     variant = DEFAULT_VARIANT
     net_file = ensure_variant_network(variant, study_area, REPO_ROOT, installation)
-    ambulance = SIGNALISED_AMBULANCE_TRIP
+
+    sensitivity = None
+    if args.speed_override_edges or args.speed_override_kmh is not None:
+        if not (args.speed_override_edges and args.speed_override_kmh and args.sensitivity_label):
+            raise SystemExit(
+                "--speed-override-edges, --speed-override-kmh and --sensitivity-label "
+                "must be given together."
+            )
+        net_file, patched = write_speed_override_network(
+            net_file, args.speed_override_edges, args.speed_override_kmh, args.sensitivity_label
+        )
+        sensitivity = {
+            "label": args.sensitivity_label,
+            "edges": list(args.speed_override_edges),
+            "assumed_speed_kmh": args.speed_override_kmh,
+            "lanes_patched": patched,
+            "data_class": "ASSUMED_SENSITIVITY_VALUE",
+            "basis": SENSITIVITY_BASIS,
+        }
+        print(
+            f"  SENSITIVITY: {sensitivity['label']} — {args.speed_override_edges} "
+            f"-> {args.speed_override_kmh} km/h ({patched} lanes patched)"
+        )
+        print("  This is an ASSUMED value for sensitivity testing, not real-world data.")
+
+    ambulance = AMBULANCE_TRIPS[args.trip]
 
     config = make_config(
         period=DemandPeriod.EVENING_PEAK,
@@ -81,9 +223,13 @@ def main() -> int:
     )
     from dataclasses import replace
 
-    config = replace(config, demand_id=f"cf_{args.area}_seed{args.seed}")
+    incident = DEFAULT_INCIDENT if args.incident else None
+    prefix = f"sens_{args.sensitivity_label}_" if sensitivity else ""
+    if incident is not None:
+        prefix = f"inc_{prefix}"
+    config = replace(config, demand_id=f"cf_{prefix}{args.area}_{args.trip}_seed{args.seed}")
 
-    print(f"Counterfactual replay — {args.area}, seed {args.seed}")
+    print(f"Counterfactual replay — {args.area}, trip {args.trip}, seed {args.seed}")
     print(f"  network   : {net_file.relative_to(REPO_ROOT)}")
     print(f"  sha256    : {sha256_file(net_file)[:32]}…")
     print(f"  demand    : {config.demand_id}  hash {config.config_hash()}")
@@ -164,6 +310,7 @@ def main() -> int:
             net_file,
             route,
             installation,
+            incident=incident,
         )
         result.output_dir = str(output_dir.relative_to(REPO_ROOT))
         from ems_sim.runner.traci_bridge import (
@@ -173,6 +320,12 @@ def main() -> int:
 
         enrich_from_statistics(result.measurements, output_dir / "statistics.xml")
         enrich_from_tripinfo(result.measurements, output_dir / "tripinfo.xml")
+        # Queue length in metres comes from SUMO's own queue output. The TraCI
+        # series carries halting counts; it must not be asked for lengths.
+        result.queue_report = queue_lengths_from_output(
+            output_dir / "queues.xml",
+            watched=set(route) | ({incident.edge_id} if incident else set()),
+        )
         results[name] = result
         identities[name] = identity_for()
 
@@ -212,7 +365,13 @@ def main() -> int:
             attributions[name] = intersection_attribution(normal, result)
 
     ems_dir = REPO_ROOT / "data" / "processed" / args.area / "ems"
-    cf_dir = REPO_ROOT / "data" / "processed" / args.area / "counterfactual"
+    cf_dir = (
+        REPO_ROOT
+        / "data"
+        / "processed"
+        / args.area
+        / ("sensitivity" if sensitivity else "counterfactual")
+    )
     ems_dir.mkdir(parents=True, exist_ok=True)
     cf_dir.mkdir(parents=True, exist_ok=True)
 
@@ -227,19 +386,21 @@ def main() -> int:
         "ambulance": ambulance.as_dict(),
         "scenario_variant": variant.as_dict(),
         "wall_clock_total_s": round(elapsed, 1),
+        "sensitivity": sensitivity,
+        "incident": incident.as_dict() if incident else None,
     }
 
-    (ems_dir / f"route_traffic_lights_seed{args.seed}.json").write_text(
+    (ems_dir / f"route_traffic_lights_{prefix}{args.trip}_seed{args.seed}.json").write_text(
         json.dumps({"reproducibility": reproducibility, "summary": summary}, indent=2) + "\n",
         encoding="utf-8",
     )
     for name, result in results.items():
-        (cf_dir / f"seed{args.seed}_{name}.json").write_text(
+        (cf_dir / f"{prefix}{args.trip}_seed{args.seed}_{name}.json").write_text(
             json.dumps({"reproducibility": reproducibility, "run": result.as_dict()}, indent=2)
             + "\n",
             encoding="utf-8",
         )
-    (cf_dir / f"seed{args.seed}_comparisons.json").write_text(
+    (cf_dir / f"{prefix}{args.trip}_seed{args.seed}_comparisons.json").write_text(
         json.dumps(
             {
                 "reproducibility": reproducibility,
@@ -254,7 +415,7 @@ def main() -> int:
 
     write_record(
         ProvenanceRecord(
-            dataset_id=f"phase5_counterfactual_seed{args.seed}",
+            dataset_id=f"phase5_counterfactual_{prefix}{args.trip}_seed{args.seed}",
             data_class=DataClass.SIMULATED,
             description=(
                 f"Phase 5 counterfactual replay for {args.area}, seed {args.seed}: "
@@ -265,7 +426,11 @@ def main() -> int:
             random_seed=args.seed,
             source_name="EMS Black Box Phase 5",
             retrieved_at=utc_now_iso(),
-            file_path=str((cf_dir / f"seed{args.seed}_comparisons.json").relative_to(REPO_ROOT)),
+            file_path=str(
+                (cf_dir / f"{prefix}{args.trip}_seed{args.seed}_comparisons.json").relative_to(
+                    REPO_ROOT
+                )
+            ),
             derived_from=[
                 "phase3_baseline",
                 "phase4_multi_seed_include_unresolved",

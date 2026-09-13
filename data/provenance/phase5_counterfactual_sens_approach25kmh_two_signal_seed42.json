@@ -1,0 +1,45 @@
+{
+  "dataset_id": "phase5_counterfactual_sens_approach25kmh_two_signal_seed42",
+  "data_class": "SIMULATED_DATA",
+  "description": "Phase 5 counterfactual replay for silk_board_v1, seed 42: 4 signal policies over one identical scenario, paired against the NORMAL run of the same seed.",
+  "source_name": "EMS Black Box Phase 5",
+  "source_url": null,
+  "source_licence": null,
+  "source_attribution": null,
+  "retrieved_at": "2026-09-10T16:44:49Z",
+  "sha256": null,
+  "size_bytes": null,
+  "file_path": "data/processed/silk_board_v1/sensitivity/sens_approach25kmh_two_signal_seed42_comparisons.json",
+  "estimation_basis": null,
+  "produced_by": "scenario:e4fe7fdddd447e94 seed:42",
+  "random_seed": 42,
+  "derived_from": [
+    "phase3_baseline",
+    "phase4_multi_seed_include_unresolved",
+    "silk_board_v1_sumo_network",
+    "sumo_network_review"
+  ],
+  "processing_steps": [
+    "Generated the demand once; every policy run used the same route file.",
+    "Identified the traffic lights on the ambulance route and the link indices its own movement uses.",
+    "Ran each policy under TraCI, observing the ambulance and never moving it.",
+    "Validated every watched signal state against its program each step.",
+    "Verified scenario identity between paired runs before comparing.",
+    "Computed differences against NORMAL of the same seed only."
+  ],
+  "tool_versions": {
+    "sumo": "1.27.1"
+  },
+  "study_area": null,
+  "limitations": [
+    "SIMULATED RESULT. Not a measurement of any real ambulance journey in Bengaluru. No ambulance GPS trace, dispatch record or observed travel time was used.",
+    "Signal programs are netconvert-generated (ESTIMATED_DATA), so the baseline these policies are measured against is assumed timing, not verified controller timing.",
+    "Demand rates, vehicle mix and vehicle behaviour are ESTIMATED_DATA and are not field-calibrated.",
+    "1,375 of 1,515 edge speeds are SUMO defaults; 166 are at or above 80 km/h. Time loss is measured against free-flow, so it is over-estimated on those edges.",
+    "The ambulance trip is a configuration choice, not a real dispatch. It was reselected in Phase 5 because the Phase 3 trip's route passes no traffic lights at all.",
+    "way/1351994264 remains operational-status UNRESOLVED and is included in this variant. Ambulance route uses it: False.",
+    "The sublane model is deliberately not enabled, so two-wheeler lateral behaviour is inert (Phase 4 finding).",
+    "Single seed. Seeds 43-46 have not been run."
+  ],
+  "notes": "Policies: ['NORMAL', 'EMS_NEXT', 'EMS_ROLLING', 'EMS_FULL_PREEMPTION']. Wall clock 504s. Scenario hash e4fe7fdddd447e94."
+}

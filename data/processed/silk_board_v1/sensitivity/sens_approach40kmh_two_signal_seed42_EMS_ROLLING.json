@@ -1,0 +1,635 @@
+{
+  "reproducibility": {
+    "generated_at": "2026-09-10T16:36:24Z",
+    "sumo_version": "1.27.1",
+    "network_file": "simulation/sumo/silk_board_v1/sensitivity/silk_board_v1.net_approach40kmh.net.xml",
+    "network_sha256": "78f929c48c3e36722ce3c17de47792d20308c8f5bd172bf9300fa18bc16e6e8c",
+    "scenario_hash": "40c40bc49c0f8e79",
+    "scenario": {
+      "network_sha256": "78f929c48c3e36722ce3c17de47792d20308c8f5bd172bf9300fa18bc16e6e8c",
+      "demand_config_hash": "aa33333ade1c545a",
+      "demand_id": "cf_sens_approach40kmh_silk_board_v1_two_signal_seed42",
+      "seed": 42,
+      "begin_s": 0.0,
+      "end_s": 3900.0,
+      "step_length_s": 0.5,
+      "vehicle_mix": {
+        "motorcycle": 0.5,
+        "car": 0.26,
+        "auto": 0.14,
+        "bus": 0.03,
+        "van": 0.04,
+        "truck": 0.03
+      },
+      "ambulance_origin": "1311812959#0",
+      "ambulance_destination": "1196514116#0",
+      "ambulance_depart_s": 600.0,
+      "ambulance_route_edges": [
+        "1311812959#0",
+        "1311812959#2",
+        "92196679#0",
+        "1393474724#1",
+        "1148717038#0",
+        "40696223#1",
+        "1167293940",
+        "1208112303",
+        "237025636",
+        "1416769967",
+        "1196514116#0"
+      ],
+      "scenario_variant": "include_unresolved",
+      "scenario_hash": "40c40bc49c0f8e79"
+    },
+    "demand_config": {
+      "demand_id": "cf_sens_approach40kmh_silk_board_v1_two_signal_seed42",
+      "period": "evening_peak",
+      "period_scaling": 1.0,
+      "period_scaling_basis": "ESTIMATED_DATA. Off-peak is set to 45% of peak as a plausible urban weekday shape; it is not derived from any count. The two peaks are equal because this project has no basis for making one heavier than the other, and inventing a directional asymmetry would be inventing a fact about where Bengaluru's employment sits relative to Silk Board.",
+      "demand_scale": 0.5,
+      "demand_scale_basis": "ESTIMATED_DATA, calibrated against the model's own capacity rather than chosen. The base flow rates gridlocked this network at scale 1.0 \u2014 148 teleports and 955 vehicles that never entered \u2014 and a gridlocked run reports travel times that are not the times to drive those journeys. The scale is the largest value at which the run stays within the teleport threshold and the insertion backlog stays small. It is a property of this model, not of Bengaluru: a network whose lane counts and signal timings were better sourced would carry a different volume.",
+      "seed": 42,
+      "begin_s": 0.0,
+      "end_s": 3900.0,
+      "warmup_s": 300.0,
+      "step_length_s": 0.5,
+      "vehicle_mix": {
+        "motorcycle": 0.5,
+        "car": 0.26,
+        "auto": 0.14,
+        "bus": 0.03,
+        "van": 0.04,
+        "truck": 0.03
+      },
+      "vehicle_mix_basis": "ESTIMATED_DATA. Chosen so the simulation exercises mixed traffic, with two-wheelers dominant as is widely reported for Bengaluru. NOT a measured or published modal split, and must not be quoted as one. Composition drives saturation flow, so this assumption propagates into every queue length and delay figure the project reports.",
+      "total_vehicles_per_hour": 2940.0,
+      "flows": [
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 350.0,
+          "label": "Hosur Rd south -> ORR west",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 325.0,
+          "label": "Hosur Rd south -> ORR east",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "172853384#3",
+          "vehicles_per_hour": 250.0,
+          "label": "Hosur Rd south -> Hosur Rd north",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 300.0,
+          "label": "ORR east -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 275.0,
+          "label": "ORR east -> ORR west (through)",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 275.0,
+          "label": "ORR west -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 250.0,
+          "label": "ORR west -> ORR east (through)",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 150.0,
+          "label": "Sarjapura Rd -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 125.0,
+          "label": "Sarjapura Rd -> ORR west",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1311812959#0",
+          "to_edge": "350096404#1",
+          "vehicles_per_hour": 75.0,
+          "label": "Sarjapura Rd local",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 200.0,
+          "label": "Ragigudda flyover -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "886153773",
+          "vehicles_per_hour": 175.0,
+          "label": "Ragigudda flyover through-movement",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "148210030",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 100.0,
+          "label": "Madiwala Underpass -> ORR east",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "684917326#0",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 90.0,
+          "label": "Madiwala link -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        }
+      ],
+      "data_class": "ESTIMATED_DATA",
+      "data_class_note": "The demand configuration is ESTIMATED_DATA. Vehicles produced by running it are SIMULATED_DATA."
+    },
+    "ambulance": {
+      "origin_edge": "1311812959#0",
+      "destination_edge": "1196514116#0",
+      "depart_time_s": 600.0,
+      "vehicle_type": "ambulance",
+      "trip_label": "two_signal",
+      "basis": "ESTIMATED_DATA. Origin, destination and departure time are configuration choices by this project, not a real EMS dispatch. Selected in Phase 5a by routing all 90 network entry/exit pairs with duarouter and keeping those whose route passes at least two traffic lights with green fraction below 0.70 for the ambulance's own movement. The criteria were fixed before any policy was run and do not refer to time saved.",
+      "vehicle_id": "ambulance_two_signal",
+      "data_class": "ESTIMATED_DATA",
+      "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+    },
+    "scenario_variant": {
+      "variant_id": "include_unresolved",
+      "include_unresolved_infrastructure": true,
+      "unresolved_edge_ids": [
+        "1351994264"
+      ],
+      "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
+      "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
+    },
+    "wall_clock_total_s": 508.2,
+    "sensitivity": {
+      "label": "approach40kmh",
+      "edges": [
+        "1393474724#1"
+      ],
+      "assumed_speed_kmh": 40.0,
+      "lanes_patched": 2,
+      "data_class": "ASSUMED_SENSITIVITY_VALUE",
+      "basis": "ASSUMED VALUE FOR SENSITIVITY TESTING \u2014 not real-world data, not a claim about any speed limit in Bengaluru, and not to be quoted as one. The value is grounded entirely inside this project's own network: of the 36 highway.primary edges in silk_board_v1, the 22 where OSM states a maxspeed state 25 km/h (2 edges), 40 km/h (4) and 60 km/h (16) \u2014 median and maximum 60 \u2014 while the 14 where OSM is silent all received netconvert's 100 km/h default from its European type map. The sensitivity values are drawn from that observed set of OSM-stated values for this road class in this network, chosen before the runs and without reference to their outcome."
+    }
+  },
+  "run": {
+    "policy": "EMS_ROLLING",
+    "seed": 42,
+    "valid_for_headline": true,
+    "validity_reason": "valid",
+    "output_dir": "simulation/results/cf_sens_approach40kmh_silk_board_v1_two_signal_seed42_EMS_ROLLING",
+    "simulation": {
+      "steps_executed": 7800,
+      "sim_end_time_s": 3900.0,
+      "wall_clock_s": 123.74,
+      "sample_interval_s": 30.0,
+      "vehicles": {
+        "loaded": 3226,
+        "departed": 3226,
+        "arrived": 2933,
+        "still_running_at_end": 292,
+        "insertion_backlog_at_end": 0,
+        "trips_recorded": 3225,
+        "trips_completed": 2934
+      },
+      "teleports": {
+        "count": 0,
+        "sumo_reported_total": 0,
+        "observations_match_sumo": true,
+        "events": []
+      },
+      "collisions": 0
+    },
+    "ambulance": {
+      "completed": true,
+      "teleported": false,
+      "travel_time_s": 172.5,
+      "waiting_time_s": 0.0,
+      "time_loss_s": 11.3,
+      "route_length_m": 2541.52,
+      "stop_count": 0,
+      "route_edges": [
+        "1311812959#0",
+        "1311812959#2",
+        "92196679#0",
+        "1393474724#1",
+        "1148717038#0",
+        "40696223#1",
+        "1167293940",
+        "1208112303",
+        "237025636",
+        "1416769967",
+        "1196514116#0"
+      ],
+      "per_edge_time_s": {
+        "1311812959#0": 3.5,
+        "1311812959#2": 9.5,
+        "92196679#0": 52.0,
+        "1393474724#1": 3.0,
+        "1148717038#0": 10.5,
+        "40696223#1": 5.5,
+        "1167293940": 1.0,
+        "1208112303": 49.5,
+        "237025636": 5.0,
+        "1416769967": 13.0,
+        "1196514116#0": 20.0
+      },
+      "signal_wait_events": []
+    },
+    "route_traffic_lights": [
+      {
+        "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+        "approach_edge": "1311812959#2",
+        "exit_edge": "92196679#0",
+        "route_index": 1,
+        "ambulance_link_indices": [
+          13,
+          18,
+          19,
+          20
+        ],
+        "controlled_link_count": 24,
+        "phase_count": 6,
+        "cycle_length_s": 90.0,
+        "green_fraction_for_ambulance": 0.2667,
+        "has_red_exposure": true,
+        "priority_phase_indices": [
+          4
+        ],
+        "note": "The ambulance movement sees red in at least one phase, so priority can change something here."
+      },
+      {
+        "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+        "approach_edge": "1393474724#1",
+        "exit_edge": "1148717038#0",
+        "route_index": 3,
+        "ambulance_link_indices": [
+          3
+        ],
+        "controlled_link_count": 13,
+        "phase_count": 4,
+        "cycle_length_s": 90.0,
+        "green_fraction_for_ambulance": 0.4333,
+        "has_red_exposure": true,
+        "priority_phase_indices": [
+          2
+        ],
+        "note": "The ambulance movement sees red in at least one phase, so priority can change something here."
+      }
+    ],
+    "policy_report": {
+      "policy": "EMS_ROLLING",
+      "description": "Coordinates every actionable traffic light within a look-ahead window along the ambulance's remaining route, so downstream signals are already serving the ambulance's movement before it arrives. Several signals may hold priority at the same time.",
+      "traffic_lights_on_route": [
+        "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+        "GS_cluster_10282769895_10775075568_11964440742_11964440743"
+      ],
+      "actionable_traffic_lights": [
+        "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+        "GS_cluster_10282769895_10775075568_11964440742_11964440743"
+      ],
+      "skipped_permanently_green": [],
+      "state_transitions": [
+        {
+          "sim_time_s": 600.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "NORMAL",
+          "new_state": "REQUESTED",
+          "reason": "signal is 17 m ahead, inside the 700 m coordination window",
+          "ambulance_edge": "1311812959#0",
+          "ambulance_lane": "1311812959#0_0",
+          "ambulance_lane_position_m": 6.1,
+          "ambulance_distance_to_tls_m": 16.580000000000002,
+          "ambulance_speed_ms": 6.121409910156894,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 601.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "REQUESTED",
+          "new_state": "PRIORITY_ACTIVE",
+          "reason": "a phase serving the ambulance movement is now green",
+          "ambulance_edge": "1311812959#0",
+          "ambulance_lane": "1311812959#0_0",
+          "ambulance_lane_position_m": 9.048398928941944,
+          "ambulance_distance_to_tls_m": 13.631601071058057,
+          "ambulance_speed_ms": 5.896797857883889,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 603.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "PRIORITY_ACTIVE",
+          "new_state": "CLEARING",
+          "reason": "ambulance passed, or the signal left the window",
+          "ambulance_edge": ":cluster_12074449285_12074449291_0",
+          "ambulance_lane": ":cluster_12074449285_12074449291_0_0",
+          "ambulance_lane_position_m": 1.6088117511889521,
+          "ambulance_distance_to_tls_m": 1.5211882488110477,
+          "ambulance_speed_ms": 4.905284648256213,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 604.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "CLEARING",
+          "new_state": "NORMAL",
+          "reason": "signal returned to its own program",
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 1.0491308351788238,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.140638167979743,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 604.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "NORMAL",
+          "new_state": "REQUESTED",
+          "reason": "signal is -1073741824 m ahead, inside the 700 m coordination window",
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 3.68167985536997,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.265098040382292,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 605.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "REQUESTED",
+          "new_state": "PRIORITY_ACTIVE",
+          "reason": "a phase serving the ambulance movement is now green",
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 6.3391721250707835,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.314984539401627,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 610.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "PRIORITY_ACTIVE",
+          "new_state": "CLEARING",
+          "reason": "ambulance passed, or the signal left the window",
+          "ambulance_edge": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8",
+          "ambulance_lane": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8_0",
+          "ambulance_lane_position_m": 3.062112084666822,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 6.885336104603485,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 610.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "CLEARING",
+          "new_state": "NORMAL",
+          "reason": "signal returned to its own program",
+          "ambulance_edge": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8",
+          "ambulance_lane": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8_0",
+          "ambulance_lane_position_m": 7.054870080913041,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 7.985515992492438,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 628.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "NORMAL",
+          "new_state": "REQUESTED",
+          "reason": "signal is 696 m ahead, inside the 700 m coordination window",
+          "ambulance_edge": "92196679#0",
+          "ambulance_lane": "92196679#0_1",
+          "ambulance_lane_position_m": 269.0338614351,
+          "ambulance_distance_to_tls_m": 695.5061385649,
+          "ambulance_speed_ms": 19.282254287470135,
+          "previous_signal_state": "yyyyGrrrrrrrr",
+          "new_signal_state": "yyyyGrrrrrrrr",
+          "previous_phase_index": 3,
+          "new_phase_index": 3,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        },
+        {
+          "sim_time_s": 641.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "REQUESTED",
+          "new_state": "PRIORITY_ACTIVE",
+          "reason": "a phase serving the ambulance movement is now green",
+          "ambulance_edge": "92196679#0",
+          "ambulance_lane": "92196679#0_1",
+          "ambulance_lane_position_m": 518.1430451830549,
+          "ambulance_distance_to_tls_m": 446.3969548169451,
+          "ambulance_speed_ms": 19.36511715218425,
+          "previous_signal_state": "GgGGGrrrrrrrr",
+          "new_signal_state": "GgGGGrrrrrrrr",
+          "previous_phase_index": 2,
+          "new_phase_index": 2,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        },
+        {
+          "sim_time_s": 667.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "PRIORITY_ACTIVE",
+          "new_state": "CLEARING",
+          "reason": "ambulance passed, or the signal left the window",
+          "ambulance_edge": ":cluster_10282769895_10775075568_11964440742_11964440743_3",
+          "ambulance_lane": ":cluster_10282769895_10775075568_11964440742_11964440743_3_0",
+          "ambulance_lane_position_m": 2.310764655363748,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 4.936203529704363,
+          "previous_signal_state": "GgGGGrrrrrrrr",
+          "new_signal_state": "GgGGGrrrrrrrr",
+          "previous_phase_index": 2,
+          "new_phase_index": 2,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        },
+        {
+          "sim_time_s": 668.0,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "CLEARING",
+          "new_state": "NORMAL",
+          "reason": "signal returned to its own program",
+          "ambulance_edge": ":cluster_10282769895_10775075568_11964440742_11964440743_3",
+          "ambulance_lane": ":cluster_10282769895_10775075568_11964440742_11964440743_3_0",
+          "ambulance_lane_position_m": 4.583338114405053,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 4.54514691808261,
+          "previous_signal_state": "GgGGGrrrrrrrr",
+          "new_signal_state": "GgGGGrrrrrrrr",
+          "previous_phase_index": 2,
+          "new_phase_index": 2,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        }
+      ],
+      "signal_changes": [
+        {
+          "sim_time_s": 601.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "from_phase_index": 4,
+          "to_phase_index": 4,
+          "from_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "to_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "reason": "began holding a phase that already serves the ambulance, extending it past its programmed duration and delaying the movements it conflicts with",
+          "policy": "EMS_ROLLING"
+        },
+        {
+          "sim_time_s": 605.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "from_phase_index": 4,
+          "to_phase_index": 4,
+          "from_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "to_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "reason": "began holding a phase that already serves the ambulance, extending it past its programmed duration and delaying the movements it conflicts with",
+          "policy": "EMS_ROLLING"
+        },
+        {
+          "sim_time_s": 635.0,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "from_phase_index": 0,
+          "to_phase_index": 1,
+          "from_state": "rrrrGGGGgGgGg",
+          "to_state": "rrrrGyyyyyyyy",
+          "reason": "ended a non-priority green after its minimum, so the program advances through its own interphase towards a phase serving the ambulance",
+          "policy": "EMS_ROLLING"
+        },
+        {
+          "sim_time_s": 641.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "from_phase_index": 2,
+          "to_phase_index": 2,
+          "from_state": "GgGGGrrrrrrrr",
+          "to_state": "GgGGGrrrrrrrr",
+          "reason": "began holding a phase that already serves the ambulance, extending it past its programmed duration and delaying the movements it conflicts with",
+          "policy": "EMS_ROLLING"
+        }
+      ],
+      "transition_count": 12,
+      "signal_change_count": 4,
+      "parameters": {
+        "min_green_s": 5.0,
+        "max_priority_s": 60.0,
+        "activation_distance_m": 700.0
+      }
+    },
+    "signal_conflicts": []
+  }
+}

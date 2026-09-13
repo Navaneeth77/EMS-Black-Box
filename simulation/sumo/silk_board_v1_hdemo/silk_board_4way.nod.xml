@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- HISTORICAL_DEMO: the four Central Silk Board approach nodes under one
+     controller. ESTIMATED modelling decision; see ems_sim.historical.network. -->
+<nodes>
+    <node id="3805003789" type="traffic_light" tl="silk_board_4way"/>
+    <node id="306594280" type="traffic_light" tl="silk_board_4way"/>
+    <node id="494271080" type="traffic_light" tl="silk_board_4way"/>
+    <node id="2971089260" type="traffic_light" tl="silk_board_4way"/>
+</nodes>

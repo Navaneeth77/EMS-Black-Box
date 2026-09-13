@@ -2,6 +2,29 @@
 
 Results of running one identical scenario under four signal policies.
 
+> ### Superseded in part — read [`PHASE5A_CONTROL.md`](PHASE5A_CONTROL.md) first
+>
+> This document records the **`signalised` trip** result and is kept unchanged as
+> that record. Two things have happened since.
+>
+> **1. A measurement defect.** Section 1 below concludes from an empty
+> `signal_wait_events` that the ambulance "never halts within 60 m of a traffic
+> light on its route". **That inference does not follow.** The detector measured
+> distance to the *start* of the approach edge, not the stop line, so once the
+> ambulance was on that edge TraCI returned `INVALID_DOUBLE_VALUE` and the check
+> could essentially never fire. It is fixed now. The headline of 0.00 s saved
+> rests independently on the 3.5 s free-flow approach traversal and probably
+> still stands, but this trip has **not** been re-run under the corrected
+> detector, and the result files below retain the uncorrected field.
+>
+> **2. A better scenario.** The Phase 5a `two_signal` trip passes two actionable
+> signals (green fractions 0.267 and 0.433) and the ambulance is genuinely
+> stopped at a red. On it, the policies save 12.5 s.
+>
+> **Do not quote the traffic-side costs below as the cost of signal priority.**
+> A control experiment showed the traffic-side effect of these perturbations
+> reproduces with no ambulance in the network at all.
+
 > **Simulated results.** Under this simulation scenario only. Not a measurement
 > of real ambulance performance in Bengaluru, and not evidence about what signal
 > priority would achieve there.

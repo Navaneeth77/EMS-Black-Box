@@ -1,0 +1,1471 @@
+{
+  "reproducibility": {
+    "generated_at": "2026-09-10T20:51:16Z",
+    "sumo_version": "1.27.1",
+    "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
+    "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+    "scenario_hash": "924618c038ef371a",
+    "scenario": {
+      "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+      "demand_config_hash": "5841cf5e92ac3f3d",
+      "demand_id": "cf_inc_silk_board_v1_two_signal_seed45",
+      "seed": 45,
+      "begin_s": 0.0,
+      "end_s": 3900.0,
+      "step_length_s": 0.5,
+      "vehicle_mix": {
+        "motorcycle": 0.5,
+        "car": 0.26,
+        "auto": 0.14,
+        "bus": 0.03,
+        "van": 0.04,
+        "truck": 0.03
+      },
+      "ambulance_origin": "1311812959#0",
+      "ambulance_destination": "1196514116#0",
+      "ambulance_depart_s": 600.0,
+      "ambulance_route_edges": [
+        "1311812959#0",
+        "1311812959#2",
+        "92196679#0",
+        "1393474724#1",
+        "1148717038#0",
+        "40696223#1",
+        "1167293940",
+        "1208112303",
+        "237025636",
+        "1416769967",
+        "1196514116#0"
+      ],
+      "scenario_variant": "include_unresolved",
+      "scenario_hash": "924618c038ef371a"
+    },
+    "demand_config": {
+      "demand_id": "cf_inc_silk_board_v1_two_signal_seed45",
+      "period": "evening_peak",
+      "period_scaling": 1.0,
+      "period_scaling_basis": "ESTIMATED_DATA. Off-peak is set to 45% of peak as a plausible urban weekday shape; it is not derived from any count. The two peaks are equal because this project has no basis for making one heavier than the other, and inventing a directional asymmetry would be inventing a fact about where Bengaluru's employment sits relative to Silk Board.",
+      "demand_scale": 0.5,
+      "demand_scale_basis": "ESTIMATED_DATA, calibrated against the model's own capacity rather than chosen. The base flow rates gridlocked this network at scale 1.0 \u2014 148 teleports and 955 vehicles that never entered \u2014 and a gridlocked run reports travel times that are not the times to drive those journeys. The scale is the largest value at which the run stays within the teleport threshold and the insertion backlog stays small. It is a property of this model, not of Bengaluru: a network whose lane counts and signal timings were better sourced would carry a different volume.",
+      "seed": 45,
+      "begin_s": 0.0,
+      "end_s": 3900.0,
+      "warmup_s": 300.0,
+      "step_length_s": 0.5,
+      "vehicle_mix": {
+        "motorcycle": 0.5,
+        "car": 0.26,
+        "auto": 0.14,
+        "bus": 0.03,
+        "van": 0.04,
+        "truck": 0.03
+      },
+      "vehicle_mix_basis": "ESTIMATED_DATA. Chosen so the simulation exercises mixed traffic, with two-wheelers dominant as is widely reported for Bengaluru. NOT a measured or published modal split, and must not be quoted as one. Composition drives saturation flow, so this assumption propagates into every queue length and delay figure the project reports.",
+      "total_vehicles_per_hour": 2940.0,
+      "flows": [
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 350.0,
+          "label": "Hosur Rd south -> ORR west",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 325.0,
+          "label": "Hosur Rd south -> ORR east",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "172853384#3",
+          "vehicles_per_hour": 250.0,
+          "label": "Hosur Rd south -> Hosur Rd north",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 300.0,
+          "label": "ORR east -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 275.0,
+          "label": "ORR east -> ORR west (through)",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 275.0,
+          "label": "ORR west -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 250.0,
+          "label": "ORR west -> ORR east (through)",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 150.0,
+          "label": "Sarjapura Rd -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 125.0,
+          "label": "Sarjapura Rd -> ORR west",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1311812959#0",
+          "to_edge": "350096404#1",
+          "vehicles_per_hour": 75.0,
+          "label": "Sarjapura Rd local",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 200.0,
+          "label": "Ragigudda flyover -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "886153773",
+          "vehicles_per_hour": 175.0,
+          "label": "Ragigudda flyover through-movement",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "148210030",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 100.0,
+          "label": "Madiwala Underpass -> ORR east",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "684917326#0",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 90.0,
+          "label": "Madiwala link -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        }
+      ],
+      "data_class": "ESTIMATED_DATA",
+      "data_class_note": "The demand configuration is ESTIMATED_DATA. Vehicles produced by running it are SIMULATED_DATA."
+    },
+    "ambulance": {
+      "origin_edge": "1311812959#0",
+      "destination_edge": "1196514116#0",
+      "depart_time_s": 600.0,
+      "vehicle_type": "ambulance",
+      "trip_label": "two_signal",
+      "basis": "ESTIMATED_DATA. Origin, destination and departure time are configuration choices by this project, not a real EMS dispatch. Selected in Phase 5a by routing all 90 network entry/exit pairs with duarouter and keeping those whose route passes at least two traffic lights with green fraction below 0.70 for the ambulance's own movement. The criteria were fixed before any policy was run and do not refer to time saved.",
+      "vehicle_id": "ambulance_two_signal",
+      "data_class": "ESTIMATED_DATA",
+      "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+    },
+    "scenario_variant": {
+      "variant_id": "include_unresolved",
+      "include_unresolved_infrastructure": true,
+      "unresolved_edge_ids": [
+        "1351994264"
+      ],
+      "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
+      "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
+    },
+    "wall_clock_total_s": 503.3,
+    "sensitivity": null,
+    "incident": {
+      "incident_id": "silk_board_lane_block_v1",
+      "incident_type": "LANE_BLOCKAGE",
+      "start_time_s": 560.0,
+      "duration_s": 420.0,
+      "edge_id": "1393474724#1",
+      "lane_index": 0,
+      "blockage": "full_lane_closure",
+      "speed_limit_ms": 0.6,
+      "description": "One lane of the two-lane approach to the GS_cluster traffic light is closed, halving capacity at the stop line where the ambulance's delay is attributed.",
+      "selection_basis": "The approach edge of the actionable traffic light on the ambulance route. An earlier rule selected the longest upstream edge; that edge carries about four vehicles a minute and no queue could form on it. The rule was changed on that measurement, not on any effect on ambulance travel time.",
+      "data_class": "SIMULATED_SCENARIO",
+      "seed": null,
+      "provenance": "SIMULATED_SCENARIO. A hypothetical incident declared by this project to study traffic under disturbance. It is not a record of any real incident at Silk Board, and no incident report, traffic bulletin or observation was used. Its location and timing are configuration.",
+      "lane_id": "1393474724#1_0",
+      "end_time_s": 980.0,
+      "config_hash": "ddd9914ed96b036a"
+    }
+  },
+  "run": {
+    "policy": "EMS_ROLLING",
+    "seed": 45,
+    "valid_for_headline": true,
+    "validity_reason": "valid",
+    "output_dir": "simulation/results/cf_inc_silk_board_v1_two_signal_seed45_EMS_ROLLING",
+    "simulation": {
+      "steps_executed": 7800,
+      "sim_end_time_s": 3900.0,
+      "wall_clock_s": 120.41,
+      "sample_interval_s": 30.0,
+      "vehicles": {
+        "loaded": 3226,
+        "departed": 3226,
+        "arrived": 2967,
+        "still_running_at_end": 257,
+        "insertion_backlog_at_end": 0,
+        "trips_recorded": 3225,
+        "trips_completed": 2969
+      },
+      "teleports": {
+        "count": 0,
+        "sumo_reported_total": 0,
+        "observations_match_sumo": true,
+        "events": []
+      },
+      "collisions": 0
+    },
+    "ambulance": {
+      "completed": true,
+      "teleported": false,
+      "travel_time_s": 173.0,
+      "waiting_time_s": 0.0,
+      "time_loss_s": 12.76,
+      "route_length_m": 2541.52,
+      "stop_count": 0,
+      "route_edges": [
+        "1311812959#0",
+        "1311812959#2",
+        "92196679#0",
+        "1393474724#1",
+        "1148717038#0",
+        "40696223#1",
+        "1167293940",
+        "1208112303",
+        "237025636",
+        "1416769967",
+        "1196514116#0"
+      ],
+      "per_edge_time_s": {
+        "1311812959#0": 3.5,
+        "1311812959#2": 9.5,
+        "92196679#0": 52.0,
+        "1393474724#1": 3.0,
+        "1148717038#0": 11.0,
+        "40696223#1": 6.0,
+        "1208112303": 49.5,
+        "237025636": 5.0,
+        "1416769967": 13.5,
+        "1196514116#0": 20.0
+      },
+      "signal_wait_events": []
+    },
+    "incident": {
+      "incident": {
+        "incident_id": "silk_board_lane_block_v1",
+        "incident_type": "LANE_BLOCKAGE",
+        "start_time_s": 560.0,
+        "duration_s": 420.0,
+        "edge_id": "1393474724#1",
+        "lane_index": 0,
+        "blockage": "full_lane_closure",
+        "speed_limit_ms": 0.6,
+        "description": "One lane of the two-lane approach to the GS_cluster traffic light is closed, halving capacity at the stop line where the ambulance's delay is attributed.",
+        "selection_basis": "The approach edge of the actionable traffic light on the ambulance route. An earlier rule selected the longest upstream edge; that edge carries about four vehicles a minute and no queue could form on it. The rule was changed on that measurement, not on any effect on ambulance travel time.",
+        "data_class": "SIMULATED_SCENARIO",
+        "seed": null,
+        "provenance": "SIMULATED_SCENARIO. A hypothetical incident declared by this project to study traffic under disturbance. It is not a record of any real incident at Silk Board, and no incident report, traffic bulletin or observation was used. Its location and timing are configuration.",
+        "lane_id": "1393474724#1_0",
+        "end_time_s": 980.0,
+        "config_hash": "ddd9914ed96b036a"
+      },
+      "events": [
+        {
+          "event": "incident_start",
+          "sim_time_s": 560.0,
+          "lane_id": "1393474724#1_0",
+          "original_speed_ms": 27.78,
+          "applied_speed_ms": 0.6
+        },
+        {
+          "event": "incident_end",
+          "sim_time_s": 980.0,
+          "lane_id": "1393474724#1_0"
+        }
+      ],
+      "applied": true,
+      "note": "The incident closes a lane. No vehicle was moved, stopped, rerouted or re-timed by it; every queue is produced by SUMO's own car-following and lane-change models."
+    },
+    "queues": {
+      "samples": 129,
+      "max_halting_vehicles": 10,
+      "mean_halting_vehicles": 2.48,
+      "max_lane_occupancy": 2.3582,
+      "mean_lane_occupancy": 0.402,
+      "baseline_halting_vehicles": 2.55,
+      "peak_halting_during_incident": 8,
+      "recovery_time_s": 60.0,
+      "source": "SUMO --queue-output queueing_length",
+      "queue_length_note": "Queue *length* in metres is taken from SUMO's own --queue-output, not from this series. getLastStepLength is mean vehicle length and must not be used for it.",
+      "available": true,
+      "network_max_queue_length_m": 393.03,
+      "route_max_queue_length_m": 48.5,
+      "route_mean_queue_length_m": 11.139
+    },
+    "queue_series": [
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0,
+        "sim_time_s": 30.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0,
+        "sim_time_s": 60.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0,
+        "sim_time_s": 90.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0577,
+        "sim_time_s": 120.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0691,
+        "sim_time_s": 150.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.7963,
+        "sim_time_s": 180.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.8111,
+        "sim_time_s": 210.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.3831,
+        "sim_time_s": 240.0,
+        "incident_active": false
+      },
+      {
+        "halting": 2,
+        "max_lane_occupancy": 0.6684,
+        "sim_time_s": 270.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.6986,
+        "sim_time_s": 300.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1115,
+        "sim_time_s": 330.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.5853,
+        "sim_time_s": 360.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6977,
+        "sim_time_s": 390.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 420.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0581,
+        "sim_time_s": 450.0,
+        "incident_active": false
+      },
+      {
+        "halting": 2,
+        "max_lane_occupancy": 0.3021,
+        "sim_time_s": 480.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 510.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 540.0,
+        "incident_active": false
+      },
+      {
+        "halting": 2,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 570.0,
+        "incident_active": true
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 600.0,
+        "incident_active": true
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2769,
+        "sim_time_s": 630.0,
+        "incident_active": true
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0442,
+        "sim_time_s": 660.0,
+        "incident_active": true
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.5664,
+        "sim_time_s": 690.0,
+        "incident_active": true
+      },
+      {
+        "halting": 5,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 720.0,
+        "incident_active": true
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2302,
+        "sim_time_s": 750.0,
+        "incident_active": true
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0523,
+        "sim_time_s": 780.0,
+        "incident_active": true
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 810.0,
+        "incident_active": true
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.062,
+        "sim_time_s": 840.0,
+        "incident_active": true
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4755,
+        "sim_time_s": 870.0,
+        "incident_active": true
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6851,
+        "sim_time_s": 900.0,
+        "incident_active": true
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2302,
+        "sim_time_s": 930.0,
+        "incident_active": true
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0565,
+        "sim_time_s": 960.0,
+        "incident_active": true
+      },
+      {
+        "halting": 9,
+        "max_lane_occupancy": 0.7796,
+        "sim_time_s": 990.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.1491,
+        "sim_time_s": 1020.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4893,
+        "sim_time_s": 1050.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 1080.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.2302,
+        "sim_time_s": 1110.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 1140.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.6347,
+        "sim_time_s": 1170.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0904,
+        "sim_time_s": 1200.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2769,
+        "sim_time_s": 1230.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6347,
+        "sim_time_s": 1260.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0256,
+        "sim_time_s": 1290.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.3338,
+        "sim_time_s": 1320.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.6482,
+        "sim_time_s": 1350.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.133,
+        "sim_time_s": 1380.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2769,
+        "sim_time_s": 1410.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6986,
+        "sim_time_s": 1440.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0581,
+        "sim_time_s": 1470.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1385,
+        "sim_time_s": 1500.0,
+        "incident_active": false
+      },
+      {
+        "halting": 5,
+        "max_lane_occupancy": 0.6977,
+        "sim_time_s": 1530.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0482,
+        "sim_time_s": 1560.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2832,
+        "sim_time_s": 1590.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.7237,
+        "sim_time_s": 1620.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 1650.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1385,
+        "sim_time_s": 1680.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6977,
+        "sim_time_s": 1710.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 1740.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0523,
+        "sim_time_s": 1770.0,
+        "incident_active": false
+      },
+      {
+        "halting": 9,
+        "max_lane_occupancy": 0.7796,
+        "sim_time_s": 1800.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 1830.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.1156,
+        "sim_time_s": 1860.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 1890.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0849,
+        "sim_time_s": 1920.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4846,
+        "sim_time_s": 1950.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 1980.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 1.3557,
+        "sim_time_s": 2010.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2832,
+        "sim_time_s": 2040.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.7237,
+        "sim_time_s": 2070.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.1549,
+        "sim_time_s": 2100.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 2130.0,
+        "incident_active": false
+      },
+      {
+        "halting": 5,
+        "max_lane_occupancy": 0.6986,
+        "sim_time_s": 2160.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0359,
+        "sim_time_s": 2190.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.1336,
+        "sim_time_s": 2220.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.6473,
+        "sim_time_s": 2250.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0865,
+        "sim_time_s": 2280.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.3968,
+        "sim_time_s": 2310.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 2340.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0601,
+        "sim_time_s": 2370.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0726,
+        "sim_time_s": 2400.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.7228,
+        "sim_time_s": 2430.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0581,
+        "sim_time_s": 2460.0,
+        "incident_active": false
+      },
+      {
+        "halting": 2,
+        "max_lane_occupancy": 0.5601,
+        "sim_time_s": 2490.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.6787,
+        "sim_time_s": 2520.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.1549,
+        "sim_time_s": 2550.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4991,
+        "sim_time_s": 2580.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 2610.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0904,
+        "sim_time_s": 2640.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2769,
+        "sim_time_s": 2670.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.6977,
+        "sim_time_s": 2700.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.057,
+        "sim_time_s": 2730.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2769,
+        "sim_time_s": 2760.0,
+        "incident_active": false
+      },
+      {
+        "halting": 4,
+        "max_lane_occupancy": 0.6969,
+        "sim_time_s": 2790.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.8896,
+        "sim_time_s": 2820.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4154,
+        "sim_time_s": 2850.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.7174,
+        "sim_time_s": 2880.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0581,
+        "sim_time_s": 2910.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4154,
+        "sim_time_s": 2940.0,
+        "incident_active": false
+      },
+      {
+        "halting": 4,
+        "max_lane_occupancy": 0.6986,
+        "sim_time_s": 2970.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0514,
+        "sim_time_s": 3000.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.2832,
+        "sim_time_s": 3030.0,
+        "incident_active": false
+      },
+      {
+        "halting": 10,
+        "max_lane_occupancy": 0.6662,
+        "sim_time_s": 3060.0,
+        "incident_active": false
+      },
+      {
+        "halting": 2,
+        "max_lane_occupancy": 0.1833,
+        "sim_time_s": 3090.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 3120.0,
+        "incident_active": false
+      },
+      {
+        "halting": 5,
+        "max_lane_occupancy": 0.6347,
+        "sim_time_s": 3150.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1125,
+        "sim_time_s": 3180.0,
+        "incident_active": false
+      },
+      {
+        "halting": 2,
+        "max_lane_occupancy": 0.5601,
+        "sim_time_s": 3210.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.7237,
+        "sim_time_s": 3240.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.1149,
+        "sim_time_s": 3270.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.5118,
+        "sim_time_s": 3300.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.6788,
+        "sim_time_s": 3330.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.2517,
+        "sim_time_s": 3360.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 3390.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.6977,
+        "sim_time_s": 3420.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.0772,
+        "sim_time_s": 3450.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.5664,
+        "sim_time_s": 3480.0,
+        "incident_active": false
+      },
+      {
+        "halting": 5,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 3510.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0246,
+        "sim_time_s": 3540.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 3570.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6221,
+        "sim_time_s": 3600.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.03,
+        "sim_time_s": 3630.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.1741,
+        "sim_time_s": 3660.0,
+        "incident_active": false
+      },
+      {
+        "halting": 7,
+        "max_lane_occupancy": 0.7103,
+        "sim_time_s": 3690.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 0.0499,
+        "sim_time_s": 3720.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4329,
+        "sim_time_s": 3750.0,
+        "incident_active": false
+      },
+      {
+        "halting": 8,
+        "max_lane_occupancy": 0.6851,
+        "sim_time_s": 3780.0,
+        "incident_active": false
+      },
+      {
+        "halting": 0,
+        "max_lane_occupancy": 2.3582,
+        "sim_time_s": 3810.0,
+        "incident_active": false
+      },
+      {
+        "halting": 1,
+        "max_lane_occupancy": 0.4216,
+        "sim_time_s": 3840.0,
+        "incident_active": false
+      },
+      {
+        "halting": 6,
+        "max_lane_occupancy": 0.6977,
+        "sim_time_s": 3870.0,
+        "incident_active": false
+      }
+    ],
+    "route_traffic_lights": [
+      {
+        "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+        "approach_edge": "1311812959#2",
+        "exit_edge": "92196679#0",
+        "route_index": 1,
+        "ambulance_link_indices": [
+          13,
+          18,
+          19,
+          20
+        ],
+        "controlled_link_count": 24,
+        "phase_count": 6,
+        "cycle_length_s": 90.0,
+        "green_fraction_for_ambulance": 0.2667,
+        "has_red_exposure": true,
+        "priority_phase_indices": [
+          4
+        ],
+        "note": "The ambulance movement sees red in at least one phase, so priority can change something here."
+      },
+      {
+        "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+        "approach_edge": "1393474724#1",
+        "exit_edge": "1148717038#0",
+        "route_index": 3,
+        "ambulance_link_indices": [
+          3
+        ],
+        "controlled_link_count": 13,
+        "phase_count": 4,
+        "cycle_length_s": 90.0,
+        "green_fraction_for_ambulance": 0.4333,
+        "has_red_exposure": true,
+        "priority_phase_indices": [
+          2
+        ],
+        "note": "The ambulance movement sees red in at least one phase, so priority can change something here."
+      }
+    ],
+    "policy_report": {
+      "policy": "EMS_ROLLING",
+      "description": "Coordinates every actionable traffic light within a look-ahead window along the ambulance's remaining route, so downstream signals are already serving the ambulance's movement before it arrives. Several signals may hold priority at the same time.",
+      "traffic_lights_on_route": [
+        "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+        "GS_cluster_10282769895_10775075568_11964440742_11964440743"
+      ],
+      "actionable_traffic_lights": [
+        "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+        "GS_cluster_10282769895_10775075568_11964440742_11964440743"
+      ],
+      "skipped_permanently_green": [],
+      "state_transitions": [
+        {
+          "sim_time_s": 600.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "NORMAL",
+          "new_state": "REQUESTED",
+          "reason": "signal is 17 m ahead, inside the 700 m coordination window",
+          "ambulance_edge": "1311812959#0",
+          "ambulance_lane": "1311812959#0_0",
+          "ambulance_lane_position_m": 6.1,
+          "ambulance_distance_to_tls_m": 16.580000000000002,
+          "ambulance_speed_ms": 6.151204994756968,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 601.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "REQUESTED",
+          "new_state": "PRIORITY_ACTIVE",
+          "reason": "a phase serving the ambulance movement is now green",
+          "ambulance_edge": "1311812959#0",
+          "ambulance_lane": "1311812959#0_0",
+          "ambulance_lane_position_m": 9.043429541573047,
+          "ambulance_distance_to_tls_m": 13.636570458426952,
+          "ambulance_speed_ms": 5.8868590831460965,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 603.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "PRIORITY_ACTIVE",
+          "new_state": "CLEARING",
+          "reason": "ambulance passed, or the signal left the window",
+          "ambulance_edge": ":cluster_12074449285_12074449291_0",
+          "ambulance_lane": ":cluster_12074449285_12074449291_0_0",
+          "ambulance_lane_position_m": 2.192425975192382,
+          "ambulance_distance_to_tls_m": 0.9375740248076179,
+          "ambulance_speed_ms": 5.211149468795453,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 604.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "CLEARING",
+          "new_state": "NORMAL",
+          "reason": "signal returned to its own program",
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 1.9979095624006247,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.870967174416486,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 604.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "NORMAL",
+          "new_state": "REQUESTED",
+          "reason": "signal is -1073741824 m ahead, inside the 700 m coordination window",
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 4.866961364786734,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.738103604772218,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 605.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "REQUESTED",
+          "new_state": "PRIORITY_ACTIVE",
+          "reason": "a phase serving the ambulance movement is now green",
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 7.6263862495719845,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.518849769570501,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 610.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "PRIORITY_ACTIVE",
+          "new_state": "CLEARING",
+          "reason": "ambulance passed, or the signal left the window",
+          "ambulance_edge": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8",
+          "ambulance_lane": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8_0",
+          "ambulance_lane_position_m": 2.9974229001926815,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 6.915531095359475,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 610.5,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "CLEARING",
+          "new_state": "NORMAL",
+          "reason": "signal returned to its own program",
+          "ambulance_edge": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8",
+          "ambulance_lane": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8_0",
+          "ambulance_lane_position_m": 6.781848532247599,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 7.568851264109835,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            13,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "sim_time_s": 628.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "NORMAL",
+          "new_state": "REQUESTED",
+          "reason": "signal is 695 m ahead, inside the 700 m coordination window",
+          "ambulance_edge": "92196679#0",
+          "ambulance_lane": "92196679#0_1",
+          "ambulance_lane_position_m": 269.39127615830137,
+          "ambulance_distance_to_tls_m": 695.1487238416986,
+          "ambulance_speed_ms": 19.136610383922235,
+          "previous_signal_state": "yyyyGrrrrrrrr",
+          "new_signal_state": "yyyyGrrrrrrrr",
+          "previous_phase_index": 3,
+          "new_phase_index": 3,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        },
+        {
+          "sim_time_s": 641.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "REQUESTED",
+          "new_state": "PRIORITY_ACTIVE",
+          "reason": "a phase serving the ambulance movement is now green",
+          "ambulance_edge": "92196679#0",
+          "ambulance_lane": "92196679#0_1",
+          "ambulance_lane_position_m": 518.0446878820726,
+          "ambulance_distance_to_tls_m": 446.4953121179274,
+          "ambulance_speed_ms": 19.17910010783002,
+          "previous_signal_state": "GgGGGrrrrrrrr",
+          "new_signal_state": "GgGGGrrrrrrrr",
+          "previous_phase_index": 2,
+          "new_phase_index": 2,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        },
+        {
+          "sim_time_s": 667.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "PRIORITY_ACTIVE",
+          "new_state": "CLEARING",
+          "reason": "ambulance passed, or the signal left the window",
+          "ambulance_edge": ":cluster_10282769895_10775075568_11964440742_11964440743_3",
+          "ambulance_lane": ":cluster_10282769895_10775075568_11964440742_11964440743_3_0",
+          "ambulance_lane_position_m": 2.4334519219910717,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 4.955707502570004,
+          "previous_signal_state": "GgGGGrrrrrrrr",
+          "new_signal_state": "GgGGGrrrrrrrr",
+          "previous_phase_index": 2,
+          "new_phase_index": 2,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        },
+        {
+          "sim_time_s": 668.0,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "previous_state": "CLEARING",
+          "new_state": "NORMAL",
+          "reason": "signal returned to its own program",
+          "ambulance_edge": ":cluster_10282769895_10775075568_11964440742_11964440743_3",
+          "ambulance_lane": ":cluster_10282769895_10775075568_11964440742_11964440743_3_0",
+          "ambulance_lane_position_m": 4.811829465972259,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 4.756755087962374,
+          "previous_signal_state": "GgGGGrrrrrrrr",
+          "new_signal_state": "GgGGGrrrrrrrr",
+          "previous_phase_index": 2,
+          "new_phase_index": 2,
+          "policy": "EMS_ROLLING",
+          "affected_link_indices": [
+            3
+          ]
+        }
+      ],
+      "signal_changes": [
+        {
+          "sim_time_s": 601.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "from_phase_index": 4,
+          "to_phase_index": 4,
+          "from_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "to_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "reason": "began holding a phase that already serves the ambulance, extending it past its programmed duration and delaying the movements it conflicts with",
+          "policy": "EMS_ROLLING"
+        },
+        {
+          "sim_time_s": 605.0,
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "from_phase_index": 4,
+          "to_phase_index": 4,
+          "from_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "to_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "reason": "began holding a phase that already serves the ambulance, extending it past its programmed duration and delaying the movements it conflicts with",
+          "policy": "EMS_ROLLING"
+        },
+        {
+          "sim_time_s": 635.0,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "from_phase_index": 0,
+          "to_phase_index": 1,
+          "from_state": "rrrrGGGGgGgGg",
+          "to_state": "rrrrGyyyyyyyy",
+          "reason": "ended a non-priority green after its minimum, so the program advances through its own interphase towards a phase serving the ambulance",
+          "policy": "EMS_ROLLING"
+        },
+        {
+          "sim_time_s": 641.5,
+          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "from_phase_index": 2,
+          "to_phase_index": 2,
+          "from_state": "GgGGGrrrrrrrr",
+          "to_state": "GgGGGrrrrrrrr",
+          "reason": "began holding a phase that already serves the ambulance, extending it past its programmed duration and delaying the movements it conflicts with",
+          "policy": "EMS_ROLLING"
+        }
+      ],
+      "transition_count": 12,
+      "signal_change_count": 4,
+      "parameters": {
+        "min_green_s": 5.0,
+        "max_priority_s": 60.0,
+        "activation_distance_m": 700.0
+      }
+    },
+    "signal_conflicts": []
+  }
+}

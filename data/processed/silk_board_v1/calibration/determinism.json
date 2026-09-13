@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-09-10T04:53:15Z",
+  "generated_at": "2026-09-10T16:58:47Z",
   "sumo_version": "1.27.1",
-  "duration_s": 600.0,
+  "duration_s": 900.0,
   "check": {
     "seed": 42,
     "passed": true,
     "demand": {
       "identical": true,
       "flows_sha256": {
-        "run_a": "f7982792c8232e2024c019c8ca61a52e7873fddd75f6cacc3799df75f8bda26b",
-        "run_b": "f7982792c8232e2024c019c8ca61a52e7873fddd75f6cacc3799df75f8bda26b"
+        "run_a": "3447f092399afc673c717591bd45ebf3a9351696f3c172730eb7d176d1814a85",
+        "run_b": "3447f092399afc673c717591bd45ebf3a9351696f3c172730eb7d176d1814a85"
       },
       "routes_sha256": {
-        "run_a": "dc085d6ffae21781100f5b6e975542a2badea7ab9a307366484bf2e381fe8b3d",
-        "run_b": "dc085d6ffae21781100f5b6e975542a2badea7ab9a307366484bf2e381fe8b3d"
+        "run_a": "d08993fcd9d0803159ec2342b72a3d38640201f70070e5400d4f412b92d60633",
+        "run_b": "d08993fcd9d0803159ec2342b72a3d38640201f70070e5400d4f412b92d60633"
       },
       "requirement": "The flows file is compared byte-for-byte: this project writes it and it is deterministic by construction. The routes file is compared by content, excluding duarouter's generated header \u2014 that header carries a timestamp and the output path, so a byte comparison would always fail for a reason unrelated to determinism, and a false alarm here would train a reader to ignore the check."
     },

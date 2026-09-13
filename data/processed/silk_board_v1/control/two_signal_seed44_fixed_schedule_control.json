@@ -1,0 +1,432 @@
+{
+  "reproducibility": {
+    "generated_at": "2026-09-10T16:02:21Z",
+    "sumo_version": "1.27.1",
+    "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+    "demand_config": {
+      "demand_id": "cf_silk_board_v1_two_signal_seed44",
+      "period": "evening_peak",
+      "period_scaling": 1.0,
+      "period_scaling_basis": "ESTIMATED_DATA. Off-peak is set to 45% of peak as a plausible urban weekday shape; it is not derived from any count. The two peaks are equal because this project has no basis for making one heavier than the other, and inventing a directional asymmetry would be inventing a fact about where Bengaluru's employment sits relative to Silk Board.",
+      "demand_scale": 0.5,
+      "demand_scale_basis": "ESTIMATED_DATA, calibrated against the model's own capacity rather than chosen. The base flow rates gridlocked this network at scale 1.0 \u2014 148 teleports and 955 vehicles that never entered \u2014 and a gridlocked run reports travel times that are not the times to drive those journeys. The scale is the largest value at which the run stays within the teleport threshold and the insertion backlog stays small. It is a property of this model, not of Bengaluru: a network whose lane counts and signal timings were better sourced would carry a different volume.",
+      "seed": 44,
+      "begin_s": 0.0,
+      "end_s": 3900.0,
+      "warmup_s": 300.0,
+      "step_length_s": 0.5,
+      "vehicle_mix": {
+        "motorcycle": 0.5,
+        "car": 0.26,
+        "auto": 0.14,
+        "bus": 0.03,
+        "van": 0.04,
+        "truck": 0.03
+      },
+      "vehicle_mix_basis": "ESTIMATED_DATA. Chosen so the simulation exercises mixed traffic, with two-wheelers dominant as is widely reported for Bengaluru. NOT a measured or published modal split, and must not be quoted as one. Composition drives saturation flow, so this assumption propagates into every queue length and delay figure the project reports.",
+      "total_vehicles_per_hour": 2940.0,
+      "flows": [
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 350.0,
+          "label": "Hosur Rd south -> ORR west",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 325.0,
+          "label": "Hosur Rd south -> ORR east",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "312063814#2",
+          "to_edge": "172853384#3",
+          "vehicles_per_hour": 250.0,
+          "label": "Hosur Rd south -> Hosur Rd north",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 300.0,
+          "label": "ORR east -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "380980308#0",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 275.0,
+          "label": "ORR east -> ORR west (through)",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 275.0,
+          "label": "ORR west -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1109914039#1",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 250.0,
+          "label": "ORR west -> ORR east (through)",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 150.0,
+          "label": "Sarjapura Rd -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "631197944#1",
+          "to_edge": "491889864#5",
+          "vehicles_per_hour": 125.0,
+          "label": "Sarjapura Rd -> ORR west",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "1311812959#0",
+          "to_edge": "350096404#1",
+          "vehicles_per_hour": 75.0,
+          "label": "Sarjapura Rd local",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 200.0,
+          "label": "Ragigudda flyover -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "886153772",
+          "to_edge": "886153773",
+          "vehicles_per_hour": 175.0,
+          "label": "Ragigudda flyover through-movement",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "148210030",
+          "to_edge": "1534247766#0",
+          "vehicles_per_hour": 100.0,
+          "label": "Madiwala Underpass -> ORR east",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        },
+        {
+          "from_edge": "684917326#0",
+          "to_edge": "1196514116#0",
+          "vehicles_per_hour": 90.0,
+          "label": "Madiwala link -> Hosur Rd south",
+          "basis": "ESTIMATED_DATA. See module docstring."
+        }
+      ],
+      "data_class": "ESTIMATED_DATA",
+      "data_class_note": "The demand configuration is ESTIMATED_DATA. Vehicles produced by running it are SIMULATED_DATA."
+    },
+    "ambulance_trip_removed": {
+      "origin_edge": "1311812959#0",
+      "destination_edge": "1196514116#0",
+      "depart_time_s": 600.0,
+      "vehicle_type": "ambulance",
+      "trip_label": "two_signal",
+      "basis": "ESTIMATED_DATA. Origin, destination and departure time are configuration choices by this project, not a real EMS dispatch. Selected in Phase 5a by routing all 90 network entry/exit pairs with duarouter and keeping those whose route passes at least two traffic lights with green fraction below 0.70 for the ambulance's own movement. The criteria were fixed before any policy was run and do not refer to time saved.",
+      "vehicle_id": "ambulance_two_signal",
+      "data_class": "ESTIMATED_DATA",
+      "priority_in_this_phase": "none \u2014 obeys normal traffic rules; siren and signal preemption are Phase 5"
+    },
+    "scenario_variant": {
+      "variant_id": "include_unresolved",
+      "include_unresolved_infrastructure": true,
+      "unresolved_edge_ids": [
+        "1351994264"
+      ],
+      "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
+      "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
+    },
+    "control_routes_file": "simulation/routes/cf_silk_board_v1_two_signal_seed44_no_ambulance.rou.xml"
+  },
+  "method": {
+    "question": "Does a signal perturbation with no ambulance logic reproduce the traffic-side effect attributed to the EMS policies?",
+    "design": "Both arms are ambulance-free ordinary runs with no state override. The intervention arm grants priority by selecting among the program's own phases, on a timetable transcribed from the recorded EMS run's state transitions.",
+    "improvement_over_phase5a": "Phase 5a's control replayed recorded signal states, which moved total time loss by ~9,925 s on its own. No replay is used here, so that footprint is absent from both arms.",
+    "remaining_approximation": "The control demand is the Candidate D demand minus exactly one vehicle (the ambulance). Both arms share that removal, so it cancels between them, but the control is not on the same absolute footing as the with-ambulance experiment."
+  },
+  "intervention_envelopes": {
+    "EMS_NEXT": {
+      "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more": [
+        [
+          600.5,
+          604.0
+        ],
+        [
+          604.5,
+          610.0
+        ]
+      ],
+      "GS_cluster_10282769895_10775075568_11964440742_11964440743": [
+        [
+          651.5,
+          667.5
+        ]
+      ]
+    },
+    "EMS_ROLLING": {
+      "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more": [
+        [
+          600.5,
+          604.0
+        ],
+        [
+          604.5,
+          610.0
+        ]
+      ],
+      "GS_cluster_10282769895_10775075568_11964440742_11964440743": [
+        [
+          628.0,
+          667.5
+        ]
+      ]
+    },
+    "EMS_FULL_PREEMPTION": {
+      "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more": [
+        [
+          600.5,
+          604.0
+        ],
+        [
+          604.5,
+          610.0
+        ]
+      ],
+      "GS_cluster_10282769895_10775075568_11964440742_11964440743": [
+        [
+          600.5,
+          604.0
+        ],
+        [
+          604.5,
+          610.0
+        ],
+        [
+          613.0,
+          667.5
+        ]
+      ]
+    }
+  },
+  "runs": {
+    "fixed_NORMAL": {
+      "arm": "fixed_NORMAL",
+      "policy": "NORMAL",
+      "source_policy": "NORMAL",
+      "signal_transitions": 0,
+      "signal_changes": 0,
+      "signal_conflicts": [],
+      "teleport_count": 0,
+      "teleports": [],
+      "ambulance_present": false,
+      "traffic": {
+        "vehicles_completed": 2950,
+        "total_travel_time_s": 723127.5,
+        "total_waiting_time_s": 127385.5,
+        "total_time_loss_s": 204740.04,
+        "mean_travel_time_s": 245.128,
+        "mean_waiting_time_s": 43.182,
+        "mean_time_loss_s": 69.403
+      },
+      "queues": {
+        "max_queue_length_m": 202.84,
+        "mean_queue_length_m": 26.6097,
+        "samples": 77928
+      },
+      "sim_end_time_s": 3900.0,
+      "steps_executed": 7800
+    },
+    "fixed_EMS_NEXT": {
+      "arm": "fixed_EMS_NEXT",
+      "policy": "SCHEDULED_PERTURBATION",
+      "source_policy": "EMS_NEXT",
+      "signal_transitions": 8,
+      "signal_changes": 3,
+      "signal_conflicts": [],
+      "teleport_count": 0,
+      "teleports": [],
+      "ambulance_present": false,
+      "traffic": {
+        "vehicles_completed": 2923,
+        "total_travel_time_s": 753458.0,
+        "total_waiting_time_s": 155807.0,
+        "total_time_loss_s": 237825.72,
+        "mean_travel_time_s": 257.769,
+        "mean_waiting_time_s": 53.304,
+        "mean_time_loss_s": 81.364
+      },
+      "queues": {
+        "max_queue_length_m": 202.89,
+        "mean_queue_length_m": 29.6832,
+        "samples": 91141
+      },
+      "sim_end_time_s": 3900.0,
+      "steps_executed": 7800
+    },
+    "fixed_EMS_ROLLING": {
+      "arm": "fixed_EMS_ROLLING",
+      "policy": "SCHEDULED_PERTURBATION",
+      "source_policy": "EMS_ROLLING",
+      "signal_transitions": 8,
+      "signal_changes": 3,
+      "signal_conflicts": [],
+      "teleport_count": 0,
+      "teleports": [],
+      "ambulance_present": false,
+      "traffic": {
+        "vehicles_completed": 2943,
+        "total_travel_time_s": 753272.0,
+        "total_waiting_time_s": 152160.0,
+        "total_time_loss_s": 235582.05,
+        "mean_travel_time_s": 255.954,
+        "mean_waiting_time_s": 51.702,
+        "mean_time_loss_s": 80.048
+      },
+      "queues": {
+        "max_queue_length_m": 202.57,
+        "mean_queue_length_m": 29.6191,
+        "samples": 88619
+      },
+      "sim_end_time_s": 3900.0,
+      "steps_executed": 7800
+    },
+    "fixed_EMS_FULL_PREEMPTION": {
+      "arm": "fixed_EMS_FULL_PREEMPTION",
+      "policy": "SCHEDULED_PERTURBATION",
+      "source_policy": "EMS_FULL_PREEMPTION",
+      "signal_transitions": 12,
+      "signal_changes": 4,
+      "signal_conflicts": [],
+      "teleport_count": 0,
+      "teleports": [],
+      "ambulance_present": false,
+      "traffic": {
+        "vehicles_completed": 2939,
+        "total_travel_time_s": 739353.5,
+        "total_waiting_time_s": 141021.0,
+        "total_time_loss_s": 222262.32,
+        "mean_travel_time_s": 251.566,
+        "mean_waiting_time_s": 47.983,
+        "mean_time_loss_s": 75.625
+      },
+      "queues": {
+        "max_queue_length_m": 202.81,
+        "mean_queue_length_m": 28.465,
+        "samples": 82977
+      },
+      "sim_end_time_s": 3900.0,
+      "steps_executed": 7800
+    }
+  },
+  "paired_vs_fixed_normal": {
+    "EMS_NEXT": {
+      "vehicles_completed": {
+        "fixed_normal": 2950,
+        "fixed_policy": 2923,
+        "absolute": -27,
+        "percent": -0.915
+      },
+      "total_travel_time_s": {
+        "fixed_normal": 723127.5,
+        "fixed_policy": 753458.0,
+        "absolute": 30330.5,
+        "percent": 4.194
+      },
+      "total_waiting_time_s": {
+        "fixed_normal": 127385.5,
+        "fixed_policy": 155807.0,
+        "absolute": 28421.5,
+        "percent": 22.311
+      },
+      "total_time_loss_s": {
+        "fixed_normal": 204740.04,
+        "fixed_policy": 237825.72,
+        "absolute": 33085.68,
+        "percent": 16.16
+      },
+      "mean_time_loss_s": {
+        "fixed_normal": 69.403,
+        "fixed_policy": 81.364,
+        "absolute": 11.961,
+        "percent": 17.234
+      }
+    },
+    "EMS_ROLLING": {
+      "vehicles_completed": {
+        "fixed_normal": 2950,
+        "fixed_policy": 2943,
+        "absolute": -7,
+        "percent": -0.237
+      },
+      "total_travel_time_s": {
+        "fixed_normal": 723127.5,
+        "fixed_policy": 753272.0,
+        "absolute": 30144.5,
+        "percent": 4.169
+      },
+      "total_waiting_time_s": {
+        "fixed_normal": 127385.5,
+        "fixed_policy": 152160.0,
+        "absolute": 24774.5,
+        "percent": 19.448
+      },
+      "total_time_loss_s": {
+        "fixed_normal": 204740.04,
+        "fixed_policy": 235582.05,
+        "absolute": 30842.01,
+        "percent": 15.064
+      },
+      "mean_time_loss_s": {
+        "fixed_normal": 69.403,
+        "fixed_policy": 80.048,
+        "absolute": 10.645,
+        "percent": 15.338
+      }
+    },
+    "EMS_FULL_PREEMPTION": {
+      "vehicles_completed": {
+        "fixed_normal": 2950,
+        "fixed_policy": 2939,
+        "absolute": -11,
+        "percent": -0.373
+      },
+      "total_travel_time_s": {
+        "fixed_normal": 723127.5,
+        "fixed_policy": 739353.5,
+        "absolute": 16226.0,
+        "percent": 2.244
+      },
+      "total_waiting_time_s": {
+        "fixed_normal": 127385.5,
+        "fixed_policy": 141021.0,
+        "absolute": 13635.5,
+        "percent": 10.704
+      },
+      "total_time_loss_s": {
+        "fixed_normal": 204740.04,
+        "fixed_policy": 222262.32,
+        "absolute": 17522.28,
+        "percent": 8.558
+      },
+      "mean_time_loss_s": {
+        "fixed_normal": 69.403,
+        "fixed_policy": 75.625,
+        "absolute": 6.222,
+        "percent": 8.965
+      }
+    }
+  },
+  "data_class": "SIMULATED_DATA"
+}

@@ -29,6 +29,16 @@ class SumoLaunchError(RuntimeError):
     """Raised when SUMO could not be started or did not accept a connection."""
 
 
+FCD_ATTRIBUTES = "x,y,z,angle,speed,pos,lane,type,slope"
+"""FCD columns requested.
+
+``lane`` carries the edge and lane index, which is what disambiguates a flyover
+from the surface road beneath it — SUMO's ``z`` alone is not always populated
+for netconvert-derived elevation. ``type`` gives the vType, and therefore the
+vehicle's dimensions and class.
+"""
+
+
 @dataclass
 class SumoRunOptions:
     """Command-line options for one SUMO run.
@@ -56,6 +66,22 @@ class SumoRunOptions:
     queue_output: Path | None = None
     stop_output: Path | None = None
     statistic_output: Path | None = None
+
+    fcd_output: Path | None = None
+    """Per-step vehicle state: position, angle, speed, lane, type.
+
+    This is the only SUMO output that says where a vehicle *was*, so it is what
+    a visualisation has to be driven from. It is off by default because it is
+    large — roughly 100 MB per 3,900 s run at 0.5 s steps — and no analysis in
+    this project needs it.
+    """
+    fcd_period_s: float | None = None
+    """Emit FCD every N seconds rather than every step.
+
+    A visualisation interpolates between samples, so it does not need every
+    0.5 s step. Sub-sampling is a size/fidelity trade-off and is recorded with
+    the output so nobody mistakes an interpolated frame for a simulated one.
+    """
 
     extra: dict[str, str] = field(default_factory=dict)
 
@@ -98,10 +124,17 @@ class SumoRunOptions:
             ("--queue-output", self.queue_output),
             ("--stop-output", self.stop_output),
             ("--statistic-output", self.statistic_output),
+            ("--fcd-output", self.fcd_output),
         ):
             if path is not None:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 command += [option, str(path)]
+        if self.fcd_output is not None:
+            # Lane, vehicle type and slope are not in the default FCD columns,
+            # and every one of them is needed to place a vehicle on the right
+            # carriageway of a grade-separated junction.
+            command += ["--device.fcd.period", str(self.fcd_period_s or self.step_length_s)]
+            command += ["--fcd-output.attributes", FCD_ATTRIBUTES]
         for key, value in sorted(self.extra.items()):
             command += [f"--{key}", value]
         if traci_port is not None:

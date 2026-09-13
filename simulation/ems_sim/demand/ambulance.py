@@ -107,3 +107,51 @@ SIGNALISED_AMBULANCE_TRIP = AmbulanceTripConfig(
         "Phase 3 trip's route passes none and no signal policy can act on it."
     ),
 )
+
+
+# Phase 5a: the trip above still gives the policies almost nothing to act on.
+# Its route passes `GS_cluster` on a movement that is green in all four phases
+# (green fraction 1.000) and `joinedS_` on its least red-exposed movement set
+# (0.600) — one actionable signal, and seed 42 showed the ambulance arriving on
+# green at it. All four policies returned the same 205.5 s.
+#
+# This trip was selected against criteria fixed **before** any policy was run and
+# **without reference to time saved**:
+#
+#   1. at least two actionable traffic lights on the route,
+#   2. each with baseline green fraction < 0.70 for the ambulance's own movement,
+#   3. the NORMAL baseline must actually stop the ambulance at a signal.
+#
+# The criterion was originally three actionable signals. A per-movement audit of
+# all eight traffic lights in the network showed that only two of them —
+# `joinedS_` (minimum 0.267) and `GS_cluster` (minimum 0.433) — have any movement
+# below 0.70 green; the other six are single-movement signals holding 0.889-0.911.
+# No route can therefore pass three, and the count was relaxed to two. The 0.70
+# threshold, which carries the actual mechanism, was kept.
+#
+# All 90 network entry/exit pairs were routed with duarouter and scored on that
+# basis. Eighteen pairs reach two signals below 0.70; this is one of them, and the
+# shortest.
+#
+# The Phase 3 and Phase 5 trips are left untouched: their published numbers
+# describe them.
+TWO_SIGNAL_AMBULANCE_TRIP = AmbulanceTripConfig(
+    origin_edge="1311812959#0",
+    destination_edge="1196514116#0",
+    depart_time_s=600.0,
+    trip_label="two_signal",
+    basis=(
+        "ESTIMATED_DATA. Origin, destination and departure time are configuration "
+        "choices by this project, not a real EMS dispatch. Selected in Phase 5a by "
+        "routing all 90 network entry/exit pairs with duarouter and keeping those "
+        "whose route passes at least two traffic lights with green fraction below "
+        "0.70 for the ambulance's own movement. The criteria were fixed before any "
+        "policy was run and do not refer to time saved."
+    ),
+)
+
+
+AMBULANCE_TRIPS: dict[str, AmbulanceTripConfig] = {
+    trip.trip_label: trip
+    for trip in (DEFAULT_AMBULANCE_TRIP, SIGNALISED_AMBULANCE_TRIP, TWO_SIGNAL_AMBULANCE_TRIP)
+}

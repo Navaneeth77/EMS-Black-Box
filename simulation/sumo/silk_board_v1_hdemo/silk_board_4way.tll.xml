@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- HISTORICAL_DEMO split-phase program for the Central Silk Board four-way.
+     Cycle 450 s OBSERVED (IJIRSET 2017). Equal green split,
+     3 s yellow, 2 s all-red and phase order ESTIMATED. -->
+<tlLogics>
+    <tlLogic id="silk_board_4way" type="static" programID="0" offset="0">
+        <phase duration="107.5" state="Grrrrrrrr"/>
+        <phase duration="3" state="yrrrrrrrr"/>
+        <phase duration="2" state="rrrrrrrrr"/>
+        <phase duration="107.5" state="rrrrrrGGG"/>
+        <phase duration="3" state="rrrrrryyy"/>
+        <phase duration="2" state="rrrrrrrrr"/>
+        <phase duration="107.5" state="rrrrGGrrr"/>
+        <phase duration="3" state="rrrryyrrr"/>
+        <phase duration="2" state="rrrrrrrrr"/>
+        <phase duration="107.5" state="rGGGrrrrr"/>
+        <phase duration="3" state="ryyyrrrrr"/>
+        <phase duration="2" state="rrrrrrrrr"/>
+    </tlLogic>
+</tlLogics>

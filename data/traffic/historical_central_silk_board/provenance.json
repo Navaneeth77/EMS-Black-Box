@@ -1,0 +1,196 @@
+{
+  "dataset_id": "historical_central_silk_board",
+  "mode": "HISTORICAL_DEMO",
+  "retrieved_at": "2026-09-11",
+  "access_method": "Each PDF was downloaded to a session scratch directory and text-extracted with pypdf. Values were read from the extracted text and checked against the printed row, table title and page header. No value was taken from a search-engine summary.",
+  "selection": {
+    "primary_volume_source": "CMP2019_DRAFT",
+    "survey_metadata_source": "RMP2031_DRAFT_VOL3",
+    "composition_and_signal_source": "IJIRSET2017",
+    "rule": "Prefer a count taken at Central Silk Board Junction itself over any count near it; prefer a government planning document over a secondary report; never substitute a mid-block or corridor count for a junction count; use a value only in the unit and period it was published in."
+  },
+  "sources": [
+    {
+      "source_id": "CMP2019_DRAFT",
+      "role": "PRIMARY: observed junction volume",
+      "organisation": "Not named in the text-extractable pages (the cover page is an image). Hosted by OpenCity.",
+      "title": "Comprehensive Mobility Plan for Bengaluru (Draft, October 2019)",
+      "authors": "Not stated",
+      "publication_date": "October 2019 (draft)",
+      "survey_date": "Not stated in the CMP. Table 2-13 cites the Revised Master Plan 2031 for Bangalore (Draft), whose traffic surveys were carried out December 2014 to April 2015 (see RMP2031_DRAFT_VOL3). The day Silk Board was counted is not reported.",
+      "location": "14 intersections; row 11 is Silk Board Junction, a 4-legged junction",
+      "location_match": "exact: Silk Board Junction",
+      "period": "Peak hour, and 24 hours (separate columns). The peak hour's clock time is not given.",
+      "volumes": [
+        {"value": 22634, "unit": "vehicles per hour", "period": "peak hour", "label": "OBSERVED"},
+        {"value": 18180, "unit": "PCU per hour", "period": "peak hour", "label": "OBSERVED"},
+        {"value": 323099, "unit": "vehicles per 24 hours", "period": "24 hours", "label": "OBSERVED"},
+        {"value": 281521, "unit": "PCU per 24 hours", "period": "24 hours", "label": "OBSERVED"}
+      ],
+      "vehicle_categories": "The counts are described as classified, but Table 2-13 publishes only totals (vehicles and PCU). No class breakdown for Silk Board.",
+      "composition": null,
+      "turning_movements": "Described as classified turning volume counts; only junction totals are published. No per-movement values.",
+      "signal_information": null,
+      "url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-Comprehensive-Mobility-Plan-October-2019-Draft.pdf",
+      "pages": "Table 2-13, printed page 2-24 (PDF page 73). The same page states the counts were carried out at 14 intersections and names Silk Board among the critical junctions.",
+      "label": "OBSERVED",
+      "used_for": [
+        "Peak-hour vehicle volume that anchors the SUMO demand (step 1 of demand_conversion.json)",
+        "Peak-hour PCU and 24-hour volumes: shown in the snapshot panel and used only for DERIVED context ratios"
+      ]
+    },
+    {
+      "source_id": "RMP2031_DRAFT_VOL3",
+      "role": "SURVEY METADATA: when and how the CMP's junction counts were taken",
+      "organisation": "Bangalore Development Authority (BDA), the planning authority for RMP-2031",
+      "title": "Revised Master Plan for Bengaluru - 2031 (Draft): Volume-3",
+      "authors": "Not stated",
+      "publication_date": "Draft. Not stated in the extracted text; the text refers to a BDA Board meeting held on 9 June 2017, so the draft post-dates that meeting.",
+      "survey_date": "Traffic and transportation primary surveys: December 2014 to April 2015",
+      "location": "Bengaluru Metropolitan Area. The 14 turning-count locations are shown on a map (Figure 4-1), not listed in text.",
+      "location_match": "survey campaign that includes the Silk Board count published in CMP Table 2-13 (14 turning-count locations in both documents)",
+      "period": "Turning volume counts at 14 locations, 24 hours for one day",
+      "volumes": [],
+      "vehicle_categories": null,
+      "composition": null,
+      "turning_movements": "Method only: turning volume counts. No Silk Board values in this volume.",
+      "signal_information": null,
+      "url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2031-Volume_3_MasterPlanDocument.pdf",
+      "pages": "Section 4.3 Primary Surveys, printed page 17 (PDF page 30)",
+      "label": "OBSERVED",
+      "used_for": ["Survey window (Dec 2014 - Apr 2015) and count duration (24 h, one day) shown for the Silk Board volume"],
+      "access_note": "The separate Traffic & Transport sub-volume linked from bdabangalore.org could not be retrieved (TLS certificate did not match the redirected host). It may hold the per-movement counts; they were not available to this project."
+    },
+    {
+      "source_id": "IJIRSET2017",
+      "role": "COMPOSITION (car share) and SIGNAL (cycle length)",
+      "organisation": "International Journal of Innovative Research in Science, Engineering and Technology (IJIRSET)",
+      "title": "Traffic Management Study for ORR, Bengaluru Jayadeva Intersection to Silk Board Intersection",
+      "authors": "Vani A (Rajeev Institute of Technology, Hassan); Madhu Singh (Transport planner, DULT, Bengaluru); Dr. Prem Swaroup Reddy M (Reva University, Bengaluru)",
+      "doi": "10.15680/IJIRSET.2017.0606056",
+      "publication_date": "June 2017 (Vol. 6, Issue 6)",
+      "survey_date": "Not stated",
+      "location": "Outer Ring Road stretch from Jayadeva Hospital Intersection to Silk Board Intersection; classified volume counts at four intersections including Silk Board, which the paper describes as 4-legged (towards Madivala, Agara, Bommanahalli and Jayadeva Hospital) with a flyover carrying Madivala-Bommanahalli through traffic",
+      "location_match": "exact: Silk Board Intersection",
+      "period": "Not stated in extractable text",
+      "volumes": [],
+      "volume_note": "The count tables are embedded as images and could not be extracted, so no volume from this paper is used.",
+      "vehicle_categories": "Not extractable, except the car share below",
+      "composition": {
+        "car_share": 0.53,
+        "printed_as": "car (53% of total volume of vehicle)",
+        "label": "OBSERVED",
+        "scope_caveat": "Stated inside a recommendation about the left turn from the Agara arm. The paper does not say whether it is the whole-junction share or that movement's share. This project uses it as the junction share and records that as an interpretation."
+      },
+      "turning_movements": "The methodology says turning movements were analysed; no values are in extractable form",
+      "signal_information": {
+        "existing_cycle_length_s": 450,
+        "label": "OBSERVED",
+        "note": "The paper also gives a proposed 270 s cycle from VISSIM. That is a proposal, not an observation, and is not used. Phase splits are not in extractable form."
+      },
+      "url": "http://www.ijirset.com/upload/2017/june/56_Publication%20_2_.pdf",
+      "pages": "p. 10536 (junction description, methodology); p. 10540 (car share, cycle length)",
+      "label": "OBSERVED",
+      "used_for": [
+        "Car share of SUMO flows (preserved exactly at 0.53)",
+        "Cycle length of the demo's four-way controller (450 s)"
+      ]
+    },
+    {
+      "source_id": "NGT_TUNNEL_DPR_2025",
+      "role": "CONTEXT ONLY: not used",
+      "organisation": "Bruhat Bengaluru Mahanagara Palike (BBMP); consultant Rodic Consultants Pvt. Ltd. Filed before the National Green Tribunal (Southern Zone) in O.A. No. 185 of 2025; certified copy dated 11 September 2025.",
+      "title": "Consultancy services for preparation of DPR for the work of Construction of underground Vehicular Tunnel from Hebbal Esteem mall junction to Silk Board KSRP junction - Final Detailed Project Report",
+      "authors": "Not stated",
+      "publication_date": "March 2025",
+      "survey_date": "August 2024 (classified volume counts at 9 locations; turning movement counts at 7 intersections)",
+      "location": "No count at Silk Board Junction. Nearest count: mid-block, NH-44 Bengaluru-Chennai Highway near Madiwala footbridge. The 7 turning-count intersections do not include Silk Board.",
+      "location_match": "none for the junction",
+      "period": "24 hours; morning and evening peak hours",
+      "volumes": [
+        {"value": 232494, "unit": "vehicles per 24 hours", "location": "NH-44 near Madiwala footbridge (mid-block)", "label": "OBSERVED"},
+        {"value": 216724, "unit": "PCU per 24 hours", "location": "NH-44 near Madiwala footbridge (mid-block)", "label": "OBSERVED"},
+        {"value": 16872, "unit": "vehicles per hour", "period": "morning peak 09:30-10:30", "location": "NH-44 near Madiwala footbridge (mid-block)", "label": "OBSERVED"},
+        {"value": 15427, "unit": "vehicles per hour", "period": "evening peak 17:00-18:00", "location": "NH-44 near Madiwala footbridge (mid-block)", "label": "OBSERVED"}
+      ],
+      "vehicle_categories": "Two-wheeler, car, taxi, auto, bus, LCV, truck, cycle, cycle-rickshaw, other",
+      "composition": "Only an average over all 9 cordons is given, not per location. The text says private vehicles 80% (two-wheelers 42%, four-wheelers 38%) and IPT about 9%; the chart labels read differently in extracted text. Neither is location-specific, so neither is used.",
+      "turning_movements": "At 7 other intersections only",
+      "signal_information": null,
+      "url": "https://www.greentribunal.gov.in/sites/default/files/news_updates/OA%20No.%20185%20of%202025%20in%20DPR%20dated%20march%20,%202025.pdf",
+      "pages": "Tables 47-52, printed pages 118-127",
+      "label": "OBSERVED",
+      "used_for": [],
+      "not_used_because": "A mid-block count on one arm is not a junction count, and substituting it would misstate both the location and the quantity."
+    },
+    {
+      "source_id": "BSMILE_ELEVATED_CORRIDOR_DPR",
+      "role": "CONTEXT ONLY: not used",
+      "organisation": "Bengaluru Smart Infrastructure Limited (B-SMILE); consultant Siddi Shakthi Projects",
+      "title": "Construction of Proposed Elevated Corridor from Old Madras Road from Swami Vivekananda Metro Station to Silk Board Junction on Hosur Road via Indiranagar - Domlur - Madiwala: Detailed Project Report, Volume-I",
+      "authors": "Not stated",
+      "publication_date": "February 2026",
+      "survey_date": "April 2025, one day, 06:00-20:00 (14 hours)",
+      "location": "Project road between Indiranagar and Domlur (mid-block), not Silk Board Junction",
+      "location_match": "none",
+      "period": "14 hours",
+      "volumes": [
+        {"value": 27807, "unit": "vehicles per 14 hours", "label": "OBSERVED"},
+        {"value": 30137, "unit": "PCU per 14 hours", "label": "OBSERVED"},
+        {"value": 3869, "unit": "vehicles per hour", "period": "10:00-11:00", "label": "OBSERVED"}
+      ],
+      "vehicle_categories": "15 classes, hourly (Table 5-1)",
+      "composition": "For the Indiranagar-Domlur count only",
+      "turning_movements": null,
+      "signal_information": null,
+      "url": "https://data.opencity.in/dataset/00c72de1-183c-4728-87ee-20f6a3b26abd/resource/e0206c2d-fb3a-4bb4-8e7d-3b2965597627/download/dpr-omr-to-silk-board.pdf",
+      "pages": "Section 5.1.1 and Table 5-1, printed pages 129-130",
+      "label": "OBSERVED",
+      "used_for": [],
+      "not_used_because": "Different location (a road several kilometres away) and a 14-hour mid-block count."
+    },
+    {
+      "source_id": "CTTP_2011",
+      "role": "CONTEXT ONLY: not used",
+      "organisation": "Karnataka Urban Infrastructure Development and Finance Corporation (KUIDFC)",
+      "title": "Comprehensive Traffic and Transportation Plan for Bengaluru - Final Report",
+      "authors": "Not stated",
+      "publication_date": "June 2011",
+      "survey_date": "Not applicable: no Silk Board count found",
+      "location": "Silk Board appears only in corridor and route descriptions",
+      "location_match": "none",
+      "period": null,
+      "volumes": [],
+      "vehicle_categories": null,
+      "composition": null,
+      "turning_movements": null,
+      "signal_information": null,
+      "url": "https://data.opencity.in/dataset/e1895867-b2e4-448c-9df0-364b5ec58c11/resource/0a21e3f2-3830-4c0f-86f1-4a60d9fa5ae9/download/76c7d21a-fddf-42a4-b16a-f9f8079dfd06.pdf",
+      "label": "OBSERVED",
+      "used_for": [],
+      "not_used_because": "No count at the junction in the extracted text."
+    }
+  ],
+  "searched_but_not_found_or_not_accessible": [
+    {
+      "item": "Urban Mobility India, 'Traffic Survey and Analysis - Central Silk Board Junction'",
+      "outcome": "Not located. Three web searches across this investigation returned no document with that title; no value from it is used."
+    },
+    {
+      "item": "IJRESM Vol. 2 Issue 6 (June 2019), paper 104, surfaced by a Silk Board turning-count search",
+      "outcome": "HTTP 403 on retrieval. Content, including whether it concerns Silk Board, is unverified. Not used."
+    },
+    {
+      "item": "Wikipedia, 'Silk Board junction'",
+      "outcome": "No traffic volume figures. Its only traffic metric is a 2017 peak-hour average speed, which is not a count. Not used."
+    },
+    {
+      "item": "Deccan Herald reports citing traffic police data",
+      "outcome": "HTTP 403 on retrieval; secondary news reporting in any case. Not used."
+    },
+    {
+      "item": "BDA RMP-2031 Traffic & Transport sub-volume (bdabangalore.org)",
+      "outcome": "Not retrieved: TLS certificate mismatch on the redirected host."
+    }
+  ]
+}

@@ -161,10 +161,25 @@ def paired_comparison(normal: PolicyRunResult, policy: PolicyRunResult) -> dict[
         ),
         "traffic": traffic,
         "traffic_delay_cost_s": traffic_cost_s,
+        "traffic_metric_status": "DIAGNOSTIC_ONLY",
+        "traffic_metric_warning": (
+            "NOT a cost or benefit of signal priority, and must not be reported as "
+            "one. Two controls (Phase 5a replay, Phase 5b fixed schedule) reproduced "
+            "traffic-side changes of this size and sign with NO ambulance in the "
+            "network at all — in Phase 5b, 24.5-72.0 s of signal holding moved total "
+            "time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by "
+            "the chaotic response of netconvert's unoptimised fixed-time plans to "
+            "being perturbed, not by the ambulance. Retained as a diagnostic of that "
+            "sensitivity. See docs/FINAL_RND_REPORT.md section 18."
+        ),
         "net_system_impact_s": (
             round(traffic_cost_s - (time_saved or 0.0), 3) if traffic_cost_s is not None else None
         ),
+        "net_system_impact_status": "DIAGNOSTIC_ONLY",
         "net_system_impact_note": (
+            "DIAGNOSTIC ONLY — inherits the traffic term above, which the controls "
+            "showed is not attributable to the ambulance. Do not quote as a net "
+            "benefit or cost of priority. "
             "Traffic-side time loss added, minus ambulance time saved, in "
             "vehicle-seconds. Positive means the network as a whole lost more than "
             "the ambulance gained. This weights one ambulance-second the same as "

@@ -1,0 +1,50 @@
+{
+  "dataset_id": "phase9_external_traffic_data_investigation",
+  "investigated_at": "2026-09-11",
+  "question": "Can real-time or historical traffic data for Central Silk Board be legitimately obtained and used as simulation demand input?",
+  "outcome": "NO_RELIABLE_EXTERNAL_TRAFFIC_DATA_OBTAINED",
+  "classification_of_demand_actually_used": "ESTIMATED_DATA",
+  "sources_investigated": [
+    {
+      "source": "TomTom Traffic Flow API",
+      "url": "https://api.tomtom.com/traffic/services/4/flowSegmentData/",
+      "probe": "flowSegmentData at 12.9165,77.6224 (Silk Board)",
+      "result": "HTTP 401 — requires a licensed API key",
+      "usable": false,
+      "note": "Commercial licence. Even with a key, redistribution of derived flow data into a published research artifact carries licence conditions this project cannot satisfy."
+    },
+    {
+      "source": "data.gov.in (Government of India open data)",
+      "probe": "datastore resource lookup and catalog endpoint",
+      "result": "HTTP 302 / 404 — no matching traffic resource reachable unauthenticated",
+      "usable": false
+    },
+    {
+      "source": "Bengaluru Traffic Police / BSMILE open data",
+      "result": "No machine-readable traffic-volume API located. Available material is PDF project documentation (e.g. the OMR-to-Silk-Board DPR), not time-series flow data.",
+      "usable": false
+    },
+    {
+      "source": "GitHub: Charankumarreddy013/Bengaluru_Traffic — Banglore_traffic_Dataset.csv",
+      "url": "https://github.com/Charankumarreddy013/Bengaluru_Traffic",
+      "result": "FETCHED AND REJECTED",
+      "usable": false,
+      "coverage_claimed": "8,936 rows, 2022-01-01 to 2024-08-09, including 275 rows labelled 'Silk Board Junction' with Traffic Volume, Average Speed, Congestion Level",
+      "why_rejected": [
+        "No licence, no stated data source, 1 star, created 2024-12-09 as a Power BI portfolio project.",
+        "SYNTHETIC SIGNATURE: weekday/weekend traffic-volume ratio is 0.984 — statistically no weekly structure. Real urban arterial traffic at Silk Board shows a substantial weekend reduction. Generated data typically does not.",
+        "Average speed reaches 81.9 km/h at Silk Board Junction, which is implausible for the junction in question.",
+        "Congestion Level and Road Capacity Utilization take exactly 100.0 in places, consistent with a clipped random generator.",
+        "Values carry 14 decimal places, consistent with generated floats rather than measurement."
+      ],
+      "conclusion": "This dataset appears to be synthetic. Labelling it 'real historical traffic data' would be a fabrication, so it is not used anywhere in this project."
+    }
+  ],
+  "real_world_context_noted_but_not_used_as_input": {
+    "claim": "Bengaluru police data reported the Silk Board double-decker flyover (opened 2025-07-18) reduced overall congestion by ~56%.",
+    "source": "press reporting of police data",
+    "why_not_used": "A single reported percentage is not a demand time series, and the modelled network predates/does not represent the double-decker configuration. Recorded as context only; it is not an input to any simulation."
+  },
+  "decision": "No external traffic data is ingested. Demand remains this project's own ESTIMATED_DATA model. For DEMO MODE the spatial and temporal distribution of that model is intensified within its own calibrated envelope to resemble a busy urban arterial; the research demand is untouched and frozen.",
+  "ui_labelling_requirement": "The interface must not display REAL-TIME or HISTORICAL for traffic. Demand is ESTIMATED_DATA and the resulting vehicle states are SIMULATED_DATA."
+}

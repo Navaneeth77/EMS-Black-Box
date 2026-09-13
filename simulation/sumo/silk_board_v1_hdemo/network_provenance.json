@@ -1,0 +1,293 @@
+{
+  "variant_id": "silk_board_v1_hdemo",
+  "mode": "HISTORICAL_DEMO",
+  "generated_at": "2026-09-11T04:29:16Z",
+  "sumo_version": "1.27.1",
+  "research_network": {
+    "file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
+    "sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
+    "modified": false
+  },
+  "demo_network": {
+    "file": "simulation/sumo/silk_board_v1_hdemo/silk_board_v1_hdemo.net.xml",
+    "sha256": "c960638e7c2f778831d78a4917f9f8f3dbc1d02530b8f92c7d46d08bb0fa814f",
+    "node_patch": "simulation/sumo/silk_board_v1_hdemo/silk_board_4way.nod.xml",
+    "tllogic": "simulation/sumo/silk_board_v1_hdemo/silk_board_4way.tll.xml"
+  },
+  "controller": {
+    "tls_id": "silk_board_4way",
+    "program_id": "0",
+    "replaces_separate_tls_ids": [
+      "3805003789",
+      "306594280",
+      "494271080",
+      "2971089260"
+    ],
+    "link_count": 9,
+    "approaches": [
+      {
+        "from_edge": "160331538#0",
+        "link_indices": [
+          0
+        ],
+        "node_id": "2971089260",
+        "arm": "N",
+        "arm_bearing_deg": 354.8,
+        "travel_heading_deg": 156.7,
+        "road_name": ""
+      },
+      {
+        "from_edge": "380980308#2",
+        "link_indices": [
+          6,
+          7,
+          8
+        ],
+        "node_id": "494271080",
+        "arm": "E",
+        "arm_bearing_deg": 76.1,
+        "travel_heading_deg": 259.1,
+        "road_name": "Outer Ring Road"
+      },
+      {
+        "from_edge": "1303068639#0",
+        "link_indices": [
+          4,
+          5
+        ],
+        "node_id": "3805003789",
+        "arm": "S",
+        "arm_bearing_deg": 174.7,
+        "travel_heading_deg": 348.2,
+        "road_name": "Srinagar - Kanyakumari Highway"
+      },
+      {
+        "from_edge": "464465163#0",
+        "link_indices": [
+          1,
+          2,
+          3
+        ],
+        "node_id": "306594280",
+        "arm": "W",
+        "arm_bearing_deg": 270.7,
+        "travel_heading_deg": 69.3,
+        "road_name": "Outer Ring Road"
+      }
+    ],
+    "phases": [
+      {
+        "duration_s": 107.5,
+        "state": "Grrrrrrrr"
+      },
+      {
+        "duration_s": 3.0,
+        "state": "yrrrrrrrr"
+      },
+      {
+        "duration_s": 2.0,
+        "state": "rrrrrrrrr"
+      },
+      {
+        "duration_s": 107.5,
+        "state": "rrrrrrGGG"
+      },
+      {
+        "duration_s": 3.0,
+        "state": "rrrrrryyy"
+      },
+      {
+        "duration_s": 2.0,
+        "state": "rrrrrrrrr"
+      },
+      {
+        "duration_s": 107.5,
+        "state": "rrrrGGrrr"
+      },
+      {
+        "duration_s": 3.0,
+        "state": "rrrryyrrr"
+      },
+      {
+        "duration_s": 2.0,
+        "state": "rrrrrrrrr"
+      },
+      {
+        "duration_s": 107.5,
+        "state": "rGGGrrrrr"
+      },
+      {
+        "duration_s": 3.0,
+        "state": "ryyyrrrrr"
+      },
+      {
+        "duration_s": 2.0,
+        "state": "rrrrrrrrr"
+      }
+    ],
+    "timing_provenance": {
+      "cycle_length_s": {
+        "value": "450.0",
+        "label": "OBSERVED",
+        "source_id": "IJIRSET2017",
+        "note": "Existing cycle length at Silk Board Intersection as reported in the paper. Survey date not reported. The paper's proposed 270 s cycle is a VISSIM proposal, not an observation, and is not used."
+      },
+      "green_split": {
+        "value": "equal share of (cycle - interphases) per approach",
+        "label": "ESTIMATED",
+        "note": "No observed phase split or green time for Silk Board was found."
+      },
+      "yellow_s": {
+        "value": "3.0",
+        "label": "ESTIMATED",
+        "note": "Assumed amber interval. Not observed at Silk Board."
+      },
+      "all_red_s": {
+        "value": "2.0",
+        "label": "ESTIMATED",
+        "note": "Assumed all-red clearance. Not observed at Silk Board."
+      },
+      "phase_order": {
+        "value": "clockwise by arm, starting from the northern arm",
+        "label": "ESTIMATED",
+        "note": "No observed phase sequence was found."
+      },
+      "single_controller": {
+        "value": "silk_board_4way",
+        "label": "ESTIMATED",
+        "note": "Modelling decision: the four approach stop lines of one at-grade junction are operated by one controller, as a signalised four-way intersection is. The research network keeps them independent."
+      }
+    }
+  },
+  "netconvert_warning_count": 42,
+  "checks": [
+    {
+      "check": "edges, lanes and lane shapes unchanged",
+      "result": "PASS",
+      "detail": {
+        "edges": 1515
+      }
+    },
+    {
+      "check": "connections (from, to, lanes, direction) unchanged",
+      "result": "PASS",
+      "detail": {
+        "connections": 4302
+      }
+    },
+    {
+      "check": "every other traffic light program unchanged",
+      "result": "PASS",
+      "detail": {
+        "compared": [
+          "11348815671",
+          "12611782078",
+          "GS_cluster_10282769895_10775075568_11964440742_11964440743",
+          "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more"
+        ]
+      }
+    },
+    {
+      "check": "the four approach signals no longer exist as separate controllers",
+      "result": "PASS",
+      "detail": {
+        "separate_ids_remaining": []
+      }
+    },
+    {
+      "check": "silk_board_4way runs exactly the intended program",
+      "result": "PASS",
+      "detail": {
+        "phases": 12
+      }
+    },
+    {
+      "check": "cycle length equals the observed 450 s",
+      "result": "PASS",
+      "detail": {
+        "cycle_s": 450.0
+      }
+    },
+    {
+      "check": "no phase releases more than one approach (conflicting approaches separated)",
+      "result": "PASS",
+      "detail": {
+        "released_per_phase": [
+          [
+            "N"
+          ],
+          [
+            "N"
+          ],
+          [],
+          [
+            "E"
+          ],
+          [
+            "E"
+          ],
+          [],
+          [
+            "S"
+          ],
+          [
+            "S"
+          ],
+          [],
+          [
+            "W"
+          ],
+          [
+            "W"
+          ],
+          []
+        ]
+      }
+    },
+    {
+      "check": "every approach gets green, then yellow, then all-red",
+      "result": "PASS",
+      "detail": {
+        "arms": [
+          "N",
+          "E",
+          "S",
+          "W"
+        ]
+      }
+    },
+    {
+      "check": "controller link indices map to the recorded approaches",
+      "result": "PASS",
+      "detail": {
+        "links": 9
+      }
+    },
+    {
+      "check": "the four approach nodes are traffic-light junctions",
+      "result": "PASS",
+      "detail": {
+        "2971089260": "traffic_light",
+        "306594280": "traffic_light",
+        "3805003789": "traffic_light",
+        "494271080": "traffic_light"
+      }
+    },
+    {
+      "check": "internal junction edges (informational)",
+      "result": "INFO",
+      "detail": {
+        "research": 5159,
+        "demo": 5163
+      }
+    },
+    {
+      "check": "research network byte-identical before and after",
+      "result": "PASS",
+      "detail": {
+        "sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d"
+      }
+    }
+  ],
+  "passed": true
+}
