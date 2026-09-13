@@ -36,7 +36,12 @@ from ems_sim.counterfactual.metrics import (  # noqa: E402
     intersection_attribution,
     paired_comparison,
 )
-from ems_sim.counterfactual.pairing import ScenarioIdentity, require_paired  # noqa: E402
+from ems_sim.counterfactual.pairing import (  # noqa: E402
+    ScenarioIdentity,
+    policy_hash,
+    require_paired,
+    require_policy_difference,
+)
 from ems_sim.counterfactual.runner import route_tls_for, run_policy  # noqa: E402
 from ems_sim.demand.ambulance import AMBULANCE_TRIPS, TWO_SIGNAL_AMBULANCE_TRIP  # noqa: E402
 from ems_sim.demand.config import DemandPeriod, make_config  # noqa: E402
@@ -297,6 +302,12 @@ def main() -> int:
         ambulance_depart_s=ambulance.depart_time_s,
         ambulance_route_edges=tuple(route),
         scenario_variant=variant.variant_id,
+        # The disturbance belongs to the scenario: a policy compared against a
+        # baseline with no lane blocked is not being compared against its own
+        # scenario, and without this the two would hash identically.
+        disturbance=(
+            tuple(sorted(incident.as_dict().items())) if incident is not None else ()
+        ),
     )
 
     results = {}
@@ -377,6 +388,9 @@ def main() -> int:
             if name == "NORMAL":
                 continue
             require_paired(identities["NORMAL"], identities[name], "NORMAL", name)
+            require_policy_difference(
+                results["NORMAL"].policy_report, results[name].policy_report
+            )
             comparisons[name] = paired_comparison(normal, result)
             attributions[name] = intersection_attribution(normal, result)
 
@@ -398,6 +412,9 @@ def main() -> int:
         "network_sha256": sha256_file(net_file),
         "scenario_hash": identities[args.policies[0]].scenario_hash(),
         "scenario": identities[args.policies[0]].as_dict(),
+        "policy_hashes": {
+            name: policy_hash(result.policy_report) for name, result in results.items()
+        },
         "demand_config": config.as_dict(),
         "ambulance": ambulance.as_dict(),
         "scenario_variant": variant.as_dict(),

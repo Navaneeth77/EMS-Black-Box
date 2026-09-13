@@ -2,7 +2,8 @@
 # Target: Python 3.11  (see docs/ENVIRONMENT.md)
 
 fastapi>=0.115,<1.0
-uvicorn[standard]>=0.30      # includes websockets + watchfiles for --reload
+# includes websockets + watchfiles for --reload
+uvicorn[standard]>=0.30
 pydantic>=2.8,<3.0
 pydantic-settings>=2.4
 

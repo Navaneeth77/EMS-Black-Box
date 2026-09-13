@@ -1,6 +1,6 @@
 {
   "reproducibility": {
-    "generated_at": "2026-09-13T22:48:02Z",
+    "generated_at": "2026-09-13T23:03:13Z",
     "sumo_version": "1.27.1",
     "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
     "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
@@ -185,7 +185,7 @@
       "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
       "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
     },
-    "wall_clock_total_s": 255.9,
+    "wall_clock_total_s": 626.8,
     "sensitivity": null,
     "incident": {
       "incident_id": "silk_board_lane_block_v1",
@@ -215,7 +215,7 @@
     "simulation": {
       "steps_executed": 7800,
       "sim_end_time_s": 3900.0,
-      "wall_clock_s": 129.91,
+      "wall_clock_s": 130.72,
       "sample_interval_s": 30.0,
       "vehicles": {
         "loaded": 3226,

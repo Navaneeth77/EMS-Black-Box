@@ -1,0 +1,69 @@
+# What a clean machine can check, and what it cannot.
+#
+# Every job here runs from a fresh checkout, which is the point: the repository
+# has to stand on its own. Two things are deliberately out of scope.
+#
+# SUMO is not installed. Tests that need a running simulator carry the `sumo`
+# marker and are excluded; tests that need a *built network* skip themselves,
+# because networks are generated from the committed OSM extract rather than
+# committed (they are large and reproducible). A clean checkout therefore
+# exercises every pure-Python path — the metrics, the cohort analysis, the
+# policy state machine, the geometry validators — against the committed
+# evidence, and skips the rest with a message saying which script builds it.
+#
+# The simulations themselves are not re-run. A 20-run counterfactual matrix is
+# roughly an hour of CPU and would make CI a scheduling problem rather than a
+# check. The per-run records are committed, and the analyses that read them run
+# here.
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  python:
+    name: python (lint, tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Lint
+        # `ruff check` only. The repository is not ruff-formatted and adding the
+        # formatter now would rewrite 17 files for no behavioural reason; the
+        # lint rules it does enforce are in pyproject.toml.
+        run: ruff check .
+      - name: Tests
+        run: pytest -m "not sumo" -q
+
+  frontend:
+    name: frontend (typecheck, tests, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - name: Typecheck
+        # `tsc -b`, not `tsc --noEmit`: the root tsconfig has "files": [] and
+        # only project references, so --noEmit against it typechecks nothing and
+        # passes unconditionally.
+        run: npm run typecheck
+      - name: Tests
+        run: npx vitest run
+      - name: Build
+        run: npm run build

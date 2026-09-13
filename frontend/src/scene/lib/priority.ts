@@ -34,6 +34,33 @@ export interface PolicyTransition {
 /** Longest release-to-re-request gap still drawn as one priority episode. */
 export const EPISODE_GAP_S = 3.0
 
+/**
+ * Policy states that mean the signal is being *acted on*, and may therefore be
+ * drawn as a priority episode.
+ *
+ * `DETECTED` is deliberately absent. It means "the ambulance is on the route and
+ * this signal is ahead of it" — the policy watching, before its activation rule
+ * has fired. Drawing that as priority would put "EMS PRIORITY ACTIVE" on screen
+ * from the moment the ambulance departs, which is the opposite of the claim the
+ * scene exists to make. Mirrors INTERVENING_STATES in
+ * `simulation/ems_sim/policies/state.py`.
+ *
+ * Recordings made before those states existed contain only REQUESTED,
+ * PRIORITY_ACTIVE, CLEARING and NORMAL, all of which this handles unchanged.
+ */
+export const INTERVENING_STATES: ReadonlySet<string> = new Set([
+  'REQUESTED',
+  'TRANSITIONING',
+  'PRIORITY_ACTIVE',
+  'CLEARING',
+  'RESTORING',
+])
+
+/** Whether a recorded policy state means the policy is acting on the signal. */
+export function isIntervening(state: string): boolean {
+  return INTERVENING_STATES.has(state)
+}
+
 /** Raw recorded policy state of each signal at `t` (NORMAL entries omitted). */
 export function priorityStatesAt(
   transitions: PolicyTransition[],
@@ -49,7 +76,7 @@ export function priorityStatesAt(
     })
   }
   for (const [key, value] of [...out]) {
-    if (value.state === 'NORMAL') out.delete(key)
+    if (!isIntervening(value.state)) out.delete(key)
   }
   return out
 }
@@ -71,17 +98,21 @@ export function priorityEpisodes(
   const out: PriorityEpisode[] = []
   for (const transition of transitions) {
     let current = open.get(transition.tls_id)
+    const intervening = isIntervening(transition.new_state)
     if (
       current &&
       current.releasedAt !== null &&
-      transition.new_state !== 'NORMAL' &&
+      intervening &&
       transition.sim_time_s - current.releasedAt > gapS
     ) {
       current.episode.end = current.releasedAt
       open.delete(transition.tls_id)
       current = undefined
     }
-    if (transition.new_state === 'NORMAL') {
+    if (!intervening) {
+      // NORMAL, or DETECTED: the policy is watching, not acting. An episode
+      // already open stays open for the merge window, so the re-request that
+      // follows a junction interior does not split it in two.
       if (current) current.releasedAt = transition.sim_time_s
       continue
     }

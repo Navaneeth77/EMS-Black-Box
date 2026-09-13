@@ -157,7 +157,7 @@ export function Hud({ data, onCamera }: { data: SceneData; onCamera: (p: string)
           <Row label="Policy" value={scenario.policy} kind="SIMULATED_DATA" />
           <Row label="Seed" value={scenario.seed} />
           <Row label="Variant" value={scenario.variant} />
-          <Row label="SUMO" value={scenario.sumo_version ?? data.manifest.sumo_version} />
+          <Row label="SUMO" value={data.manifest.sumo_version} />
           <div className="mt-2 border-t border-slate-700/60 pt-2 text-[10px] leading-snug text-amber-300/90">
             Simulated scene. Not a measurement of real traffic or of any real
             ambulance journey in Bengaluru.

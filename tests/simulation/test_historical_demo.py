@@ -266,6 +266,12 @@ def test_network_record_passed_and_research_network_is_unmodified(repo_root: Pat
     record = _load(repo_root / "simulation/sumo/silk_board_v1_hdemo/network_provenance.json")
     assert record["passed"] is True
     research = repo_root / record["research_network"]["file"]
+    if not research.is_file():
+        # Networks are generated, not committed (see .gitignore), so a fresh
+        # checkout has the record but not the file it vouches for. Skipping is
+        # right; failing would make a clean clone look broken when it is only
+        # unbuilt.
+        pytest.skip("No research SUMO network; run scripts/build_sumo_network.py")
     assert hashlib.sha256(research.read_bytes()).hexdigest() == record["research_network"]["sha256"]
 
 

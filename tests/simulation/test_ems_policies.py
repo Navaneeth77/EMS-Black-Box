@@ -583,3 +583,77 @@ class TestSeed42Artifacts:
             for name in ("NORMAL", "EMS_NEXT", "EMS_ROLLING", "EMS_FULL_PREEMPTION")
         }
         assert len(set(routes.values())) == 1, routes
+
+
+class TestScenarioAndPolicyHashes:
+    """Part of the counterfactual's contract: same scenario, different policy."""
+
+    def _identity(self, **overrides):
+        from ems_sim.counterfactual.pairing import ScenarioIdentity
+
+        base = {
+            "network_sha256": "a" * 64,
+            "demand_config_hash": "deadbeef",
+            "demand_id": "cf_demo",
+            "seed": 42,
+            "begin_s": 0.0,
+            "end_s": 3900.0,
+            "step_length_s": 0.5,
+            "vehicle_mix": {"car": 1.0},
+            "ambulance_origin": "a",
+            "ambulance_destination": "z",
+            "ambulance_depart_s": 600.0,
+            "ambulance_route_edges": ("a", "b", "z"),
+            "scenario_variant": "v1",
+        }
+        base.update(overrides)
+        return ScenarioIdentity(**base)
+
+    def test_two_runs_of_one_scenario_hash_identically(self) -> None:
+        assert self._identity().scenario_hash() == self._identity().scenario_hash()
+
+    def test_a_different_disturbance_is_a_different_scenario(self) -> None:
+        """Without this the incident arm and the clean arm hashed the same, and
+        a policy could be compared against a baseline that had no lane blocked."""
+        clean = self._identity()
+        blocked = self._identity(disturbance=(("edge_id", "x"), ("lane_index", 1)))
+        assert clean.scenario_hash() != blocked.scenario_hash()
+        assert (
+            clean.component_hashes()["disturbance_hash"]
+            != blocked.component_hashes()["disturbance_hash"]
+        )
+        assert clean.component_hashes()["demand_hash"] == blocked.component_hashes()["demand_hash"]
+
+    def test_pairing_refuses_a_disturbance_mismatch(self) -> None:
+        from ems_sim.counterfactual.pairing import ScenarioMismatchError, require_paired
+
+        with pytest.raises(ScenarioMismatchError, match="disturbance"):
+            require_paired(
+                self._identity(),
+                self._identity(disturbance=(("edge_id", "x"),)),
+                "NORMAL",
+                "EMS_NEXT",
+            )
+
+    def test_the_policy_hash_is_the_intended_difference(self) -> None:
+        from ems_sim.counterfactual.pairing import policy_hash
+
+        normal = make_policy("NORMAL").on_simulation_end()
+        next_policy = make_policy("EMS_NEXT").on_simulation_end()
+        near = make_policy("EMS_NEXT", activation_distance_m=100.0).on_simulation_end()
+        assert policy_hash(normal) != policy_hash(next_policy)
+        assert policy_hash(next_policy) != policy_hash(near), "parameters are part of the policy"
+        assert policy_hash(next_policy) == policy_hash(make_policy("EMS_NEXT").on_simulation_end())
+
+    def test_a_pair_that_does_not_differ_in_policy_is_refused(self) -> None:
+        from ems_sim.counterfactual.pairing import (
+            ScenarioMismatchError,
+            require_policy_difference,
+        )
+
+        report = make_policy("EMS_NEXT").on_simulation_end()
+        with pytest.raises(ScenarioMismatchError, match="no intervention"):
+            require_policy_difference(report, report)
+        assert require_policy_difference(
+            make_policy("NORMAL").on_simulation_end(), report
+        )["differs"]

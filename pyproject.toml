@@ -7,21 +7,37 @@ name = "ems-black-box"
 version = "0.1.0"
 description = "Counterfactual replay of ambulance trips through simulated Bengaluru traffic"
 requires-python = ">=3.11"
-dependencies = []
 
-# ems_sim and ems_analysis are libraries imported by the backend, the tests and
-# ad-hoc scripts. Installing them editable (`pip install -e .`) means imports
-# resolve the same way everywhere instead of depending on sys.path juggling.
+# Read from the component requirements files rather than restated here. Two
+# copies of a dependency list drift, and the copy nobody installs from is the one
+# that drifts: `dependencies = []` sat here while the simulation had six real
+# requirements, so the package metadata said this project needed nothing.
+#
+# traci and sumolib are deliberately absent from both: they ship inside the SUMO
+# installation and must match its version exactly. ems_sim.runner.sumo_env
+# resolves them at runtime.
+dynamic = ["dependencies", "optional-dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["simulation/requirements.txt"] }
+
+[tool.setuptools.dynamic.optional-dependencies]
+backend = { file = ["backend/requirements.txt"] }
+dev = { file = ["requirements-dev.txt"] }
+
+# ems_sim is the library imported by the backend, the tests and the scripts.
+# Installing it editable (`pip install -e .`) means imports resolve the same way
+# everywhere instead of depending on sys.path juggling.
 [tool.setuptools]
-package-dir = { "ems_sim" = "simulation/ems_sim", "ems_analysis" = "analysis/ems_analysis" }
+package-dir = { "ems_sim" = "simulation/ems_sim" }
 
 [tool.setuptools.packages.find]
-where = ["simulation", "analysis"]
-include = ["ems_sim*", "ems_analysis*"]
+where = ["simulation"]
+include = ["ems_sim*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["backend", "simulation", "analysis"]
+pythonpath = ["backend", "simulation"]
 addopts = "-ra --strict-markers"
 markers = [
     "sumo: requires a working SUMO installation",

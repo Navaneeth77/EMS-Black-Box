@@ -1,12 +1,12 @@
 {
   "dataset_id": "phase5_counterfactual_corrected_inc_two_signal_seed42",
   "data_class": "SIMULATED_DATA",
-  "description": "Phase 5 counterfactual replay for silk_board_v1, seed 42: 2 signal policies over one identical scenario, paired against the NORMAL run of the same seed.",
+  "description": "Phase 5 counterfactual replay for silk_board_v1, seed 42: 5 signal policies over one identical scenario, paired against the NORMAL run of the same seed.",
   "source_name": "EMS Black Box Phase 5",
   "source_url": null,
   "source_licence": null,
   "source_attribution": null,
-  "retrieved_at": "2026-09-13T22:48:02Z",
+  "retrieved_at": "2026-09-13T23:03:13Z",
   "sha256": null,
   "size_bytes": null,
   "file_path": "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_comparisons.json",
@@ -41,5 +41,5 @@
     "The sublane model is deliberately not enabled, so two-wheeler lateral behaviour is inert (Phase 4 finding).",
     "Single seed. Seeds 43-46 have not been run."
   ],
-  "notes": "Policies: ['NORMAL', 'EMS_ROLLING']. Wall clock 256s. Scenario hash ff9fa74f5992d70d."
+  "notes": "Policies: ['NORMAL', 'EMS_NEXT', 'EMS_ROLLING', 'EMS_FULL_SCOPE', 'EMS_FULL_PREEMPTION']. Wall clock 627s. Scenario hash ff9fa74f5992d70d."
 }

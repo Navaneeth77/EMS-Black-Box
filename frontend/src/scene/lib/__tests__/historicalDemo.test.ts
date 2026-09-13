@@ -20,12 +20,15 @@ import {
   EPISODE_GAP_S,
   displayStatesAt,
   priorityEpisodes,
+  priorityStatesAt,
   priorityStatus,
   type PolicyTransition,
 } from '../priority'
 import { buildRoutePolyline, corridorSpan } from '../routeCorridor'
 import { sceneKeyFrom, scenePaths } from '../sceneBase'
-import { approachFurniture, aspectFor } from '../../components/TrafficSignals'
+// TrafficSignals re-exports signalState's aspectFor rather than defining its
+// own, so importing it from both places bound one function to one name twice.
+import { approachFurniture } from '../../components/TrafficSignals'
 import type { Lane, Manifest, TrafficLight } from '../types'
 
 describe('playback controls', () => {
@@ -292,5 +295,45 @@ describe('bodyCentreOffset (SUMO reports the front bumper)', () => {
     const leaderTail = leaderFront.z + leaderBack.z + 4.5 / 2
     const followerNose = followerFront.z + followerBack.z - 6 / 2
     expect(followerNose - leaderTail).toBeCloseTo(2.0, 6) // exactly the minGap
+  })
+})
+
+describe('policy states the display may act on', () => {
+  it('does not draw priority for a signal the policy is merely watching', () => {
+    // DETECTED means the ambulance is on the route and this signal is ahead of
+    // it. Drawing that as an episode would put "priority active" on screen from
+    // the moment the ambulance departs.
+    const transitions = [
+      { sim_time_s: 600, tls_id: 't1', previous_state: 'NORMAL', new_state: 'DETECTED', reason: '' },
+      { sim_time_s: 640, tls_id: 't1', previous_state: 'DETECTED', new_state: 'REQUESTED', reason: '' },
+      { sim_time_s: 646, tls_id: 't1', previous_state: 'REQUESTED', new_state: 'TRANSITIONING', reason: '' },
+      { sim_time_s: 652, tls_id: 't1', previous_state: 'TRANSITIONING', new_state: 'PRIORITY_ACTIVE', reason: '' },
+      { sim_time_s: 690, tls_id: 't1', previous_state: 'PRIORITY_ACTIVE', new_state: 'CLEARING', reason: '' },
+      { sim_time_s: 690, tls_id: 't1', previous_state: 'CLEARING', new_state: 'RESTORING', reason: '' },
+      { sim_time_s: 700, tls_id: 't1', previous_state: 'RESTORING', new_state: 'NORMAL', reason: '' },
+    ]
+    const episodes = priorityEpisodes(transitions)
+    expect(episodes).toHaveLength(1)
+    expect(episodes[0].start).toBe(640)
+    expect(episodes[0].end).toBe(700)
+    expect(episodes[0].activeTimes).toEqual([652])
+
+    expect(priorityStatesAt(transitions, 620).size).toBe(0)
+    expect(priorityStatesAt(transitions, 645).get('t1')?.state).toBe('REQUESTED')
+    expect(priorityStatesAt(transitions, 660).get('t1')?.state).toBe('PRIORITY_ACTIVE')
+    expect(priorityStatesAt(transitions, 999).size).toBe(0)
+  })
+
+  it('still reads recordings made before those states existed', () => {
+    const legacy = [
+      { sim_time_s: 700, tls_id: 't1', previous_state: 'NORMAL', new_state: 'REQUESTED', reason: '' },
+      { sim_time_s: 726, tls_id: 't1', previous_state: 'REQUESTED', new_state: 'PRIORITY_ACTIVE', reason: '' },
+      { sim_time_s: 784, tls_id: 't1', previous_state: 'PRIORITY_ACTIVE', new_state: 'CLEARING', reason: '' },
+      { sim_time_s: 784, tls_id: 't1', previous_state: 'CLEARING', new_state: 'NORMAL', reason: '' },
+    ]
+    const episodes = priorityEpisodes(legacy)
+    expect(episodes).toHaveLength(1)
+    expect(episodes[0].start).toBe(700)
+    expect(episodes[0].end).toBe(784)
   })
 })
