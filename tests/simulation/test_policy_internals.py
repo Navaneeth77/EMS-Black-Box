@@ -347,3 +347,85 @@ class TestQueueClearance:
         row = report["encounters"][0]
         assert row["queue_at_priority_active"] is None
         assert report["encounters_with_priority"] == 0
+
+
+class TestCoordinatedMovements:
+    """One signal, two of the ambulance's movements, one phase at a time."""
+
+    TWO_MOVEMENT_PROGRAM = TlsProgram(
+        tls_id="t1",
+        # phase 0 serves movement A only; phase 2 serves A and B together.
+        phase_states=["GGrr", "yyrr", "GGGG", "yyyy"],
+        phase_durations=[30.0, 4.0, 30.0, 4.0],
+        links=[
+            ControlledLink(0, "in_a", "mid"),
+            ControlledLink(1, "in_a", "mid"),
+            ControlledLink(2, "mid", "out_b"),
+            ControlledLink(3, "mid", "out_b"),
+        ],
+    )
+
+    def _encounters(self):
+        first = RouteTls(
+            tls_id="t1",
+            program=self.TWO_MOVEMENT_PROGRAM,
+            ambulance_links=[0, 1],
+            approach_edge="in_a",
+            exit_edge="mid",
+            route_index=0,
+        )
+        second = RouteTls(
+            tls_id="t1",
+            program=self.TWO_MOVEMENT_PROGRAM,
+            ambulance_links=[2, 3],
+            approach_edge="mid",
+            exit_edge="out_b",
+            route_index=1,
+        )
+        return first, second
+
+    def test_the_policy_does_not_truncate_its_own_green(self) -> None:
+        """Asked per movement, the encounter needing phase 2 cuts phase 0 while
+        the encounter using phase 0 is holding it. Coordinated, both ask for the
+        phase that serves the whole way through."""
+        light = FakeTrafficLight(self.TWO_MOVEMENT_PROGRAM, phase=0)
+        traci = FakeTraci(light)
+        policy = make_policy("EMS_ROLLING")
+        policy.on_simulation_start(list(self._encounters()), traci)
+
+        for _ in range(60):
+            policy.on_step(light.now, observation(distance=200.0, route_index=0), traci)
+            light.step()
+
+        truncations = [c for c in policy.signal_changes if "ended a non-priority" in c.reason]
+        holds = [c for c in policy.signal_changes if "began holding" in c.reason]
+        # Phase 0 does not serve both movements, so it is ended once — and then
+        # phase 2, which does, is held. What must not happen is a hold and a
+        # truncation of the same phase.
+        assert holds, "the policy never held the phase that serves both movements"
+        held_phases = {c.from_phase_index for c in holds}
+        assert held_phases == {2}
+        assert all(c.from_phase_index != 2 for c in truncations)
+
+    def test_it_falls_back_when_no_phase_serves_both(self) -> None:
+        """Two movements that are never green together: the policy asks for the
+        one at hand rather than truncating for a phase that does not exist."""
+        program = TlsProgram(
+            tls_id="t1",
+            phase_states=["GGrr", "yyrr", "rrGG", "rryy"],
+            phase_durations=[30.0, 4.0, 30.0, 4.0],
+            links=self.TWO_MOVEMENT_PROGRAM.links,
+        )
+        first, second = self._encounters()
+        first.program = program
+        second.program = program
+        light = FakeTrafficLight(program, phase=0)
+        traci = FakeTraci(light)
+        policy = make_policy("EMS_ROLLING")
+        policy.on_simulation_start([first, second], traci)
+        for _ in range(40):
+            policy.on_step(light.now, observation(distance=200.0, route_index=0), traci)
+            light.step()
+
+        report = policy.on_simulation_end()
+        assert report["coordinated_movements"]["fell_back_to_single_movement"]

@@ -172,6 +172,7 @@ class BasePolicy:
         self._phase_entry_exact: dict[str, bool] = {}
         # Audit records waiting for the next step to say what the signal did.
         self._pending: list[tuple[str, StateTransition | SignalChange]] = []
+        self._fallback_used: dict[str, bool] = {}
 
     # --- lifecycle --------------------------------------------------------
 
@@ -213,6 +214,18 @@ class BasePolicy:
                 for control in self.control.values()
                 if control.timeline is not None
             ],
+            "coordinated_movements": {
+                "rule": (
+                    "Where the route makes several controlled movements at one "
+                    "traffic light, priority is requested for a phase serving all "
+                    "of the ones still ahead of the ambulance, because the signal "
+                    "can only show one phase and asking per movement makes the "
+                    "policy truncate its own green."
+                ),
+                "fell_back_to_single_movement": sorted(
+                    key for key, used in self._fallback_used.items() if used
+                ),
+            },
             "transition_count": len(self.transitions),
             "signal_change_count": len(self.signal_changes),
             "parameters": {
@@ -320,7 +333,9 @@ class BasePolicy:
                     traci_module,
                 )
             else:
-                serving, changed = self._serve_priority(entry, now, traci_module)
+                links, fell_back = self._links_to_serve(entry, ambulance, now)
+                serving, changed = self._serve_priority(entry, now, traci_module, links)
+                self._fallback_used[entry.key] = fell_back
                 if serving:
                     self._transition(
                         entry,
@@ -354,7 +369,8 @@ class BasePolicy:
                     traci_module,
                 )
             else:
-                self._serve_priority(entry, now, traci_module)
+                links, _ = self._links_to_serve(entry, ambulance, now)
+                self._serve_priority(entry, now, traci_module, links)
 
         if control.state is PolicyState.CLEARING:
             self._release(entry, now, traci_module)
@@ -482,8 +498,46 @@ class BasePolicy:
 
     # --- signal mechanics -------------------------------------------------
 
+    def _links_to_serve(
+        self, entry: RouteTls, ambulance: AmbulanceObservation, sim_time_s: float
+    ) -> tuple[list[int], bool]:
+        """Every movement the ambulance still has to make at this traffic light.
+
+        A route can make two controlled movements through one signal — through a
+        joined cluster, typically, where netconvert has given one controller two
+        junctions. Each is its own encounter, with its own links and its own
+        record. But they share a signal, and a signal can only be showing one
+        phase.
+
+        Asking for them independently makes the policy fight itself: the
+        encounter whose movement the current phase serves holds that phase, and
+        the encounter whose movement it does not truncates the same phase a step
+        later. Measured on the incident scenario, that halved what EMS_ROLLING
+        recovered — it cut its own green.
+
+        So the request is for a phase serving **all** the movements still ahead
+        of the ambulance at this signal, which is what letting a vehicle through
+        a junction means. If the program has no such phase — two movements that
+        are never green together — the policy falls back to the movement at hand
+        rather than truncating forever, and says so.
+        """
+        links: set[int] = set()
+        for other in self.actionable:
+            if other.tls_id == entry.tls_id and self._is_relevant(other, ambulance, sim_time_s):
+                links.update(other.ambulance_links)
+        union = sorted(links)
+        if not union:
+            return list(entry.ambulance_links), False
+        if union != list(entry.ambulance_links) and not entry.program.phases_serving(union):
+            return list(entry.ambulance_links), True
+        return union, False
+
     def _serve_priority(
-        self, entry: RouteTls, sim_time_s: float, traci_module
+        self,
+        entry: RouteTls,
+        sim_time_s: float,
+        traci_module,
+        links: list[int] | None = None,
     ) -> tuple[bool, bool]:
         """Move the signal towards a phase serving the ambulance, lawfully.
 
@@ -496,11 +550,12 @@ class BasePolicy:
         """
         tls_id = entry.tls_id
         program = entry.program
+        serving_links = list(entry.ambulance_links) if links is None else links
         current = traci_module.trafficlight.getPhase(tls_id)
         if current >= len(program.phase_states):
             return False, False
 
-        if program.phase_serves(current, entry.ambulance_links):
+        if program.phase_serves(current, serving_links):
             # Hold: the remaining duration is reset each step, so the green
             # persists while the policy asks and ends shortly after it stops.
             #
