@@ -94,4 +94,6 @@ def sumo_to_scene(
     Applies the Z sign flip described in the module docstring and re-anchors to
     ``scene_origin`` to keep magnitudes inside float32's useful precision.
     """
-    raise NotImplementedError("Pending the state schema this will feed. See docs/archive/ROADMAP.md.")
+    raise NotImplementedError(
+        "Pending the state schema this will feed. See docs/archive/ROADMAP.md."
+    )

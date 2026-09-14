@@ -138,7 +138,8 @@ def main() -> int:
 
     print(
         "\nNext: review the network against imagery before building anything on it "
-        "(docs/archive/ROADMAP.md Phase 1).\nSUMO conversion is Phase 2 and is not part of this step."
+        "(docs/archive/ROADMAP.md Phase 1).\nSUMO conversion is Phase 2 and is not "
+        "part of this step."
     )
     return 0
 
