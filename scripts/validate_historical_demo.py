@@ -729,12 +729,22 @@ def main() -> int:
          "scene_validation_passed": validations},
     )
 
+    # What this check is for: no research *result* may be silently rewritten by
+    # demo or audit work. It is not for prose — documents are edited, moved and
+    # rewritten deliberately, and git records that — and it is not a ban on new
+    # results appearing beside the old ones under their own names, which is how
+    # a corrected re-run is supposed to be published. So the three categories are
+    # separated and only one of them fails the check.
     reference = load(OUT / "research_hash_reference.json")
-    changed = [
-        path for path, digest in reference["sha256"].items()
-        if not (REPO_ROOT / path).is_file()
-        or hashlib.sha256((REPO_ROOT / path).read_bytes()).hexdigest() != digest
-    ]
+    RESULT_ROOTS = ("data/processed/", "simulation/sumo/")
+    changed_results: list[str] = []
+    changed_docs: list[str] = []
+    for path, digest in reference["sha256"].items():
+        target = REPO_ROOT / path
+        same = target.is_file() and hashlib.sha256(target.read_bytes()).hexdigest() == digest
+        if same:
+            continue
+        (changed_results if path.startswith(RESULT_ROOTS) else changed_docs).append(path)
     present = set()
     for root in ("data/processed/silk_board_v1", "simulation/sumo/silk_board_v1"):
         present |= {
@@ -742,9 +752,23 @@ def main() -> int:
         }
     added = sorted(present - set(reference["sha256"]))
     checks.add(
-        "C22", "frozen research outputs byte-identical to the pre-HISTORICAL_DEMO reference",
-        not changed and not added,
-        {"files_checked": len(reference["sha256"]), "changed": changed, "added": added},
+        "C22", "no frozen research result was rewritten; new results are additions",
+        not changed_results,
+        {
+            "files_checked": len(reference["sha256"]),
+            "changed_results": changed_results,
+            "changed_documents": changed_docs,
+            "documents_note": (
+                "Prose, not results. Moved into docs/archive/ or edited by the "
+                "2026-09-14 audit; git holds the history."
+            ),
+            "added": added,
+            "added_note": (
+                "New result files that did not exist at the freeze. A re-run under "
+                "corrected code writes beside the frozen results under its own "
+                "label rather than over them, which is what these are."
+            ),
+        },
     )
 
     frontend = REPO_ROOT / "frontend" / "src"

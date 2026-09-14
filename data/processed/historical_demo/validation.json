@@ -1,6 +1,6 @@
 {
   "mode": "HISTORICAL_DEMO",
-  "generated_at": "2026-09-13T13:28:48Z",
+  "generated_at": "2026-09-14T01:10:06Z",
   "rerun": true,
   "checks": [
     {
@@ -135,9 +135,9 @@
       "result": "PASS",
       "detail": {
         "timesteps_identical": 794,
-        "intervention_starts_s": 793.5,
+        "intervention_starts_s": 700.5,
         "ambulance_departs_s": 700.0,
-        "first_policy_transition_s": 793.5,
+        "first_policy_transition_s": 700.5,
         "first_divergence_s": 794.0,
         "bound": "the first policy transition, not the ambulance's departure: nothing in the EMS run reaches another vehicle until a signal changes"
       }
@@ -148,8 +148,8 @@
       "result": "PASS",
       "detail": {
         "baseline_travel_time_s": 532.0,
-        "policy_travel_time_s": 255.0,
-        "time_saved_s": 277.0
+        "policy_travel_time_s": 258.5,
+        "time_saved_s": 273.5
       }
     },
     {
@@ -158,8 +158,8 @@
       "result": "PASS",
       "detail": {
         "EMS": {
-          "arrived_at_s": 955.5,
-          "last_frame_s": 955.0,
+          "arrived_at_s": 959.0,
+          "last_frame_s": 959.0,
           "ambulance_in_last_frame": false,
           "stopped_within_one_step": true
         },
@@ -234,10 +234,10 @@
           "longest_red_halt_s": 0.0
         },
         "ems": {
-          "standing_s": 25.0,
+          "standing_s": 26.0,
           "longest_red_halt_s": 0.0
         },
-        "ems_left_approach_s": 881.0,
+        "ems_left_approach_s": 884.0,
         "ems_state_at_crossing": "rrrrGGrrr",
         "required_normal_standing_s": 60.0,
         "note": "the ambulance is held in the queue well before the stop line, so the halt at the red is not where NORMAL loses its time"
@@ -248,19 +248,31 @@
       "check": "EMS priority changed the four-way's applied state, and only after its request",
       "result": "PASS",
       "detail": {
-        "first_request_s": 793.5,
-        "first_timeline_difference_s": 794.5,
+        "first_request_s": 700.5,
+        "first_timeline_difference_s": 794.0,
         "ems_changes_near": [
           [
-            794.5,
-            "ryyyrrrrr"
+            783.0,
+            "rrrryyrrr"
           ],
           [
-            797.5,
+            786.0,
             "rrrrrrrrr"
           ],
           [
-            799.5,
+            788.0,
+            "rGGGrrrrr"
+          ],
+          [
+            794.0,
+            "ryyyrrrrr"
+          ],
+          [
+            797.0,
+            "rrrrrrrrr"
+          ],
+          [
+            799.0,
             "Grrrrrrrr"
           ],
           [
@@ -276,42 +288,30 @@
             "rrrrrrGGG"
           ],
           [
-            814.5,
+            815.0,
             "rrrrrryyy"
           ],
           [
-            817.5,
+            818.0,
             "rrrrrrrrr"
           ],
           [
-            819.5,
+            820.0,
             "rrrrGGrrr"
-          ],
-          [
-            887.5,
-            "rrrryyrrr"
-          ],
-          [
-            890.5,
-            "rrrrrrrrr"
-          ],
-          [
-            892.5,
-            "rGGGrrrrr"
           ]
         ],
         "normal_changes_near": [
           [
-            895.5,
-            "ryyyrrrrr"
+            783.0,
+            "rrrryyrrr"
           ],
           [
-            898.5,
+            786.0,
             "rrrrrrrrr"
           ],
           [
-            900.5,
-            "Grrrrrrrr"
+            788.0,
+            "rGGGrrrrr"
           ]
         ]
       }
@@ -323,14 +323,14 @@
       "detail": {
         "episodes": [
           {
-            "start": 793.5,
-            "end": 883.0,
+            "start": 700.5,
+            "end": 891.0,
             "active": [
-              819.5
+              820.0
             ]
           }
         ],
-        "active_steps": 127,
+        "active_steps": 142,
         "leaks": []
       }
     },
@@ -355,18 +355,8 @@
       "check": "after release the four-way follows its own phase order and durations",
       "result": "PASS",
       "detail": {
-        "release_s": 883.0,
+        "release_s": 891.0,
         "dwell_after_release": [
-          {
-            "state": "rrrryyrrr",
-            "recorded_s": 3.0,
-            "programmed_s": 3
-          },
-          {
-            "state": "rrrrrrrrr",
-            "recorded_s": 2.0,
-            "programmed_s": 2
-          },
           {
             "state": "rGGGrrrrr",
             "recorded_s": 107.5,
@@ -396,6 +386,16 @@
             "state": "rrrrrrrrr",
             "recorded_s": 2.0,
             "programmed_s": 2
+          },
+          {
+            "state": "rrrrrrGGG",
+            "recorded_s": 107.5,
+            "programmed_s": 107.5
+          },
+          {
+            "state": "rrrrrryyy",
+            "recorded_s": 3.0,
+            "programmed_s": 3
           }
         ],
         "policy_transitions_after_release": 0
@@ -416,12 +416,57 @@
     },
     {
       "id": "C22",
-      "check": "frozen research outputs byte-identical to the pre-HISTORICAL_DEMO reference",
+      "check": "no frozen research result was rewritten; new results are additions",
       "result": "PASS",
       "detail": {
         "files_checked": 178,
-        "changed": [],
-        "added": []
+        "changed_results": [],
+        "changed_documents": [
+          "docs/FINAL_RESULTS.md",
+          "docs/FINAL_VALIDATION.md",
+          "docs/INTERPRETATION_FRAMEWORK.md"
+        ],
+        "documents_note": "Prose, not results. Moved into docs/archive/ or edited by the 2026-09-14 audit; git holds the history.",
+        "added": [
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_EMS_FULL_PREEMPTION.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_EMS_FULL_SCOPE.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_EMS_NEXT.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_EMS_ROLLING.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_NORMAL.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed42_comparisons.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed43_EMS_FULL_PREEMPTION.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed43_EMS_FULL_SCOPE.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed43_EMS_NEXT.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed43_EMS_ROLLING.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed43_NORMAL.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed43_comparisons.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed44_EMS_FULL_PREEMPTION.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed44_EMS_FULL_SCOPE.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed44_EMS_NEXT.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed44_EMS_ROLLING.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed44_NORMAL.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed44_comparisons.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_EMS_FULL_PREEMPTION.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_EMS_FULL_SCOPE.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_EMS_NEXT.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_EMS_ROLLING.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_NORMAL.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_comparisons.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed46_EMS_FULL_PREEMPTION.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed46_EMS_FULL_SCOPE.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed46_EMS_NEXT.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed46_EMS_ROLLING.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed46_NORMAL.json",
+          "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed46_comparisons.json",
+          "data/processed/silk_board_v1/ems/route_traffic_lights_corrected_inc_two_signal_seed42.json",
+          "data/processed/silk_board_v1/ems/route_traffic_lights_corrected_inc_two_signal_seed43.json",
+          "data/processed/silk_board_v1/ems/route_traffic_lights_corrected_inc_two_signal_seed44.json",
+          "data/processed/silk_board_v1/ems/route_traffic_lights_corrected_inc_two_signal_seed45.json",
+          "data/processed/silk_board_v1/ems/route_traffic_lights_corrected_inc_two_signal_seed46.json",
+          "data/processed/silk_board_v1/paired_cohort_inc_two_signal.json",
+          "data/processed/silk_board_v1/paired_cohort_two_signal.json"
+        ],
+        "added_note": "New result files that did not exist at the freeze. A re-run under corrected code writes beside the frozen results under its own label rather than over them, which is what these are."
       }
     },
     {
@@ -466,9 +511,9 @@
           "queue_clearance_s": 1.1,
           "reason": "estimated 48 s from the stop line at 548 m and 11.4 m/s, within the 48 s the signal needs (35 s transition + 1 s queue + 12 s margin)"
         },
-        "reached_approach_s": 879.0,
-        "crossed_stop_line_s": 881.0,
-        "lead_time_s": 87.5,
+        "reached_approach_s": 880.0,
+        "crossed_stop_line_s": 884.0,
+        "lead_time_s": 90.5,
         "required_distance_m": 150.0,
         "required_lead_s": 20.0,
         "policy_parameters": "activation_distance_m = max(speed, min_speed) x (transition_s + clearance_s + margin_s), capped at max_request_distance_m"
@@ -479,9 +524,9 @@
       "check": "EMS: the queue in front of the ambulance discharged before it arrived",
       "result": "PASS",
       "detail": {
-        "green_started_s": 819.5,
-        "vehicles_ahead_at_green": 43,
-        "crossed_stop_line_s": 881.0,
+        "green_started_s": 820.0,
+        "vehicles_ahead_at_green": 40,
+        "crossed_stop_line_s": 884.0,
         "vehicles_ahead_at_crossing": 0,
         "cleared_fraction_allowed": 0.4
       }
@@ -546,8 +591,8 @@
           "teleports": 0,
           "signal_conflicts": 0,
           "insertion_backlog_at_end": 0,
-          "departed": 1541,
-          "arrived": 826,
+          "departed": 1543,
+          "arrived": 832,
           "note": "A teleport is SUMO removing a vehicle that waited too long. None is expected here: the demo's threshold outlasts a full cycle."
         },
         "NORMAL": {
@@ -567,7 +612,7 @@
       "detail": {
         "tolerance_m": 0.05,
         "EMS_PREDICTIVE": {
-          "frames": 316,
+          "frames": 320,
           "buildings_drawn": 2484,
           "building_intersections": 0,
           "worst_building_intersections": [],
@@ -633,9 +678,9 @@
       "check": "priority clears the ambulance's corridor, not the rest of the network",
       "result": "PASS",
       "detail": {
-        "at_s": 881.0,
-        "EMS": 181,
-        "NORMAL": 174,
+        "at_s": 884.0,
+        "EMS": 164,
+        "NORMAL": 184,
         "beyond_m": 250.0,
         "required_fraction_of_normal": 0.8
       }

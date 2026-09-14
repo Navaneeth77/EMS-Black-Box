@@ -309,13 +309,13 @@ a simulation that never happened.
 
 | | NORMAL | EMS_PREDICTIVE |
 |---|---:|---:|
-| Ambulance travel time | **532.0 s** | **255.0 s** |
-| Waiting time | 308.5 s | 24.5 s |
-| Time standing still (measured from the recording) | 309.0 s | 25.0 s |
-| Stops | 5 | 3 |
-| Arrival (sim time) | 1,232.5 s | 955.5 s |
+| Ambulance travel time | **532.0 s** | **258.5 s** |
+| Waiting time | 308.5 s | 25.0 s |
+| Time standing still (measured from the recording) | 309.0 s | 26.0 s |
+| Stops | 5 | 2 |
+| Arrival (sim time) | 1,232.5 s | 959.0 s |
 | Teleports / signal conflicts | 0 / 0 | 0 / 0 |
-| **Saved (recorded difference)** | | **277.0 s (52.1%)** |
+| **Saved (recorded difference)** | | **273.5 s (51.4%)** |
 
 Both runs depart at 700 s, use the same demand, seed, network, trip and route,
 inject no disturbance, and are given **exactly the same SUMO options** — the EMS
@@ -326,8 +326,8 @@ identical vehicle-for-vehicle until the policy first changes a signal (C08).
 
 | | NORMAL | EMS_PREDICTIVE |
 |---|---|---|
-| t = 860.0 s | standing still, **38 vehicles** between it and the stop line, 37 of them stationary | moving at 4.9 m/s, **3 vehicles** ahead, none stationary |
-| t = 881.0 s | still standing, **40 vehicles** ahead, all stationary | crossing the stop line at 9.1 m/s, **0 ahead** |
+| t = 860.0 s | standing still, **38 vehicles** between it and the stop line, 37 of them stationary | moving at 5.2 m/s, **4 vehicles** ahead, none stationary |
+| t = 884.0 s | still standing, **41 vehicles** ahead, 40 of them stationary | crossing the stop line at 6.7 m/s, **0 ahead** |
 
 **How EMS got there.**
 
@@ -336,25 +336,25 @@ identical vehicle-for-vehicle until the policy first changes a signal (C08).
   the first metre at which it could: *"estimated 48 s from the stop line at 548 m
   and 11.4 m/s, within the 48 s the signal needs (35 s transition + 1 s queue +
   12 s margin)"*.
-- **819.5 s** — the ambulance's movement goes green, with **43 vehicles** still in
+- **820.0 s** — the ambulance's movement goes green, with **40 vehicles** still in
   front of it and the ambulance itself still 300 m short of the line.
-- **819 → 881 s** — the queue discharges on that green, ahead of the ambulance
-  rather than because of it: 43 vehicles at the green, 3 by 860 s, **0** when the
+- **820 → 884 s** — the queue discharges on that green, ahead of the ambulance
+  rather than because of it: 40 vehicles at the green, 4 by 860 s, **0** when the
   ambulance reaches the line.
-- **881.0 s** — it crosses on green (`rrrrGGrrr` — its own two links green, every
-  conflicting movement red), 87.5 s after the request. Priority is released and
+- **884.0 s** — it crosses on green (`rrrrGGrrr` — its own two links green, every
+  conflicting movement red), 90.5 s after the request. Priority is released and
   the controller resumes its own phase order and programmed durations (C19).
 - It never stands at that red at all: its longest halt at the four-way's red is
   **0.0 s** in both runs — in NORMAL because the queue stops it 219 m earlier.
 
 **NORMAL, for contrast:** at 849.5 s the ambulance joins the back of a queue
 **219 m** from the stop line with **37 vehicles** in front of it, 32 of them
-already stopped. It stands still for **309 s** of its 532 s trip and arrives 277 s
+already stopped. It stands still for **309 s** of its 532 s trip and arrives 273.5 s
 after the EMS run.
 
 **And the rest of the city stays where it was.** At the moment the EMS ambulance
-crosses, **181** vehicles are standing still more than 250 m away from it, against
-**174** in NORMAL at the same instant (C33). Priority cleared a corridor, not a
+crosses, **164** vehicles are standing still more than 250 m away from it, against
+**184** in NORMAL at the same instant (C33). Priority cleared a corridor, not a
 city.
 
 Nothing here was tuned for the outcome: the trip came from a rule about the
@@ -426,9 +426,10 @@ The earlier DEMO scene still loads at `?scene=demo`.
 
 `python scripts/validate_historical_demo.py` runs 33 checks, including a fresh
 SUMO rerun, and writes `data/processed/historical_demo/validation.json`.
-**All 33 pass.** Alongside them: 532 pytest, 55 vitest, tsc and ruff clean, and
-`validate_scene_coords.py` clean on both scenes (0 failures over 208,382 and
-428,777 vehicle samples).
+**All 33 pass.** Alongside them: 570 pytest, 57 vitest, `tsc -b` and ruff clean,
+and `validate_scene_coords.py` clean on both scenes (0 failures over 211,248 and
+428,777 vehicle samples — including every frame of the ambulance checked against
+SUMO's own record of it).
 
 Four results worth quoting.
 
@@ -436,15 +437,16 @@ Four results worth quoting.
   they are drawn: a body per vehicle, placed from the recorded position, the
   recorded heading and the simulated dimensions, tested against the 2,484 drawn
   building footprints and against every other vehicle in the frame. **0 building
-  intersections and 0 vehicle overlaps in both runs**, at a 5 cm tolerance that
+  intersections and 0 vehicle overlaps in both runs** (320 and 593 frames), at a
+  5 cm tolerance that
   is numerical and nothing else — the exporter rounds positions to 1 cm and
   headings to 0.1°, which at the far corner of the longest body in the scene is
   half a centimetre.
-- **C26 — the corridor cleared ahead of the ambulance, not because of it.** 43
-  vehicles stood between it and the stop line when the green came at 819.5 s, and
-  0 when it crossed at 881.0 s.
-- **C33 — and only the corridor.** 181 vehicles were standing still more than
-  250 m from the ambulance when it crossed, against 174 in NORMAL at that instant.
+- **C26 — the corridor cleared ahead of the ambulance, not because of it.** 40
+  vehicles stood between it and the stop line when the green came at 820.0 s, and
+  0 when it crossed at 884.0 s.
+- **C33 — and only the corridor.** 164 vehicles were standing still more than
+  250 m from the ambulance when it crossed, against 184 in NORMAL at that instant.
 - **C20 — the rerun reproduced the exported EMS run exactly**: arrival, travel
   time, waiting, stops, every policy transition and every signal timeline.
 
