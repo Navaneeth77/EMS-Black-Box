@@ -8,6 +8,11 @@ Every figure below comes from a committed file under `data/processed/`. Where th
 2026-09-14 audit changed a number, both the old and the new one are given, with
 the reason.
 
+**No result here is a test of historically sourced signal timing.** The one
+sourced figure — a 450 s existing cycle at Central Silk Board — is verified and
+used only by the HISTORICAL_DEMO replay; why it cannot enter the counterfactual
+is in [`METHOD.md`](METHOD.md) §3.
+
 ---
 
 ## 1. The headline, with its condition attached
@@ -15,15 +20,24 @@ the reason.
 **Signal priority is worth little when the ambulance is already moving, and
 substantially more when congestion has put a queue in front of it.**
 
-| Scenario | NORMAL trip | Best policy saves |
-|---|---:|---:|
-| Free-flowing approach | 184.5 s | **≈ 12 s** (6.8%) |
-| With the modelled queue-producing disturbance | 282.5 s | **≈ 80 s** (28%) |
+Four congestion levels, five seeds each, everything else identical (§9):
 
-Quoting the second figure alone would describe a situation the first one
-contradicts. What priority does is recover time an ambulance loses *to signals
-and to the queues they create* — so when there is no such loss, there is nothing
-to recover.
+| Congestion | NORMAL trip | Best policy saves | |
+|---|---:|---:|---|
+| None | 184.5 ± 0.4 s | **12.4 ± 0.4 s** | 6.7% |
+| Obstruction, `low` | 191.2 ± 3.8 s | **11.7 ± 3.5 s** | 6.1% |
+| Obstruction, `medium` | 284.0 ± 2.3 s | **80.5 ± 2.1 s** | 28.3% |
+| Obstruction, `high` | 520.7 ± 29.4 s | **86.9 ± 26.8 s** | 16.7% |
+
+Quoting the large figures alone would describe a situation the small ones
+contradict. What priority does is recover time an ambulance loses *to signals and
+to the queues they create* — so when there is no such loss, there is nothing to
+recover, and when the corridor is saturated there is more loss than priority can
+reach.
+
+**The range 65–80 s is the benefit under one particular modelled obstruction. It
+is not a baseline.** The baseline — what priority is worth with the corridor
+clear — is about 12 s.
 
 ## 2. The counterfactual matrix, with the disturbance
 
@@ -63,21 +77,33 @@ changed. Paired per seed:
 | `FULL_PREEMPTION − FULL_SCOPE` | 3 s min green, 600 s ceiling | −1.0, −1.5, +0.5, 0.0, +0.5 | **−0.3 s** | **not** distinguishable (se 0.41) |
 | `ROLLING − NEXT` | look-ahead window vs next signal | +16.5, +11.5, +14.0, +14.5, +14.5 | **+14.2 s** | distinguishable (se 0.80) |
 
-Read plainly:
+Read plainly, **and only of this scenario**:
 
-- **Coordinating a look-ahead window is worth about 14 s** over preempting only
-  the next signal. That is the one large effect among the policies.
+- **Coordinating a look-ahead window is worth about 14 s here** over preempting
+  only the next signal. That is the one large effect among the policies — and it
+  exists only because there is a queue for the extra signals to discharge.
 - **Removing the distance limit entirely adds about 1 second** on top of that.
 - **The extra aggression in `EMS_FULL_PREEMPTION` buys nothing at all.** Cutting
   cross-traffic greens to 3 s and holding for up to 600 s does not beat the same
   scope with ordinary parameters — the difference is −0.3 s, inside the noise —
   while it leaves up to 40 more vehicles unfinished (§5).
 
-> **Correction to the earlier framing.** The pre-audit report said EMS_ROLLING
-> "captures 98.8% of full preemption's benefit". The arithmetic was right and the
-> precision was not: the per-seed ratios are 97.5–100%, so this is "about 99%,
-> and the gap is around a second". Three significant figures on a ratio of two
-> five-sample means claims a resolution the data does not have.
+> **The 14 s is conditional, and the condition is not optional.** It belongs to
+> this obstruction at this severity. With the obstruction off (§8) the same
+> contrast is **+0.1 s (se 0.91)**; with a milder one **+0.1 s (se 0.40)**; with
+> a four-times tighter one **0.0 s (se 0.42)** (§9). At three of the four
+> congestion levels tested the three EMS policies are **indistinguishable from
+> each other**. An earlier draft of this section stated the 14 s without that
+> condition; it must not be quoted as a property of the policies.
+
+> **Correction to the earlier framing.** The pre-audit report claimed EMS_ROLLING
+> "captures 98.8% of full preemption's benefit". That precision is withdrawn and
+> is not restated anywhere as a finding: the per-seed ratios are 97.5–100%, so
+> the most that can be said is "about 99%, and the gap is around a second".
+> Three significant figures on a ratio of two five-sample means claims a
+> resolution the data does not have. The claim survives only in
+> [`archive/FINAL_RESULTS.md`](archive/FINAL_RESULTS.md) as what was reported at
+> the time.
 
 ## 4. What the audit changed
 
@@ -144,6 +170,26 @@ supposed to reproduce, not by the test suite. The fix keeps the last known route
 index across junction interiors. Recorded here because "the tests passed" was
 true throughout.
 
+### 4e. The last instance of the same defect, found by a stray log line
+
+The audit's central fix was that a traffic light met twice on a route is two
+encounters, not one (§4b). One place still keyed by `tls_id` alone: the halt
+detector's map of stop-line positions. The route's two encounters at the
+`joinedS_…` cluster approach on edges 19.55 m and 33.69 m long, and the second
+overwrote the first — so the query for the first asked TraCI for a position 33.69 m
+along a 19.55 m edge. TraCI answered `Position on lane invalid`, the caller
+suppressed it, and that encounter silently dropped out of the halt record.
+
+It surfaced as one stderr line per run during the `NO_INCIDENT_CONTROL` runs, and
+it had been there through the whole published matrix. **It changed no reported
+value**: it only degrades a diagnostic annotation, and the ambulance never halted
+on that edge in any run of any matrix. Verified rather than argued — seed 42 was
+re-run under the fix in both scenarios across four policies, and every ambulance
+metric, vehicle count, teleport count and scenario hash came back identical.
+
+Kept as a lesson rather than deleted: the defect was invisible to 570 tests and
+to every result file, and what exposed it was a log line nobody had read.
+
 ## 5. The traffic side is a diagnostic, not a cost
 
 On the corrected paired cohort, over five seeds:
@@ -190,10 +236,15 @@ the unattributed bucket rather than being assigned to the nearest signal.
 
 ## 7. Safety, queues, and pairing
 
-- **Signal safety.** 311,960 applied signal states and every change between them
-  checked against the junction's own foe matrix across the 25 corrected runs:
-  **0 conflicting protected greens, 0 unclear swaps.** The structural argument
-  (policies only select among netconvert's phases) is now also a tested property.
+- **Signal safety.** Every applied signal state and every change between them
+  checked against the junction's own foe matrix: **0 conflicting protected
+  greens, 0 unclear swaps**, in every run of every matrix. Each run checks 15,598
+  states, so the 25 corrected incident runs are **389,950**.
+
+  > **Correction.** This section previously reported "311,960 applied signal
+  > states … across the 25 corrected runs". 311,960 is the total for **20** runs;
+  > 25 runs is 389,950. An arithmetic error in the report, not in the check — the
+  > conflict count it was describing was and is zero.
 - **Queue clearance.** Measured at each signal at the four moments the policy's
   timeline names. Across 60 encounters the queue at the actionable signals was
   0.8 vehicles when the green came and 0 when the ambulance arrived, clearing in
@@ -206,26 +257,113 @@ the unattributed bucket rather than being assigned to the nearest signal.
   **includes the disturbance** — without it, an arm with a lane blocked and an arm
   without hashed identically and would have paired without complaint.
 
-## 8. The free-flowing scenario
+## 8. The free-flowing control, re-run
 
-The second matrix — same design, no disturbance — is unchanged from the pre-audit
-runs and has not been re-run under the corrected code:
+`NO_INCIDENT_CONTROL` is the same design with the disturbance switched off,
+re-run under the corrected code on the same five seeds and the same vehicle
+cohort (3,226 identical vehicle IDs per seed, byte-for-byte the demand the
+incident matrix used).
 
-| Policy | Time saved |
-|---|---:|
-| `EMS_NEXT` | 12.2 ± 1.0 s |
-| `EMS_ROLLING` | 12.5 ± 0.4 s |
-| `EMS_FULL_PREEMPTION` | 12.7 ± 0.6 s |
+| Policy | Travel time | Time saved | Per seed |
+|---|---:|---:|---|
+| `NORMAL` | 184.5 ± 0.4 s | — | 184.5, 184.0, 184.5, 185.0, 184.5 |
+| `EMS_NEXT` | 172.4 ± 1.3 s | **12.1 ± 1.2 s** | 10.0, 13.0, 12.5, 13.0, 12.0 |
+| `EMS_ROLLING` | 172.3 ± 1.1 s | **12.2 ± 1.3 s** | 12.5, 10.0, 13.5, 12.5, 12.5 |
+| `EMS_FULL_SCOPE` | 172.1 ± 0.4 s | **12.4 ± 0.4 s** | 12.0, 12.0, 13.0, 12.5, 12.5 |
 
-The cohort re-analysis *was* run on it, with the same outcome as the incident
-matrix: 2 of 15 pairs change sign between the biased and paired views, and no
-policy's traffic-side effect is distinguishable from zero
-(`data/processed/silk_board_v1/paired_cohort_two_signal.json`).
+It reproduces the pre-audit free-flow matrix: NORMAL 184.5 ± 0.4 against
+184.5 ± 0.4, `EMS_NEXT` 12.1 against 12.2, `EMS_ROLLING` 12.2 against 12.5. Those
+numbers are no longer carried forward as pre-audit values.
 
-Given §2 — where the corrected code reproduced the incident matrix to within a
-third of a second — there is no reason to expect these to move either, but they
-have not been recomputed and are labelled as pre-audit numbers rather than
-quietly carried forward.
+**The mechanism is visible and it explains §3.** With no disturbance the NORMAL
+ambulance makes **exactly one** signal stop — at the `GS_cluster` approach, in
+all five seeds — losing 5.5–7.0 s of waiting. All three policies remove that one
+stop, and all three land on ~172 s. There is nothing left for a wider look-ahead
+window to buy, which is why the contrasts between the policies collapse here.
+
+Traffic side, corrected paired cohort: `EMS_NEXT` −9.4 ± 4.9, `EMS_ROLLING`
+−4.2 ± 4.4, `EMS_FULL_SCOPE` −7.7 ± 4.0 s per vehicle — none distinguishable from
+zero, as in the incident matrix. Attribution puts only **8.7%** of the recovered
+time upstream of the stop line, against 26–38% with the disturbance.
+
+Source: `data/processed/silk_board_v1/counterfactual/NO_INCIDENT_CONTROL_*.json`.
+0 signal conflicts, 0 ambulance teleports, 14 background teleports over 20 runs,
+route identical to the incident matrix's in every run.
+
+## 9. How the benefit depends on congestion severity
+
+`CONGESTION_SEVERITY` scales the obstruction's discharge rate and nothing else —
+same edge, same lane, same window, same mechanism (`METHOD.md` §1). `medium` **is**
+the committed obstruction, and reproduces the corrected matrix of §2 to the
+decimal on all twelve figures, which is how the sweep and the published result
+are known to be the same scenario.
+
+**Ambulance time saved, mean ± sd over five seeds:**
+
+| Policy | none | `low` | `medium` | `high` |
+|---|---:|---:|---:|---:|
+| `NORMAL` trip | 184.5 ± 0.4 | 191.2 ± 3.8 | 284.0 ± 2.3 | 520.7 ± 29.4 |
+| `EMS_NEXT` | 12.1 ± 1.2 | 11.4 ± 4.0 | **65.1 ± 3.2** | **86.9 ± 26.8** |
+| `EMS_ROLLING` | 12.2 ± 1.3 | 11.5 ± 4.3 | **79.3 ± 2.1** | **86.9 ± 26.6** |
+| `EMS_FULL_SCOPE` | 12.4 ± 0.4 | 11.7 ± 3.5 | **80.5 ± 2.1** | **86.0 ± 27.0** |
+
+**The contrasts between the policies, which is what the sweep was for:**
+
+| Contrast | none | `low` | `medium` | `high` |
+|---|---:|---:|---:|---:|
+| `ROLLING − NEXT` | +0.1 (se 0.91) | +0.1 (se 0.40) | **+14.2 (se 0.80)** | 0.0 (se 0.42) |
+| `FULL_SCOPE − ROLLING` | +0.2 (se 0.46) | +0.2 (se 0.49) | **+1.2 (se 0.44)** | −0.9 (se 0.29) |
+
+### What this changes
+
+**The look-ahead advantage is not a property of the policy. It is a property of a
+middle band of congestion.** `ROLLING − NEXT` is indistinguishable from zero with
+no obstruction, indistinguishable from zero with a mild one, **+14.2 s** at the
+committed severity, and **back to exactly zero** when the obstruction is four
+times tighter. It is not monotone in congestion and it does not survive at either
+end. An earlier draft reported the 14 s as though it were general; on this
+evidence it is not.
+
+The mechanism is visible in the runs. Under `high`, priority no longer clears the
+corridor: the ambulance still waits 12.6 s and still makes **22.4 stops** with
+`EMS_ROLLING` against 25.4 under `NORMAL` — on seed 42 it makes *more* stops with
+priority than without (33 against 27) while still arriving 52.5 s earlier. The
+time it recovers is queue discharge, not stop-line waiting, and **90% of the
+attributed benefit is upstream** against 38% at `medium` and 1% at `low`:
+
+| Attribution (mean) | none | `low` | `medium` | `high` |
+|---|---:|---:|---:|---:|
+| At the stop line | 11.6 s | 9.6 s | 48.9 s | 8.6 s |
+| Upstream queue | 1.1 s | 0.1 s | 30.1 s | 77.5 s |
+| Upstream share | 8.7% | 1.0% | 38.1% | **90.0%** |
+
+Once nearly all of the recoverable time is upstream, *which* signals a policy
+preempts stops mattering — every policy is discharging the same queue — and the
+policies converge. That is the same reason they converge in free flow, arrived at
+from the opposite direction: at one end there is nothing to recover, at the other
+there is nothing a wider window recovers that the narrow one does not.
+
+**`high` is also where the result becomes unstable.** Its per-seed savings are
++53.0, +109.5, +107.5, +63.0, +101.5 — a spread of 57 s, against 3 s at `medium`.
+The standard deviation (±27) is a third of the mean. A number from this severity
+should be quoted as "tens of seconds, highly variable", not as a value.
+
+**`FULL_SCOPE − ROLLING` turns slightly negative** under `high` (−0.9 s, se 0.29,
+4 of 5 seeds negative). Unlimited scope is marginally *worse* than a 700 m window
+when the whole corridor is saturated. The effect is under a second and rests on
+five seeds; it is reported because it is what the runs show, not because it is
+established.
+
+### Integrity
+
+60 runs, all valid for headline use. 0 signal conflicts over 935,880 applied
+states across the three severities, 0 SUMO collisions, 0 ambulance teleports, one
+scenario hash per severity per seed with four distinct policy hashes, and the
+identical ambulance route in every run of every experiment. Background teleports
+rise with severity — 12 (`low`), 22 (`medium`), 35 (`high`) per 20 runs — and are
+reported separately; no teleported vehicle enters a travel-time metric.
+
+Source: `data/processed/silk_board_v1/counterfactual/CONGESTION_{LOW,MEDIUM,HIGH}_inc_*.json`.
 
 ---
 

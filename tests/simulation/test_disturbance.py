@@ -20,8 +20,10 @@ import pytest
 from ems_sim.disturbance.incident import (
     BLOCKED_CLASSES,
     DEFAULT_INCIDENT,
+    SEVERITY_SPEED_LIMIT_MS,
     IncidentConfig,
     IncidentController,
+    incident_at_severity,
 )
 
 
@@ -173,3 +175,48 @@ class TestCommittedDefault:
         """A queue has to exist before the ambulance arrives, or it builds around it."""
         assert DEFAULT_INCIDENT.start_time_s < 600.0
         assert DEFAULT_INCIDENT.end_time_s > 600.0 + 184.5
+
+
+class TestSeverityLadder:
+    """The CONGESTION_SEVERITY sweep must move one number and nothing else.
+
+    A partial obstruction's only effect is the lane's speed limit, so that number
+    is the obstruction's severity. If the sweep changed anything else — the edge,
+    the lane, the window, the blockage type — the experiment would no longer be
+    about queue severity.
+    """
+
+    def test_medium_is_the_committed_disturbance_itself(self) -> None:
+        """Not a re-creation of it: the same object, so the same scenario hash."""
+        assert incident_at_severity("medium") is DEFAULT_INCIDENT
+
+    @pytest.mark.parametrize("severity", sorted(SEVERITY_SPEED_LIMIT_MS))
+    def test_only_the_discharge_rate_differs(self, severity: str) -> None:
+        incident = incident_at_severity(severity)
+        for field in ("start_time_s", "duration_s", "edge_id", "lane_index", "blockage"):
+            assert getattr(incident, field) == getattr(DEFAULT_INCIDENT, field)
+        assert incident.speed_limit_ms == SEVERITY_SPEED_LIMIT_MS[severity]
+
+    def test_the_ladder_is_monotone_in_severity(self) -> None:
+        """Lower speed is a tighter obstruction, so the order must not be scrambled."""
+        low, medium, high = (
+            incident_at_severity(s).speed_limit_ms for s in ("low", "medium", "high")
+        )
+        assert low > medium > high
+
+    def test_each_severity_is_a_distinct_scenario(self) -> None:
+        """Different disturbances must not pair with each other."""
+        hashes = {s: incident_at_severity(s).config_hash() for s in SEVERITY_SPEED_LIMIT_MS}
+        assert len(set(hashes.values())) == len(hashes)
+
+    def test_severities_are_labelled_assumed_not_observed(self) -> None:
+        for severity in SEVERITY_SPEED_LIMIT_MS:
+            incident = incident_at_severity(severity)
+            assert incident.data_class == "SIMULATED_SCENARIO"
+            if severity != "medium":
+                assert "ASSUMED_SCENARIO_PARAMETER" in incident.selection_basis
+                assert "not observed" in incident.selection_basis.lower()
+
+    def test_an_unknown_severity_is_refused(self) -> None:
+        with pytest.raises(KeyError, match="Unknown severity"):
+            incident_at_severity("catastrophic")

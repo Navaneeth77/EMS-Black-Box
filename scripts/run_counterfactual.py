@@ -46,7 +46,10 @@ from ems_sim.counterfactual.runner import route_tls_for, run_policy  # noqa: E40
 from ems_sim.demand.ambulance import AMBULANCE_TRIPS, TWO_SIGNAL_AMBULANCE_TRIP  # noqa: E402
 from ems_sim.demand.config import DemandPeriod, make_config  # noqa: E402
 from ems_sim.demand.generator import generate_demand  # noqa: E402
-from ems_sim.disturbance.incident import DEFAULT_INCIDENT  # noqa: E402
+from ems_sim.disturbance.incident import (  # noqa: E402
+    SEVERITY_SPEED_LIMIT_MS,
+    incident_at_severity,
+)
 from ems_sim.network.study_area import get_study_area  # noqa: E402
 from ems_sim.policies.policies import POLICY_ORDER, make_policy  # noqa: E402
 from ems_sim.policies.tls_map import summarise_route_tls  # noqa: E402
@@ -196,6 +199,17 @@ def main() -> int:
         "directory differ. Used to re-run a frozen matrix under corrected code "
         "without overwriting the frozen results.",
     )
+    parser.add_argument(
+        "--disturbance-severity",
+        default="medium",
+        choices=sorted(SEVERITY_SPEED_LIMIT_MS),
+        help="CONGESTION_SEVERITY ONLY. How fast the obstructed lane discharges, "
+        "which is the only quantity a partial obstruction changes. 'medium' is the "
+        "committed disturbance unchanged, so it hashes identically to the published "
+        "matrix; 'low' and 'high' scale that one number by 4 and by 1/4. Requires "
+        "--incident, and changes the scenario hash, which is correct: a different "
+        "disturbance is a different scenario and must not pair with this one.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -238,7 +252,9 @@ def main() -> int:
     )
     from dataclasses import replace
 
-    incident = DEFAULT_INCIDENT if args.incident else None
+    if args.disturbance_severity != "medium" and not args.incident:
+        raise SystemExit("--disturbance-severity has nothing to scale without --incident.")
+    incident = incident_at_severity(args.disturbance_severity) if args.incident else None
     prefix = f"sens_{args.sensitivity_label}_" if sensitivity else ""
     if incident is not None:
         prefix = f"inc_{prefix}"

@@ -22,14 +22,22 @@ the model's inputs are listed below with their sources.
 Signal priority is worth very different amounts depending on whether the
 ambulance is already moving:
 
-- **Free-flowing approach:** ~12 s saved over a 185 s trip.
-- **With the modelled queue-producing disturbance:** tens of seconds, because the
+- **Free-flowing approach:** ~12 s saved over a ~185 s trip.
+- **With the modelled queue-producing obstruction:** ~65–80 s, because the
   ambulance is stopped in a queue that priority can discharge.
 
 Quoting the larger number alone would describe a scenario the smaller one
 contradicts. The honest statement is that priority buys little when the corridor
 is clear and much more when it is not — which is also the least surprising
 possible finding, and the one the design can actually support.
+
+**The same condition governs the differences between the policies.** In free flow
+the three EMS policies are indistinguishable from each other: the undisturbed
+ambulance makes exactly one signal stop, all three remove it, and the contrasts
+between them sit inside the seed-to-seed noise. Any statement that a wider
+look-ahead window is worth a particular number of seconds is a statement about
+the congested scenario and must carry that condition. See
+[`RESULTS.md`](RESULTS.md) §3.
 
 ## 3. One network, one junction pair, one trip, five seeds
 
@@ -64,13 +72,24 @@ that sensitivity, and every report labels it `DIAGNOSTIC_ONLY`.
 ## 5. The signal programs are not the real ones
 
 netconvert generated them from OSM geometry. Nobody has the Bengaluru Traffic
-Police's actual timings for these junctions. The one sourced figure is the
-**450 s cycle length** at Central Silk Board (IJIRSET 2017), which the
-HISTORICAL_DEMO four-way uses; its phase splits, amber, all-red and phase order
-are `ESTIMATED` because no published source gives them.
+Police's actual timings for these junctions.
+
+The one sourced figure is the **450 s existing cycle length** at Central Silk
+Board (IJIRSET 2017, p. 10540, verified against the PDF). It is used by the
+HISTORICAL_DEMO four-way and by nothing else; its phase splits, amber, all-red
+and phase order are `ESTIMATED` because no published source gives them.
+
+**No result in this repository is a test of historically sourced signal timing.**
+A 450 s counterfactual was examined and rejected: the source publishes a cycle
+length and no phase information at all, and the junction it describes is one the
+research ambulance never passes — its route's two signals are 510 m and 1,011 m
+away, on different roads. Running it would have required inventing every phase
+split and transplanting one junction's cycle onto two others.
+[`METHOD.md`](METHOD.md) §3 gives the full reasoning.
 
 A priority policy's value depends on the plan it is preempting. These are
-plausible plans, not the installed ones.
+plausible plans, not the installed ones — and how much a plan can be improved by
+preemption is a property of that plan.
 
 ## 6. What the demand is, and is not
 
@@ -100,6 +119,20 @@ not drive the distance it is credited with, so its travel time is excluded from
 travel-time metrics — but the teleport count and rate are reported per arm, and a
 run whose **ambulance** teleported is invalid for headline use. Teleport rates in
 the reported matrix are 0–4 vehicles per 3,226.
+
+## 8a. The congestion sweep is three points on one mechanism
+
+The severity sweep varies one number — how fast the obstructed lane discharges —
+on one obstruction, on one lane, of one edge, at one time of day. It establishes
+whether the benefit depends on queue severity *within that mechanism*. It does
+not cover a different kind of disturbance (a full closure, an incident elsewhere
+on the route, an incident on a cross approach, several at once), a different
+demand level, or an obstruction the ambulance meets at a different point in its
+trip. Three severities over five seeds is enough to see a trend and not enough to
+fit one.
+
+The severities themselves are `ASSUMED`. Nothing observed says an obstruction at
+Silk Board discharges at 2.4, 0.6 or 0.15 m/s.
 
 ## 9. The 3D replay is a renderer, and the demo is not the research
 

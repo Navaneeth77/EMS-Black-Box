@@ -619,7 +619,10 @@ def main() -> int:
         print(f"  {name:14} {len(subset):>4} checks, {len(failed)} FAIL{detail}")
     print(f"  vehicle samples scanned: {summary['totals']['vehicle_samples_scanned']}")
     print(f"\n  RESULT: {'PASS' if summary['passed'] else 'FAIL'}  ({failures} failures)")
-    print(f"  wrote {out.relative_to(REPO_ROOT)}")
+    # --out may legitimately point outside the repository — writing a report to a
+    # scratch path is how this is run without touching the committed one.
+    shown = out.relative_to(REPO_ROOT) if out.is_relative_to(REPO_ROOT) else out
+    print(f"  wrote {shown}")
     return 0 if summary["passed"] else 1
 
 

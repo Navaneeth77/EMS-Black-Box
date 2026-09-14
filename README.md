@@ -32,8 +32,13 @@ Three things, each cited, none of them a trajectory:
 | Observed | Value | Source |
 |---|---|---|
 | Peak-hour junction volume | 22,634 vehicles / 18,180 PCU | Comprehensive Mobility Plan for Bengaluru (Draft, Oct 2019), Table 2-13, citing a Dec 2014 – Apr 2015 survey |
-| Car share of vehicles | 53% | IJIRSET, June 2017 |
-| Signal cycle length | 450 s | IJIRSET, June 2017 |
+| Car share of vehicles | 53% | IJIRSET, June 2017, p. 10540 |
+| Existing signal cycle length | 450 s | IJIRSET, June 2017, p. 10540 |
+
+The 450 s cycle is **verified and used only by the HISTORICAL_DEMO replay, not by
+the counterfactual experiment**: the source publishes a cycle length and no phase
+splits at all, and it describes a junction the research ambulance does not pass
+through. [`docs/METHOD.md`](docs/METHOD.md) §3 gives the reasoning.
 
 The road network is **publicly sourced**: an OpenStreetMap extract (© OpenStreetMap
 contributors, ODbL 1.0), converted with `netconvert`.
@@ -66,10 +71,21 @@ unrealistic upper bound that holds every signal for the whole trip
 ## 5. Current result
 
 **Signal priority is worth little when the ambulance is already moving, and
-substantially more when congestion has put a queue in front of it.** In the
-free-flowing scenario it recovers about 12 s of a ~185 s trip; with the modelled
-queue-producing disturbance it recovers tens of seconds, because there is a queue
-for it to discharge.
+substantially more when congestion has put a queue in front of it.** Across four
+congestion levels, five seeds each:
+
+| Congestion | NORMAL trip | Best policy saves |
+|---|---:|---:|
+| None | 184.5 s | ~12 s |
+| Modelled obstruction, `low` | 191.2 s | ~12 s |
+| Modelled obstruction, `medium` | 284.0 s | ~80 s |
+| Modelled obstruction, `high` | 520.7 s | ~87 s, highly variable |
+
+The **~12 s is the baseline**; the 65–80 s figures belong to one particular
+modelled obstruction and are not a baseline EMS benefit. The advantage of a wider
+look-ahead window over preempting only the next signal exists at **one** of the
+four levels tested (+14 s at `medium`) and is indistinguishable from zero at the
+other three — it is a property of a congestion band, not of the policy.
 
 The network-wide delay figures are **not** a cost of priority, and are labelled
 `DIAGNOSTIC_ONLY`: two ambulance-free controls and a corrected paired-cohort
@@ -138,6 +154,7 @@ ems-black-box/
 | How the question is asked and what each number may mean | [`docs/METHOD.md`](docs/METHOD.md) |
 | The numbers, and what the audit changed | [`docs/RESULTS.md`](docs/RESULTS.md) |
 | What this cannot support | [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) |
+| What has been run, what passed, what was not run | [`docs/VALIDATION.md`](docs/VALIDATION.md) |
 | The 3D replay of observed-demand traffic | [`docs/HISTORICAL_DEMO.md`](docs/HISTORICAL_DEMO.md) |
 | Why there is no LICENSE yet | [`docs/LICENSING.md`](docs/LICENSING.md) |
 | Every review cycle and defect found | [`docs/archive/COUNCIL_LOG.md`](docs/archive/COUNCIL_LOG.md) |

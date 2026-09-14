@@ -176,6 +176,68 @@ DEFAULT_INCIDENT = IncidentConfig(
 )
 
 
+#: Severity ladder for the CONGESTION_SEVERITY experiment, in metres per second.
+#:
+#: A partial obstruction is applied by dropping the lane's speed limit and
+#: nothing else — ``_apply`` only calls ``setDisallowed`` for a full closure — so
+#: this single number *is* the obstruction's severity: it sets how fast the
+#: affected lane discharges, and therefore how long a queue stands behind it.
+#: Scaling it is the most transparent severity sweep available, because the
+#: mechanism, the edge, the lane, the start time and the duration are all
+#: unchanged and only the discharge rate moves.
+#:
+#: The ladder is geometric about the frozen value: x4, x1, /4. ``medium`` is
+#: :data:`DEFAULT_INCIDENT` exactly — same fields, same ``config_hash`` — so the
+#: middle rung of the sweep is the disturbance the published matrix used rather
+#: than a re-creation of it.
+#:
+#: ASSUMED. No obstruction at Silk Board was observed, measured or reported.
+#: These are configuration values chosen to span a range of queue severities,
+#: fixed before the runs and without reference to their effect on the ambulance.
+SEVERITY_SPEED_LIMIT_MS: dict[str, float] = {
+    "low": 2.4,
+    "medium": 0.6,
+    "high": 0.15,
+}
+
+SEVERITY_BASIS = (
+    "ASSUMED_SCENARIO_PARAMETER. The obstructed lane's speed limit, which is the "
+    "only quantity a partial obstruction changes and therefore the rate at which "
+    "the lane discharges. Scaled x4 / x1 / /4 about the value the published "
+    "matrix used; 'medium' is that configuration unchanged. Not observed, not "
+    "derived from any report of a real obstruction, and not tuned on any result."
+)
+
+
+def incident_at_severity(severity: str) -> IncidentConfig:
+    """:data:`DEFAULT_INCIDENT` with only its discharge rate changed.
+
+    ``medium`` returns the default itself, so the middle of the sweep and the
+    frozen matrix share a ``config_hash`` and a scenario identity rather than
+    merely resembling each other.
+    """
+    from dataclasses import replace
+
+    try:
+        speed = SEVERITY_SPEED_LIMIT_MS[severity]
+    except KeyError:
+        known = ", ".join(sorted(SEVERITY_SPEED_LIMIT_MS))
+        raise KeyError(f"Unknown severity {severity!r}. Known: {known}") from None
+    if speed == DEFAULT_INCIDENT.speed_limit_ms:
+        return DEFAULT_INCIDENT
+    return replace(
+        DEFAULT_INCIDENT,
+        incident_id=f"{DEFAULT_INCIDENT.incident_id}_severity_{severity}",
+        speed_limit_ms=speed,
+        description=(
+            f"{DEFAULT_INCIDENT.description} Severity '{severity}': the obstructed "
+            f"lane discharges at {speed} m/s instead of "
+            f"{DEFAULT_INCIDENT.speed_limit_ms} m/s."
+        ),
+        selection_basis=f"{DEFAULT_INCIDENT.selection_basis} {SEVERITY_BASIS}",
+    )
+
+
 class IncidentController:
     """Applies and clears one incident during a TraCI run.
 

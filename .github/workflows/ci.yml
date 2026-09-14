@@ -38,8 +38,8 @@ jobs:
           pip install -e ".[dev]"
       - name: Lint
         # `ruff check` only. The repository is not ruff-formatted and adding the
-        # formatter now would rewrite 17 files for no behavioural reason; the
-        # lint rules it does enforce are in pyproject.toml.
+        # formatter now would rewrite a large fraction of the tree for no behavioural
+        # reason; the lint rules it does enforce are in pyproject.toml.
         run: ruff check .
       - name: Tests
         run: pytest -m "not sumo" -q

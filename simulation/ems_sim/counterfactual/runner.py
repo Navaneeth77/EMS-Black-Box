@@ -22,6 +22,7 @@ import contextlib
 import os
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -272,6 +273,22 @@ def _traffic_ahead(
     }
 
 
+def stop_line_positions(
+    route_tls: list[RouteTls], lane_length: Callable[[str], float]
+) -> dict[str, float]:
+    """Position of each encounter's stop line along its own approach edge.
+
+    Keyed by **encounter**, never by ``tls_id``. A route that meets one signal
+    twice approaches it on two different edges, and those edges have different
+    lengths; a ``tls_id``-keyed mapping kept only whichever came last, so one
+    encounter was then measured against a position that does not exist on the
+    edge being measured. TraCI answers that with "Position on lane invalid",
+    which the caller suppresses — and the encounter vanished from the halt
+    record rather than reporting a wrong number loudly.
+    """
+    return {entry.key: lane_length(f"{entry.approach_edge}_0") for entry in route_tls}
+
+
 def run_policy(
     options: SumoRunOptions,
     policy: BasePolicy,
@@ -370,9 +387,8 @@ def run_policy(
         # Deliberately kept separate from ``observation.distance_to_tls_m``, which
         # the policies consume: changing what the policies see would change their
         # activation timing and make these runs incomparable with Phase 5's.
-        stop_line_pos = {
-            entry.tls_id: traci.lane.getLength(f"{entry.approach_edge}_0") for entry in route_tls
-        }
+        #
+        stop_line_pos = stop_line_positions(route_tls, traci.lane.getLength)
 
         # Lanes to watch per signal, for the queue in front of it. The claim a
         # priority policy makes is that the queue discharges; measuring it means
@@ -483,11 +499,7 @@ def run_policy(
                         # policies are calibrated on that, so it stays the default. A
                         # demo can ask for the stop line instead: that is where the
                         # queue ends, and where an approaching driver judges from.
-                        target = (
-                            stop_line_pos[entry.tls_id]
-                            if measure_distance_to_stop_line
-                            else 0.0
-                        )
+                        target = stop_line_pos[entry.key] if measure_distance_to_stop_line else 0.0
                         distance = traci.vehicle.getDrivingDistance(
                             ambulance_id, entry.approach_edge, target
                         )
@@ -505,19 +517,24 @@ def run_policy(
                     halted = (observation.speed_ms or 0.0) < 0.1
                     if halted and not was_halted:
                         stop_count += 1
+                        # Keyed by encounter: one signal can be met twice on a
+                        # route, at two approaches, and the two are different
+                        # events with different distances.
                         near = {}
                         own_signal: dict[str, list[int]] = {}
+                        near_entries: dict[str, RouteTls] = {}
                         for entry in route_tls:
                             to_stop_line = -1.0
                             with contextlib.suppress(traci.TraCIException):
                                 to_stop_line = traci.vehicle.getDrivingDistance(
                                     ambulance_id,
                                     entry.approach_edge,
-                                    stop_line_pos[entry.tls_id],
+                                    stop_line_pos[entry.key],
                                 )
                             if 0 <= to_stop_line <= 60.0:
-                                near[entry.tls_id] = round(to_stop_line, 1)
-                                own_signal[entry.tls_id] = entry.ambulance_links
+                                near[entry.key] = round(to_stop_line, 1)
+                                own_signal[entry.key] = entry.ambulance_links
+                                near_entries[entry.key] = entry
                         queue_ahead = None
                         if record_queue_ahead:
                             # Everything between the ambulance and the next signal on
@@ -557,15 +574,18 @@ def run_policy(
                         # demo is about, and it happens nowhere near the stop line.
                         if near or queue_ahead is not None:
                             states = {
-                                tls_id: traci.trafficlight.getRedYellowGreenState(tls_id)
-                                for tls_id in near
+                                key: traci.trafficlight.getRedYellowGreenState(
+                                    near_entries[key].tls_id
+                                )
+                                for key in near
                             }
                             own_movement = {}
-                            for tls_id, links in own_signal.items():
-                                chars = [
-                                    states[tls_id][i] for i in links if i < len(states[tls_id])
-                                ]
-                                own_movement[tls_id] = {
+                            for key, links in own_signal.items():
+                                chars = [states[key][i] for i in links if i < len(states[key])]
+                                own_movement[key] = {
+                                    "tls_id": near_entries[key].tls_id,
+                                    "route_index": near_entries[key].route_index,
+                                    "approach_edge": near_entries[key].approach_edge,
                                     "link_indices": links,
                                     "link_states": "".join(chars),
                                     "red": bool(chars) and all(c in "rR" for c in chars),
@@ -585,7 +605,10 @@ def run_policy(
                             event = {
                                 "sim_time_s": now,
                                 "edge_id": observation.edge_id,
-                                "tls_ids_within_60m": sorted(near),
+                                "tls_ids_within_60m": sorted(
+                                    {e.tls_id for e in near_entries.values()}
+                                ),
+                                "encounters_within_60m": sorted(near),
                                 "distance_to_stop_line_m": near,
                                 "lane_position_m": observation.lane_position_m,
                                 "tls_states": states,

@@ -29,6 +29,48 @@ policy_hash     different   between arms   ← proves something did
 A pair that matches on both is two copies of one run; a pair that differs on the
 first is two different scenarios. Both are refused.
 
+### The experiments, and what each one isolates
+
+Every matrix below is 5 seeds × the policies, on one network, one demand, one
+ambulance route. They differ only in the disturbance, and each has its own result
+namespace so none can overwrite another.
+
+| Namespace | Disturbance | Isolates |
+|---|---|---|
+| `two_signal_*` | none | the free-flow baseline, as first published |
+| `NO_INCIDENT_CONTROL_*` | none | the same, re-run under the corrected code |
+| `corrected_inc_two_signal_*` | the committed obstruction | the published incident matrix, corrected |
+| `CONGESTION_LOW/MEDIUM/HIGH_*` | that obstruction at three discharge rates | whether the benefit depends on queue severity |
+
+`CONGESTION_MEDIUM` **is** the committed obstruction — same fields, same
+`config_hash` — so the middle rung of the sweep and the published matrix are the
+same scenario rather than two similar ones.
+
+### The disturbance, and the one number that scales it
+
+The disturbance is a partial lane obstruction: for its window, the trafficked
+lane of one approach has its speed limit dropped and nothing else is touched. No
+vehicle is placed, stopped, rerouted or re-timed, so every queue behind it is
+produced by SUMO's own car-following and lane-change models.
+
+Because a partial obstruction's *only* effect is that speed limit, that number is
+the obstruction's severity: it sets how fast the lane discharges and therefore
+how long a queue stands behind it. The severity sweep scales it and nothing else
+— same edge, same lane, same start time, same duration, same blockage type:
+
+| Severity | Obstructed lane discharges at | Relative to the committed value |
+|---|---:|---|
+| `low` | 2.4 m/s | ×4 |
+| `medium` | 0.6 m/s | the committed obstruction itself |
+| `high` | 0.15 m/s | ÷4 |
+
+`ASSUMED`. No obstruction at Silk Board was observed, measured or reported. These
+are configuration values chosen to span a range of queue severities, fixed before
+the runs and without reference to their effect on the ambulance. Each severity
+has a different `config_hash` and therefore a different `scenario_hash`, so two
+severities cannot be paired with each other — which is correct: a different
+disturbance is a different scenario.
+
 ## 2. SUMO is the only source of truth
 
 The simulator decides what happened. Nothing downstream may invent, smooth or
@@ -63,6 +105,34 @@ Every value in this project carries one of four labels, and they are never mixed
 **No ambulance GPS trace was available**, and none is simulated as if it were.
 The ambulance's origin, destination and departure are configuration choices,
 labelled as such wherever they appear.
+
+### The one sourced signal timing, and why it is not in the counterfactual
+
+> **HISTORICAL SOURCE VERIFIED — NOT USED IN THE COUNTERFACTUAL EXPERIMENT.**
+
+A 450 s existing cycle length at Silk Board Intersection is `OBSERVED`: Vani A,
+Madhu Singh and Prem Swaroup Reddy M, *IJIRSET* 6(6), June 2017, DOI
+10.15680/IJIRSET.2017.0606056, printed page 10540, verified against the PDF
+verbatim — "Existing cycle length-450sec Proposed cycle length-270 sec".
+
+It is used by the HISTORICAL_DEMO four-way controller and by nothing else. It was
+examined as the basis for a signal-timing counterfactual and **rejected**, for
+two reasons that are properties of the source rather than of this project:
+
+1. **No phase information exists.** The paper gives a total cycle length and no
+   phase splits, sequence, amber or all-red — it says the phasing was collected
+   and publishes none of it. `observed_counts.json` lists "signal phase sequence
+   and green times at Silk Board" under `not_reported_in_any_accessible_source`.
+   Building a 450 s program would mean inventing every split.
+2. **It applies to a junction the research ambulance never passes.** The 450 s
+   figure is for Central Silk Board Junction (12.9172 N, 77.6228 E), which the
+   network holds as four approach signals. The ambulance route's two signals are
+   510 m and 1,011 m away, on different roads. Transplanting one junction's cycle
+   onto two others is an assumption the source does not support.
+
+The demo's 450 s program therefore carries an `OBSERVED` cycle length with
+`ESTIMATED` splits, amber, all-red and phase order, and says so; and no result in
+`RESULTS.md` is a test of historically sourced signal timing.
 
 ## 4. The measurement rules
 
