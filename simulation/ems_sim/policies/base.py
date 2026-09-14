@@ -173,6 +173,8 @@ class BasePolicy:
         # Audit records waiting for the next step to say what the signal did.
         self._pending: list[tuple[str, StateTransition | SignalChange]] = []
         self._fallback_used: dict[str, bool] = {}
+        # Survives a junction interior, where SUMO reports no route index.
+        self._last_route_index: int | None = None
 
     # --- lifecycle --------------------------------------------------------
 
@@ -264,12 +266,26 @@ class BasePolicy:
         ambulance": once it has passed, holding the signal only costs cross
         traffic. A policy with no ambulance — the fixed-schedule control —
         overrides this with its own notion of relevance.
+
+        **The last known route index is kept while the ambulance is inside a
+        junction**, where SUMO reports no route index at all. Reading that gap as
+        "the ambulance is no longer on the route" makes the policy release every
+        signal for a step or two and then ask again — and a release is not free:
+        the green it was holding expires, and the ambulance that was about to
+        cross the junction arrives at a signal that has moved on. It is worth
+        tens of seconds. The ambulance being *in* a junction is the last moment
+        to conclude it has passed the one ahead.
         """
-        return (
-            ambulance.present
-            and ambulance.route_index is not None
-            and entry.route_index >= ambulance.route_index
+        if not ambulance.present:
+            return False
+        if ambulance.route_index is not None:
+            self._last_route_index = ambulance.route_index
+        index = (
+            ambulance.route_index
+            if ambulance.route_index is not None
+            else self._last_route_index
         )
+        return index is not None and entry.route_index >= index
 
     # --- the state machine ------------------------------------------------
 
@@ -383,15 +399,26 @@ class BasePolicy:
                 traci_module,
             )
 
-        if control.state is PolicyState.RESTORING and self._program_in_charge(entry, traci_module):
-            self._transition(
-                entry,
-                PolicyState.NORMAL,
-                "signal has moved on under its own program",
-                now,
-                ambulance,
-                traci_module,
-            )
+        if control.state is PolicyState.RESTORING:
+            if relevant:
+                self._transition(
+                    entry,
+                    PolicyState.DETECTED,
+                    "the ambulance is approaching this signal again before it "
+                    "finished handing itself back",
+                    now,
+                    ambulance,
+                    traci_module,
+                )
+            elif self._program_in_charge(entry, traci_module):
+                self._transition(
+                    entry,
+                    PolicyState.NORMAL,
+                    "signal has moved on under its own program",
+                    now,
+                    ambulance,
+                    traci_module,
+                )
 
     def _transition(
         self,

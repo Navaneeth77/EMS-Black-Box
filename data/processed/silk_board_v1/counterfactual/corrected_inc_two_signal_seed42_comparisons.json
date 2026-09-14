@@ -1,10 +1,10 @@
 {
   "reproducibility": {
-    "generated_at": "2026-09-13T23:03:13Z",
+    "generated_at": "2026-09-14T00:04:37Z",
     "sumo_version": "1.27.1",
     "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
     "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
-    "scenario_hash": "ff9fa74f5992d70d",
+    "scenario_hash": "55322b7829193ee8",
     "scenario": {
       "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
       "demand_config_hash": "45b0cc1f7c874c5e",
@@ -38,7 +38,85 @@
         "1196514116#0"
       ],
       "scenario_variant": "include_unresolved",
-      "scenario_hash": "ff9fa74f5992d70d"
+      "disturbance": [
+        [
+          "blockage",
+          "partial_obstruction"
+        ],
+        [
+          "config_hash",
+          "3c43dded423b95d7"
+        ],
+        [
+          "data_class",
+          "SIMULATED_SCENARIO"
+        ],
+        [
+          "description",
+          "The trafficked lane of the approach to the GS_cluster traffic light is partially obstructed and drops to a crawl, at the stop line where the ambulance's delay is attributed. The lane stays open so the route is not severed."
+        ],
+        [
+          "duration_s",
+          420.0
+        ],
+        [
+          "edge_id",
+          "1393474724#1"
+        ],
+        [
+          "end_time_s",
+          980.0
+        ],
+        [
+          "incident_id",
+          "silk_board_lane_block_v1"
+        ],
+        [
+          "incident_type",
+          "LANE_BLOCKAGE"
+        ],
+        [
+          "lane_id",
+          "1393474724#1_1"
+        ],
+        [
+          "lane_index",
+          1
+        ],
+        [
+          "provenance",
+          "SIMULATED_SCENARIO. A hypothetical incident declared by this project to study traffic under disturbance. It is not a record of any real incident at Silk Board, and no incident report, traffic bulletin or observation was used. Its location and timing are configuration."
+        ],
+        [
+          "seed",
+          null
+        ],
+        [
+          "selection_basis",
+          "Edge: the approach of the actionable traffic light on the ambulance route. Lane: the one that carries the traffic - measured, because lane 0 on this approach carries no vehicles at all and blocking it did nothing. Blockage type: partial, because closing the only used lane risks severing the route. Every one of these was decided on flow and connectivity, not on any effect on ambulance travel time."
+        ],
+        [
+          "speed_limit_ms",
+          0.6
+        ],
+        [
+          "start_time_s",
+          560.0
+        ]
+      ],
+      "scenario_hash": "55322b7829193ee8",
+      "component_hashes": {
+        "network_hash": "2c23d6f96c30bf22",
+        "demand_hash": "4b84a117adebfaa5",
+        "route_hash": "579bd5644ba2ef7b",
+        "ambulance_hash": "cf9fa194eb6c8899",
+        "disturbance_hash": "5b572427d741d747",
+        "window_hash": "8f09896252825388"
+      }
+    },
+    "policy_hashes": {
+      "NORMAL": "cf3dc221cb2e029d",
+      "EMS_ROLLING": "085593b429652b11"
     },
     "demand_config": {
       "demand_id": "cf_inc_silk_board_v1_two_signal_seed42",
@@ -185,7 +263,7 @@
       "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
       "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
     },
-    "wall_clock_total_s": 626.8,
+    "wall_clock_total_s": 253.7,
     "sensitivity": null,
     "incident": {
       "incident_id": "silk_board_lane_block_v1",
@@ -207,245 +285,6 @@
     }
   },
   "comparisons": {
-    "EMS_NEXT": {
-      "seed": 42,
-      "baseline_policy": "NORMAL",
-      "counterfactual_policy": "EMS_NEXT",
-      "both_runs_valid_for_headline": true,
-      "validity": {
-        "normal": {
-          "valid": true,
-          "reason": "valid"
-        },
-        "policy": {
-          "valid": true,
-          "reason": "valid"
-        }
-      },
-      "ambulance": {
-        "travel_time": {
-          "normal": 282.5,
-          "policy": 236.0,
-          "absolute": -46.5,
-          "percent": -16.46
-        },
-        "waiting_time": {
-          "normal": 53.5,
-          "policy": 13.5,
-          "absolute": -40.0,
-          "percent": -74.766
-        },
-        "time_loss": {
-          "normal": 96.43,
-          "policy": 49.73,
-          "absolute": -46.7,
-          "percent": -48.429
-        },
-        "stops": {
-          "normal": 2.0,
-          "policy": 1.0,
-          "absolute": -1.0,
-          "percent": -50.0
-        }
-      },
-      "ambulance_time_saved_s": 46.5,
-      "cohort": {
-        "normal": {
-          "departed_count": 3224,
-          "completed_count": 2891,
-          "completed_not_teleported_count": 2890,
-          "unfinished_count": 333,
-          "teleport_count": 1,
-          "teleport_rate": 0.00031,
-          "never_departed_count": 0,
-          "censored_time_loss_s": 119859.82,
-          "censored_waiting_time_s": 17978.0,
-          "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
-          "ambulance_excluded": "ambulance_two_signal"
-        },
-        "policy": {
-          "departed_count": 3224,
-          "completed_count": 2942,
-          "completed_not_teleported_count": 2942,
-          "unfinished_count": 282,
-          "teleport_count": 0,
-          "teleport_rate": 0.0,
-          "never_departed_count": 0,
-          "censored_time_loss_s": 75201.05,
-          "censored_waiting_time_s": 12619.5,
-          "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
-          "ambulance_excluded": "ambulance_two_signal"
-        },
-        "paired": {
-          "paired_count": 2871,
-          "departed_in_both": 3224,
-          "departed_only_in_normal": 0,
-          "departed_only_in_policy": 0,
-          "completed_only_in_normal": 19,
-          "completed_only_in_policy": 71,
-          "normal": {
-            "vehicle_count": 2871,
-            "total_travel_time_s": 779209.5,
-            "total_waiting_time_s": 181605.0,
-            "total_time_loss_s": 270550.42,
-            "mean_travel_time_s": 271.407,
-            "mean_waiting_time_s": 63.255,
-            "mean_time_loss_s": 94.236
-          },
-          "policy": {
-            "vehicle_count": 2871,
-            "total_travel_time_s": 694281.0,
-            "total_waiting_time_s": 108560.5,
-            "total_time_loss_s": 185597.72,
-            "mean_travel_time_s": 241.825,
-            "mean_waiting_time_s": 37.813,
-            "mean_time_loss_s": 64.646
-          },
-          "deltas": {
-            "total_time_loss_s": {
-              "normal": 270550.42,
-              "policy": 185597.72,
-              "absolute": -84952.7,
-              "percent": -31.4
-            },
-            "mean_time_loss_s": {
-              "normal": 94.236,
-              "policy": 64.646,
-              "absolute": -29.59,
-              "percent": -31.4
-            },
-            "total_waiting_time_s": {
-              "normal": 181605.0,
-              "policy": 108560.5,
-              "absolute": -73044.5,
-              "percent": -40.222
-            },
-            "mean_waiting_time_s": {
-              "normal": 63.255,
-              "policy": 37.813,
-              "absolute": -25.442,
-              "percent": -40.221
-            }
-          },
-          "note": "The same vehicles in both arms, each completing its route without a teleport in either. Vehicles that finished in only one arm are excluded and counted above; a policy that finishes fewer vehicles has not made the network faster."
-        },
-        "note": "The counts come first because the metric below depends on them: `traffic` sums over each arm's own completers, which are different vehicles, and `paired` sums over the vehicles both arms finished.",
-        "unfinished_delta_policy_minus_normal": -51
-      },
-      "ambulance_improvement_percent": 16.46,
-      "traffic": {
-        "excluding_ambulance": {
-          "normal": {
-            "vehicle_count": 2890,
-            "total_travel_time_s": 791308.5,
-            "total_waiting_time_s": 188575.0,
-            "total_time_loss_s": 280178.12,
-            "mean_travel_time_s": 273.809,
-            "mean_waiting_time_s": 65.251,
-            "mean_time_loss_s": 96.947
-          },
-          "policy": {
-            "vehicle_count": 2942,
-            "total_travel_time_s": 732444.0,
-            "total_waiting_time_s": 130164.0,
-            "total_time_loss_s": 214822.01,
-            "mean_travel_time_s": 248.961,
-            "mean_waiting_time_s": 44.243,
-            "mean_time_loss_s": 73.019
-          },
-          "deltas": {
-            "vehicles_completed": {
-              "normal": 2890.0,
-              "policy": 2942.0,
-              "absolute": 52.0,
-              "percent": 1.799
-            },
-            "total_time_loss_s": {
-              "normal": 280178.12,
-              "policy": 214822.01,
-              "absolute": -65356.11,
-              "percent": -23.327
-            },
-            "total_waiting_time_s": {
-              "normal": 188575.0,
-              "policy": 130164.0,
-              "absolute": -58411.0,
-              "percent": -30.975
-            },
-            "mean_time_loss_s": {
-              "normal": 96.947,
-              "policy": 73.019,
-              "absolute": -23.928,
-              "percent": -24.682
-            }
-          }
-        },
-        "including_ambulance": {
-          "normal": {
-            "vehicle_count": 2891,
-            "total_travel_time_s": 791591.0,
-            "total_waiting_time_s": 188628.5,
-            "total_time_loss_s": 280274.55,
-            "mean_travel_time_s": 273.812,
-            "mean_waiting_time_s": 65.247,
-            "mean_time_loss_s": 96.947
-          },
-          "policy": {
-            "vehicle_count": 2943,
-            "total_travel_time_s": 732680.0,
-            "total_waiting_time_s": 130177.5,
-            "total_time_loss_s": 214871.74,
-            "mean_travel_time_s": 248.957,
-            "mean_waiting_time_s": 44.233,
-            "mean_time_loss_s": 73.011
-          },
-          "deltas": {
-            "vehicles_completed": {
-              "normal": 2891.0,
-              "policy": 2943.0,
-              "absolute": 52.0,
-              "percent": 1.799
-            },
-            "total_time_loss_s": {
-              "normal": 280274.55,
-              "policy": 214871.74,
-              "absolute": -65402.81,
-              "percent": -23.335
-            },
-            "total_waiting_time_s": {
-              "normal": 188628.5,
-              "policy": 130177.5,
-              "absolute": -58451.0,
-              "percent": -30.987
-            },
-            "mean_time_loss_s": {
-              "normal": 96.947,
-              "policy": 73.011,
-              "absolute": -23.936,
-              "percent": -24.69
-            }
-          }
-        }
-      },
-      "traffic_delay_cost_s": -65356.11,
-      "traffic_metric_status": "DIAGNOSTIC_ONLY",
-      "traffic_metric_cohort": "Each arm's own completers, excluding teleported trips. These are DIFFERENT VEHICLES in the two arms. Use comparison['cohort']['paired'] for the same-vehicles view.",
-      "traffic_metric_warning": "NOT a cost or benefit of signal priority, and must not be reported as one. Two controls (Phase 5a replay, Phase 5b fixed schedule) reproduced traffic-side changes of this size and sign with NO ambulance in the network at all \u2014 in Phase 5b, 24.5-72.0 s of signal holding moved total time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by the chaotic response of netconvert's unoptimised fixed-time plans to being perturbed, not by the ambulance. Retained as a diagnostic of that sensitivity. See docs/FINAL_RND_REPORT.md section 18.",
-      "net_system_impact_s": -65402.61,
-      "net_system_impact_status": "DIAGNOSTIC_ONLY",
-      "net_system_impact_note": "DIAGNOSTIC ONLY \u2014 inherits the traffic term above, which the controls showed is not attributable to the ambulance. Do not quote as a net benefit or cost of priority. Traffic-side time loss added, minus ambulance time saved, in vehicle-seconds. Positive means the network as a whole lost more than the ambulance gained. This weights one ambulance-second the same as one car-second, which is a modelling choice, not a policy judgement: whether an ambulance second is worth more is a question this project cannot answer.",
-      "route_unchanged": true,
-      "teleports": {
-        "normal": 1,
-        "policy": 0
-      },
-      "signal_conflicts": {
-        "normal": 0,
-        "policy": 0
-      },
-      "data_class": "SIMULATED_DATA",
-      "interpretation": "Simulated result. Under this simulation scenario, with estimated demand, estimated vehicle behaviour and netconvert-generated signal programs, this policy changed simulated ambulance travel time by the stated amount relative to its paired NORMAL run. It is not a measurement of any real ambulance journey in Bengaluru."
-    },
     "EMS_ROLLING": {
       "seed": 42,
       "baseline_policy": "NORMAL",
@@ -464,30 +303,30 @@
       "ambulance": {
         "travel_time": {
           "normal": 282.5,
-          "policy": 254.5,
-          "absolute": -28.0,
-          "percent": -9.912
+          "policy": 204.5,
+          "absolute": -78.0,
+          "percent": -27.611
         },
         "waiting_time": {
           "normal": 53.5,
-          "policy": 39.5,
-          "absolute": -14.0,
-          "percent": -26.168
+          "policy": 0.0,
+          "absolute": -53.5,
+          "percent": -100.0
         },
         "time_loss": {
           "normal": 96.43,
-          "policy": 68.86,
-          "absolute": -27.57,
-          "percent": -28.591
+          "policy": 18.62,
+          "absolute": -77.81,
+          "percent": -80.691
         },
         "stops": {
           "normal": 2.0,
-          "policy": 2.0,
-          "absolute": 0.0,
-          "percent": 0.0
+          "policy": 0.0,
+          "absolute": -2.0,
+          "percent": -100.0
         }
       },
-      "ambulance_time_saved_s": 28.0,
+      "ambulance_time_saved_s": 78.0,
       "cohort": {
         "normal": {
           "departed_count": 3224,
@@ -504,552 +343,74 @@
         },
         "policy": {
           "departed_count": 3224,
-          "completed_count": 2899,
-          "completed_not_teleported_count": 2898,
-          "unfinished_count": 325,
-          "teleport_count": 3,
-          "teleport_rate": 0.000931,
+          "completed_count": 2908,
+          "completed_not_teleported_count": 2907,
+          "unfinished_count": 316,
+          "teleport_count": 1,
+          "teleport_rate": 0.00031,
           "never_departed_count": 0,
-          "censored_time_loss_s": 123338.25,
-          "censored_waiting_time_s": 16454.5,
+          "censored_time_loss_s": 113995.56,
+          "censored_waiting_time_s": 13577.5,
           "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
           "ambulance_excluded": "ambulance_two_signal"
         },
         "paired": {
-          "paired_count": 2863,
+          "paired_count": 2869,
           "departed_in_both": 3224,
           "departed_only_in_normal": 0,
           "departed_only_in_policy": 0,
-          "completed_only_in_normal": 27,
-          "completed_only_in_policy": 35,
+          "completed_only_in_normal": 21,
+          "completed_only_in_policy": 38,
           "normal": {
-            "vehicle_count": 2863,
-            "total_travel_time_s": 769899.5,
-            "total_waiting_time_s": 175156.0,
-            "total_time_loss_s": 262247.24,
-            "mean_travel_time_s": 268.914,
-            "mean_waiting_time_s": 61.179,
-            "mean_time_loss_s": 91.599
-          },
-          "policy": {
-            "vehicle_count": 2863,
-            "total_travel_time_s": 734082.5,
-            "total_waiting_time_s": 144184.5,
-            "total_time_loss_s": 226404.94,
-            "mean_travel_time_s": 256.403,
-            "mean_waiting_time_s": 50.361,
-            "mean_time_loss_s": 79.08
-          },
-          "deltas": {
-            "total_time_loss_s": {
-              "normal": 262247.24,
-              "policy": 226404.94,
-              "absolute": -35842.3,
-              "percent": -13.667
-            },
-            "mean_time_loss_s": {
-              "normal": 91.599,
-              "policy": 79.08,
-              "absolute": -12.519,
-              "percent": -13.667
-            },
-            "total_waiting_time_s": {
-              "normal": 175156.0,
-              "policy": 144184.5,
-              "absolute": -30971.5,
-              "percent": -17.682
-            },
-            "mean_waiting_time_s": {
-              "normal": 61.179,
-              "policy": 50.361,
-              "absolute": -10.818,
-              "percent": -17.683
-            }
-          },
-          "note": "The same vehicles in both arms, each completing its route without a teleport in either. Vehicles that finished in only one arm are excluded and counted above; a policy that finishes fewer vehicles has not made the network faster."
-        },
-        "note": "The counts come first because the metric below depends on them: `traffic` sums over each arm's own completers, which are different vehicles, and `paired` sums over the vehicles both arms finished.",
-        "unfinished_delta_policy_minus_normal": -8
-      },
-      "ambulance_improvement_percent": 9.912,
-      "traffic": {
-        "excluding_ambulance": {
-          "normal": {
-            "vehicle_count": 2890,
-            "total_travel_time_s": 791308.5,
-            "total_waiting_time_s": 188575.0,
-            "total_time_loss_s": 280178.12,
-            "mean_travel_time_s": 273.809,
-            "mean_waiting_time_s": 65.251,
-            "mean_time_loss_s": 96.947
-          },
-          "policy": {
-            "vehicle_count": 2898,
-            "total_travel_time_s": 755659.5,
-            "total_waiting_time_s": 156868.5,
-            "total_time_loss_s": 243041.37,
-            "mean_travel_time_s": 260.752,
-            "mean_waiting_time_s": 54.13,
-            "mean_time_loss_s": 83.865
-          },
-          "deltas": {
-            "vehicles_completed": {
-              "normal": 2890.0,
-              "policy": 2898.0,
-              "absolute": 8.0,
-              "percent": 0.277
-            },
-            "total_time_loss_s": {
-              "normal": 280178.12,
-              "policy": 243041.37,
-              "absolute": -37136.75,
-              "percent": -13.255
-            },
-            "total_waiting_time_s": {
-              "normal": 188575.0,
-              "policy": 156868.5,
-              "absolute": -31706.5,
-              "percent": -16.814
-            },
-            "mean_time_loss_s": {
-              "normal": 96.947,
-              "policy": 83.865,
-              "absolute": -13.082,
-              "percent": -13.494
-            }
-          }
-        },
-        "including_ambulance": {
-          "normal": {
-            "vehicle_count": 2891,
-            "total_travel_time_s": 791591.0,
-            "total_waiting_time_s": 188628.5,
-            "total_time_loss_s": 280274.55,
-            "mean_travel_time_s": 273.812,
-            "mean_waiting_time_s": 65.247,
-            "mean_time_loss_s": 96.947
-          },
-          "policy": {
-            "vehicle_count": 2899,
-            "total_travel_time_s": 755914.0,
-            "total_waiting_time_s": 156908.0,
-            "total_time_loss_s": 243110.23,
-            "mean_travel_time_s": 260.75,
-            "mean_waiting_time_s": 54.125,
-            "mean_time_loss_s": 83.86
-          },
-          "deltas": {
-            "vehicles_completed": {
-              "normal": 2891.0,
-              "policy": 2899.0,
-              "absolute": 8.0,
-              "percent": 0.277
-            },
-            "total_time_loss_s": {
-              "normal": 280274.55,
-              "policy": 243110.23,
-              "absolute": -37164.32,
-              "percent": -13.26
-            },
-            "total_waiting_time_s": {
-              "normal": 188628.5,
-              "policy": 156908.0,
-              "absolute": -31720.5,
-              "percent": -16.816
-            },
-            "mean_time_loss_s": {
-              "normal": 96.947,
-              "policy": 83.86,
-              "absolute": -13.087,
-              "percent": -13.499
-            }
-          }
-        }
-      },
-      "traffic_delay_cost_s": -37136.75,
-      "traffic_metric_status": "DIAGNOSTIC_ONLY",
-      "traffic_metric_cohort": "Each arm's own completers, excluding teleported trips. These are DIFFERENT VEHICLES in the two arms. Use comparison['cohort']['paired'] for the same-vehicles view.",
-      "traffic_metric_warning": "NOT a cost or benefit of signal priority, and must not be reported as one. Two controls (Phase 5a replay, Phase 5b fixed schedule) reproduced traffic-side changes of this size and sign with NO ambulance in the network at all \u2014 in Phase 5b, 24.5-72.0 s of signal holding moved total time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by the chaotic response of netconvert's unoptimised fixed-time plans to being perturbed, not by the ambulance. Retained as a diagnostic of that sensitivity. See docs/FINAL_RND_REPORT.md section 18.",
-      "net_system_impact_s": -37164.75,
-      "net_system_impact_status": "DIAGNOSTIC_ONLY",
-      "net_system_impact_note": "DIAGNOSTIC ONLY \u2014 inherits the traffic term above, which the controls showed is not attributable to the ambulance. Do not quote as a net benefit or cost of priority. Traffic-side time loss added, minus ambulance time saved, in vehicle-seconds. Positive means the network as a whole lost more than the ambulance gained. This weights one ambulance-second the same as one car-second, which is a modelling choice, not a policy judgement: whether an ambulance second is worth more is a question this project cannot answer.",
-      "route_unchanged": true,
-      "teleports": {
-        "normal": 1,
-        "policy": 3
-      },
-      "signal_conflicts": {
-        "normal": 0,
-        "policy": 0
-      },
-      "data_class": "SIMULATED_DATA",
-      "interpretation": "Simulated result. Under this simulation scenario, with estimated demand, estimated vehicle behaviour and netconvert-generated signal programs, this policy changed simulated ambulance travel time by the stated amount relative to its paired NORMAL run. It is not a measurement of any real ambulance journey in Bengaluru."
-    },
-    "EMS_FULL_SCOPE": {
-      "seed": 42,
-      "baseline_policy": "NORMAL",
-      "counterfactual_policy": "EMS_FULL_SCOPE",
-      "both_runs_valid_for_headline": true,
-      "validity": {
-        "normal": {
-          "valid": true,
-          "reason": "valid"
-        },
-        "policy": {
-          "valid": true,
-          "reason": "valid"
-        }
-      },
-      "ambulance": {
-        "travel_time": {
-          "normal": 282.5,
-          "policy": 242.0,
-          "absolute": -40.5,
-          "percent": -14.336
-        },
-        "waiting_time": {
-          "normal": 53.5,
-          "policy": 32.0,
-          "absolute": -21.5,
-          "percent": -40.187
-        },
-        "time_loss": {
-          "normal": 96.43,
-          "policy": 55.86,
-          "absolute": -40.57,
-          "percent": -42.072
-        },
-        "stops": {
-          "normal": 2.0,
-          "policy": 2.0,
-          "absolute": 0.0,
-          "percent": 0.0
-        }
-      },
-      "ambulance_time_saved_s": 40.5,
-      "cohort": {
-        "normal": {
-          "departed_count": 3224,
-          "completed_count": 2891,
-          "completed_not_teleported_count": 2890,
-          "unfinished_count": 333,
-          "teleport_count": 1,
-          "teleport_rate": 0.00031,
-          "never_departed_count": 0,
-          "censored_time_loss_s": 119859.82,
-          "censored_waiting_time_s": 17978.0,
-          "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
-          "ambulance_excluded": "ambulance_two_signal"
-        },
-        "policy": {
-          "departed_count": 3224,
-          "completed_count": 2909,
-          "completed_not_teleported_count": 2909,
-          "unfinished_count": 315,
-          "teleport_count": 0,
-          "teleport_rate": 0.0,
-          "never_departed_count": 0,
-          "censored_time_loss_s": 111303.03,
-          "censored_waiting_time_s": 16162.5,
-          "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
-          "ambulance_excluded": "ambulance_two_signal"
-        },
-        "paired": {
-          "paired_count": 2865,
-          "departed_in_both": 3224,
-          "departed_only_in_normal": 0,
-          "departed_only_in_policy": 0,
-          "completed_only_in_normal": 25,
-          "completed_only_in_policy": 44,
-          "normal": {
-            "vehicle_count": 2865,
-            "total_travel_time_s": 771399.0,
-            "total_waiting_time_s": 175872.5,
-            "total_time_loss_s": 263457.69,
-            "mean_travel_time_s": 269.249,
-            "mean_waiting_time_s": 61.387,
-            "mean_time_loss_s": 91.957
-          },
-          "policy": {
-            "vehicle_count": 2865,
-            "total_travel_time_s": 742188.5,
-            "total_waiting_time_s": 152360.5,
-            "total_time_loss_s": 234180.66,
-            "mean_travel_time_s": 259.054,
-            "mean_waiting_time_s": 53.18,
-            "mean_time_loss_s": 81.738
-          },
-          "deltas": {
-            "total_time_loss_s": {
-              "normal": 263457.69,
-              "policy": 234180.66,
-              "absolute": -29277.03,
-              "percent": -11.113
-            },
-            "mean_time_loss_s": {
-              "normal": 91.957,
-              "policy": 81.738,
-              "absolute": -10.219,
-              "percent": -11.113
-            },
-            "total_waiting_time_s": {
-              "normal": 175872.5,
-              "policy": 152360.5,
-              "absolute": -23512.0,
-              "percent": -13.369
-            },
-            "mean_waiting_time_s": {
-              "normal": 61.387,
-              "policy": 53.18,
-              "absolute": -8.207,
-              "percent": -13.369
-            }
-          },
-          "note": "The same vehicles in both arms, each completing its route without a teleport in either. Vehicles that finished in only one arm are excluded and counted above; a policy that finishes fewer vehicles has not made the network faster."
-        },
-        "note": "The counts come first because the metric below depends on them: `traffic` sums over each arm's own completers, which are different vehicles, and `paired` sums over the vehicles both arms finished.",
-        "unfinished_delta_policy_minus_normal": -18
-      },
-      "ambulance_improvement_percent": 14.336,
-      "traffic": {
-        "excluding_ambulance": {
-          "normal": {
-            "vehicle_count": 2890,
-            "total_travel_time_s": 791308.5,
-            "total_waiting_time_s": 188575.0,
-            "total_time_loss_s": 280178.12,
-            "mean_travel_time_s": 273.809,
-            "mean_waiting_time_s": 65.251,
-            "mean_time_loss_s": 96.947
-          },
-          "policy": {
-            "vehicle_count": 2909,
-            "total_travel_time_s": 768096.5,
-            "total_waiting_time_s": 166667.5,
-            "total_time_loss_s": 254062.52,
-            "mean_travel_time_s": 264.041,
-            "mean_waiting_time_s": 57.294,
-            "mean_time_loss_s": 87.337
-          },
-          "deltas": {
-            "vehicles_completed": {
-              "normal": 2890.0,
-              "policy": 2909.0,
-              "absolute": 19.0,
-              "percent": 0.657
-            },
-            "total_time_loss_s": {
-              "normal": 280178.12,
-              "policy": 254062.52,
-              "absolute": -26115.6,
-              "percent": -9.321
-            },
-            "total_waiting_time_s": {
-              "normal": 188575.0,
-              "policy": 166667.5,
-              "absolute": -21907.5,
-              "percent": -11.617
-            },
-            "mean_time_loss_s": {
-              "normal": 96.947,
-              "policy": 87.337,
-              "absolute": -9.61,
-              "percent": -9.913
-            }
-          }
-        },
-        "including_ambulance": {
-          "normal": {
-            "vehicle_count": 2891,
-            "total_travel_time_s": 791591.0,
-            "total_waiting_time_s": 188628.5,
-            "total_time_loss_s": 280274.55,
-            "mean_travel_time_s": 273.812,
-            "mean_waiting_time_s": 65.247,
-            "mean_time_loss_s": 96.947
-          },
-          "policy": {
-            "vehicle_count": 2910,
-            "total_travel_time_s": 768338.5,
-            "total_waiting_time_s": 166699.5,
-            "total_time_loss_s": 254118.38,
-            "mean_travel_time_s": 264.034,
-            "mean_waiting_time_s": 57.285,
-            "mean_time_loss_s": 87.326
-          },
-          "deltas": {
-            "vehicles_completed": {
-              "normal": 2891.0,
-              "policy": 2910.0,
-              "absolute": 19.0,
-              "percent": 0.657
-            },
-            "total_time_loss_s": {
-              "normal": 280274.55,
-              "policy": 254118.38,
-              "absolute": -26156.17,
-              "percent": -9.332
-            },
-            "total_waiting_time_s": {
-              "normal": 188628.5,
-              "policy": 166699.5,
-              "absolute": -21929.0,
-              "percent": -11.625
-            },
-            "mean_time_loss_s": {
-              "normal": 96.947,
-              "policy": 87.326,
-              "absolute": -9.621,
-              "percent": -9.924
-            }
-          }
-        }
-      },
-      "traffic_delay_cost_s": -26115.6,
-      "traffic_metric_status": "DIAGNOSTIC_ONLY",
-      "traffic_metric_cohort": "Each arm's own completers, excluding teleported trips. These are DIFFERENT VEHICLES in the two arms. Use comparison['cohort']['paired'] for the same-vehicles view.",
-      "traffic_metric_warning": "NOT a cost or benefit of signal priority, and must not be reported as one. Two controls (Phase 5a replay, Phase 5b fixed schedule) reproduced traffic-side changes of this size and sign with NO ambulance in the network at all \u2014 in Phase 5b, 24.5-72.0 s of signal holding moved total time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by the chaotic response of netconvert's unoptimised fixed-time plans to being perturbed, not by the ambulance. Retained as a diagnostic of that sensitivity. See docs/FINAL_RND_REPORT.md section 18.",
-      "net_system_impact_s": -26156.1,
-      "net_system_impact_status": "DIAGNOSTIC_ONLY",
-      "net_system_impact_note": "DIAGNOSTIC ONLY \u2014 inherits the traffic term above, which the controls showed is not attributable to the ambulance. Do not quote as a net benefit or cost of priority. Traffic-side time loss added, minus ambulance time saved, in vehicle-seconds. Positive means the network as a whole lost more than the ambulance gained. This weights one ambulance-second the same as one car-second, which is a modelling choice, not a policy judgement: whether an ambulance second is worth more is a question this project cannot answer.",
-      "route_unchanged": true,
-      "teleports": {
-        "normal": 1,
-        "policy": 0
-      },
-      "signal_conflicts": {
-        "normal": 0,
-        "policy": 0
-      },
-      "data_class": "SIMULATED_DATA",
-      "interpretation": "Simulated result. Under this simulation scenario, with estimated demand, estimated vehicle behaviour and netconvert-generated signal programs, this policy changed simulated ambulance travel time by the stated amount relative to its paired NORMAL run. It is not a measurement of any real ambulance journey in Bengaluru."
-    },
-    "EMS_FULL_PREEMPTION": {
-      "seed": 42,
-      "baseline_policy": "NORMAL",
-      "counterfactual_policy": "EMS_FULL_PREEMPTION",
-      "both_runs_valid_for_headline": true,
-      "validity": {
-        "normal": {
-          "valid": true,
-          "reason": "valid"
-        },
-        "policy": {
-          "valid": true,
-          "reason": "valid"
-        }
-      },
-      "ambulance": {
-        "travel_time": {
-          "normal": 282.5,
-          "policy": 227.0,
-          "absolute": -55.5,
-          "percent": -19.646
-        },
-        "waiting_time": {
-          "normal": 53.5,
-          "policy": 20.5,
-          "absolute": -33.0,
-          "percent": -61.682
-        },
-        "time_loss": {
-          "normal": 96.43,
-          "policy": 41.04,
-          "absolute": -55.39,
-          "percent": -57.441
-        },
-        "stops": {
-          "normal": 2.0,
-          "policy": 1.0,
-          "absolute": -1.0,
-          "percent": -50.0
-        }
-      },
-      "ambulance_time_saved_s": 55.5,
-      "cohort": {
-        "normal": {
-          "departed_count": 3224,
-          "completed_count": 2891,
-          "completed_not_teleported_count": 2890,
-          "unfinished_count": 333,
-          "teleport_count": 1,
-          "teleport_rate": 0.00031,
-          "never_departed_count": 0,
-          "censored_time_loss_s": 119859.82,
-          "censored_waiting_time_s": 17978.0,
-          "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
-          "ambulance_excluded": "ambulance_two_signal"
-        },
-        "policy": {
-          "departed_count": 3224,
-          "completed_count": 2912,
-          "completed_not_teleported_count": 2911,
-          "unfinished_count": 312,
-          "teleport_count": 1,
-          "teleport_rate": 0.00031,
-          "never_departed_count": 0,
-          "censored_time_loss_s": 102294.09,
-          "censored_waiting_time_s": 13829.5,
-          "censored_note": "Accumulated by vehicles that had not finished when the run ended. A lower bound on the delay they suffered, not a total, and never added to a completed-vehicle figure.",
-          "ambulance_excluded": "ambulance_two_signal"
-        },
-        "paired": {
-          "paired_count": 2867,
-          "departed_in_both": 3224,
-          "departed_only_in_normal": 0,
-          "departed_only_in_policy": 0,
-          "completed_only_in_normal": 23,
-          "completed_only_in_policy": 44,
-          "normal": {
-            "vehicle_count": 2867,
-            "total_travel_time_s": 773280.5,
+            "vehicle_count": 2869,
+            "total_travel_time_s": 773314.0,
             "total_waiting_time_s": 176834.0,
-            "total_time_loss_s": 265151.32,
-            "mean_travel_time_s": 269.718,
-            "mean_waiting_time_s": 61.679,
-            "mean_time_loss_s": 92.484
+            "total_time_loss_s": 264977.1,
+            "mean_travel_time_s": 269.541,
+            "mean_waiting_time_s": 61.636,
+            "mean_time_loss_s": 92.359
           },
           "policy": {
-            "vehicle_count": 2867,
-            "total_travel_time_s": 757671.0,
-            "total_waiting_time_s": 166885.5,
-            "total_time_loss_s": 249484.37,
-            "mean_travel_time_s": 264.273,
-            "mean_waiting_time_s": 58.209,
-            "mean_time_loss_s": 87.019
+            "vehicle_count": 2869,
+            "total_travel_time_s": 748539.5,
+            "total_waiting_time_s": 157630.0,
+            "total_time_loss_s": 240094.65,
+            "mean_travel_time_s": 260.906,
+            "mean_waiting_time_s": 54.942,
+            "mean_time_loss_s": 83.686
           },
           "deltas": {
             "total_time_loss_s": {
-              "normal": 265151.32,
-              "policy": 249484.37,
-              "absolute": -15666.95,
-              "percent": -5.909
+              "normal": 264977.1,
+              "policy": 240094.65,
+              "absolute": -24882.45,
+              "percent": -9.39
             },
             "mean_time_loss_s": {
-              "normal": 92.484,
-              "policy": 87.019,
-              "absolute": -5.465,
-              "percent": -5.909
+              "normal": 92.359,
+              "policy": 83.686,
+              "absolute": -8.673,
+              "percent": -9.391
             },
             "total_waiting_time_s": {
               "normal": 176834.0,
-              "policy": 166885.5,
-              "absolute": -9948.5,
-              "percent": -5.626
+              "policy": 157630.0,
+              "absolute": -19204.0,
+              "percent": -10.86
             },
             "mean_waiting_time_s": {
-              "normal": 61.679,
-              "policy": 58.209,
-              "absolute": -3.47,
-              "percent": -5.626
+              "normal": 61.636,
+              "policy": 54.942,
+              "absolute": -6.694,
+              "percent": -10.861
             }
           },
           "note": "The same vehicles in both arms, each completing its route without a teleport in either. Vehicles that finished in only one arm are excluded and counted above; a policy that finishes fewer vehicles has not made the network faster."
         },
         "note": "The counts come first because the metric below depends on them: `traffic` sums over each arm's own completers, which are different vehicles, and `paired` sums over the vehicles both arms finished.",
-        "unfinished_delta_policy_minus_normal": -21
+        "unfinished_delta_policy_minus_normal": -17
       },
-      "ambulance_improvement_percent": 19.646,
+      "ambulance_improvement_percent": 27.611,
       "traffic": {
         "excluding_ambulance": {
           "normal": {
@@ -1062,38 +423,38 @@
             "mean_time_loss_s": 96.947
           },
           "policy": {
-            "vehicle_count": 2911,
-            "total_travel_time_s": 794224.0,
-            "total_waiting_time_s": 190380.5,
-            "total_time_loss_s": 280739.2,
-            "mean_travel_time_s": 272.835,
-            "mean_waiting_time_s": 65.4,
-            "mean_time_loss_s": 96.441
+            "vehicle_count": 2907,
+            "total_travel_time_s": 772485.5,
+            "total_waiting_time_s": 171878.5,
+            "total_time_loss_s": 259257.1,
+            "mean_travel_time_s": 265.733,
+            "mean_waiting_time_s": 59.126,
+            "mean_time_loss_s": 89.184
           },
           "deltas": {
             "vehicles_completed": {
               "normal": 2890.0,
-              "policy": 2911.0,
-              "absolute": 21.0,
-              "percent": 0.727
+              "policy": 2907.0,
+              "absolute": 17.0,
+              "percent": 0.588
             },
             "total_time_loss_s": {
               "normal": 280178.12,
-              "policy": 280739.2,
-              "absolute": 561.08,
-              "percent": 0.2
+              "policy": 259257.1,
+              "absolute": -20921.02,
+              "percent": -7.467
             },
             "total_waiting_time_s": {
               "normal": 188575.0,
-              "policy": 190380.5,
-              "absolute": 1805.5,
-              "percent": 0.957
+              "policy": 171878.5,
+              "absolute": -16696.5,
+              "percent": -8.854
             },
             "mean_time_loss_s": {
               "normal": 96.947,
-              "policy": 96.441,
-              "absolute": -0.506,
-              "percent": -0.522
+              "policy": 89.184,
+              "absolute": -7.763,
+              "percent": -8.007
             }
           }
         },
@@ -1108,47 +469,47 @@
             "mean_time_loss_s": 96.947
           },
           "policy": {
-            "vehicle_count": 2912,
-            "total_travel_time_s": 794451.0,
-            "total_waiting_time_s": 190401.0,
-            "total_time_loss_s": 280780.24,
-            "mean_travel_time_s": 272.82,
-            "mean_waiting_time_s": 65.385,
-            "mean_time_loss_s": 96.422
+            "vehicle_count": 2908,
+            "total_travel_time_s": 772690.0,
+            "total_waiting_time_s": 171878.5,
+            "total_time_loss_s": 259275.72,
+            "mean_travel_time_s": 265.712,
+            "mean_waiting_time_s": 59.105,
+            "mean_time_loss_s": 89.159
           },
           "deltas": {
             "vehicles_completed": {
               "normal": 2891.0,
-              "policy": 2912.0,
-              "absolute": 21.0,
-              "percent": 0.726
+              "policy": 2908.0,
+              "absolute": 17.0,
+              "percent": 0.588
             },
             "total_time_loss_s": {
               "normal": 280274.55,
-              "policy": 280780.24,
-              "absolute": 505.69,
-              "percent": 0.18
+              "policy": 259275.72,
+              "absolute": -20998.83,
+              "percent": -7.492
             },
             "total_waiting_time_s": {
               "normal": 188628.5,
-              "policy": 190401.0,
-              "absolute": 1772.5,
-              "percent": 0.94
+              "policy": 171878.5,
+              "absolute": -16750.0,
+              "percent": -8.88
             },
             "mean_time_loss_s": {
               "normal": 96.947,
-              "policy": 96.422,
-              "absolute": -0.525,
-              "percent": -0.542
+              "policy": 89.159,
+              "absolute": -7.788,
+              "percent": -8.033
             }
           }
         }
       },
-      "traffic_delay_cost_s": 561.08,
+      "traffic_delay_cost_s": -20921.02,
       "traffic_metric_status": "DIAGNOSTIC_ONLY",
       "traffic_metric_cohort": "Each arm's own completers, excluding teleported trips. These are DIFFERENT VEHICLES in the two arms. Use comparison['cohort']['paired'] for the same-vehicles view.",
-      "traffic_metric_warning": "NOT a cost or benefit of signal priority, and must not be reported as one. Two controls (Phase 5a replay, Phase 5b fixed schedule) reproduced traffic-side changes of this size and sign with NO ambulance in the network at all \u2014 in Phase 5b, 24.5-72.0 s of signal holding moved total time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by the chaotic response of netconvert's unoptimised fixed-time plans to being perturbed, not by the ambulance. Retained as a diagnostic of that sensitivity. See docs/FINAL_RND_REPORT.md section 18.",
-      "net_system_impact_s": 505.58,
+      "traffic_metric_warning": "NOT a cost or benefit of signal priority, and must not be reported as one. Two controls (Phase 5a replay, Phase 5b fixed schedule) reproduced traffic-side changes of this size and sign with NO ambulance in the network at all \u2014 in Phase 5b, 24.5-72.0 s of signal holding moved total time loss by 19,555-47,918 vehicle-seconds. The metric is dominated by the chaotic response of netconvert's unoptimised fixed-time plans to being perturbed, not by the ambulance. Retained as a diagnostic of that sensitivity. See docs/archive/FINAL_RND_REPORT.md section 18.",
+      "net_system_impact_s": -20999.02,
       "net_system_impact_status": "DIAGNOSTIC_ONLY",
       "net_system_impact_note": "DIAGNOSTIC ONLY \u2014 inherits the traffic term above, which the controls showed is not attributable to the ambulance. Do not quote as a net benefit or cost of priority. Traffic-side time loss added, minus ambulance time saved, in vehicle-seconds. Positive means the network as a whole lost more than the ambulance gained. This weights one ambulance-second the same as one car-second, which is a modelling choice, not a policy judgement: whether an ambulance second is worth more is a question this project cannot answer.",
       "route_unchanged": true,
@@ -1165,12 +526,12 @@
     }
   },
   "intersection_attribution": {
-    "EMS_NEXT": {
-      "policy": "EMS_NEXT",
+    "EMS_ROLLING": {
+      "policy": "EMS_ROLLING",
       "seed": 42,
       "label": "simulated intersection attribution",
-      "direct_signal_delay_reduction_s": 30.0,
-      "upstream_queue_delay_reduction_s": 17.0,
+      "direct_signal_delay_reduction_s": 48.0,
+      "upstream_queue_delay_reduction_s": 30.0,
       "upstream_queue_attribution": {
         "edges": [
           {
@@ -1178,8 +539,8 @@
             "attributed_to_tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
             "attributed_to_encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
             "baseline_traversal_time_s": 84.5,
-            "counterfactual_traversal_time_s": 67.5,
-            "delay_reduction_s": 17.0,
+            "counterfactual_traversal_time_s": 54.5,
+            "delay_reduction_s": 30.0,
             "queue_at_that_signal_while_here": 4,
             "ambulance_on_this_edge_s": [
               613.0,
@@ -1195,12 +556,12 @@
           },
           {
             "edge_id": "40696223#1",
-            "delay_change_s": 0.5,
+            "delay_change_s": -0.5,
             "reason": "no signal ahead of this edge on the route"
           },
           {
             "edge_id": "1208112303",
-            "delay_change_s": -1.0,
+            "delay_change_s": -0.5,
             "reason": "no signal ahead of this edge on the route"
           },
           {
@@ -1210,12 +571,12 @@
           },
           {
             "edge_id": "1416769967",
-            "delay_change_s": 0.5,
+            "delay_change_s": 0.0,
             "reason": "no signal ahead of this edge on the route"
           },
           {
             "edge_id": "1196514116#0",
-            "delay_change_s": 0.5,
+            "delay_change_s": 0.0,
             "reason": "no signal ahead of this edge on the route"
           }
         ],
@@ -1231,13 +592,13 @@
           "actionable": true,
           "green_fraction_for_ambulance": 0.4333,
           "baseline_traversal_time_s": 80.5,
-          "counterfactual_traversal_time_s": 50.5,
-          "delay_reduction_s": 30.0,
+          "counterfactual_traversal_time_s": 32.5,
+          "delay_reduction_s": 48.0,
           "movements_sharing_this_edge": 1,
-          "policy": "EMS_NEXT",
+          "policy": "EMS_ROLLING",
           "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 18,
-          "upstream_queue_delay_reduction_s": 17.0
+          "state_transitions_here": 7,
+          "upstream_queue_delay_reduction_s": 30.0
         },
         {
           "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
@@ -1249,9 +610,9 @@
           "counterfactual_traversal_time_s": 3.5,
           "delay_reduction_s": -0.0,
           "movements_sharing_this_edge": 1,
-          "policy": "EMS_NEXT",
+          "policy": "EMS_ROLLING",
           "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 14,
+          "state_transitions_here": 12,
           "upstream_queue_delay_reduction_s": 0.0
         },
         {
@@ -1264,340 +625,13 @@
           "counterfactual_traversal_time_s": 9.5,
           "delay_reduction_s": -0.0,
           "movements_sharing_this_edge": 1,
-          "policy": "EMS_NEXT",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 14,
-          "upstream_queue_delay_reduction_s": 0.0
-        }
-      ],
-      "unattributed_change_s": -0.5,
-      "unattributed_note": "Change on route edges not controlled by a traffic light. Not attributable to the signal policy \u2014 it is traffic the ambulance met elsewhere, and crediting it to the policy would overstate the effect.",
-      "data_class": "SIMULATED_DATA"
-    },
-    "EMS_ROLLING": {
-      "policy": "EMS_ROLLING",
-      "seed": 42,
-      "label": "simulated intersection attribution",
-      "direct_signal_delay_reduction_s": 2.0,
-      "upstream_queue_delay_reduction_s": 25.5,
-      "upstream_queue_attribution": {
-        "edges": [
-          {
-            "edge_id": "92196679#0",
-            "attributed_to_tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-            "attributed_to_encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-            "baseline_traversal_time_s": 84.5,
-            "counterfactual_traversal_time_s": 59.0,
-            "delay_reduction_s": 25.5,
-            "queue_at_that_signal_while_here": 4,
-            "ambulance_on_this_edge_s": [
-              613.0,
-              697.5
-            ]
-          }
-        ],
-        "unexplained": [
-          {
-            "edge_id": "1148717038#0",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "40696223#1",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1208112303",
-            "delay_change_s": -0.5,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "237025636",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1416769967",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1196514116#0",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          }
-        ],
-        "rule": "Delay on a non-approach route edge is attributed to the next signal ahead of it only when a queue was recorded standing at that signal while the ambulance was on the edge. Otherwise it is unattributed.",
-        "window_basis": "Accumulated per-edge traversal times from the ambulance's departure in the NORMAL run. Approximate: time on junction internal lanes is not included in the per-edge record."
-      },
-      "not_a_real_world_claim": "These are delays in a simulation built on estimated demand and netconvert-generated signal programs. Nothing here establishes that they correspond to delay at the real junction.",
-      "intersections": [
-        {
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "approach_edge": "1393474724#1",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.4333,
-          "baseline_traversal_time_s": 80.5,
-          "counterfactual_traversal_time_s": 48.5,
-          "delay_reduction_s": 32.0,
-          "movements_sharing_this_edge": 1,
           "policy": "EMS_ROLLING",
           "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 18,
-          "upstream_queue_delay_reduction_s": 25.5
-        },
-        {
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "encounter": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "approach_edge": "1311812959#0",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.6,
-          "baseline_traversal_time_s": 3.5,
-          "counterfactual_traversal_time_s": 3.5,
-          "delay_reduction_s": -0.0,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_ROLLING",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 19,
-          "upstream_queue_delay_reduction_s": 0.0
-        },
-        {
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "encounter": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "approach_edge": "1311812959#2",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.2667,
-          "baseline_traversal_time_s": 9.5,
-          "counterfactual_traversal_time_s": 39.5,
-          "delay_reduction_s": -30.0,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_ROLLING",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 19,
+          "state_transitions_here": 12,
           "upstream_queue_delay_reduction_s": 0.0
         }
       ],
-      "unattributed_change_s": 0.5,
-      "unattributed_note": "Change on route edges not controlled by a traffic light. Not attributable to the signal policy \u2014 it is traffic the ambulance met elsewhere, and crediting it to the policy would overstate the effect.",
-      "data_class": "SIMULATED_DATA"
-    },
-    "EMS_FULL_SCOPE": {
-      "policy": "EMS_FULL_SCOPE",
-      "seed": 42,
-      "label": "simulated intersection attribution",
-      "direct_signal_delay_reduction_s": 11.5,
-      "upstream_queue_delay_reduction_s": 29.0,
-      "upstream_queue_attribution": {
-        "edges": [
-          {
-            "edge_id": "92196679#0",
-            "attributed_to_tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-            "attributed_to_encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-            "baseline_traversal_time_s": 84.5,
-            "counterfactual_traversal_time_s": 55.5,
-            "delay_reduction_s": 29.0,
-            "queue_at_that_signal_while_here": 4,
-            "ambulance_on_this_edge_s": [
-              613.0,
-              697.5
-            ]
-          }
-        ],
-        "unexplained": [
-          {
-            "edge_id": "1148717038#0",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "40696223#1",
-            "delay_change_s": 0.5,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1208112303",
-            "delay_change_s": -1.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "237025636",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1416769967",
-            "delay_change_s": 0.5,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1196514116#0",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          }
-        ],
-        "rule": "Delay on a non-approach route edge is attributed to the next signal ahead of it only when a queue was recorded standing at that signal while the ambulance was on the edge. Otherwise it is unattributed.",
-        "window_basis": "Accumulated per-edge traversal times from the ambulance's departure in the NORMAL run. Approximate: time on junction internal lanes is not included in the per-edge record."
-      },
-      "not_a_real_world_claim": "These are delays in a simulation built on estimated demand and netconvert-generated signal programs. Nothing here establishes that they correspond to delay at the real junction.",
-      "intersections": [
-        {
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "approach_edge": "1393474724#1",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.4333,
-          "baseline_traversal_time_s": 80.5,
-          "counterfactual_traversal_time_s": 39.5,
-          "delay_reduction_s": 41.0,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_FULL_SCOPE",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 27,
-          "upstream_queue_delay_reduction_s": 29.0
-        },
-        {
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "encounter": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "approach_edge": "1311812959#0",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.6,
-          "baseline_traversal_time_s": 3.5,
-          "counterfactual_traversal_time_s": 3.5,
-          "delay_reduction_s": -0.0,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_FULL_SCOPE",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 19,
-          "upstream_queue_delay_reduction_s": 0.0
-        },
-        {
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "encounter": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "approach_edge": "1311812959#2",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.2667,
-          "baseline_traversal_time_s": 9.5,
-          "counterfactual_traversal_time_s": 39.0,
-          "delay_reduction_s": -29.5,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_FULL_SCOPE",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 19,
-          "upstream_queue_delay_reduction_s": 0.0
-        }
-      ],
-      "unattributed_change_s": -0.0,
-      "unattributed_note": "Change on route edges not controlled by a traffic light. Not attributable to the signal policy \u2014 it is traffic the ambulance met elsewhere, and crediting it to the policy would overstate the effect.",
-      "data_class": "SIMULATED_DATA"
-    },
-    "EMS_FULL_PREEMPTION": {
-      "policy": "EMS_FULL_PREEMPTION",
-      "seed": 42,
-      "label": "simulated intersection attribution",
-      "direct_signal_delay_reduction_s": 25.0,
-      "upstream_queue_delay_reduction_s": 30.5,
-      "upstream_queue_attribution": {
-        "edges": [
-          {
-            "edge_id": "92196679#0",
-            "attributed_to_tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-            "attributed_to_encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-            "baseline_traversal_time_s": 84.5,
-            "counterfactual_traversal_time_s": 54.0,
-            "delay_reduction_s": 30.5,
-            "queue_at_that_signal_while_here": 4,
-            "ambulance_on_this_edge_s": [
-              613.0,
-              697.5
-            ]
-          }
-        ],
-        "unexplained": [
-          {
-            "edge_id": "1148717038#0",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "40696223#1",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1208112303",
-            "delay_change_s": -0.5,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "237025636",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1416769967",
-            "delay_change_s": 0.5,
-            "reason": "no signal ahead of this edge on the route"
-          },
-          {
-            "edge_id": "1196514116#0",
-            "delay_change_s": 0.0,
-            "reason": "no signal ahead of this edge on the route"
-          }
-        ],
-        "rule": "Delay on a non-approach route edge is attributed to the next signal ahead of it only when a queue was recorded standing at that signal while the ambulance was on the edge. Otherwise it is unattributed.",
-        "window_basis": "Accumulated per-edge traversal times from the ambulance's departure in the NORMAL run. Approximate: time on junction internal lanes is not included in the per-edge record."
-      },
-      "not_a_real_world_claim": "These are delays in a simulation built on estimated demand and netconvert-generated signal programs. Nothing here establishes that they correspond to delay at the real junction.",
-      "intersections": [
-        {
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "encounter": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "approach_edge": "1393474724#1",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.4333,
-          "baseline_traversal_time_s": 80.5,
-          "counterfactual_traversal_time_s": 32.0,
-          "delay_reduction_s": 48.5,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_FULL_PREEMPTION",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 27,
-          "upstream_queue_delay_reduction_s": 30.5
-        },
-        {
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "encounter": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "approach_edge": "1311812959#0",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.6,
-          "baseline_traversal_time_s": 3.5,
-          "counterfactual_traversal_time_s": 3.5,
-          "delay_reduction_s": -0.0,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_FULL_PREEMPTION",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 19,
-          "upstream_queue_delay_reduction_s": 0.0
-        },
-        {
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "encounter": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "approach_edge": "1311812959#2",
-          "actionable": true,
-          "green_fraction_for_ambulance": 0.2667,
-          "baseline_traversal_time_s": 9.5,
-          "counterfactual_traversal_time_s": 33.0,
-          "delay_reduction_s": -23.5,
-          "movements_sharing_this_edge": 1,
-          "policy": "EMS_FULL_PREEMPTION",
-          "vehicles_affected_note": "Cross-traffic vehicles held at this signal are not counted individually; the network-wide traffic cost is reported in the paired comparison.",
-          "state_transitions_here": 19,
-          "upstream_queue_delay_reduction_s": 0.0
-        }
-      ],
-      "unattributed_change_s": -0.0,
+      "unattributed_change_s": 1.0,
       "unattributed_note": "Change on route edges not controlled by a traffic light. Not attributable to the signal policy \u2014 it is traffic the ambulance met elsewhere, and crediting it to the policy would overstate the effect.",
       "data_class": "SIMULATED_DATA"
     }

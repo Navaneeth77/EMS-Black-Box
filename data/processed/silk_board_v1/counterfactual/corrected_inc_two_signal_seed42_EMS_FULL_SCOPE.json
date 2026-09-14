@@ -1,10 +1,10 @@
 {
   "reproducibility": {
-    "generated_at": "2026-09-13T23:03:13Z",
+    "generated_at": "2026-09-13T23:58:24Z",
     "sumo_version": "1.27.1",
     "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
     "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
-    "scenario_hash": "ff9fa74f5992d70d",
+    "scenario_hash": "55322b7829193ee8",
     "scenario": {
       "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
       "demand_config_hash": "45b0cc1f7c874c5e",
@@ -38,7 +38,88 @@
         "1196514116#0"
       ],
       "scenario_variant": "include_unresolved",
-      "scenario_hash": "ff9fa74f5992d70d"
+      "disturbance": [
+        [
+          "blockage",
+          "partial_obstruction"
+        ],
+        [
+          "config_hash",
+          "3c43dded423b95d7"
+        ],
+        [
+          "data_class",
+          "SIMULATED_SCENARIO"
+        ],
+        [
+          "description",
+          "The trafficked lane of the approach to the GS_cluster traffic light is partially obstructed and drops to a crawl, at the stop line where the ambulance's delay is attributed. The lane stays open so the route is not severed."
+        ],
+        [
+          "duration_s",
+          420.0
+        ],
+        [
+          "edge_id",
+          "1393474724#1"
+        ],
+        [
+          "end_time_s",
+          980.0
+        ],
+        [
+          "incident_id",
+          "silk_board_lane_block_v1"
+        ],
+        [
+          "incident_type",
+          "LANE_BLOCKAGE"
+        ],
+        [
+          "lane_id",
+          "1393474724#1_1"
+        ],
+        [
+          "lane_index",
+          1
+        ],
+        [
+          "provenance",
+          "SIMULATED_SCENARIO. A hypothetical incident declared by this project to study traffic under disturbance. It is not a record of any real incident at Silk Board, and no incident report, traffic bulletin or observation was used. Its location and timing are configuration."
+        ],
+        [
+          "seed",
+          null
+        ],
+        [
+          "selection_basis",
+          "Edge: the approach of the actionable traffic light on the ambulance route. Lane: the one that carries the traffic - measured, because lane 0 on this approach carries no vehicles at all and blocking it did nothing. Blockage type: partial, because closing the only used lane risks severing the route. Every one of these was decided on flow and connectivity, not on any effect on ambulance travel time."
+        ],
+        [
+          "speed_limit_ms",
+          0.6
+        ],
+        [
+          "start_time_s",
+          560.0
+        ]
+      ],
+      "scenario_hash": "55322b7829193ee8",
+      "component_hashes": {
+        "network_hash": "2c23d6f96c30bf22",
+        "demand_hash": "4b84a117adebfaa5",
+        "route_hash": "579bd5644ba2ef7b",
+        "ambulance_hash": "cf9fa194eb6c8899",
+        "disturbance_hash": "5b572427d741d747",
+        "window_hash": "8f09896252825388"
+      }
+    },
+    "policy_hashes": {
+      "NORMAL": "cf3dc221cb2e029d",
+      "EMS_NEXT": "b7e938fd9746b772",
+      "EMS_ROLLING": "085593b429652b11",
+      "EMS_FULL_SCOPE": "d2fa4481144b571e",
+      "EMS_FULL_PREEMPTION": "14c3446584ea00cf"
     },
     "demand_config": {
       "demand_id": "cf_inc_silk_board_v1_two_signal_seed42",
@@ -185,7 +266,7 @@
       "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
       "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
     },
-    "wall_clock_total_s": 626.8,
+    "wall_clock_total_s": 619.4,
     "sensitivity": null,
     "incident": {
       "incident_id": "silk_board_lane_block_v1",
@@ -215,7 +296,7 @@
     "simulation": {
       "steps_executed": 7800,
       "sim_end_time_s": 3900.0,
-      "wall_clock_s": 124.38,
+      "wall_clock_s": 123.95,
       "sample_interval_s": 30.0,
       "vehicles": {
         "loaded": 3226,
@@ -2560,6 +2641,10 @@
           "priority_held_s": 3.0
         }
       ],
+      "coordinated_movements": {
+        "rule": "Where the route makes several controlled movements at one traffic light, priority is requested for a phase serving all of the ones still ahead of the ambulance, because the signal can only show one phase and asking per movement makes the policy truncate its own green.",
+        "fell_back_to_single_movement": []
+      },
       "transition_count": 46,
       "signal_change_count": 12,
       "parameters": {

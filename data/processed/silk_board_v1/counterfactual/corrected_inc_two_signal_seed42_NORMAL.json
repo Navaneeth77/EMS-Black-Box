@@ -1,10 +1,10 @@
 {
   "reproducibility": {
-    "generated_at": "2026-09-13T23:03:13Z",
+    "generated_at": "2026-09-14T00:04:37Z",
     "sumo_version": "1.27.1",
     "network_file": "simulation/sumo/silk_board_v1/silk_board_v1.net.xml",
     "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
-    "scenario_hash": "ff9fa74f5992d70d",
+    "scenario_hash": "55322b7829193ee8",
     "scenario": {
       "network_sha256": "2c23d6f96c30bf220e748250fc673699e7f32a85806cbf9b3856e88f98ae440d",
       "demand_config_hash": "45b0cc1f7c874c5e",
@@ -38,7 +38,85 @@
         "1196514116#0"
       ],
       "scenario_variant": "include_unresolved",
-      "scenario_hash": "ff9fa74f5992d70d"
+      "disturbance": [
+        [
+          "blockage",
+          "partial_obstruction"
+        ],
+        [
+          "config_hash",
+          "3c43dded423b95d7"
+        ],
+        [
+          "data_class",
+          "SIMULATED_SCENARIO"
+        ],
+        [
+          "description",
+          "The trafficked lane of the approach to the GS_cluster traffic light is partially obstructed and drops to a crawl, at the stop line where the ambulance's delay is attributed. The lane stays open so the route is not severed."
+        ],
+        [
+          "duration_s",
+          420.0
+        ],
+        [
+          "edge_id",
+          "1393474724#1"
+        ],
+        [
+          "end_time_s",
+          980.0
+        ],
+        [
+          "incident_id",
+          "silk_board_lane_block_v1"
+        ],
+        [
+          "incident_type",
+          "LANE_BLOCKAGE"
+        ],
+        [
+          "lane_id",
+          "1393474724#1_1"
+        ],
+        [
+          "lane_index",
+          1
+        ],
+        [
+          "provenance",
+          "SIMULATED_SCENARIO. A hypothetical incident declared by this project to study traffic under disturbance. It is not a record of any real incident at Silk Board, and no incident report, traffic bulletin or observation was used. Its location and timing are configuration."
+        ],
+        [
+          "seed",
+          null
+        ],
+        [
+          "selection_basis",
+          "Edge: the approach of the actionable traffic light on the ambulance route. Lane: the one that carries the traffic - measured, because lane 0 on this approach carries no vehicles at all and blocking it did nothing. Blockage type: partial, because closing the only used lane risks severing the route. Every one of these was decided on flow and connectivity, not on any effect on ambulance travel time."
+        ],
+        [
+          "speed_limit_ms",
+          0.6
+        ],
+        [
+          "start_time_s",
+          560.0
+        ]
+      ],
+      "scenario_hash": "55322b7829193ee8",
+      "component_hashes": {
+        "network_hash": "2c23d6f96c30bf22",
+        "demand_hash": "4b84a117adebfaa5",
+        "route_hash": "579bd5644ba2ef7b",
+        "ambulance_hash": "cf9fa194eb6c8899",
+        "disturbance_hash": "5b572427d741d747",
+        "window_hash": "8f09896252825388"
+      }
+    },
+    "policy_hashes": {
+      "NORMAL": "cf3dc221cb2e029d",
+      "EMS_ROLLING": "085593b429652b11"
     },
     "demand_config": {
       "demand_id": "cf_inc_silk_board_v1_two_signal_seed42",
@@ -185,7 +263,7 @@
       "description": "Default. The '(u/c)' flyover is available to traffic. Chosen because excluding it disconnects a 1.9 km carriageway, and because OSM's own highway tag says it is drivable. Travel times of vehicles using it are conditional on a fact nobody has verified.",
       "basis": "Phase 2.5 could not establish whether way/1351994264 is open to traffic: OSM tags it highway=primary_link (a drivable class) and names it '(u/c)'. The status remains UNRESOLVED and is not decided by inference here."
     },
-    "wall_clock_total_s": 626.8,
+    "wall_clock_total_s": 253.7,
     "sensitivity": null,
     "incident": {
       "incident_id": "silk_board_lane_block_v1",
@@ -215,7 +293,7 @@
     "simulation": {
       "steps_executed": 7800,
       "sim_end_time_s": 3900.0,
-      "wall_clock_s": 130.72,
+      "wall_clock_s": 127.84,
       "sample_interval_s": 30.0,
       "vehicles": {
         "loaded": 3226,
@@ -1317,17 +1395,17 @@
           "policy_state": "DETECTED"
         },
         {
-          "sim_time_s": 603.5,
+          "sim_time_s": 604.0,
           "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
           "previous_state": "DETECTED",
           "new_state": "NORMAL",
           "reason": "signal is no longer ahead of the ambulance; nothing was requested",
           "encounter_key": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more@0",
-          "ambulance_edge": ":cluster_12074449285_12074449291_0",
-          "ambulance_lane": ":cluster_12074449285_12074449291_0_0",
-          "ambulance_lane_position_m": 1.7714563190364458,
-          "ambulance_distance_to_tls_m": 1.358543680963554,
-          "ambulance_speed_ms": 5.030983323935152,
+          "ambulance_edge": "1311812959#2",
+          "ambulance_lane": "1311812959#2_0",
+          "ambulance_lane_position_m": 1.4169670156679564,
+          "ambulance_distance_to_tls_m": -1073741824.0,
+          "ambulance_speed_ms": 5.55102139326302,
           "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
           "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
           "previous_phase_index": 4,
@@ -1342,224 +1420,40 @@
           "policy_state": "NORMAL"
         },
         {
-          "sim_time_s": 603.5,
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "previous_state": "DETECTED",
-          "new_state": "NORMAL",
-          "reason": "signal is no longer ahead of the ambulance; nothing was requested",
-          "encounter_key": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more@1",
-          "ambulance_edge": ":cluster_12074449285_12074449291_0",
-          "ambulance_lane": ":cluster_12074449285_12074449291_0_0",
-          "ambulance_lane_position_m": 1.7714563190364458,
-          "ambulance_distance_to_tls_m": 1.358543680963554,
-          "ambulance_speed_ms": 5.030983323935152,
-          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
-          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
-          "previous_phase_index": 4,
-          "new_phase_index": 4,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            13
-          ],
-          "policy_state": "NORMAL"
-        },
-        {
-          "sim_time_s": 603.5,
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "previous_state": "DETECTED",
-          "new_state": "NORMAL",
-          "reason": "signal is no longer ahead of the ambulance; nothing was requested",
-          "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
-          "ambulance_edge": ":cluster_12074449285_12074449291_0",
-          "ambulance_lane": ":cluster_12074449285_12074449291_0_0",
-          "ambulance_lane_position_m": 1.7714563190364458,
-          "ambulance_distance_to_tls_m": 1033.8885436809635,
-          "ambulance_speed_ms": 5.030983323935152,
-          "previous_signal_state": "GgGGGrrrrrrrr",
-          "new_signal_state": "GgGGGrrrrrrrr",
-          "previous_phase_index": 2,
-          "new_phase_index": 2,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            3
-          ],
-          "policy_state": "NORMAL"
-        },
-        {
-          "sim_time_s": 604.0,
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "previous_state": "NORMAL",
-          "new_state": "DETECTED",
-          "reason": "ambulance is in the network and this signal is ahead of it on its route",
-          "encounter_key": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more@1",
-          "ambulance_edge": "1311812959#2",
-          "ambulance_lane": "1311812959#2_0",
-          "ambulance_lane_position_m": 1.4169670156679564,
-          "ambulance_distance_to_tls_m": -1073741824.0,
-          "ambulance_speed_ms": 5.55102139326302,
-          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
-          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
-          "previous_phase_index": 4,
-          "new_phase_index": 4,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            13
-          ],
-          "policy_state": "DETECTED"
-        },
-        {
-          "sim_time_s": 604.0,
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "previous_state": "NORMAL",
-          "new_state": "DETECTED",
-          "reason": "ambulance is in the network and this signal is ahead of it on its route",
-          "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
-          "ambulance_edge": "1311812959#2",
-          "ambulance_lane": "1311812959#2_0",
-          "ambulance_lane_position_m": 1.4169670156679564,
-          "ambulance_distance_to_tls_m": 1031.113032984332,
-          "ambulance_speed_ms": 5.55102139326302,
-          "previous_signal_state": "GgGGGrrrrrrrr",
-          "new_signal_state": "GgGGGrrrrrrrr",
-          "previous_phase_index": 2,
-          "new_phase_index": 2,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            3
-          ],
-          "policy_state": "DETECTED"
-        },
-        {
-          "sim_time_s": 609.5,
-          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
-          "previous_state": "DETECTED",
-          "new_state": "NORMAL",
-          "reason": "signal is no longer ahead of the ambulance; nothing was requested",
-          "encounter_key": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more@1",
-          "ambulance_edge": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8",
-          "ambulance_lane": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8_0",
-          "ambulance_lane_position_m": 0.46707387803780875,
-          "ambulance_distance_to_tls_m": -1073741824.0,
-          "ambulance_speed_ms": 6.5566944583412266,
-          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
-          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
-          "previous_phase_index": 4,
-          "new_phase_index": 4,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            13
-          ],
-          "policy_state": "NORMAL"
-        },
-        {
-          "sim_time_s": 609.5,
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "previous_state": "DETECTED",
-          "new_state": "NORMAL",
-          "reason": "signal is no longer ahead of the ambulance; nothing was requested",
-          "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
-          "ambulance_edge": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8",
-          "ambulance_lane": ":cluster_11809900885_11809900886_1837005138_260911861_#1more_8_0",
-          "ambulance_lane_position_m": 0.46707387803780875,
-          "ambulance_distance_to_tls_m": 998.3729261219621,
-          "ambulance_speed_ms": 6.5566944583412266,
-          "previous_signal_state": "GgGGGrrrrrrrr",
-          "new_signal_state": "GgGGGrrrrrrrr",
-          "previous_phase_index": 2,
-          "new_phase_index": 2,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            3
-          ],
-          "policy_state": "NORMAL"
-        },
-        {
           "sim_time_s": 613.5,
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "previous_state": "NORMAL",
-          "new_state": "DETECTED",
-          "reason": "ambulance is in the network and this signal is ahead of it on its route",
-          "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
+          "tls_id": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more",
+          "previous_state": "DETECTED",
+          "new_state": "NORMAL",
+          "reason": "signal is no longer ahead of the ambulance; nothing was requested",
+          "encounter_key": "joinedS_12074449284_12074449289_cluster_11809900885_11809900886_1837005138_260911861_#1more_cluster_12074449285_12074449291_#1more@1",
           "ambulance_edge": "92196679#0",
           "ambulance_lane": "92196679#0_1",
           "ambulance_lane_position_m": 4.327958764240215,
-          "ambulance_distance_to_tls_m": 960.2120412357598,
+          "ambulance_distance_to_tls_m": -1073741824.0,
           "ambulance_speed_ms": 9.969907255023719,
-          "previous_signal_state": "GgGGGrrrrrrrr",
-          "new_signal_state": "GgGGGrrrrrrrr",
-          "previous_phase_index": 2,
-          "new_phase_index": 2,
+          "previous_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "new_signal_state": "GGGGGrrrrrrrGGGGGgGGGrrr",
+          "previous_phase_index": 4,
+          "new_phase_index": 4,
           "signal_changed": false,
           "policy": "NORMAL",
           "affected_link_indices": [
-            3
-          ],
-          "policy_state": "DETECTED"
-        },
-        {
-          "sim_time_s": 697.5,
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "previous_state": "DETECTED",
-          "new_state": "NORMAL",
-          "reason": "signal is no longer ahead of the ambulance; nothing was requested",
-          "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
-          "ambulance_edge": ":494271106_0",
-          "ambulance_lane": ":494271106_0_1",
-          "ambulance_lane_position_m": 0.19633096657196347,
-          "ambulance_distance_to_tls_m": 0.10366903342803652,
-          "ambulance_speed_ms": 0.5107637522471198,
-          "previous_signal_state": "GgGGGrrrrrrrr",
-          "new_signal_state": "GgGGGrrrrrrrr",
-          "previous_phase_index": 2,
-          "new_phase_index": 2,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            3
+            13
           ],
           "policy_state": "NORMAL"
         },
         {
-          "sim_time_s": 698.0,
-          "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
-          "previous_state": "NORMAL",
-          "new_state": "DETECTED",
-          "reason": "ambulance is in the network and this signal is ahead of it on its route",
-          "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
-          "ambulance_edge": "1393474724#1",
-          "ambulance_lane": "1393474724#1_1",
-          "ambulance_lane_position_m": 0.11867257379067936,
-          "ambulance_distance_to_tls_m": -1073741824.0,
-          "ambulance_speed_ms": 0.44468321443743175,
-          "previous_signal_state": "GgGGGrrrrrrrr",
-          "new_signal_state": "GgGGGrrrrrrrr",
-          "previous_phase_index": 2,
-          "new_phase_index": 2,
-          "signal_changed": false,
-          "policy": "NORMAL",
-          "affected_link_indices": [
-            3
-          ],
-          "policy_state": "DETECTED"
-        },
-        {
-          "sim_time_s": 776.5,
+          "sim_time_s": 778.5,
           "tls_id": "GS_cluster_10282769895_10775075568_11964440742_11964440743",
           "previous_state": "DETECTED",
           "new_state": "NORMAL",
           "reason": "signal is no longer ahead of the ambulance; nothing was requested",
           "encounter_key": "GS_cluster_10282769895_10775075568_11964440742_11964440743@3",
-          "ambulance_edge": ":cluster_10282769895_10775075568_11964440742_11964440743_3",
-          "ambulance_lane": ":cluster_10282769895_10775075568_11964440742_11964440743_3_0",
-          "ambulance_lane_position_m": 0.18014136267179737,
+          "ambulance_edge": "1148717038#0",
+          "ambulance_lane": "1148717038#0_1",
+          "ambulance_lane_position_m": 1.3678909798701842,
           "ambulance_distance_to_tls_m": -1073741824.0,
-          "ambulance_speed_ms": 0.5707087677321396,
+          "ambulance_speed_ms": 4.681419202625238,
           "previous_signal_state": "GgGGGrrrrrrrr",
           "new_signal_state": "GgGGGrrrrrrrr",
           "previous_phase_index": 2,
@@ -1585,7 +1479,7 @@
           "priority_active_at_s": null,
           "ambulance_cleared_at_s": null,
           "restoring_at_s": null,
-          "restored_at_s": 603.5,
+          "restored_at_s": 604.0,
           "requested_at_distance_m": null,
           "requested_at_speed_ms": null,
           "request_count": 0,
@@ -1604,7 +1498,7 @@
           "priority_active_at_s": null,
           "ambulance_cleared_at_s": null,
           "restoring_at_s": null,
-          "restored_at_s": 603.5,
+          "restored_at_s": 613.5,
           "requested_at_distance_m": null,
           "requested_at_speed_ms": null,
           "request_count": 0,
@@ -1623,7 +1517,7 @@
           "priority_active_at_s": null,
           "ambulance_cleared_at_s": null,
           "restoring_at_s": null,
-          "restored_at_s": 603.5,
+          "restored_at_s": 778.5,
           "requested_at_distance_m": null,
           "requested_at_speed_ms": null,
           "request_count": 0,
@@ -1632,7 +1526,11 @@
           "priority_held_s": null
         }
       ],
-      "transition_count": 14,
+      "coordinated_movements": {
+        "rule": "Where the route makes several controlled movements at one traffic light, priority is requested for a phase serving all of the ones still ahead of the ambulance, because the signal can only show one phase and asking per movement makes the policy truncate its own green.",
+        "fell_back_to_single_movement": []
+      },
+      "transition_count": 6,
       "signal_change_count": 0,
       "parameters": {
         "min_green_s": 5.0,

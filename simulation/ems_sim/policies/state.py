@@ -84,7 +84,10 @@ VALID_TRANSITIONS: dict[PolicyState, frozenset[PolicyState]] = {
     PolicyState.TRANSITIONING: frozenset({PolicyState.PRIORITY_ACTIVE, PolicyState.CLEARING}),
     PolicyState.PRIORITY_ACTIVE: frozenset({PolicyState.CLEARING}),
     PolicyState.CLEARING: frozenset({PolicyState.RESTORING}),
-    PolicyState.RESTORING: frozenset({PolicyState.NORMAL}),
+    # DETECTED, not only NORMAL: the ambulance can become relevant again
+    # before the signal has finished handing itself back, and making the
+    # policy wait for that would cost the green it is about to need.
+    PolicyState.RESTORING: frozenset({PolicyState.NORMAL, PolicyState.DETECTED}),
 }
 
 

@@ -12,6 +12,7 @@ from __future__ import annotations
 import pytest
 from ems_sim.policies.conflicts import ConflictWatcher, check_state, check_transition
 from ems_sim.policies.policies import make_policy
+from ems_sim.policies.state import PolicyState
 from ems_sim.policies.tls_map import ControlledLink, RouteTls, TlsProgram
 
 # A four-phase program: green for the ambulance's links in phase 0, yellow,
@@ -429,3 +430,40 @@ class TestCoordinatedMovements:
 
         report = policy.on_simulation_end()
         assert report["coordinated_movements"]["fell_back_to_single_movement"]
+
+
+class TestRelevanceAcrossAJunction:
+    """SUMO reports no route index while a vehicle is inside a junction."""
+
+    def test_a_held_green_survives_the_ambulance_being_in_a_junction(self, entry) -> None:
+        light = FakeTrafficLight(PROGRAM, phase=0)  # serving the ambulance
+        traci = FakeTraci(light)
+        policy = make_policy("EMS_ROLLING")
+        policy.on_simulation_start([entry], traci)
+
+        for tick in range(40):
+            ambulance = observation(distance=150.0)
+            if 10 <= tick < 16:
+                # Inside a junction: present, moving, but no route index.
+                ambulance.route_index = None
+            policy.on_step(light.now, ambulance, traci)
+            light.step()
+
+        states = [str(t.new_state) for t in policy.transitions]
+        assert "CLEARING" not in states, (
+            "the policy released the signal because the ambulance was mid-junction"
+        )
+        control = next(iter(policy.control.values()))
+        assert control.state is PolicyState.PRIORITY_ACTIVE
+
+    def test_it_still_releases_once_the_ambulance_is_genuinely_past(self, entry) -> None:
+        light = FakeTrafficLight(PROGRAM, phase=0)
+        traci = FakeTraci(light)
+        policy = make_policy("EMS_ROLLING")
+        policy.on_simulation_start([entry], traci)
+        for tick in range(60):
+            ambulance = observation(distance=150.0, route_index=0 if tick < 30 else 5)
+            policy.on_step(light.now, ambulance, traci)
+            light.step()
+        states = [str(t.new_state) for t in policy.transitions]
+        assert "CLEARING" in states and states[-1] in {"NORMAL", "RESTORING"}
