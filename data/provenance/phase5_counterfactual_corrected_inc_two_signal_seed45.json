@@ -6,7 +6,7 @@
   "source_url": null,
   "source_licence": null,
   "source_attribution": null,
-  "retrieved_at": "2026-09-13T23:34:39Z",
+  "retrieved_at": "2026-09-14T00:47:17Z",
   "sha256": null,
   "size_bytes": null,
   "file_path": "data/processed/silk_board_v1/counterfactual/corrected_inc_two_signal_seed45_comparisons.json",
@@ -41,5 +41,5 @@
     "The sublane model is deliberately not enabled, so two-wheeler lateral behaviour is inert (Phase 4 finding).",
     "Single seed. Seeds 43-46 have not been run."
   ],
-  "notes": "Policies: ['NORMAL', 'EMS_NEXT', 'EMS_ROLLING', 'EMS_FULL_SCOPE', 'EMS_FULL_PREEMPTION']. Wall clock 634s. Scenario hash ffc816260c87c700."
+  "notes": "Policies: ['NORMAL', 'EMS_NEXT', 'EMS_ROLLING', 'EMS_FULL_SCOPE', 'EMS_FULL_PREEMPTION']. Wall clock 603s. Scenario hash ffc816260c87c700."
 }
